@@ -1,0 +1,178 @@
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+position: relative;
+display: flex;
+flex-direction: column;
+font-family: Pretendard, sans-serif;
+width: 640px;
+height: 618px;
+top: 231px;
+left: 640px;
+opacity: 0px;
+}
+
+.headercontainor {
+  display: flex;
+  align-items: center;
+  gap: 22.24px;
+  width: 396px;
+  height: 132px;
+  margin: 0 120px 40px;
+}
+
+.headimg1 {
+  width: 103.53px;
+  height: 103.88px;
+}
+
+.headimg2 {
+  max-width: 266px;
+  max-height: 90px;
+}
+
+.maincontainor {
+ display: flex;
+ flex-direction: column;
+ width: 100%;
+ height: 98px;
+ margin-bottom: 24px;
+}
+
+.maintext {
+  width: 47px;
+  height: 26px;
+  font-size: 18px;
+  font-weight: 700;
+  gap: 0px;
+  opacity: 0px;
+  white-space: nowrap;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.maininsert {
+width: 100%;
+height: 56px;
+padding: 16px 24px 16px 24px;
+gap: 10px;
+border-radius: 12px;
+opacity: 0px;
+font-size: 16px;
+font-weight: 400;
+line-height: 26px;
+color: #9CA3AF;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+border-width: 0;
+background-color:#F3F4F6;
+}
+
+.maininsert:focus {
+  font-size: 16px;
+  font-weight: 400;
+  color:#1F2937;
+  border-color: #3692ff;
+}
+
+
+.passtext {
+  width: 63px;
+  height: 26px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1F2937;
+  gap: 0px;
+  opacity: 0px;
+  white-space: nowrap;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.passcontainor {
+  width: 100%;
+  height: 56px;
+  position: relative;
+  display: flex;
+  margin-bottom: 24px;
+}
+
+.passcontainor > input{
+  width: 100%;
+}
+
+.passcontainor > a img{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 18px;
+  bottom: 50px;
+  right: 20px;
+  
+}
+
+.passcontainor a:hover {
+  
+}
+
+.signupbuttun {
+display: block;
+width: 100%;
+height: 56px;
+padding: 16px 124px 16px 124px;
+margin-bottom: 24px;
+gap: 10px;
+border-radius: 40px;
+opacity: 0px;
+color:#F3F4F6;
+white-space: nowrap;
+text-decoration: none;
+text-align: center;
+flex-shrink: 0;
+background-color: #9CA3AF;
+}
+
+
+.signupbuttun:hover {
+  cursor: pointer;
+  background-color:#3692FF;
+  ;
+}
+
+.easylogincotainor {
+  background-color: #E6F2FF;
+  border-radius: 12px;
+  padding: 16px 23px;
+  margin-bottom: 24px;
+}
+
+.easylogcontent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.easylogtexst{
+font-size: 16px;
+font-weight: 500;
+line-height: 26px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+}
+
+.easylogimg   {
+  width: 42px;
+  height: auto;
+  white-space: nowrap;
+}
+
+.relogincotainor {
+  display: flex;
+  justify-content: center;
+}
