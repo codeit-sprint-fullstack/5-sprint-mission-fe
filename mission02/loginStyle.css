@@ -75,6 +75,10 @@
 
 }
 
+.button:focus {
+    background-color: var(--maincolor);
+}
+
 .labels {
     font-family: 'Pretendard';
     font-weight: 700;
