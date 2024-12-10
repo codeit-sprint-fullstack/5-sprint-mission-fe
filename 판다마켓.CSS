@@ -36,7 +36,7 @@ header {
   width: 100%;
   gap: 2rem;
   padding: 0 10rem;
-  max-width: 192rem;
+  max-width: 112rem;
   padding-left: calc((100% - 1920px) / 2 + 20rem);
   padding-right: calc((100% - 1920px) / 2 + 20rem);
 }
@@ -143,7 +143,6 @@ a.watchbutton:hover {
 
 .watchimgstand{
 width: 100%;
- position: relative;
 }
 
 .watchimg {
@@ -225,9 +224,6 @@ width: 100%;
   background-color: #CFE5FF;
   margin-top: 13.8rem;
 }
-
-
-
 
 .lastcontrol {
   position: absolute;
