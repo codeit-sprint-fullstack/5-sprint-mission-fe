@@ -1,0 +1,165 @@
+@import "./styles/reset.css";
+
+:root {
+    --primary100 : #3692FF;
+    --primary200 : #1967d6;
+    --primary300 : #1251aa;
+    --error : #f74747;
+    --gray900 : #111827;
+    --gray800 : #1f2937;
+    --gray700 : #374151;
+    --gray600 : #4b5563;
+    --gray500 : #6b7280;
+    --gray400 : #9ca3af;
+    --gray200 : #e5e7eb;
+    --gary100 : #F3F4F6;
+    --gray50 : #f9fafb;
+    --box_bg : #e6f2ff;
+}
+
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    background: #ffffff;
+    font-family: pretendard;
+    margin: 0;
+}
+
+header {
+    margin: 60px auto 40px;
+}
+
+header > .content {
+    display: flex;
+    justify-content: center;
+}
+
+#logo_img {
+    width: 396px;
+}
+
+.content {
+    width: 100%;
+    max-width: 640px;
+    margin: auto;
+    padding: 0 16px;
+}
+
+#input_form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.input_container {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input_label {
+    color: var(--gray800);
+    font-size: 1.125rem;
+    font-weight: 700;
+    line-height: 26px;
+}
+
+.input_box {
+    width: 100%;
+    height: 56px;
+    background-color: var(--gary100);
+    border-radius: 12px;
+    padding: 15px 24px;
+    border: none;
+
+    color: var(--gray800);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 24px;
+}
+
+input::placeholder {
+    color: var(--gray400);
+    line-height: 26px;
+}
+
+input:focus {
+    outline: 1px solid var(--primary100);
+}
+
+#login_btn {
+    width: 100%;
+    height: 56px;
+    background-color: var(--gray400);
+    border-radius: 40px;
+    padding: auto;
+    border: none;
+
+    color: var(--gary100);
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 32px;
+    text-align: center;
+    cursor: pointer;
+}
+
+#login_btn:hover {
+    background-color: var(--primary100);
+}
+
+#sns_login_box {
+    background-color: var(--box_bg);
+    width: 100%;
+    height: 74px;
+    padding: 16px 23px;
+    margin: 24px 0;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.main_text {
+    color: var(--gray800);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 26px;
+    margin: 0;
+}
+
+#sns_img_box {
+    width: 100px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.sns_img {
+    width: 42px;
+    height: 42px;
+    cursor: pointer;
+}
+
+#find_box {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+}
+
+.main_text.light {
+    font-size: 0.875rem;
+    line-height: 24px;
+}
+
+#signup_link {
+    color: var(--primary100);
+    font-size: 0.875rem;
+    line-height: 16.71px;
+    cursor: pointer;
+}
