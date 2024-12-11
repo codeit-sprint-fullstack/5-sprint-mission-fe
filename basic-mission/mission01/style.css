@@ -1,0 +1,314 @@
+@import "./reset.css";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI",
+    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
+}
+
+.content {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+}
+
+header {
+  position: sticky;
+  top: 0px;
+
+  background-color: #ffffff;
+  height: 70px;
+  display: flex;
+}
+header .content {
+  max-width: 1120px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+header .content .button {
+  background-color: #3692ff;
+  color: #f3f4f6;
+  font-size: 1rem; /* 16px */
+  line-height: 26px;
+
+  padding: 11px 43px;
+  border: none;
+  border-radius: 8px;
+
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.landing {
+  background-color: #cfe5ff;
+  height: 540px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.landing .content {
+  gap: 7px;
+  justify-content: center;
+  align-items: end;
+}
+.landing .content .intro {
+  width: 357px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 100px;
+}
+.landing .content .intro h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  line-height: 56px;
+}
+.landing .content .intro .button {
+  background-color: #3692ff;
+  color: #f9fafb;
+  font-size: 1.25rem; /* 20px */
+  line-height: 32px;
+
+  padding: 12px 124px;
+
+  border: none;
+  border-radius: 40px;
+
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.info {
+  background-color: #ffffff;
+  height: 720px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.info .card {
+  background-color: #fcfcfc;
+  width: 988px;
+  height: 444px;
+
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+.hot-item .card,
+.register .card {
+  flex-direction: row;
+}
+.search .card {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.info .card .card-content {
+  display: flex;
+  flex-direction: column;
+}
+.info .card .card-content .badge {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+  color: #3692ff;
+  margin-bottom: 12px;
+}
+.info .card .card-content h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  line-height: 56px;
+
+  margin-bottom: 24px;
+}
+.info .card .card-content p {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.banner {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.banner .content {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 69px;
+}
+.banner h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  line-height: 56px;
+
+  margin-bottom: 172.5px;
+}
+
+footer {
+  height: 160px;
+  background-color: #111827;
+  color: #e5e7eb;
+  font-size: 1rem; /* 16px */
+  font-weight: 400;
+
+  display: flex;
+}
+footer .content {
+  max-width: 1120px;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding: 0 10px;
+}
+footer .content .middle {
+  display: flex;
+  gap: 30px;
+}
+footer > .content > .middle > a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+footer .content .right {
+  display: flex;
+  gap: 12px;
+}
+
+/* image size */
+#img-logo {
+  width: 153px;
+  height: auto;
+}
+#img-landing {
+  width: 746px;
+  height: auto;
+}
+.info .card img {
+  width: 588px;
+  height: auto;
+}
+.img-sns {
+  width: 20px;
+  height: 20px;
+}
+#img-banner {
+  width: 746px;
+  height: auto;
+}
+
+/* 미디어 쿼리 설정 */
+@media (max-width: 1120px) {
+  body {
+    font-size: 14px;
+  }
+
+  .landing {
+    height: auto;
+  }
+  .landing .content {
+    flex-direction: column;
+    align-items: center;
+  }
+  .landing .content .intro {
+    width: 90%;
+    text-align: center;
+    align-items: center;
+    margin-bottom: 40px;
+  }
+  .landing .content .intro h1 {
+    font-size: 2rem;
+    line-height: 48px;
+    margin-top: 40px;
+  }
+  .landing .content .intro .button {
+    width: 100%;
+    max-width: 357px;
+    padding: 12px 14px;
+  }
+
+  .info {
+    height: auto;
+    padding: 20px;
+  }
+  .info .card {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    gap: 20px;
+    padding-bottom: 20px;
+  }
+  .info .card img {
+    width: 100%;
+    height: auto;
+  }
+  .info .card .card-content {
+    width: 90%;
+    text-align: center;
+  }
+
+  .banner {
+    height: auto;
+  }
+  .banner .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .banner h1 {
+    font-size: 2rem;
+    line-height: 48px;
+    margin: 40px 0;
+  }
+
+  footer {
+    height: auto;
+    flex-direction: column;
+    padding: 20px;
+  }
+  footer .content {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  footer .content .middle {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+  footer .content .right {
+    justify-content: center;
+  }
+}
+
+/* 태블릿 */
+@media (max-width: 768px) {
+  body {
+    font-size: 12px;
+  }
+
+  #img-landing,
+  #img-banner {
+    width: 97.14vw;
+    height: auto;
+  }
+}
+
+/* 모바일 */
+@media (max-width: 480px) {
+  body {
+    font-size: 10px;
+  }
+}
