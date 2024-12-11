@@ -18,18 +18,18 @@ body {
 .header-wrapper {
   display: flex;
   justify-content: center;
-  padding: 9.5px 200px;
+  padding: .5938rem 12.5rem;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 56.25rem) {
   .header-wrapper {
-    padding: 9.5px 15vw;
+    padding: .5938rem 15vw;
   }
 }
 
 .header-wrapper > .header,
 .top-wrapper > .top {
-  width: 1920px;
+  width: 120rem;
 }
 
 .header-wrapper > .header > .container {
@@ -40,13 +40,13 @@ body {
 .header-wrapper > .header > .container > .home {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: .625rem;
 }
 
 .header-wrapper > .header > .container > .login {
   width: 8rem;
   height: 3rem;
-  border-radius: 0.5rem;
+  border-radius: .5rem;
   background-color: var(--color-button-bg);
   border: none;
   color: var(--color-button-font);
@@ -67,47 +67,47 @@ body {
 .top-wrapper > .top > .container {
   display: flex;
   justify-content: center;
-  margin: 200px 0 0;
-  gap: 10px;
+  margin: 12.5rem 0 0;
+  gap: .625rem;
 }
 
 .top-wrapper > .top > .container > .top-container > h1 {
   flex: 1 1 0%;
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 60px;
+  line-height: 3.75rem;
   color: #374151;
-  padding: 20px 0;
+  padding: 1.25rem 0;
 }
 
 .top-wrapper > .top > .container > .top-container > .btn {
   flex: 1 1 0%;
   text-decoration: none;
-  max-width: 357px;
-  height: 56px;
+  max-width: 22.3125rem;
+  height: 3.5rem;
   background-color: var(--color-button-bg);
   color: #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  border-radius: 40px;
-  font-size: 20px;
+  border-radius: 2.5rem;
+  font-size: 1.25rem;
   font-weight: 600;
 }
 
 .top-wrapper > .top > .container > img {
   width: 60vw;
   height: auto;
-  max-width: 746px;
-  min-width: 300px;
+  max-width: 46.625rem;
+  min-width: 18.75rem;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 68.75rem) {
   .top-wrapper > .top > .container {
     flex-direction: column;
     align-items: center;
-    gap: 40px;
-    margin-top: 20px;
+    gap: 2.5rem;
+    margin-top: 1.25rem;
   }
 
   .top-wrapper > .top > .container > img {
@@ -116,7 +116,7 @@ body {
 
   .top-wrapper > .top > .container > .top-container > h1 {
     text-align: center;
-    line-height: 50px;
+    line-height: 3.125rem;
   }
 }
 
@@ -128,38 +128,38 @@ section {
 article {
   display: flex;
   align-items: center;
-  margin: 138px auto;
+  margin: 8.625rem auto;
   background-color: fcfcfc;
 }
 
 article > img {
   width: 50vw;
   height: auto;
-  max-width: 588px;
+  max-width: 36.75rem;
 }
 
 article > .text {
-  margin: 0 80px;
+  margin: 0 5rem;
 }
 
 article > .text > h3 {
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 700;
   color: #3692ff;
 }
 
 article > .text > h1 {
-  font-size: 40px;
+  font-size: 2.5rem;
   font-weight: 700;
-  line-height: 60px;
+  line-height: 3.75rem;
   color: #374151;
-  padding: 20px 0;
+  padding: 1.25rem 0;
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 68.75rem) {
   article {
     flex-direction: column;
-    gap: 100px;
+    gap: 6.25rem;
   }
 
   article > .text {
@@ -179,53 +179,53 @@ article > .text > span {
 /* footer */
 footer > .wrapper {
   background-color: var(--color-footer-bg);
-  padding: 32px 200px 0;
+  padding: 2rem 12.5rem 0;
 }
 
 footer > .wrapper > .container {
   display: flex;
   justify-content: space-between;
-  height: 160px;
+  height: 10rem;
 }
 
 footer > .wrapper > .container > .policy-faq {
   display: flex;
-  gap: 30px;
+  gap: 1.875rem;
 }
 
 footer > .wrapper > .container > .from {
   color: #9ca3af;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
 }
 
 footer > .wrapper > .container > .sns {
   display: flex;
-  height: 20px;
-  gap: 12px;
+  height: 1.25rem;
+  gap: .75rem;
 }
 
 footer > .wrapper > .container > .sns > a > img {
-  width: 20px;
+  width: 1.25rem;
 }
 
 footer > .wrapper > .container > .policy-faq > a {
   color: #e5e7eb;
-  font-size: 16px;
+  font-size: 1rem;
   font-weight: 400;
   text-decoration: none;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 62.5rem) {
   footer > .wrapper {
     background-color: #111827;
-    padding: 32px 15vw 0;
+    padding: 2rem 15vw 0;
   }
 
   footer > .wrapper > .container {
     flex-direction: column;
     align-items: center;
     justify-content: start;
-    gap: 20px;
+    gap: 1.25rem;
   }
 }
