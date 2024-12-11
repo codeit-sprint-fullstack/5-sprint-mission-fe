@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="../style/main.css" />
+    <title>판다마켓</title>
+    <link rel="icon" href="../assets/logo.ico" />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H6W3E6RE1M"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-H6W3E6RE1M");
+    </script>
+  </head>
+
+  <body>
+    <!-- 헤더 -->
+    <header class="hd">
+      <div class="header">
+        <img
+          id="home"
+          width="153px"
+          height="51px"
+          src="../assets/headerIcon.png"
+        />
+        <button id="login" class="loginBtn">로그인</button>
+      </div>
+    </header>
+
+    <!-- 메인페이지 -->
+    <div>
+      <main>
+        <section class="blueCard">
+          <div class="blueCardBox">
+            <div>일상의 모든 물건을<br />거래해 보세요</div>
+            <button id="items">구경하러 가기</button>
+          </div>
+          <img src="../assets/Img_home_top.png" />
+        </section>
+
+        <section class="whiteCard">
+          <div class="whiteCardDtail">
+            <img src="../assets/hot_item.png" />
+            <div class="textBox">
+              <label>Hot item</label>
+              <p>인기 상품을<br />확인해 보세요</p>
+              <span>
+                가장 HOT한 중고거래 물품을<br />판다 마켓에서 확인해 보세요
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section class="whiteCard">
+          <div class="whiteCardDtail">
+            <div class="textBox">
+              <label>Hot item</label>
+              <p>구매를 원하는 <br />상품을 검색하세요</p>
+              <span> 구매하고 싶은 물품은 검색해서<br />쉽게 찾아보세요 </span>
+            </div>
+            <img src="../assets/search_item.png" />
+          </div>
+        </section>
+
+        <section class="whiteCard">
+          <div class="whiteCardDtail">
+            <img src="../assets/create_item.png" />
+            <div class="textBox">
+              <label>Register</label>
+              <p>판매를 원하는<br />상품을 등록하세요</p>
+              <span>
+                어떤 물건이든 판매하고 싶은 상품을<br />쉽게 등록하세요
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section class="blueCard">
+          <div class="blueCardBox">
+            <div>믿을 수 있는<br />판다마켓 중고 거래</div>
+          </div>
+          <img src="../assets/Img_home_bottom.png" />
+        </section>
+      </main>
+
+      <!-- 푸터 -->
+      <footer>
+        <div class="footerBox">
+          <div class="footerText">©codeit - 2024</div>
+          <div class="footerBtn">
+            <p id="privacy">Privacy Policy</p>
+            <!-- 글사이 간격을 위한 공백 -->
+            <div class="space"></div>
+            <p id="fqa">FAQ</p>
+          </div>
+
+          <div class="footerIcon">
+            <img
+              src="../assets/ic_facebook.png"
+              onclick="window.open('https://www.facebook.com/codeit.kr/')"
+            />
+            <img
+              src="../assets/ic_twitter.png"
+              onclick="window.open('https://x.com/codeitkr')"
+            />
+            <img
+              src="../assets/ic_youtube.png"
+              onclick="window.open('https://www.youtube.com/channel/UCCM79CPm2WbBYTRaiNEExbg')"
+            />
+            <img
+              src="../assets/ic_instagram.png"
+              onclick="window.open('https://www.instagram.com/codeit_kr/')"
+            />
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
