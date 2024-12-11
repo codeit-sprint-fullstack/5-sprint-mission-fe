@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>판다마켓</title>
+  <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+  <link rel="stylesheet" href="reset.css">
+  <link rel="stylesheet" href="style.css">
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-F1JPKXMRM5"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-F1JPKXMRM5');
+  </script>
+  </script>
+</head>
+<body>
+
+  <!-- 헤더 - 로고, 로그인 버튼 -->
+  <header>
+    <div id="header-wrap">
+      <a id="main-logo" href="index.html"><img src="img/logo.png" art="판다마켓 로고" /></a>
+      <button id="main-login-btn" onclick="location.href='login.html'">
+        <img src="img/btn_login_header.png" art="로그인 버튼">
+      </button>
+    </div>
+  </header>
+  
+  <main>
+    <!-- main-welcome -->
+    <div class="main-welcome">
+      <div class="main-welcome-wrap">
+        <div class="main-welcome-conts">
+          <p class="main-large-txt">
+            일상의 모든 물건을<br>
+            거래해 보세요
+          </p>
+          <button onclick="location.href='items.html'">
+            <img src="img/btn_visit.png">
+          </button>
+        </div>
+        <img src="img/main_welcome.png" alt="welcome" />
+      </div>
+    </div>
+
+    <!-- main-feature - 인기 상품 확인 -->
+    <div class="main-feature">
+      <div class="main-feature-wrap">
+        <img src="img/main_01.png" alt="인기 상품 확인" />
+        <div class="main-feature-conts">
+          <h2 class="main-feature-badge">Hot item</h2>
+          <div class="main-feature-text">
+            <div class="main-large-txt">
+              인기 상품을<br>
+              확인해 보세요
+            </div>
+            <div class="main-small-txt">
+              가장 HOT한 중고거래 물품을<br>
+              판다 마켓에서 확인해보세요
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- main-feature - 상품 검색 -->
+    <div id="main-feature2" class="main-feature">
+      <div class="main-feature-wrap">
+        <div class="main-feature-conts">
+          <h2 class="main-feature-badge">Search</h2>
+          <div class="main-feature-text">
+            <div class="main-large-txt">
+              구매를 원하는<br>
+              상품을 검색하세요
+            </div>
+            <div class="main-small-txt">
+              구매하고 싶은 물품은 검색해서<br>
+              쉽게 찾아보세요
+            </div>
+          </div>
+        </div>
+        <img src="img/main_02.png" alt="상품 검색" />
+      </div>
+    </div>
+
+    <!-- main-feature - 상품 등록 -->
+    <div class="main-feature">
+      <div class="main-feature-wrap">
+        <img src="img/main_03.png" alt="상품 등록" />
+        <div class="main-feature-conts">
+          <div class="main-feature-badge">Register</div>
+          <div class="main-feature-text">
+            <div class="main-large-txt">
+              판매를 원하는<br>
+              상품을 등록하세요
+            </div>
+            <div class="main-small-txt">
+              어떤 물건이든 판매하고 싶은 상품을<br>
+              쉽게 등록하세요
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- main-bottom -->
+    <div class="main-bottom">
+      <div class="main-bottom-wrap">
+        <div class="main-bottom-conts">
+          <p class="main-large-txt">
+            믿을 수 있는<br>
+            판다마켓 중고 거래
+          </p>
+        </div>
+        <img src="img/main_bottom.png" alt="main bottom" />
+      </div>
+    </div>
+  </main>
+  
+  <!-- footer -->
+  <footer>
+    <div id="footer-wrap">
+      <span>@codeit - 2024</span>
+      <div id="footer-conts">
+        <a href="privacy.html">Privacy Policy</a>
+        <a href="faq.html">FAQ</a>
+      </div>
+      <div id="footer-sns-icons">
+        <a href="https://www.facebook.com/?locale=ko_KR" target="_blank"><img src="img/ic_facebook_footer.png" alt="페이스북"></a>
+        <a href="https://x.com/?lang=ko" target="_blank"><img src="img/ic_twitter_footer.png" alt="트위터"></a>
+        <a href="https://www.youtube.com/" target="_blank"><img src="img/ic_youtube_footer.png" alt="유튜브"></a>
+        <a href="https://www.instagram.com/" target="_blank"><img src="img/ic_instagram_footer.png" alt="인스타그램"></a>
+      </div>
+    </div>
+  </footer>
+  
+</body>
+</html>

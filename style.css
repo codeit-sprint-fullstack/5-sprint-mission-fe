@@ -1,0 +1,364 @@
+@import "reset.css";
+
+:root {
+  /* Primary Color */
+  --primary-color-100: #3692FF;
+  --primary-color-200: #1967D6;
+  --primary-color-300: #1251AA;
+
+  /* Secondary Color Group(gray) */
+  --secondary-color-900: #111827;
+  --secondary-color-800: #1F2937;
+  --secondary-color-700: #374151;
+  --secondary-color-600: #4B5563;
+  --secondary-color-500: #6B7280;
+  --secondary-color-400: #9CA3AF;
+  --secondary-color-200: #E5E7EB;
+  --secondary-color-100: #F3F4F6;
+  --secondary-color-50: #F9FAFB;
+
+  /* Error Color Group */
+  --error-color: #F74747;
+}
+
+* {
+  font-family: Pretendard;
+  /* outline: 1px solid red; */
+}
+
+html {
+  font-size: 62.5%;
+}
+
+button {
+  /* 버튼 기본 스타일 지우기 */
+  border: 0;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+button, a {
+  /* 버튼, 링크 안 이미지 중앙 정렬 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+button > img {
+  width: 100%;
+}
+
+/* index.html*/
+
+.main-large-txt {
+  color: var(--secondary-color-700);
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 5.6rem;
+  margin: 0;
+  word-break: keep-all;
+}
+
+.main-small-txt {
+  color: var(--secondary-color-700);
+  font-size: 2.4rem;
+  font-weight: 500;
+  line-height: 3.2rem;
+}
+
+/*헤더*/
+header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 7rem;
+  position: sticky;
+  top: 0;
+  background-color: white;
+}
+
+#header-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 112rem;
+  min-width: 30rem;
+  flex-grow: 1;
+  margin: 0 20rem;
+}
+
+#main-logo img {
+  width: 15.3rem;
+  height: 5.1rem;
+}
+
+#main-login-btn {
+  width: 12.8rem;
+  height: 4.8rem;
+}
+
+/*main-welcome, main-bottom*/
+.main-welcome,.main-bottom {
+  background-color: #CFE5FF;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  height: 54rem;
+}
+
+.main-welcome-wrap,.main-bottom-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  max-width: 111rem;
+  width: 90%;
+}
+
+/* main-welcome */
+.main-welcome-conts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 40%;
+  padding-bottom: 7%;
+  gap: 2rem;
+}
+
+.main-welcome-wrap > img {
+  width: 60%;
+}
+
+/* main-bottom */
+.main-bottom-conts {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  width: 40%;
+  padding-bottom: 15%;
+  gap: 2rem;
+}
+
+.main-bottom-wrap > img {
+  width: 60%;
+}
+
+/*main-feature 공통*/
+.main-feature {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 72rem;
+}
+
+.main-feature-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #FCFCFC;
+  max-width: 98.8rem;
+  width: 90%;
+  gap: 5%;
+}
+
+.main-feature-wrap img {
+  width: 60%;
+}
+
+.main-feature-conts {
+  display: flex;
+  flex-direction: column;
+}
+
+.main-feature-badge {
+  color: var(--primary-color-100);
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.6rem;
+  margin-bottom: 1.2rem;
+}
+
+.main-feature-text {
+  height: 20rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+/* main-feature2 - 오른쪽 정렬 */
+#main-feature2 .main-feature-conts {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+#main-feature2 .main-large-txt, #main-feature2 .main-small-txt {
+  text-align: right;
+}
+
+/*푸터*/
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 16rem;
+  background-color: var(--secondary-color-900);
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+#footer-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 152rem;
+  flex-grow: 1;
+  margin: 3.2rem 20rem 10.8rem;
+}
+
+footer span {
+  color: var(--secondary-color-400);
+}
+
+footer a {
+  text-decoration: none;
+  color: var(--secondary-color-200);
+}
+
+#footer-conts {
+  display: flex;
+  justify-content: center;
+  width: 15.9rem;
+  height: 1.9rem;
+  gap: 3rem;
+}
+
+#footer-sns-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 1.2rem
+}
+
+#footer-sns-icons a {
+  width: 2rem;
+  height: 2rem;
+}
+
+#footer-sns-icons a img{
+  width: 100%;
+}
+
+/* login.html, signup.html*/
+
+#login-wrap, #signup-wrap {
+  box-sizing: border-box;
+  padding: 23.1rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#login-logo, #signup-logo {
+  display: block;
+  box-sizing: border-box;
+  width: 39.6rem;
+  height: 13.2rem;
+  margin-bottom: 4rem;
+}
+
+#login-logo img, #signup-logo img {
+  width: 100%;
+  height: 100%;
+}
+
+#login-conts, #signup-conts {
+  max-width: 64rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+label {
+  display: block;
+  margin-bottom: 1.6rem;
+  font-size: 1.8rem;
+  font-weight: 700;
+  line-height: 2.6rem;
+}
+
+.input-box {
+  position: relative;
+}
+
+input {
+  box-sizing: border-box;
+  width: 100%;
+  height: 5.6rem;
+  border: 0;
+  background-color: var(--secondary-color-100);
+  border-radius: 1.2rem;
+  font-size: 1.6rem;
+  padding: 1.5rem 2.4rem;
+}
+
+input:focus {
+  outline: 0.1rem solid var(--primary-color-100);
+}
+
+#visibility-icon {
+  width: 2.4rem;
+  height: 2.4rem;
+  position: absolute;
+  bottom: 1.5rem;
+  right: 2rem;
+}
+
+/* #login-btn:hover img {
+  content: url('img/btn_login_large_active.png')
+} */
+
+#social-login {
+  box-sizing: border-box;
+  background-color: #E6F2FF;
+  border-radius: 0.8rem;
+  height: 7.4rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem 2.3rem;
+
+}
+
+#social-login span {
+  color: var(--secondary-color-800);
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 2.6rem;
+}
+
+#social-logo-wrap {
+  display: flex;
+  gap: 1.6rem;
+}
+
+.social-logo {
+  width: 4.2rem;
+  height: 4.2rem;
+}
+
+#signup-text p, #login-text p {
+  color: var(--secondary-color-800);
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 2.4rem;
+}
+
+#signup-text a, #login-text a {
+  display: inline;
+  color: var(--primary-color-100);
+}
