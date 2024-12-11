@@ -16,9 +16,12 @@ body {
 }
 
 .header-wrapper {
+  position: sticky;
+  top: 0;
   display: flex;
   justify-content: center;
   padding: .5938rem 12.5rem;
+  background-color: #fff;
 }
 
 @media (max-width: 56.25rem) {
