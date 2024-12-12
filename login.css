@@ -1,3 +1,13 @@
+@import "reset.css";
+
+:root {
+  --inputtextcolor : #9CA3AF;
+  --inputextbackgroundcolor : #F3F4F6;
+  --inputfocuscolor : #3692ff;
+  --easyloginbackgroundcolor : #E6F2FF;
+  --maintextcolor : #1F2937;
+}
+
 *{
   box-sizing: border-box;
   padding: 0;
@@ -5,49 +15,72 @@
 }
 
 body {
-position: relative;
+font-family: Pretendard, sans-serif;
+display: flex;
+justify-content: center;
+}
+
+main  {
+  width: 100%;
+}
+
+.containor {
 display: flex;
 flex-direction: column;
-font-family: Pretendard, sans-serif;
-width: 640px;
-height: 618px;
-top: 115.5px;
-left: 640px;
-opacity: 0px;
+align-items: center;
+ justify-content: center;
+ width: 90%;
+ width: 640px;
+ height: 618px;
+ margin: 230px 320px;
+ padding: 2rem;
 }
 
-.headercontainor {
+.header-containor {
   display: flex;
+  justify-content: center;
   align-items: center;
-  gap: 22.24px;
-  width: 396px;
-  height: 132px;
-  margin: 0 120px 40px;
+  width: 100%;
+  height: auto;
+  margin: 0 4rem 4rem 4rem;
 }
 
-.headimg1 {
+.head-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+}
+
+.head-img1 {
   width: 103.53px;
-  height: 103.88px;
+  max-width: 20%;
+  height: auto;
+  max-height: 103.88px;
+
 }
 
-.headimg2 {
+.head-img2 {
+  width: 80%;
   max-width: 266px;
+  height: auto;
   max-height: 90px;
 }
 
-.mailcontainor {
+.mail-containor {
  display: flex;
  flex-direction: column;
  width: 100%;
- height: 98px;
+ max-width: 640px;
  margin-bottom: 24px;
 }
 
-.mailtext {
+.mail-title-text {
   width: 47px;
   height: 26px;
   font-size: 18px;
   font-weight: 700;
+  color: var(--maintextcolor);
   gap: 0px;
   opacity: 0px;
   white-space: nowrap;
@@ -55,7 +88,7 @@ opacity: 0px;
   margin-bottom: 16px;
 }
 
-.maininsert{
+.main-insert-text {
 width: 100%;
 height: 56px;
 padding: 16px 24px 16px 24px;
@@ -65,30 +98,30 @@ opacity: 0px;
 font-size: 16px;
 font-weight: 400;
 line-height: 26px;
-color: #9CA3AF;
+color: var(--inputtextcolor);
 text-align: left;
 text-underline-position: from-font;
 text-decoration-skip-ink: none;
-border-width: 0;
-background-color:#F3F4F6;
+border: none;
+background-color:var(--inputextbackgroundcolor);
 }
 
-
-
-.maininsert:focus {
+.main-insert-text:focus {
   font-size: 16px;
   font-weight: 400;
-  color:#1F2937;
-  border-color: #3692ff;
+  color:var(--maintextcolor);
+  width: 100%;
+  outline: none;
+  border: 1px solid;
+  border-color: var(--inputfocuscolor);
 }
 
-
-.passtext {
+.pass-title-text {
   width: 63px;
   height: 26px;
   font-size: 18px;
   font-weight: 700;
-  color: #1F2937;
+  color: var(--maintextcolor);
   gap: 0px;
   opacity: 0px;
   white-space: nowrap;
@@ -96,18 +129,22 @@ background-color:#F3F4F6;
   margin-bottom: 16px;
 }
 
-.passcontainor {
+.pass-containor {
   width: 100%;
   height: 56px;
   position: relative;
   display: flex;
 }
 
-.passcontainor > input{
+.pass-containor input:focus{
   width: 100%;
+  outline: none;
+  color: var(--maintextcolor);
+  border: 1px solid;
+  border-color: var(--inputfocuscolor);
 }
 
-.passcontainor > a img{
+.pass-containor > a img{
   position: absolute;
   width: 24px;
   height: 24px;
@@ -120,8 +157,10 @@ background-color:#F3F4F6;
   
 }
 
-.loginbuttun {
-display: block;
+.login-button {
+display: flex;
+justify-content: center;
+align-items: center;
 width: 100%;
 height: 56px;
 padding: 16px 124px 16px 124px;
@@ -129,35 +168,35 @@ margin: 24px 0;
 gap: 10px;
 border-radius: 40px;
 opacity: 0px;
-color:#F3F4F6;
+color:var(--inputextbackgroundcolor);
 white-space: nowrap;
 text-decoration: none;
 text-align: center;
 flex-shrink: 0;
-background-color: #9CA3AF;
+background-color: var(--inputtextcolor);
 }
 
 
-.loginbuttun:hover {
+.login-button:hover {
   cursor: pointer;
-  background-color:#3692FF;
+  background-color:var(--inputfocuscolor);
   ;
 }
 
-.easylogincotainor {
-  background-color: #E6F2FF;
+.easylogin-cotainor {
+  background-color: var(--easyloginbackgroundcolor);
   border-radius: 12px;
   padding: 16px 23px;
   margin-bottom: 24px;
 }
 
-.easylogcontent {
+.easylogin-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-.easylogtexst{
+.easylog-title-text{
 font-size: 16px;
 font-weight: 500;
 line-height: 26px;
@@ -166,13 +205,18 @@ text-underline-position: from-font;
 text-decoration-skip-ink: none;
 }
 
-.easylogimg   {
+.easylogin-img   {
   width: 42px;
   height: auto;
   white-space: nowrap;
 }
 
-.signupcotainor {
+.easylogin-img-box {
+  text-decoration: none;
+}
+
+.signup-cotainor {
   display: flex;
   justify-content: center;
+  gap: 0.3rem;
 }
