@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판다마켓</title>
+</head>
+<style>
+    body {
+        margin: 0;
+    }
+
+    header {
+        position: sticky;
+        top: 0px;
+        background-color: white;
+        z-index: 100;
+    }
+
+    .nav {
+        width: 100%;
+        height: 72px;
+        display: flex;
+        align-items: center;
+    }
+
+    /* .nav-container {
+        width: 1920px;
+    } */
+
+    .blank {
+        flex-grow: 1;
+    }
+
+    .logo {
+        display: flex;
+        width: 153px;
+        height: 51px;
+        gap: 9px;
+        align-items: center;
+        position: relative;
+        left: 200px;
+    }
+
+    .login_button {
+        background-color: rgb(54, 146, 255);
+        color: white;
+        width: 128px;
+        height: 48px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        position: relative;
+        right: 200px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .top_banner {
+        width: 100%;
+        height: 540px;
+        background-color: rgba(207, 229, 255);
+        display: flex;
+        justify-content: center;
+    }
+
+    .top_banner_container {
+        display: flex;
+        margin-top: 200px;
+    }
+
+    .top_banner_text_container {
+        margin-top: 40px;
+    }
+
+    .banner_text {
+        font-size: 40px;
+        font-weight: 800;
+        margin-bottom: 32px;
+    }
+
+    .banner_button {
+        width: 357px;
+        height: 56px;
+        font-weight: 600;
+        font-size: 20px;
+        background-color: rgb(54, 146, 255);
+        color: white;
+        border: none;
+        border-radius: 40px;
+    }
+
+    .info_item {
+        width: 100%;
+        height: 720px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .right {
+        text-align: right;
+    }
+
+    .container {
+        width: 988px;
+        height: 444px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 31px;
+        box-sizing: border-box;
+        cursor: pointer;
+    }
+
+    .item_text_box {
+        width: 274px;
+        height: 238px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+    }
+
+    .search_text_box {
+        width: 317px;
+        height: 238px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        /* background-color: aqua; */
+    }
+
+    .tag {
+        color: rgb(54, 146, 255);
+        font-size: 18px;
+        font-weight: 700;
+        margin-bottom: 12px;
+    }
+
+    .title {
+        font-size: 40px;
+        font-weight: 700;
+        line-height: 56px;
+        margin-bottom: 24px;
+    }
+
+    .description {
+        font-size: 24px;
+        font-weight: 500;
+        line-height: 32px;
+    }
+
+    .bottom_banner {
+        margin-top: 135px;
+        width: 100%;
+        height: 540px;
+        background-color: rgba(207, 229, 255, 1);
+        display: flex;
+        justify-content: center;
+    }
+
+    .bottom_banner_container {
+        display: flex;
+        flex-direction: row;
+        margin-top: 143px;
+    }
+
+    #bottom_banner_title {
+        position: relative;
+        top: 112.5px;
+    }
+
+    .footer {
+        width: 100%;
+        height: 180px;
+        background-color: black;
+        display: flex;
+        justify-content: center;
+    }
+
+    .footer_container {
+        width: 1520px;
+        height: 20px;
+        margin: 32px 200px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .footer_center_container {
+        display: flex;
+        gap: 30px;
+    }
+
+    .footer_social_container {
+        display: flex;
+        gap: 12px;
+    }
+
+    .footer_company_name {
+        font-size: 16px;
+        color: rgba(156, 163, 175, 1);
+    }
+
+    .footer_text {
+        font-size: 16px;
+        color: rgba(229, 231, 235, 1);
+    }
+
+    a {
+        text-decoration: none;
+    }
+
+</style>
+
+<body>
+    <!-- 네비게이션 -->
+    <header>
+        <div class="nav">
+            <!-- <div class="nav-container"> -->
+            <div class="logo">
+                <img src="./asset/panda_icon.png" />
+                <img src="./asset/logo_name.png" />
+            </div>
+            <div class="blank"></div>
+            <button class="login_button" onclick="location.href='./login.html'">로그인</button>
+            <!-- </div> -->
+        </div>
+    </header>
+    <!-- 배너 -->
+    <div class="top_banner">
+        <div class="top_banner_container">
+            <div class="top_banner_text_container">
+                <div class="banner_text">
+                    일상의 모든 물건을<br>
+                    거래해 보세요
+                </div>
+                <button class="banner_button" onclick="location.href='./items.html'">
+                    구경하러 가기
+                </button>
+            </div>
+            <div class="banner_image">
+                <img src="./asset/banner_image.png" />
+            </div>
+        </div>
+    </div>
+    <!-- 인기 상품 -->
+    <div class="info_item hot_item">
+        <div class="container">
+            <img src="./asset/hot_item_image.png">
+            <div class="item_text_box">
+                <div class="tag">Hot item</div>
+                <div class="title">인기 상품을<br>확인해 보세요</div>
+                <div class="description">가장 Hot한 중고거래 물품을<br>판다 마켓에서 확인해보세요</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 검색 -->
+    <div class="info_item">
+        <div class="container">
+            <div class="search_text_box">
+                <div class="tag right">Search</div>
+                <div class="title right">구매를 원하는<br>상품을 검색하세요</div>
+                <div class="description right">구매하고 싶은 분들은 검색해서<br>쉽게 찾아보세요</div>
+            </div>
+            <img src="./asset/search_image.png">
+        </div>
+    </div>
+
+    <!-- 등록 -->
+    <div class="info_item">
+        <div class="container">
+            <img src="./asset/register_image.png">
+            <div class="search_text_box">
+                <div class="tag">Search</div>
+                <div class="title">판매를 원하는<br>상품을 등록하세요</div>
+                <div class="description">어떤 물건이든 판매하고 싶은 상품을<br>쉽게 등록하세요</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 하단 배너 -->
+    <div class="bottom_banner">
+        <div class="bottom_banner_container">
+            <div id="bottom_banner_title" class="title">믿을 수 있는<br>판다마켓 중고 거래</div>
+            <img src="./asset/bottom_banner_image.png">
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="footer_container">
+            <div class="footer_company_name">
+                @codeit-2024
+            </div>
+            <div class="footer_center_container">
+                <a class="footer_text" href="./privacy.html">Privacy Policy</a>
+                <a class="footer_text" href="./faq.html">FAQ</a>
+            </div>
+            <div class="footer_social_container">
+                <img src="./asset/ic_facebook.png">
+                <img src="./asset/ic_twitter.png">
+                <img src="./asset/ic_youtube.png">
+                <img src="./asset/ic_instagram.png">
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
