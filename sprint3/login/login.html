@@ -13,18 +13,21 @@
             <div class="loginlogo"><a href="../index.html"><img src="./loginpandalogo.png"></a></div>
                 <div class="email_input">
                     <label class="email">이메일</label>
-                    <input type="email" placeholder="이메일을 입력해주세요">
+                    <div class="input-container">
+                        <input type="email" id="emailInput" placeholder="이메일을 입력해주세요">
+                    </div>
                 </div>
                 <div class="passwd_input">
                     <label class="password">비밀번호</label>
-                    <div class="passwd_label">
-                        <input type="password" placeholder="비밀번호를 입력해주세요" >
-                        <img src="secret.png" id="togglePassword">
+                    <div class="input-container">
+                        <input type="password" id="passwordInput" placeholder="비밀번호를 입력해주세요">
+                        <img src="secret.png" id="togglePassword" alt="비밀번호 보기">
                     </div>
                 </div>
                 <div class="login_bt">
                     <a class="login_text">로그인</a>
                 </div>
+            
                 <div class="easy_login">
                     <div class="easy_box">
                         <div class="do_easy">
@@ -42,5 +45,7 @@
             </div>
         </div>
     </div>
+<script src="login.js"></script>
 </body>
+
 </html>
