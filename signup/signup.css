@@ -1,0 +1,163 @@
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+      "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI",
+      "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+      sans-serif;
+}
+
+#content{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    padding-left: 10px;
+    padding-right: 10px;
+    box-sizing: border-box;
+}
+
+#panda a{
+    height: 100%;
+    display: inline-block;
+}
+
+#panda img{
+    width: 40vh;
+    max-width: 396px;
+}
+
+input{
+    background-color: #F3F4F6;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0);
+    color: #9CA3AF;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 26px;
+    padding: 15px;
+    box-sizing: border-box;
+    width: 100%;
+    font-family: Pretendard;
+
+}
+
+input:focus{
+    outline: 1px solid #3692FF;
+}
+
+.em_nick{
+    max-width: 640px;
+    width: 80vw;
+}
+
+.pw{
+    position: relative;
+    max-width: 640px;
+    width: 80vw;
+}
+
+.pw > img{
+    width: 24px;
+    position: absolute;
+    width: 24px;
+    right: 15px;
+    top: 72px;
+}
+
+.explain{
+    margin-top: 2.4vh;
+    margin-bottom: 1.6vh;
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 26px;
+}
+
+#btn_signup{
+    max-width: 640px;
+    width: 80vw;
+    margin-top: 2.8vh;
+    margin-bottom: 2.8vh;
+}
+
+#btn_signup button{
+    width: 100%;
+    height: 50px;
+    border-radius: 40px;
+    border: 0px;
+    background: #9CA3AF;
+    color: #F3F4F6;
+    font-family: Pretendard;
+    font-size: 20px;
+    font-weight: 600;
+    line-height: 32px;
+    text-align: center;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+}
+
+#btn_signup button:hover{
+    background: #3692FF;
+}
+
+#simple{
+    display: flex;
+    border-radius: 8px;
+    width: 80vw;
+    height: 7vh;
+    max-width: 640px;
+    max-height: 74px;
+    background: #E6F2FF;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#simple_img{
+    height: 42px;
+    
+}
+
+
+#simple_txt{
+    padding-left: 23px;
+}
+
+#simple_txt p{
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+}
+
+#google{
+    background-image: url(img/google.png);
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    background-size: cover;
+    margin-right: 16px;
+}
+
+#kakao{
+    background-image: url(img/kakako.png);
+    width: 42px;
+    height: 42px;
+    display: inline-block;
+    background-size: cover;
+    margin-right: 23px;
+}
+
+#login{
+    margin-top: 24px;
+}
+
+#login p{
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+}
+
+#login a{
+    color: #3692FF;
+}
