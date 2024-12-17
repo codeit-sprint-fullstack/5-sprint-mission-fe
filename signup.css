@@ -1,0 +1,261 @@
+@import "reset.css";
+
+:root {
+  --inputtextcolor : #9CA3AF;
+  --inputextbackgroundcolor : #F3F4F6;
+  --inputfocuscolor : #3692ff;
+  --easyloginbackgroundcolor : #E6F2FF;
+  --maintextcolor : #1F2937;
+}
+
+*{
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: Pretendard, sans-serif;
+  display: flex;
+  justify-content: center;
+}
+
+main  {
+  width: 100%;
+}
+
+.containor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+ justify-content: center;
+ width: 90%;
+ width: 640px;
+ height: 618px;
+ margin: 230px 320px;
+ padding: 2rem;
+}
+
+.header-containor {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 0;
+  height: auto;
+  margin: 0 4rem 4rem 4rem;
+}
+
+.head-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5%;
+}
+
+.head-img1 {
+  width: 103.53px;
+  max-width: 20%;
+  height: auto;
+  max-height: 103.88px;
+
+}
+
+.head-img2 {
+  width: 80%;
+  max-width: 266px;
+  height: auto;
+  max-height: 90px;
+}
+
+.main-containor {
+ display: flex;
+ flex-direction: column;
+ width: 100%;
+ max-width: 640px;
+ margin-bottom: 24px;
+}
+
+.main-title-text {
+  width: 47px;
+  height: 26px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--maintextcolor);
+  gap: 0px;
+  opacity: 0px;
+  white-space: nowrap;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.main-input-text {
+width: 100%;
+height: 56px;
+padding: 16px 24px 16px 24px;
+gap: 10px;
+border-radius: 12px;
+opacity: 0px;
+font-size: 16px;
+font-weight: 400;
+line-height: 26px;
+color: var(--inputtextcolor);
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+border-width: 0;
+background-color:var(--inputextbackgroundcolor);
+}
+
+
+.main-input-text:focus {
+  font-size: 16px;
+  font-weight: 400;
+  color: var(--maintextcolor);
+  width: 100%;
+  outline: none;
+  border: 1px solid;
+  border-color: var(--inputfocuscolor);
+}
+
+
+.pass-title-text {
+  width: 63px;
+  height: 26px;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--maintextcolor);
+  gap: 0px;
+  opacity: 0px;
+  white-space: nowrap;
+  text-decoration: none;
+  margin-bottom: 16px;
+}
+
+.pass-containor {
+  width: 100%;
+  height: 56px;
+  position: relative;
+  display: flex;
+  background-color: var(--inputextbackgroundcolor);
+  margin-bottom: 24px;
+  border-radius: 12px;
+}
+
+.pass-containor input:focus{
+  width: 100%;
+  outline: none;
+  color: var(--maintextcolor);
+  border: 1px solid;
+  border-color: var(--inputfocuscolor);
+}
+
+.pass-containor > a img{
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  top: 18px;
+  bottom: 50px;
+  right: 20px;
+  
+}
+
+.passcontainor a:hover {
+  
+}
+
+.pass-input-text {
+  width: 80%;
+  height: 56px;
+  padding: 16px 24px 16px 24px;
+  gap: 10px;
+  border-radius: 12px;
+  opacity: 0px;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  color: var(--inputtextcolor);
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  border-width: 0;
+  background-color:var(--inputextbackgroundcolor)
+}
+
+.repass-input-text {
+  width: 90%;
+  height: 56px;
+  padding: 16px 24px 16px 24px;
+  gap: 10px;
+  border-radius: 12px;
+  opacity: 0px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  line-height: 26px;
+  color: var(--inputtextcolor);
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  border-width: 0;
+  background-color:var(--inputextbackgroundcolor);
+}
+
+
+.signup-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 56px;
+  padding: 16px 124px 16px 124px;
+  margin-bottom: 24px;
+  gap: 10px;
+  border-radius: 40px;
+  opacity: 0px;
+  color:var(--inputextbackgroundcolor);
+  white-space: nowrap;
+  text-decoration: none;
+  text-align: center;
+  flex-shrink: 0;
+  background-color: var(--inputtextcolor);
+  }
+  
+
+.signup-button:hover {
+  cursor: pointer;
+  background-color:var(--inputfocuscolor);
+}
+
+.easylogin-cotainor {
+  background-color: var(--easyloginbackgroundcolor);
+  border-radius: 12px;
+  padding: 16px 23px;
+  margin-bottom: 24px;
+}
+
+.easylogin-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.easylogin-title-text{
+font-size: 16px;
+font-weight: 500;
+line-height: 26px;
+text-align: left;
+text-underline-position: from-font;
+text-decoration-skip-ink: none;
+}
+
+.easylog-img   {
+  width: 42px;
+  height: auto;
+  white-space: nowrap;
+}
+
+.relogin-cotainor {
+  display: flex;
+  justify-content: center;
+  gap: 0.3rem;
+}

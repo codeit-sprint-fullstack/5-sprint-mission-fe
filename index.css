@@ -1,0 +1,373 @@
+@import "reset.css";
+
+:root {
+  --headerbackgroundcolor : #ffffff;
+  --buttontextcolor : #F3F4F6;
+  --buttoncolor : #3692ff;
+  --watchlastbackcolor : #CFE5FF; 
+  --explainbackcolor : #FCFCFC;
+  --maintextcolor : #1F2937;
+  --footerbackcolor : #111827;
+  --footersourcecolor : #9CA3AF;
+  --footerbuttoncolor : #E5E7EB;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px; 
+}
+
+body {
+  font-family: Pretendard, sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  margin: 0;
+  padding: 0;
+}
+
+header {
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 7rem;
+  padding: 1rem 20rem;
+  z-index: 10;
+  background-color: var(--headerbackgroundcolor);
+}
+
+
+.head-log {
+  position: relative;
+  text-align: center;
+  font-size: 1.6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 2rem;
+  max-width: 112rem;
+}
+
+.head-main-img{
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  width:: 100%;
+  height: auto;
+  flex-shrink: 0;
+  gap: 8.59px;
+}
+
+.head-img1 {
+  width: auto;
+  height: 4rem;
+  flex-shrink: 0;
+}
+
+.head-img2 > img {
+  width: auto;
+  height: 2rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+}
+
+.head-button {
+  position: relative;
+  display: block;
+  padding: 1rem 4.3rem;
+  border-radius: 0.8rem;
+  background-color: var(--buttoncolor);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--buttontextcolor);
+  white-space: nowrap;
+  text-decoration: none;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+.head-button:hover {
+  cursor: pointer;
+}
+
+.container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.watch-containor {
+  position: relative;
+  width: 100%;
+  height: 54rem;
+  background-color: var(--watchlastbackcolor);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.watch-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  gap: 2rem; 
+  flex-wrap: wrap;
+}
+
+.watch-textbox {
+  height: auto;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+.watch-main-text {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.watch-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 12.4rem;
+  border-radius: 3rem;
+  background-color: var(--buttoncolor);
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--buttontextcolor);
+  text-align: center;
+  white-space: nowrap;
+  margin-top: 2rem;
+  text-decoration: none;
+  width: 100%;
+}
+
+a.watch-button:hover {
+  cursor: pointer;
+}
+
+.watch-img-box{
+ display: flex;
+ justify-content: center;
+}
+
+.watch-img {
+  width: 90%;
+  max-width: 746px;
+  height: auto;
+  object-fit: contain;
+}
+
+.explain-containor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-size: 1.6rem;
+  padding: 138px 0;
+  gap: 276px;
+}
+
+
+.explain-content, .explain-content1{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  font-size: 0;
+  gap: 2%;
+  background-color: var(--explainbackcolor);
+  white-space: nowrap;
+  flex-wrap: nowrap;
+  padding: 0;
+}
+
+  .explain-content1 {
+    justify-content: flex-end;
+  }
+
+ .explain-content1 > div p {
+   text-align: right;
+ }
+
+ .explain-box{
+    height: auto;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+ }
+
+ .explain-title-text {
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 2.6;
+  color: var(--buttoncolor);
+  text-align: left;
+  }
+
+.explain-main-text {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.explain-sub-text {
+  font-size: 2rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-align: left;
+}
+
+.explain-img-box {
+    display: flex;
+    justify-content: center;
+}
+
+.explain-img {
+  width: 100%;
+  max-width : 588px;
+  height: auto;
+  white-space: nowrap;
+  }
+
+.last-containor {
+  position: relative;
+  width: 100%;
+  height: 54rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  background-color: var(--watchlastbackcolor);
+  margin-top: 13.8rem;
+}
+
+.last-content {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  gap: 69px; 
+  flex-wrap: wrap;
+  }
+
+.last-text-box {
+  position: relative;
+  height: auto;
+  flex-wrap: nowrap;
+  white-space: nowrap;
+}
+
+  .last-title-text {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: left;
+  white-space: nowrap;
+  }
+
+  .last-img-box  {
+    position: relative;
+    display: flex;
+   }
+
+  .last-img {
+    width: 90%;
+    max-width: 746px;
+    height: auto;
+    object-fit: contain;
+  }
+
+
+.footer-containor {
+  position: relative;
+  background-color: var(--footerbackcolor);
+  height: auto;
+  font-size: 1.6rem;
+  padding: 3.2rem 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: nowrap;
+}
+
+
+.footer-content {
+  width: 90%;
+  display: flex;
+  height: auto;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+}
+
+.footer-source {
+  flex-shrink: 0;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.909;
+  text-align: center;
+  color: var(--footersourcecolor);
+  white-space: nowrap;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.footer-button {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 1.909;
+  text-align: center;
+  white-space: nowrap;
+  color: var(--footerbuttoncolor);
+  display: flex;
+  gap: 2rem;
+  flex-grow: 1;
+  justify-content: center;
+}
+
+.footer-button:hover {
+  cursor: pointer;
+  text-decoration-line: none;
+}
+
+.footer-button > a {
+  right: 0;
+  margin-left: 30px;
+}
+  
+.footer-sub-img {
+  width:: 100%;
+  height: auto;
+  flex-shrink: 0;
+  display: flex;
+  gap: 1rem;
+  margin-left: 2rem;
+}
+
+.footer-sub-img > a img {
+  width: 17px;
+  height: 1.7;
+}
+
+.footer-sub-img:hover > a img {
+  cursor: pointer;
+}
