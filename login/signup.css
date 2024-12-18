@@ -1,0 +1,221 @@
+@import "reset.css";
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Pretendard", sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.all-wrapper {
+    padding: 227px 640px;
+}
+
+/* 로고부분 */
+
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    margin-top: 227px;
+}
+
+.panda-home {
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+ }
+
+/* 메인입력부분 */
+
+main {
+    width: 100%;
+}
+
+.email_area{
+    margin-top: 40px;
+}
+
+.nick_area {
+    margin-top: 24px;
+}
+
+.pass_area {
+    margin-top: 24px;
+}
+
+.passcheck_area {
+    margin-top: 24px;
+}
+
+dt {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 26px;
+    margin-bottom: 16px;
+    color: #1F2937;
+}
+
+input {
+    height: 56px;
+    background-color: #F3F4F6;
+    border-style: none;
+    gap: 10px;
+    border-radius: 12px;
+}
+
+input::placeholder {
+    color: #9CA3AF;
+    padding: 15px 24px;
+    font-size: 16px;
+}
+
+#uid, #unickname, #password, #passwordcheck {
+    width: 100%;
+    height: 56px;
+    background-color: #F3F4F6;
+    border-style: none;
+    gap: 10px;
+    border-radius: 12px;
+}
+
+.pass_box {
+    position: relative;
+}
+
+.눈알1 {
+    position: absolute;
+    right: 16px;
+    top:10%;
+}
+
+.passcheck_box {
+    position: relative;
+}
+
+.눈알2 {
+    position: absolute;
+    right: 16px;
+    top:10%;
+}
+
+
+/* #passwordcheck {
+    background-image : url('btn_visibility_on_24px.png');
+    background-repeat : no-repeat;
+    background-size: 24px;
+    background-position: right;
+    background-position-x: 592px;
+    border-style: none;
+}
+#password {
+    background-image : url('btn_visibility_on_24px.png');
+    background-repeat : no-repeat;
+    background-size: 24px;
+    background-position: right;
+    background-position-x: 592px;
+    border-style: none; }*/
+
+
+/* 회원가입 버튼 */
+
+.join_area {
+    margin-top: 24px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.join-btn {
+    border: none;
+    width: 100%;
+    height: 56px;
+    border-radius: 40px;  
+    gap:10px;
+    background-color: #9CA3AF;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 32px;
+    cursor: pointer;
+}
+
+.join-btn:hover {
+    background-color: #3692FF ;
+}
+
+/* 간편 로그인하기 */
+
+.간편_area {
+    width: 100%;
+    height: 74px;
+    border-radius: 8px;
+    background-color: #E6F2FF;
+    color: #1F2937;
+    margin-top: 24px;
+    gap: 10px;
+
+}
+
+.간편-contentbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 23px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 26px;
+}
+
+.googleim{
+    margin-right: 16px;
+}
+
+.googleim, .kakaoim {
+    height: 42px;
+    text-decoration-line: none;
+    gap: 16px;
+}
+
+.간편-google, .간편-kakao {
+    text-decoration-line: none;
+}
+
+input:focus {
+    outline: 1px solid #3692FF;
+}
+
+/* 이미 회원이신가요? */
+
+.relogin_area {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 24px;
+    gap: 4px;
+    color: #1F2937;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 24px;
+}
+
+.signup-link {
+   color: #3692FF;
+   font-weight: 500;
+   font-size: 14px;
+   line-height: 16.71px;
+}
