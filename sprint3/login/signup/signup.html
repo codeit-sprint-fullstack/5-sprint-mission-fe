@@ -13,29 +13,33 @@
             <div class="loginlogo"><a href="../../index.html"><img src="logo.png"></a></div>
                 <div class="email_input">
                     <label class="email">이메일</label>
-                    <input type="email" placeholder="이메일을 입력해주세요">
+                    <div>
+                        <input type="email" id="emailInput" placeholder="이메일을 입력해주세요">
+                    </div>
                 </div>
                 <div class="nickname_input">
                     <label class="email">닉네임</label>
-                    <input type="email" placeholder="닉네임을 입력해주세요">
+                    <div>
+                        <input type="email" placeholder="닉네임을 입력해주세요">
+                    </div>
                 </div>
                 <div class="passwd_input">
                     <label class="passwd">비밀번호</label>
                     <div class="passwd_label">
-                        <input type="password" placeholder="비밀번호를 입력해주세요" >
-                        <img src="../secret.png" id="togglePassword">
+                        <input type="password" id="passwordInput" placeholder="비밀번호를 입력해주세요" >
+                        <img src="../secret.png" id="togglePassword" alt="비밀번호 보기">
                     
                     </div>
                 </div>
                 <div class="repasswd_input">
                     <label class="passwd">비밀번호 확인</label>
                     <div class="passwd_label">
-                        <input type="password" placeholder="비밀번호를 다시 한 번 입력해주세요" >
-                        <img src="../secret.png" id="togglePassword">
+                        <input type="password" id="checkPasswordInput" placeholder="비밀번호를 다시 한 번 입력해주세요" >
+                        <img src="../secret.png" id="togglePassword2">
                     
                     </div>
                 </div>
-                <div class="login_bt">
+                <div class="login_bt" style="pointer-events: non;">
                     <a class="signup">회원가입</a>
                 </div>
                 <div class="easy_login">
@@ -53,8 +57,16 @@
                     <a>이미 회원이신가요?&nbsp;&nbsp;<a href="../login.html">로그인</a>
                     </a>
                 </div>
+                
             </div>
         </div>
     </div>
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage">비밀번호가 일치하지 않습니다.</p>
+            <button id="confirmButton" class="confirm-btn">확인</button>
+        </div>
+    </div> 
+    <script src="signup.js"></script>
 </body>
 </html>

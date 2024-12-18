@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 <body>
-    <div class="login">
+    <div class="login" id="modal" class="modal" >
         <div class="loginbox" style="width: 640px; height: 618px; ">
             <div class="loginlogo"><a href="../index.html"><img src="./loginpandalogo.png"></a></div>
                 <div class="email_input">
@@ -24,10 +24,10 @@
                         <img src="secret.png" id="togglePassword" alt="비밀번호 보기">
                     </div>
                 </div>
-                <div class="login_bt">
+                <div id="loginButton" type="button">
                     <a class="login_text">로그인</a>
                 </div>
-            
+                
                 <div class="easy_login">
                     <div class="easy_box">
                         <div class="do_easy">
@@ -37,7 +37,7 @@
                             <a href="https://www.google.com/"><img src="./goggle.png"></a><a href="https://www.kakao.com/page/"><img src="./kakao.png"></a>
                         </div>
                     </div>
-                   
+                    
                 </div>
                 <div class="join_panda">
                     판다마켓이 처음이신가요?&nbsp;&nbsp;<a href="./signup/signup.html">회원가입</a>
@@ -45,7 +45,13 @@
             </div>
         </div>
     </div>
-<script src="login.js"></script>
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage">비밀번호가 일치하지 않습니다.</p>
+            <button id="confirmButton" class="confirm-btn">확인</button>
+        </div>
+    </div>
+<script src="./login.js"></script>
 </body>
 
 </html>
