@@ -345,6 +345,7 @@ footer .content .right {
 
   footer .content {
     flex-wrap: wrap;
+    margin-bottom: 65px;
   }
   footer .content .left {
     order: 3;
