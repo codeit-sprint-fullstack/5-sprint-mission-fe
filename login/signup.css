@@ -5,25 +5,32 @@
     padding: 0;
 }
 
+html {
+  width: 100%;
+  height: 100%;
+}
+
 body {
-    font-family: "Pretendard", sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  height: 100%;
+  font-family: "Pretendard", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .all-wrapper {
-    padding: 227px 640px;
+  padding: 227px 640px;
 }
 
 /* 로고부분 */
 
 header {
+  margin-top: 200px;
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
-    margin-top: 227px;
 }
 
 .panda-home {
