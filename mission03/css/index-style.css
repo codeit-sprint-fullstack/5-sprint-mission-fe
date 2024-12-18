@@ -4,21 +4,19 @@
   width: 100%;
   margin: 0 auto;
   display: flex;
+  padding: 0 24px;
 }
 
 header {
   position: sticky;
   top: 0px;
-
   background-color: #ffffff;
   height: 70px;
   display: flex;
 }
 header .content {
-  max-width: 1120px;
   align-items: center;
   justify-content: space-between;
-  padding: 0 10px;
 }
 header .content .button {
   background-color: #3692ff;
@@ -36,8 +34,6 @@ header .content .button {
 
 .landing {
   background-color: #cfe5ff;
-  height: 540px;
-
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -46,9 +42,9 @@ header .content .button {
   gap: 7px;
   justify-content: center;
   align-items: end;
+  margin-top: 200px;
 }
 .landing .content .intro {
-  width: 357px;
   display: flex;
   flex-direction: column;
   gap: 32px;
@@ -63,22 +59,19 @@ header .content .button {
   background-color: #3692ff;
   color: #f9fafb;
   font-size: 1.25rem; /* 20px */
+  font-weight: 600;
   line-height: 32px;
-
   padding: 12px 124px;
-
   border: none;
   border-radius: 40px;
-
   text-decoration: none;
   cursor: pointer;
 }
 
 .info {
   background-color: #ffffff;
-  height: 720px;
-
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
@@ -86,20 +79,20 @@ header .content .button {
   background-color: #fcfcfc;
   width: 988px;
   height: 444px;
-
   display: flex;
   align-items: center;
   gap: 64px;
+  margin: 138px 0;
 }
-.hot-item .card,
-.register .card {
+.hot-item,
+.register {
   flex-direction: row;
 }
-.search .card {
+.search {
   flex-direction: row-reverse;
   text-align: right;
 }
-.info .card .card-content {
+.card-content {
   display: flex;
   flex-direction: column;
 }
@@ -113,8 +106,10 @@ header .content .button {
   font-size: 2.5rem; /* 40px */
   font-weight: 700;
   line-height: 56px;
-
   margin-bottom: 24px;
+}
+.break-line {
+  display: inline; /* 줄바꿈 있음 */
 }
 .info .card .card-content p {
   font-size: 1.5rem; /* 24px */
@@ -124,9 +119,9 @@ header .content .button {
 
 .banner {
   background-color: #cfe5ff;
-  height: 540px;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: flex-end;
 }
 .banner .content {
@@ -134,35 +129,33 @@ header .content .button {
   justify-content: center;
   align-items: end;
   gap: 69px;
+  margin-top: 143px;
 }
 .banner h1 {
   font-size: 2.5rem; /* 40px */
   font-weight: 700;
   line-height: 56px;
-
   margin-bottom: 172.5px;
 }
 
 footer {
-  height: 160px;
   background-color: #111827;
   color: #e5e7eb;
   font-size: 1rem; /* 16px */
   font-weight: 400;
-
   display: flex;
 }
 footer .content {
-  max-width: 1120px;
   justify-content: space-between;
+  padding: 0 24px;
   margin-top: 32px;
-  padding: 0 10px;
+  margin-bottom: 108px;
 }
 footer .content .middle {
   display: flex;
   gap: 30px;
 }
-footer > .content > .middle > a {
+footer .content .middle a {
   text-decoration: none;
   cursor: pointer;
   color: inherit;
@@ -194,8 +187,8 @@ footer .content .right {
   height: auto;
 }
 
-/* 미디어 쿼리 설정 */
-@media (max-width: 1120px) {
+/* -------------------------Tablet------------------------- */
+@media (max-width: 1200px) {
   body {
     font-size: 14px;
   }
@@ -204,95 +197,169 @@ footer .content .right {
     height: auto;
   }
   .landing .content {
+    gap: 211px;
     flex-direction: column;
     align-items: center;
+    margin-top: 84px;
   }
   .landing .content .intro {
-    width: 90%;
     text-align: center;
     align-items: center;
-    margin-bottom: 40px;
-  }
-  .landing .content .intro h1 {
-    font-size: 2rem;
-    line-height: 48px;
-    margin-top: 40px;
-  }
-  .landing .content .intro .button {
-    width: 100%;
-    max-width: 357px;
-    padding: 12px 14px;
+    gap: 24px;
+    margin: 0;
   }
 
   .info {
     height: auto;
-    padding: 20px;
+    padding: 24px 24px 56px 24px;
+    gap: 52px;
   }
   .info .card {
     flex-direction: column;
     width: 100%;
     height: auto;
-    gap: 20px;
-    padding-bottom: 20px;
+    margin: 0;
+    gap: 24px;
   }
   .info .card img {
     width: 100%;
     height: auto;
   }
-  .info .card .card-content {
+  .card .card-content {
     width: 90%;
-    text-align: center;
+    text-align: left;
+  }
+  .hot-item,
+  .register {
+    text-align: left;
+  }
+  .search {
+    text-align: right;
+  }
+  .info .card .card-content .badge {
+    margin-bottom: 16px;
+  }
+  .info .card .card-content h1 {
+    font-size: 2em; /* 32px */
+    line-height: 42px;
+    margin-bottom: 24px;
+  }
+  .break-line {
+    display: none; /* 줄바꿈 없음 */
+  }
+  .info .card .card-content p {
+    font-size: 1.125rem; /* 18px */
+    line-height: 26px;
   }
 
-  .banner {
-    height: auto;
-  }
   .banner .content {
+    text-align: center;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 217px;
+    margin-top: 201px;
   }
   .banner h1 {
     font-size: 2rem;
     line-height: 48px;
-    margin: 40px 0;
+    margin-bottom: 0;
   }
 
-  footer {
-    height: auto;
-    flex-direction: column;
-    padding: 20px;
-  }
   footer .content {
-    flex-direction: column;
     align-items: center;
-    gap: 20px;
   }
   footer .content .middle {
-    flex-direction: column;
     align-items: center;
-    gap: 10px;
   }
   footer .content .right {
-    justify-content: center;
+    justify-content: space-between;
+  }
+
+  .landing .content,
+  .banner .content {
+    padding: 0;
+  }
+
+  /* image size */
+  #img-landing,
+  #img-banner {
+    padding: 0 24px;
   }
 }
 
-/* 미디어 쿼리 */
-@media (max-width: 768px) {
+/* -------------------------mobile------------------------- */
+@media (max-width: 744px) {
   body {
     font-size: 12px;
   }
 
+  .content {
+    padding: 0 16px;
+  }
+
+  .landing .break-line {
+    display: inline; /* 줄바꿈 있음 */
+  }
+  .landing .content {
+    gap: 132px;
+    margin-top: 48px;
+  }
+  .landing .content .intro h1 {
+    font-size: 2rem; /* 32px */
+    line-height: 44.8px;
+  }
+  .landing .content .intro .button {
+    font-size: 1.125rem; /* 18px */
+    line-height: 26px;
+    padding: 11px 71px;
+  }
+
+  .info {
+    gap: 40px;
+    margin-top: 52px;
+    margin-bottom: 83px;
+  }
+  .info .card .card-content .badge {
+    font-size: 1rem; /* 16px */
+    line-height: 22.4px;
+    margin-bottom: 8px;
+  }
+  .info .card .card-content h1 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 33.6px;
+    margin-bottom: 16px;
+  }
+  .info .card .card-content p {
+    font-size: 1.125rem; /* 18px */
+    line-height: 25.2px;
+  }
+
+  .banner .content {
+    gap: 131px;
+    margin-top: 121px;
+  }
+  .banner h1 {
+    font-size: 2rem; /* 32px */
+    line-height: 44.8px;
+  }
+
+  footer .content {
+    flex-wrap: wrap;
+  }
+  footer .content .left {
+    order: 3;
+  }
+  footer .content .middle {
+    order: 1;
+  }
+  footer .content .right {
+    order: 2;
+  }
+
+  /* image size */
   #img-landing,
   #img-banner {
-    width: 97.14vw;
+    width: 100%;
     height: auto;
-  }
-}
-
-@media (max-width: 480px) {
-  body {
-    font-size: 10px;
   }
 }
