@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const nicknameInput = document.querySelector(".nickname_input input");
     const passwordInput = document.getElementById("passwordInput");
     const checkPasswordInput = document.getElementById("checkPasswordInput");
-    const signupButton = document.querySelector(".login_bt");
+    const signupButton = document.getElementById("login_bt");
     const showPasswordIcon = "../eye.png";
     const hidePasswordIcon = "../secret.png";
 
@@ -228,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function () {
         signupButton.classList.remove("active");
         signupButton.style.pointerEvents = "none";
     }
+
 
     // 회원가입 버튼 클릭 이벤트
     signupButton.addEventListener("click", function () {

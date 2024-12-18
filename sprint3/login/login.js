@@ -16,6 +16,9 @@ document.addEventListener("DOMContentLoaded", function () {
     const loginButton = document.getElementById("loginButton");
     const showPasswordIcon = "./eye.png";
     const hidePasswordIcon = "./secret.png";
+    const messageModal = document.getElementById("messageModal");
+    const modalMessage = document.getElementById("modalMessage");
+    const confirmButton = document.getElementById("confirmButton");
 
     // 초기 로그인 버튼 비활성화
     loginButton.classList.add("inactive");
@@ -80,30 +83,50 @@ document.addEventListener("DOMContentLoaded", function () {
         } else {
             deactivateLoginButton();
         }
-}
+        
+    }
 
 
+    emailInput.addEventListener("input", checkInputs);
+    passwordInput.addEventListener("input", checkInputs);
 
 
-    // 버튼 활성화
     function activateLoginButton() {
         loginButton.classList.add("active");
         loginButton.style.pointerEvents = "auto";
+    
+        // 이벤트 핸들러 함수
+        function handleLoginEvent(event) {
+            if (event.type === "click" || (event.type === "keyup" && event.key === "Enter")) {
+                const email = emailInput.value.trim();
+                const password = passwordInput.value.trim();
+                const user = USER_DATA.find(user => user.email === email);
+    
+                if (!user || user.password !== password) {
+                    showModalMessage("비밀번호가 일치하지 않습니다.");
+                } else {
+                    window.location.href = "../items/items.html"; // 페이지 이동
+                }
+            }
+        }
+    
+        // 클릭 및 키보드 이벤트 추가
+        loginButton.addEventListener("click", handleLoginEvent);
+        document.addEventListener("keyup", function (event) {
+            if (event.key === "Enter" && document.activeElement === loginButton) {
+                handleLoginEvent(event);
+            }
+        });
     }
+    
 
     // 버튼 비활성화
     function deactivateLoginButton() {
         loginButton.classList.remove("active");
         loginButton.style.pointerEvents = "none";
+    
     }
 
-
-
-
-
-
-    emailInput.addEventListener("input", checkInputs);
-    passwordInput.addEventListener("input", checkInputs);
 
     // 비밀번호 보기/숨기기 기능
     togglePassword.addEventListener("click", function () {
@@ -140,49 +163,51 @@ document.addEventListener("DOMContentLoaded", function () {
     //     }
     // });
 
-    // 모달 관련 요소
-    const messageModal = document.getElementById("messageModal");
-    const modalMessage = document.getElementById("modalMessage");
-    const confirmButton = document.getElementById("confirmButton");
-
     // 모달 메시지 표시 함수
     function showModalMessage(message) {
         modalMessage.innerText = message; // 메시지 삽입
         messageModal.style.display = "block"; // 모달 보이기
     }
-
-    
-    // 로그인 버튼 클릭 이벤트 수정
-    loginButton.addEventListener("click", function () {
-        const email = emailInput.value.trim();
-        const password = passwordInput.value.trim();
-        
-        const user = USER_DATA.find(user => user.email === email);
-        
-        if (!user || user.password !== password) {
-            showModalMessage("비밀번호가 일치하지 않습니다.");
-        } else {
-            window.location.href = "../items/items.html"; // 페이지 이동
-        }
-    });
-    loginButton.addEventListener("keyup", function (event) {
-        if (event.key === "Enter") {
-            loginButton.click(); // 로그인 버튼 클릭 이벤트 호출
-        }
-    });
-    
-
-    // 공통 이벤트 핸들러 함수
+    // 모달 닫기 이벤트 처리
     function handleCloseModal(event) {
         if (event.type === "click" || (event.type === "keyup" && event.key === "Enter")) {
             messageModal.style.display = "none"; // 모달 숨기기
         }
     }
-    // 클릭 및 키업 이벤트 리스너 추가
-    confirmButton.addEventListener("click", handleCloseModal);
-    confirmButton.addEventListener("keyup", handleCloseModal);
+
+     // 모달 닫기 이벤트 추가
+     confirmButton.addEventListener("click", handleCloseModal);
+     document.addEventListener("keyup", function (event) {
+         if (event.key === "Enter" && document.activeElement === confirmButton) {
+             handleCloseModal(event);
+         }
+     });
+    
 
 
-});
+    // function handleEvent(event) {
+    //     const target = event.target;
+
+    //     // 로그인 버튼 처리
+    //     if (target === loginButton && (event.type === "click" || (event.type === "keyup" && event.key === "Enter"))) {
+    //         const email = emailInput.value.trim();
+    //         const password = passwordInput.value.trim();
+    //         const user = USER_DATA.find(user => user.email === email);
+
+    //         if (!user || user.password !== password) {
+    //             showModalMessage("비밀번호가 일치하지 않습니다.");
+    //         } else {
+    //             window.location.href = "../items/items.html"; // 페이지 이동
+    //         }
+    //     }
+
+    //     // 모달 닫기 처리
+    //     if (target === confirmButton && (event.type === "click" || (event.type === "keyup" && event.key === "Enter"))) {
+    //         messageModal.style.display = "none"; // 모달 숨기기
+    //     }
+    // }
+
+
+});   
 
 

@@ -3,6 +3,40 @@
     src: url(../../Pretendard-1.3.9/web/static/woff/Pretendard-Regular.woff) format('woff');
 }
 
+@media (min-width: 1200px)  {
+    div.signup_box {
+        width: 640px;
+        padding: 0px 24px;
+    }
+    .modal-content{
+        width: 540px;
+        height: 250px;
+    }
+}
+
+@media (min-width: 744px) and (max-width: 1199px) {
+    div.signup_box {
+        width: 640px;
+        padding: 0px 24px;
+    }
+    .modal-content{
+        width: 540px;
+        height: 250px;
+    }
+}
+
+/* Mobile (375px 이상 ~ 743px 이하) */
+@media (min-width: 375px) and (max-width: 743px) {
+    div.signup_box {
+        width: 640px;
+        margin-left: 16px;
+        margin-right: 16px;
+    }
+    .modal-content{
+        width: 327px;
+        height: 220px;
+    }
+}
 
 
 body{
@@ -17,13 +51,11 @@ div.login {
 }
 
 div.signup_box {
-    width: 640px;
-    height: 842px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-top: 120px;
-    padding: 0 24px;
+    gap: 24px;
 }
 
 div.loginlogo{
@@ -195,7 +227,7 @@ div.passwd_label {
     align-content: center;
 }
 
-div.login_bt{
+#login_bt{
     background-color: #9ca3af;
     display: flex;
     justify-content: center;
@@ -247,7 +279,7 @@ div.join_panda {
 }
 
 
-.login_bt.active {
+#login_bt.active {
     background-color: #3b82f6; /* 파란색 */
     cursor: pointer;
 }
@@ -265,8 +297,11 @@ div.join_panda {
 
 .error-message {
     color: red;
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 15px;
+    margin-top: 8px;
+    font-weight: 600;
+    line-height: 18px;
+    margin-left: 16px;
 }
 
 /* 비밀번호 보기 아이콘 */
@@ -313,11 +348,8 @@ input[type="text"] {
     position: relative; /* 버튼 위치 계산 기준 */
     background-color: #fff;
     margin: 15% auto; /* 화면 중앙 */
-    padding: 20px;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    width: 90%;
-    max-width: 400px;
     min-height: 200px; /* 높이 설정 */
     display: flex;
     flex-direction: column;
