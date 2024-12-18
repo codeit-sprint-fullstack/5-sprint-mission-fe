@@ -15,7 +15,7 @@ body {
   flex-direction: column;
 }
 
-.header-wrapper {
+header {
   position: sticky;
   top: 0;
   display: flex;
@@ -25,28 +25,28 @@ body {
 }
 
 @media (max-width: 56.25rem) {
-  .header-wrapper {
+  header {
     padding: .5938rem 15vw;
   }
 }
 
-.header-wrapper > .header,
+header > .header,
 .top-wrapper > .top {
   width: 120rem;
 }
 
-.header-wrapper > .header > .container {
+header > .header > .container {
   display: flex;
   justify-content: space-between;
 }
 
-.header-wrapper > .header > .container > .home {
+header > .header > .container > .home {
   display: flex;
   align-items: center;
   gap: .625rem;
 }
 
-.header-wrapper > .header > .container > .login {
+header > .header > .container > .login {
   width: 8rem;
   height: 3rem;
   border-radius: .5rem;
@@ -180,39 +180,39 @@ article > .text > span {
 }
 
 /* footer */
-footer > .wrapper {
+footer > .footer-wrapper {
   background-color: var(--color-footer-bg);
   padding: 2rem 12.5rem 0;
 }
 
-footer > .wrapper > .container {
+footer > .footer-wrapper > .container {
   display: flex;
   justify-content: space-between;
   height: 10rem;
 }
 
-footer > .wrapper > .container > .policy-faq {
+footer > .footer-wrapper > .container > .policy-faq {
   display: flex;
   gap: 1.875rem;
 }
 
-footer > .wrapper > .container > .from {
+footer > .footer-wrapper > .container > .from {
   color: #9ca3af;
   font-size: 1rem;
   font-weight: 400;
 }
 
-footer > .wrapper > .container > .sns {
+footer > .footer-wrapper > .container > .sns {
   display: flex;
   height: 1.25rem;
   gap: .75rem;
 }
 
-footer > .wrapper > .container > .sns > a > img {
+footer > .footer-wrapper > .container > .sns > a > img {
   width: 1.25rem;
 }
 
-footer > .wrapper > .container > .policy-faq > a {
+footer > .footer-wrapper > .container > .policy-faq > a {
   color: #e5e7eb;
   font-size: 1rem;
   font-weight: 400;
@@ -220,12 +220,12 @@ footer > .wrapper > .container > .policy-faq > a {
 }
 
 @media (max-width: 62.5rem) {
-  footer > .wrapper {
+  footer > .footer-wrapper {
     background-color: #111827;
     padding: 2rem 15vw 0;
   }
 
-  footer > .wrapper > .container {
+  footer > .footer-wrapper > .container {
     flex-direction: column;
     align-items: center;
     justify-content: start;
