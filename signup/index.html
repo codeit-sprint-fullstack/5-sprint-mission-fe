@@ -20,14 +20,15 @@
 </head>
 <body>
   <div class="wrapper">
-    <div class="login">
+    <div class="signup">
       <a href="/" class="header">
         <img src="/assets/panda_face.png">
         <h1>판다마켓</h1>
       </a>
       <div class="input-box">
         <h3>이메일</h3>
-        <input type="text" placeholder="이메일을 입력해주세요">
+        <input id="email" class="email" type="text" placeholder="이메일을 입력해주세요">
+        <p id="email-error" class="error-text">잘못된 이메일 형식입니다.</p>
       </div>
       <div class="input-box">
         <h3>닉네임</h3>
@@ -35,15 +36,21 @@
       </div>
       <div class="input-box">
         <h3>비밀번호</h3>
-        <input type="password" placeholder="비밀번호를 입력해주세요">
-        <button><i class="fas fa-eye-slash"></i></button>
+        <div class="pwd-container">
+          <input id="pwd" class="pwd" type="password" placeholder="비밀번호를 입력해주세요">
+          <button class="pwd-btn"><i class="fas fa-eye-slash" data-status="hide"></i></button>
+        </div>
+        <p id="pwd-error" class="error-text">비밀번호를 8자 이상 입력해주세요.</p>
       </div>
       <div class="input-box">
         <h3>비밀번호 확인</h3>
-        <input type="password" placeholder="비밀번호를 다시 한 번 입력해주세요">
-        <button><i class="fas fa-eye-slash"></i></button>
+        <div class="pwd-container">
+          <input id="pwd-confirm" class="pwd-confirm" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요">
+          <button class="pwd-btn"><i class="fas fa-eye-slash" data-status="hide"></i></button>
+        </div>
+        <p id="pwd-confirm-error" class="error-text">비밀번호가 일치하지 않습니다.</p>
       </div>
-      <button class="btn">
+      <button id="signup-btn" class="btn" disabled>
         회원가입
       </button>
       <div class="oauth-login">
@@ -53,11 +60,19 @@
           <a href="https://www.kakaocorp.com/page/" class="btn"><img src="/assets/logo_kakao.png"></a>
         </div>
       </div>
-      <div class="signup">
+      <div class="login">
         <span>이미 회원이신가요?</span>
         <a href="/login">로그인</a>
       </div>
     </div>
+    <div class="modal">
+      <div class="modal-container">
+        <span>비밀번호가 일치하지 않습니다.</span>
+        <button>확인</button>
+      </div>
+    </div>
   </div>
+
+  <script type="module" src="/js/signup.js"></script>
 </body>
 </html>
