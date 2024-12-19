@@ -30,6 +30,12 @@ body {
     margin: 0;
 }
 
+/* 링크 클릭 후 보라색으로 변경되는 스타일 없애기
+밑줄까지 없어져서 피그마 도안과 달라져서 확인 후 적용 */
+/* a {
+    text-decoration: none;
+} */
+
 header {
     margin: 60px auto 40px;
 }
