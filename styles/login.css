@@ -65,7 +65,6 @@ header > .content {
 .input_container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
 }
 
 .input_label {
@@ -73,6 +72,7 @@ header > .content {
     font-size: 1.125rem;
     font-weight: 700;
     line-height: 26px;
+    margin-bottom: 16px;
 }
 
 .input_wrapper {
@@ -103,6 +103,19 @@ input:focus {
     outline: 1px solid var(--primary100);
 }
 
+.showError {
+    outline: 1px solid var(--error);
+}
+
+.errorMsg {
+    color: var(--error);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 17.9px;
+    padding-top: 8px;
+    padding-left: 16px;
+}
+
 .visible_btn {
     width: 24px;
     height: 24px;
@@ -129,9 +142,10 @@ input:focus {
     cursor: pointer;
 }
 
-#login_btn:hover {
+/* hover말고 input에 유효한 값 들어왔을 떄 활성화되도록 바꾸기 */
+/* #login_btn:hover {
     background-color: var(--primary100);
-}
+} */
 
 #sns_login_box {
     background-color: var(--box_bg);
