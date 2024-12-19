@@ -103,11 +103,11 @@ input:focus {
     outline: 1px solid var(--primary100);
 }
 
-.showError {
+.show_error {
     outline: 1px solid var(--error);
 }
 
-.errorMsg {
+.error_msg {
     color: var(--error);
     font-size: 1rem;
     font-weight: 600;
@@ -142,10 +142,10 @@ input:focus {
     cursor: pointer;
 }
 
-/* hover말고 input에 유효한 값 들어왔을 떄 활성화되도록 바꾸기 */
-/* #login_btn:hover {
+
+#login_btn.activate {
     background-color: var(--primary100);
-} */
+}
 
 #sns_login_box {
     background-color: var(--box_bg);

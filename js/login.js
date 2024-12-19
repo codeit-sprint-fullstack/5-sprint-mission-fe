@@ -1,5 +1,3 @@
-//일단 과제 내용 먼저 만들고 나중에 변수 이름 스타일 통일하기
-
 const emailInput = document.querySelector("#email_input");
 const pwInput = document.querySelector("#pw_input");
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -17,14 +15,16 @@ const msgList = {
     pwValidErrorMsg: "잘못된 비밀번호 형식입니다."
 }
 
+loginBtn.disabled = true;
+
 //에러 메세지 표시 함수
 const showError = (input, msg) => {
     clearError(input);
 
-    input.classList.add("showError");
+    input.classList.add("show_error");
 
     const errorMsg = document.createElement("div");
-    errorMsg.classList.add("errorMsg");
+    errorMsg.classList.add("error_msg");
     errorMsg.innerText = msg;
 
     input.parentElement.insertAdjacentElement("afterend", errorMsg);
@@ -33,12 +33,29 @@ const showError = (input, msg) => {
 //에러 메세지 제거 함수
 const clearError = (input) => {
     const errorMsg = input.parentElement.nextElementSibling;
-    input.classList.remove("showError");
+    input.classList.remove("show_error");
 
-    if (errorMsg && errorMsg.classList.contains("errorMsg")) {
+    if (errorMsg && errorMsg.classList.contains("error_msg")) {
         errorMsg.remove()
     }
 };
+
+//로그인 버튼 활성화 함수
+const activateLoginBtn = () => {
+    //이메일, 비밀번호 모두 유효한지 검사
+    const isEmailValid = emailRegex.test(emailInput.value);
+    const isPwValid = pwRegex.test(pwInput.value);
+
+    //모두 유효하면 활성화
+    if (isEmailValid && isPwValid) {
+        loginBtn.disabled = false;
+        loginBtn.classList.add("activate");
+    }
+    else {
+        loginBtn.disabled = true;
+        loginBtn.classList.remove("activate");
+    }
+}
 
 //이메일 유효성 검사 함수
 const validEmail = (e) => {
@@ -55,6 +72,8 @@ const validEmail = (e) => {
     else {
         clearError(email);
     }
+
+    activateLoginBtn();
 }
 
 //비밀번호 유효성 검사 함수
@@ -76,7 +95,29 @@ const validPw = (e) => {
     else {
         clearError(pw);
     }
+
+    activateLoginBtn();
 }
 
 emailInput.addEventListener("blur", validEmail);
 pwInput.addEventListener("blur", validPw);
+
+//비밀번호 보기 함수
+const visibleOn = (e) => {
+    const btn = e.target;
+    const input = btn.previousElementSibling;
+    input.classList.toggle("active_visible");
+
+    if (input.classList.contains("active_visible")) {
+        btn.src = "./assets/btn_visibility_on.svg";
+        input.type = "text";
+    }
+    else {
+        btn.src = "./assets/btn_visibility_off.svg";
+        input.type = "password";
+    }
+}
+
+visibleBtn.forEach((btn) =>{
+    btn.addEventListener("click", visibleOn);
+})
