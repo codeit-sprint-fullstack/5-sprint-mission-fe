@@ -6,7 +6,9 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
     />
+
     <link rel="icon" href="../img/ico.png" />
+
     <link
       rel="stylesheet"
       as="style"
@@ -14,7 +16,14 @@
       href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
     />
     <link rel="stylesheet" href="../css/style.css" />
-    <script src="../feature/validations/verifyAuth.js" defer></script>
+
+    <script src="../feature/toggle/toggleIcon.js" defer></script>
+    <script type="module" src="../feature/valid/condition.js" defer></script>
+    <script type="module" src="../feature/valid/handler.js" defer></script>
+    <script type="module" src="../feature/valid/setError.js" defer></script>
+    <script type="module" src="../feature/valid/verifyForm.js" defer></script>
+    <script type="module" src="../feature/valid/verifyAuth.js" defer></script>
+
     <title>판다마켓 : 로그인</title>
   </head>
 
@@ -44,7 +53,11 @@
               id="password"
               placeholder="비밀번호를 입력해주세요"
             />
-            <img src="../img/btn_visibility_off.png" alt="비밀번호 숨기기" />
+            <img
+              class="eyeIcon"
+              src="../img/btn_visibility_off.png"
+              alt="비밀번호 숨기기"
+            />
           </div>
         </section>
 

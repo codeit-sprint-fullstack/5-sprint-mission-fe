@@ -65,14 +65,14 @@ form input:-webkit-autofill {
   border: none;
   outline: none;
 }
-.input-container img {
+.eyeIcon {
   display: none;
   width: 24px;
   height: 24px;
   cursor: pointer;
 }
-.input-container:hover img,
-.input-container:focus-within img {
+.input-container:hover .eyeIcon,
+.input-container:focus-within .eyeIcon {
   display: block;
 }
 .input-container:focus-within {
@@ -137,12 +137,22 @@ footer a {
   margin-left: 4px;
 }
 
+.visible {
+  display: block;
+}
+.hidden {
+  display: none;
+}
 .invalid {
   border-color: var(--color-error);
 }
 .error-message {
   color: var(--color-error);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 18px;
   margin-top: 8px;
+  margin-left: 16px;
 }
 
 /* ------------------------Tablet------------------------ */
