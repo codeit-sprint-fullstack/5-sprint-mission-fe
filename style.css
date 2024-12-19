@@ -1,0 +1,234 @@
+:root {
+  --color-board-bg: #cfe5ff;
+  --color-button-bg: #3692ff;
+  --color-button-font: #ffffff;
+  --color-input-bg: #f3f4f6;
+  --color-footer-bg: #111827;
+}
+
+body {
+  font-family: Pretendard, sans-serif;
+  margin: 0;
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+}
+
+header {
+  position: sticky;
+  top: 0;
+  display: flex;
+  justify-content: center;
+  padding: .5938rem 12.5rem;
+  background-color: #fff;
+}
+
+@media (max-width: 56.25rem) {
+  header {
+    padding: .5938rem 15vw;
+  }
+}
+
+header > .header,
+.top-wrapper > .top {
+  width: 120rem;
+}
+
+header > .header > .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+header > .header > .container > .home {
+  display: flex;
+  align-items: center;
+  gap: .625rem;
+}
+
+header > .header > .container > .login {
+  width: 8rem;
+  height: 3rem;
+  border-radius: .5rem;
+  background-color: var(--color-button-bg);
+  border: none;
+  color: var(--color-button-font);
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.top-wrapper {
+  display: flex;
+  justify-content: center;
+  background-color: var(--color-board-bg);
+}
+
+.top-wrapper > .top > .container {
+  display: flex;
+  justify-content: center;
+  margin: 12.5rem 0 0;
+  gap: .625rem;
+}
+
+.top-wrapper > .top > .container > .top-container > h1 {
+  flex: 1 1 0%;
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 3.75rem;
+  color: #374151;
+  padding: 1.25rem 0;
+}
+
+.top-wrapper > .top > .container > .top-container > .btn {
+  flex: 1 1 0%;
+  text-decoration: none;
+  max-width: 22.3125rem;
+  height: 3.5rem;
+  background-color: var(--color-button-bg);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 2.5rem;
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.top-wrapper > .top > .container > img {
+  width: 60vw;
+  height: auto;
+  max-width: 46.625rem;
+  min-width: 18.75rem;
+}
+
+@media (max-width: 68.75rem) {
+  .top-wrapper > .top > .container {
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    margin-top: 1.25rem;
+  }
+
+  .top-wrapper > .top > .container > img {
+    width: 90vw;
+  }
+
+  .top-wrapper > .top > .container > .top-container > h1 {
+    text-align: center;
+    line-height: 3.125rem;
+  }
+}
+
+section {
+  display: flex;
+  flex-direction: column;
+}
+
+article {
+  display: flex;
+  align-items: center;
+  margin: 8.625rem auto;
+  background-color: fcfcfc;
+}
+
+article > img {
+  width: 50vw;
+  height: auto;
+  max-width: 36.75rem;
+}
+
+article > .text {
+  margin: 0 5rem;
+}
+
+article > .text > h3 {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: #3692ff;
+}
+
+article > .text > h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 3.75rem;
+  color: #374151;
+  padding: 1.25rem 0;
+}
+
+@media (max-width: 68.75rem) {
+  article {
+    flex-direction: column;
+    gap: 6.25rem;
+  }
+
+  article > .text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  article > .text > * {
+    text-align: center;
+  }
+}
+
+article > .text > span {
+  text-align: center;
+}
+
+/* footer */
+footer > .footer-wrapper {
+  background-color: var(--color-footer-bg);
+  padding: 2rem 12.5rem 0;
+}
+
+footer > .footer-wrapper > .container {
+  display: flex;
+  justify-content: space-between;
+  height: 10rem;
+}
+
+footer > .footer-wrapper > .container > .policy-faq {
+  display: flex;
+  gap: 1.875rem;
+}
+
+footer > .footer-wrapper > .container > .from {
+  color: #9ca3af;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+footer > .footer-wrapper > .container > .sns {
+  display: flex;
+  height: 1.25rem;
+  gap: .75rem;
+}
+
+footer > .footer-wrapper > .container > .sns > a > img {
+  width: 1.25rem;
+}
+
+footer > .footer-wrapper > .container > .policy-faq > a {
+  color: #e5e7eb;
+  font-size: 1rem;
+  font-weight: 400;
+  text-decoration: none;
+}
+
+@media (max-width: 62.5rem) {
+  footer > .footer-wrapper {
+    background-color: #111827;
+    padding: 2rem 15vw 0;
+  }
+
+  footer > .footer-wrapper > .container {
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    gap: 1.25rem;
+  }
+}
