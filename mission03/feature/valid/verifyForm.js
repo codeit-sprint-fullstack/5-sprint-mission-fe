@@ -1,20 +1,21 @@
 // import
 import { validHandler } from "./handler.js";
 
-// DOM id
-const ids = ["email", "nickname", "password", "password-check"];
-// DOM 요소를 배열로 가져오기
-const forms = ids.map((id) => document.querySelector(`#${id}`));
+// DOM
+const form = document.querySelector("form"); // form 요소
+const inputs = form.querySelectorAll("input"); // input 요소
 
-// DOM 배열 순회로 이벤트 등록
-for (const form of forms) {
-  if (!form) continue; // form이 존재하지 않으면 건너뛰기
+// 오류 체크 함수
+export const checkError = (inputs) => {
+  for (const input of inputs) {
+    const listener = function () {
+      const handler = validHandler(this.id); // this를 사용해 현재 요소 참조
+      handler(this);
+    };
+    input.addEventListener("focusout", listener);
+    input.addEventListener("input", listener);
+  }
+};
 
-  const listener = (e) => {
-    const input = e.target;
-    const handler = validHandler(input.id);
-    handler(input);
-  };
-  form.addEventListener("focusout", listener);
-  form.addEventListener("input", listener);
-}
+// 오류 체크 실행
+checkError(inputs);
