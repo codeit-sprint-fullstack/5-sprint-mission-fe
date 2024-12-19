@@ -170,14 +170,14 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     // 모달 닫기 이벤트 처리
     function handleCloseModal(event) {
-        if (event.type === "click" || (event.type === "keyup" && event.key === "Enter")) {
+        if (event.type === "click" || (event.type === "keydown" && event.key === "Enter")) {
             messageModal.style.display = "none"; // 모달 숨기기
         }
     }
 
      // 모달 닫기 이벤트 추가
      confirmButton.addEventListener("click", handleCloseModal);
-     document.addEventListener("keyup", function (event) {
+     document.addEventListener("keydown", function (event) {
          if (event.key === "Enter" && document.activeElement === confirmButton) {
              handleCloseModal(event);
          }

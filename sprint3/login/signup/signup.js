@@ -237,8 +237,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         if (emailExists) {
             showModalMessage("사용중인 이메일입니다.");
-        } else {
-            window.location.href = "../login.html"; // 로그인 페이지로 이동
+        } else { 
+            showModalMessage("회원가입이 완료되었습니다.");
         }
     });
 
@@ -300,6 +300,10 @@ document.addEventListener("DOMContentLoaded", function () {
     // 확인 버튼 클릭 시 모달 닫기
     confirmButton.addEventListener("click", function () {
         messageModal.style.display = "none"; // 모달 숨기기
+        if (message = "회원가입이 완료되었습니다.") {
+            window.location.href = "../login.html";
+        }
+
     });
     document.addEventListener("keyup", function (event) {
         if (event.key === "Enter") {
