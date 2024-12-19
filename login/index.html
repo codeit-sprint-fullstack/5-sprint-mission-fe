@@ -27,14 +27,18 @@
       </a>
       <div class="input-box">
         <h3>이메일</h3>
-        <input type="text" placeholder="이메일을 입력해주세요">
+        <input id="email" class="email" type="text" placeholder="이메일을 입력해주세요">
+        <p id="email-error" class="error-text">잘못된 이메일 형식입니다.</p>
       </div>
       <div class="input-box">
         <h3>비밀번호</h3>
-        <input type="password" placeholder="비밀번호를 입력해주세요">
-        <button><i class="fas fa-eye-slash"></i></button>
+        <div class="pwd-container">
+          <input id="pwd" class="pwd" type="password" placeholder="비밀번호를 입력해주세요">
+          <button id="pwd-btn"><i class="fas fa-eye-slash" data-state="hide"></i></button>
+        </div>
+        <p id="pwd-error" class="error-text">비밀번호를 8자 이상 입력해주세요.</p>
       </div>
-      <button class="btn">
+      <button id="login-btn" class="btn" disabled>
         로그인
       </button>
       <div class="oauth-login">
@@ -49,6 +53,14 @@
         <a href="/signup">회원가입</a>
       </div>
     </div>
+    <div class="modal">
+      <div class="modal-container">
+        <span>비밀번호가 일치하지 않습니다.</span>
+        <button>확인</button>
+      </div>
+    </div>
   </div>
+
+  <script type="module" src="/js/login.js"></script>
 </body>
 </html>

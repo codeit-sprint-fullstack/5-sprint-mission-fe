@@ -17,7 +17,8 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 14.375rem;
-  min-height: 100vh;
+  /* min-height: 90vh; */
+  /* height: 100vh; */
   padding: 1.5rem;
 }
 
@@ -46,17 +47,14 @@ body {
   color: #3692ff;
 }
 
-.login .input-box {
-  position: relative;
-}
-
 .login .input-box h3 {
   font-size: 1.125rem;
   font-weight: 700;
+  margin-top: 24px;
 }
 
 .login .input-box input {
-  margin: 1rem 0;
+  margin: 1rem 0 0;
   width: 100%;
   height: 3.5rem;
   border-radius: 1rem;
@@ -73,17 +71,36 @@ body {
   outline: none;
   border: .125rem solid var(--color-login-button-border);
 }
+.error-text {
+  margin: 8px 0 0px 20px;
+  color: #f74747;
+  font-size: 15px;
+  font-weight: 600;
+  display: none;
+}
+.error + #email-error,
+.pwd-container:has(> .error) + #pwd-error {
+  display: block;
+}
+#email.error,
+#pwd.error {
+  border: .125rem solid #f74747 !important;
+}
 
+.pwd-container {
+  position: relative;
+}
 .login .input-box button {
   position: absolute;
-  width: 1.875rem;
-  height: 1.875rem;
-  top: 45%;
+  width: 1rem;
+  height: 1rem;
+  top: 50%;
   right: 1.25rem;
   color: #6a6d74;
   border: none;
   cursor: pointer;
   background-color: var(--color-login-input-bg);
+  padding: 0;
 }
 
 .login .input-box button i {
@@ -99,13 +116,14 @@ body {
   font-size: 1.25rem;
   font-weight: 600;
   color: var(--color-login-button-font);
-  margin-top: .5rem;
+  margin-top: 24px;
+  cursor: not-allowed;
 }
 
-.login > .btn:hover {
+.login > .btn:enabled {
   background-color: #3692ff;
   cursor: pointer;
-}
+}  
 
 .login .oauth-login {
   height: 4.625rem;
@@ -136,4 +154,88 @@ body {
 
 .login .signup a {
   color: #3692ff;
+}
+
+.modal {
+  /* display: none; */
+  position: fixed;
+  z-index: 1; /* 화면 위에 표시 */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgb(0,0,0); /* 배경색 */
+  background-color: rgba(0,0,0,0.4); /* 투명한 배경 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  display: none;
+}
+.modal-container {
+  background-color: #fefefe;
+  padding: 20px;
+  border: 1px solid #888;
+  border-radius: 8px;
+  width: 80%;
+  height: 250px;
+  max-width: 400px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-container span {
+  font-size: 16px;
+  font-weight: 500;
+  color: #1f2937;
+}
+.modal-container button {
+  position: absolute;
+  bottom: 10%;
+  left: 80%;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 8px;
+  width: 120px;
+  height: 48px;
+  background: var(--color-login-button-bg-hover);
+  color: var(--color-login-button-font);
+  cursor: pointer;
+}
+
+@media (max-width: 743px) {
+  body {
+    display: flex;
+    justify-content: center;
+  }
+  .wrapper {
+    margin-top: 1.875rem;
+    max-width: 25rem;
+    padding: 1rem;
+  }
+
+  .login .header {
+    margin-bottom: 20px;
+  }
+
+  .login .header img {
+    width: 51.76px;
+  }
+
+  .login .header h1 {
+    font-size: 33.17px;
+  }
+
+  .login .input-box h3 {
+    font-size: 14px;
+  }
+
+  .login > .btn {
+    font-size: 16px;
+  }
+
+  .modal-container button {
+    left: 50%;
+  }
 }
