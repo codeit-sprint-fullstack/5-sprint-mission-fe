@@ -78,16 +78,6 @@ input::placeholder {
     border-radius: 12px;
 }
 
-#error-message-email {
-  color:#F74747;
-  display: none;
-}
-
-#error-message-pwd {
-  color:#F74747;
-  display: none;
-}
-
 #password {
     width: 100%;
     height: 56px;
@@ -110,6 +100,11 @@ input::placeholder {
     position: absolute;
     right: 16px;
     top:10%;
+}
+
+.hide {
+  color:#F74747;
+  display: none;
 }
 
 /* 로그인~간편로그인 */
