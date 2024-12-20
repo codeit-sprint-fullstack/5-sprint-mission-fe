@@ -30,6 +30,59 @@ body {
     margin: 0;
 }
 
+#modal-bg {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(0,0,0,0.7);
+    margin: auto;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+#modal-bg.show {
+    display: flex;
+}
+
+#modal {
+    position: absolute;
+    width: 540px;
+    height: 250px;
+    background-color: #ffffff;
+    border-radius: 8px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#modal-msg {
+    color: var(--gray800);
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 19.09px;
+    text-align: center;
+}
+
+#close-btn {
+    position: absolute;
+    bottom: 28px;
+    right: 28px;
+    width: 120px;
+    height: 48px;
+    background-color: var(--primary100);
+    border-radius: 8px;
+    padding: 12px 23px;
+    border: none;
+
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 19.09px;
+}
+
 /* 링크 클릭 후 보라색으로 변경되는 스타일 없애기
 밑줄까지 없어져서 피그마 도안과 달라져서 확인 후 적용 */
 /* a {
@@ -65,7 +118,6 @@ header > .content {
 .input_container {
     display: flex;
     flex-direction: column;
-    gap: 16px;
 }
 
 .input_wrapper {
@@ -78,6 +130,7 @@ header > .content {
     font-size: 1.125rem;
     font-weight: 700;
     line-height: 26px;
+    margin-bottom: 16px;
 }
 
 .input_box {
@@ -103,6 +156,19 @@ input:focus {
     outline: 1px solid var(--primary100);
 }
 
+.show_error {
+    outline: 1px solid var(--error);
+}
+
+.error_msg {
+    color: var(--error);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 17.9px;
+    padding-top: 8px;
+    padding-left: 16px;
+}
+
 .visible_btn {
     width: 24px;
     height: 24px;
@@ -111,6 +177,10 @@ input:focus {
     right: 24px;
     transform: translateY(-50%);
     cursor: pointer;
+}
+
+#signup_btn_box {
+    margin-top: 24px;
 }
 
 #signup_btn {
@@ -129,10 +199,9 @@ input:focus {
     cursor: pointer;
 }
 
-/* hover말고 input에 유효한 값 들어왔을 떄 활성화되도록 바꾸기 */
-/* #signup_btn:hover {
+#signup_btn.activate {
     background-color: var(--primary100);
-} */
+}
 
 #sns_login_box {
     background-color: var(--box_bg);

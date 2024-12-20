@@ -11,6 +11,17 @@
     <link rel="icon" href="./assets/logo_favicon.ico" />
 </head>
 <body>
+    <div id="modal-bg">
+        <div id="modal">
+            <p id="modal-msg">
+                <!-- JS로 채울 예정 -->
+            </p>
+            <button id="close-btn">
+                확인
+            </button>
+        </div>
+    </div>
+
     <header>
         <div class="content">
             <a href="/">
@@ -26,15 +37,19 @@
                     <label for="email_input" class="input_label">
                         이메일
                     </label>
-                    <input id="email_input" class="input_box" name="email" type="email"
+                    <div class="input_wrapper">
+                        <input id="email_input" class="input_box" name="email" type="email"
                     placeholder="이메일을 입력해주세요">
+                        </div>
                 </div>
                 <div class="input_container">
                     <label for="user_name_input" class="input_label">
                         닉네임
                     </label>
-                    <input id="user_name_input" class="input_box" name="user_name" type="text"
+                    <div class="input_wrapper">
+                        <input id="user_name_input" class="input_box" name="user_name" type="text"
                     placeholder="닉네임을 입력해주세요">
+                        </div>
                 </div>
                 <div class="input_container">
                     <label for="pw_input" class="input_label">
@@ -55,12 +70,14 @@
                         <img class="visible_btn" src="./assets/btn_visibility_off.svg" alt="비밀번호 보기" />
                     </div>
                 </div>
-                <div id="signup_btn_box">
-                    <button id="signup_btn">
-                        회원가입
-                    </button>
-                </div>
             </form>
+
+            <div id="signup_btn_box">
+                <button id="signup_btn">
+                    회원가입
+                </button>
+            </div>
+            
 
             <div id="sns_login_box">
                 <p class="main_text">간편 로그인하기</p>
@@ -85,7 +102,7 @@
         </div>
     </main>
 
-    <script src="./js/userData.js"></script>
-    <script src="./js/signup.js"></script>
+    <script type="module" src="./js/userData.js"></script>
+    <script type="module" src="./js/signup.js"></script>
 </body>
 </html>

@@ -25,7 +25,7 @@ const msgList = {
 
 loginBtn.disabled = true;
 
-//에러 메시시지 표시 함수
+//에러 메시지 표시 함수
 const showError = (input, msg) => {
     clearError(input);
 
@@ -38,7 +38,7 @@ const showError = (input, msg) => {
     input.parentElement.insertAdjacentElement("afterend", errorMsg);
 }
 
-//에러 메시시지 제거 함수
+//에러 메시지 제거 함수
 const clearError = (input) => {
     const errorMsg = input.parentElement.nextElementSibling;
     input.classList.remove("show_error");
@@ -80,9 +80,8 @@ closeBtn.addEventListener("click", closeModal);
 
 
 //로그인 성공/실패
-const loginErrorModal = () => {
+const validLogin = () => {
     const userData = USER_DATA.find((element) => element.email === emailInput.value);
-    console.log(userData)
 
     const isEmailNotFound = !userData;
     const isPwIncorrect = userData && userData.password !==pwInput.value;
@@ -97,7 +96,7 @@ const loginErrorModal = () => {
     }
 }
 
-loginBtn.addEventListener("click", loginErrorModal);
+loginBtn.addEventListener("click", validLogin);
 
 //이메일 유효성 검사 함수
 const validEmail = (e) => {
