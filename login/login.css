@@ -51,7 +51,7 @@ header {
     margin-top: 24px;
 }
 
-dt {
+label {
     font-size: 18px;
     font-weight: 700;
     line-height: 26px;
@@ -76,6 +76,16 @@ input::placeholder {
     border-style: none;
     gap: 10px;
     border-radius: 12px;
+}
+
+#error-message-email {
+  color:#F74747;
+  display: none;
+}
+
+#error-message-pwd {
+  color:#F74747;
+  display: none;
 }
 
 #password {
