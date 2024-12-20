@@ -30,7 +30,12 @@
     <header>
         <nav>
             <a href="/">
-                <img id="logo_img" src="./assets/logo_img.png" alt="로고 이미지" /> </a>
+                <!-- 모바일 사이즈에서 텍스트만 보이기위해 아이콘/텍스트 분리해서 넣음 -->
+                <div id="logo_img">
+                <img id="logo_icon" src="./assets/logo_icon.png" alt="로고 이미지" /> 
+                <img id="logo_text" src="./assets/logo_text.png" alt="로고 텍스트" />
+                </div>
+            </a>
             <a id="login_button" href="/login.html">로그인</a>
         </nav>
     </header>
