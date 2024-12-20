@@ -127,12 +127,15 @@ input::placeholder {
     font-weight: 600;
     font-size: 20px;
     line-height: 32px;
-    cursor: pointer;
 }
 
-.login-btn:hover {
+/* .loginButtonDisabled {
+  background-color:#3692FF;
+} */
+
+/* .login-btn:hover {
     background-color: #3692FF ;
-}
+} */
 
 .간편_area {
     width: 100%;

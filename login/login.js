@@ -1,4 +1,4 @@
-//input에서 focus out할 때, 값이 없을 경우 input 빨강테두리+에러메세지
+////input에서 focus out할 때, 값이 없을 경우 input 빨강테두리+에러메세지
 const emailBox = document.querySelector("#uid");
 const pwdBox = document.querySelector("#password");
 const errorMsgEmail_N = document.querySelector("#error-message-email-none");
@@ -13,7 +13,7 @@ emailBox.addEventListener("focusout", (event)=> {
       event.target.style.border = "none";
       errorMsgEmail_N.style.display = "none";
     }
-  });
+  })
 
 pwdBox.addEventListener("focusout", (event)=> {
   if(!event.target.value) {
@@ -23,15 +23,15 @@ pwdBox.addEventListener("focusout", (event)=> {
     event.target.style.border = "none";
     errorMsgPwd_N.style.display = "none";
   }
-});
+})
 
-//이메일 유효성 검사 및 에러메세지
+////이메일 유효성 검사 및 에러메세지
 const errorMsgEmail_T =document.querySelector("#error-message-email-type");
 const emailRegex = /^[a-z0-9._%+-]{1,}@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/
 
 function emailcheck(emailBox) {
   return /^[a-z0-9._%+-]{1,}@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/.test(emailBox);
-};
+}
 
 emailBox.addEventListener("input", (e) => {
   if (!e.target.value.length) {
@@ -41,14 +41,14 @@ emailBox.addEventListener("input", (e) => {
   if (emailcheck(e.target.value)) errorMsgEmail_T.style.display = "none";
   else errorMsgEmail_T.style.display = "block";
   return;
-});
+})
 
-//비밀번호 유효성 검사 및 에러메세지
+////비밀번호 유효성 검사 및 에러메세지
 const errorMsgPwd_T =document.querySelector("#error-message-pwd-type");
 
 function pwdcheck(pwdBox) {
   return /^[a-zA-Z0-9]{8,}$/.test(pwdBox);
-};
+}
 
 pwdBox.addEventListener("input", (e) => {
   if (!e.target.value.length) {
@@ -57,6 +57,25 @@ pwdBox.addEventListener("input", (e) => {
   }
   if (pwdcheck(e.target.value)) errorMsgPwd_T.style.display = "none";
   else errorMsgPwd_T.style.display = "block";
-});
+})
 
-//로그인버튼 활성화 비활성화
+////로그인버튼 활성화 비활성화
+const loginButton = document.getElementById("login-btn")
+//Q.위에서 유효성 검사한 값에 알맞지 않을 경우 비활성화하는 방법 질문하기
+function checkLabel() {
+  if (emailBox.value.trim() === '' || pwdBox.value.trim() === '') {
+    loginButton.disabled = true;
+    loginButton.style.backgroundColor = "#9CA3AF";
+  } else {
+    loginButton.disabled = false;
+    loginButton.style.backgroundColor = "#3692FF";
+    loginButton.style.cursor = "pointer";
+    // loginButton.click.window.location.href = "../items/items.html"
+  }
+}
+
+emailBox.addEventListener('input',checkLabel);
+pwdBox.addEventListener('input',checkLabel);
+
+
+
