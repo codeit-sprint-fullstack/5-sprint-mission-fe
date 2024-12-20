@@ -12,5 +12,9 @@ export const isValidEmail = (input) => {
 export const isValidPassword = (input) => input.value.trim().length >= 8;
 
 // 비민번호 확인이 비밀번호와 동일한가?
-export const isMatchPassword = (input) =>
-  passwordCheckForm.value.trim() === passwordForm.value.trim();
+export const isMatchPassword = (input) => {
+  // 매개변수 input === passwordCheckFrom
+  const form = input.closest("form"); // input이 속한 form 요소 찾기
+  const passwordForm = form.querySelector("#password"); // form 안의 #password 필드 찾기
+  return input.value.trim() === passwordForm.value.trim();
+};

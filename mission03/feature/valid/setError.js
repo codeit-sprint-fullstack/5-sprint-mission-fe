@@ -37,7 +37,7 @@ const errorMessages = {
   email: "이메일을 입력해주세요.",
   nickname: "닉네임을 입력해주세요.",
   password: "비밀번호를 입력해주세요.",
-  "password-check": "비밀번호가 일치하지 않습니다.",
+  "password-check": "비밀번호를 확인해주세요.",
 };
 // 에러 메시지 반환함수
 export const getErrorMessage = (id) =>

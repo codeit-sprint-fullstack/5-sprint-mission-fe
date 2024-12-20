@@ -22,13 +22,13 @@
     <script type="module" src="../feature/valid/handler.js" defer></script>
     <script type="module" src="../feature/valid/setError.js" defer></script>
     <script type="module" src="../feature/valid/verifyForm.js" defer></script>
-    <script type="module" src="../feature/valid/verifyAuth.js" defer></script>
+    <script type="module" src="../feature/auth/verifyAuth.js" defer></script>
     <script
       type="module"
       src="../feature/button/buttonHandlers.js"
       defer
     ></script>
-
+    <script type="module" src="../feature/modal/modalHandler.js"></script>
     <title>판다마켓 : 로그인</title>
   </head>
 
@@ -84,6 +84,14 @@
         판다마켓이 처음이신가요?
         <a href="signup.html">회원가입</a>
       </footer>
+
+      <!--------------------- dialog --------------------->
+      <dialog id="dialog">
+        <p id="dialog-message"></p>
+        <form method="dialog">
+          <button value="confirm" class="modal-btn">확인</button>
+        </form>
+      </dialog>
     </main>
   </body>
 </html>

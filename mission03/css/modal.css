@@ -1,0 +1,75 @@
+body {
+  min-height: 100vh;
+  margin: 0;
+}
+
+main {
+  display: flex;
+  height: 70vh;
+  color: gray;
+}
+
+/* ----------------------------------------------------- */
+
+dialog[open] {
+  position: relative;
+  border: none;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 108px 174px 123px 174px;
+}
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  /* backdrop의 필터 속성은 filter가 아닌 backdrop-filter를 사용 */
+  backdrop-filter: blur(1px);
+}
+#dialog-message {
+  color: #1f2937;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 19.09px;
+  margin: 0;
+}
+.modal-btn {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  background-color: #3692ff;
+
+  color: #ffffff;
+  font-size: 1rem; /* 16px */
+  font-weight: 600;
+  line-height: 19.09px;
+
+  border: none;
+  border-radius: 8px;
+  padding: 14.5px 46px;
+}
+.modal-btn:hover {
+  cursor: pointer;
+}
+#dialog form {
+  display: flex;
+  justify-content: right;
+}
+.show-btn {
+  display: block;
+  width: 6rem;
+  height: 2rem;
+  margin: auto;
+}
+
+@media (max-width: 744px) {
+  dialog[open] {
+    padding: 23px;
+    flex-direction: column;
+  }
+  #dialog-message {
+    padding: 58px 45px 49px 45px;
+  }
+  .modal-btn {
+    position: static;
+  }
+}
