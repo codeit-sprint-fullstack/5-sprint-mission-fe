@@ -37,7 +37,7 @@ const toggleBtnState = () => {
     const isPwValid = pwRegex.test(pwInput.value);
     const isPwConfirmed = (pwInput.value === pwConfirmInput.value);
 
-    //이메일, 비밀번호, 확인 모두 유효하면 활성화
+    //이메일, 닉네임, 비밀번호, 확인 모두 유효하면 활성화
     if (isEmailValid && isNicknameValid && isPwValid && isPwConfirmed) {
         signupBtn.disabled = false;
         signupBtn.classList.add("activate");
