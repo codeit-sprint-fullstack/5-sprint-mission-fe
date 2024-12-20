@@ -1,5 +1,6 @@
 // import
 import { validHandler } from "./handler.js";
+import { activeButton } from "../button/buttonHandlers.js";
 
 // DOM
 const form = document.querySelector("form"); // form 요소
@@ -11,6 +12,7 @@ export const checkError = (inputs) => {
     const listener = function () {
       const handler = validHandler(this.id); // this를 사용해 현재 요소 참조
       handler(this);
+      activeButton();
     };
     input.addEventListener("focusout", listener);
     input.addEventListener("input", listener);
