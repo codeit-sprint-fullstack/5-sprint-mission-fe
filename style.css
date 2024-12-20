@@ -1,0 +1,327 @@
+
+
+  /*전체 홈페이지 사이즈(요게없음 로그인버튼이 정렬이 안되고 하늘색이 쫙펴지지??*/
+.Wrapper {
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+  /*상단바*/
+#HeaderLine {
+  width: 100%;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  background-color: #ffff;
+  position: sticky;
+  top: 0;
+}
+
+  /*로고, 로그인 범위*/
+#HeaderLineMini {
+  width: 1120px;
+  height: 70px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+
+  /*로그인 버튼*/
+#LoginButton {
+  width: 128px;
+  height: 48px;
+  background-color: #3692ff;
+  border: none;
+  border-radius: 8px;
+
+  color: #ffff;
+  font-size: 16px;
+}
+
+  /*구경하러가기 버튼*/
+#WatchButton {
+  width: 357px;
+  height: 56px;
+  background-color: #3692ff;
+  border: none;
+  border-radius: 40px;
+  margin-top: 40px;
+
+  color: #ffff;
+  font-size: 20px;
+}
+
+  /*글자옵션변경*/
+h1{color: #374151;; margin: 0; line-height: 140%;}
+h3{color: #374151;; margin: 0; line-height: 125%;}
+h4{color: #3692ff;; margin: 0;}
+h5{color: #9ca3af;; margin: 0;}
+
+ /*하늘색배경*/
+.SkyColor {
+  background-color: #cfe5ff;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: end;
+}
+
+ /*흰색배경*/
+ .WhiteColor {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+ /*검정배경*/
+ #BlackColor {
+  background-color: #111827;
+  width: 100%;
+  height: 160px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+}
+
+  /*하늘색배경_그림글씨정렬*/
+.ObjectFrameSky {
+  width: 1110px;
+  height: 397px;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: end;
+}
+
+  /*물건 거래글씨랑 버튼*/
+#TradeObject1{
+  width: 100%;
+  height: 288px;
+  display: flex;
+  flex-direction: column;
+  justify-content:left;
+  align-items: start;
+}
+
+  /*믿을수있는 중고거래글씨*/
+#TradeObject2{
+  width: 100%;
+  height: 288px;
+}
+
+  /*흰색배경_그림글씨정렬*/
+.ObjectFrameWhite {
+  width: 988px;
+  height: 444px;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+}
+
+  /*흰색배경_그림 왼쪽 글씨*/
+.ObjectFrameLift {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content:end;
+  align-items: left;
+  gap: 40px;
+}
+
+  /*흰색배경_그림 오른쪽 글씨*/
+.ObjectFrameRight {
+  width: 40%;
+  display: flex;
+  flex-direction: column;
+  justify-content:end;
+  text-align: right;
+  gap: 40px;
+}
+
+ /*하단검정배경_아이콘글씨정렬*/
+#ObjectFrameBlack {
+  width: 1520px;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  margin-top: 32px;
+}
+
+ /*하단검정배경__FAQ글씨 묶음*/
+ #ObjectFrameBottom {
+  width: 159px;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+}
+
+ /*하단 footer부분_아이콘*/
+ #ObjectFrameIcon {
+  width: 116px;
+  display: flex;
+  flex-direction: row;
+  justify-content:space-between;
+  align-items: center;
+}
+
+/* 뷰를 기준으로 보여지는거 */
+.WindowView {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+}
+
+ /*login화면_로고와 폼정렬*/
+ #LoginWrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+ /*login화면_폼내부정렬*/
+.FormArray {
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+}
+
+ /*login화면_폼 속성*/
+label{
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 26px;
+  padding-bottom: 12px;
+}
+
+input{
+  max-width: 640px;
+  height: 56px;
+  margin-bottom: 24px;
+  border-radius: 12px;
+  border: none;
+  background-color: #f3f4f6;
+  padding : 0px 24px;
+
+
+}
+
+input:focus{
+  outline-color: #3692ff;
+}
+
+
+
+input::placeholder{
+  width:592px;
+  height: 26px;
+  font-size: 1.2em;
+  display: flex;
+  text-align: left;
+  color: #9ca3af;
+}
+
+
+
+ /* 비밀번호눈모양 */
+.PWIcon {
+  background-image: url("image/btn_visibility_off_24px.png");
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: 592px;
+
+}
+
+
+  /*로그인/회원가입 버튼*/
+  .LoginButton {
+    width: 640px;
+    height: 56px;
+    background-color: #9ca3af;
+    border: none;
+    border-radius: 40px;
+    margin-bottom: 24px;
+  
+    color: #f3f4f6;
+    font-size: 20px;
+  }
+  
+
+
+  
+    /*간편로그인*/
+  .EasyLogin {
+  width: 640px;
+  height: 74px;
+  border-radius: 8px;
+  background-color:#e6f2ff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 26px;
+
+
+  }
+
+  /*간편로그인_글씨랑 로고 div*/
+  .EasyLoginArray {
+    width: 594px;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    color: #1f2937;
+    }
+
+    
+  /*간편로그인_아이콘 div*/
+  .EasyLoginIcon {
+    width: 100px;
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    }
+
+      /*간편로그인_회원가입/로그인돌아가기*/
+  .EasyLoginRetuen {
+    width: 100%;
+    height: 24px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #1f2937;
+
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+
+    }
+
+
+    
+    a {color : #3692ff; margin-left: 4px;}
