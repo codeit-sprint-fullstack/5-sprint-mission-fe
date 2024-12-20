@@ -77,5 +77,13 @@ function checkLabel() {
 emailBox.addEventListener('input',checkLabel);
 pwdBox.addEventListener('input',checkLabel);
 
+//활성화버튼 클릭 시 페이지 이동
+function siteinItems() {
+  window.location.href ="../items/items.html";
+}
 
-
+loginButton.addEventListener("click", (e) => {
+  if (!loginButton.disabled) {
+    siteinItems();
+  }
+})
