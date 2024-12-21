@@ -2,10 +2,10 @@
 export const showError = (input, msg) => {
     clearError(input);
 
-    input.classList.add("show_error");
+    input.classList.add("show-error");
 
     const errorMsg = document.createElement("div");
-    errorMsg.classList.add("error_msg");
+    errorMsg.classList.add("error-msg");
     errorMsg.innerText = msg;
 
     input.parentElement.insertAdjacentElement("afterend", errorMsg);
@@ -14,8 +14,8 @@ export const showError = (input, msg) => {
 //에러 메시지 제거 함수
 export const clearError = (input) => {
     const errorMsg = input.parentElement.nextElementSibling;
-    input.classList.remove("show_error");
-    if (errorMsg && errorMsg.classList.contains("error_msg")) {
+    input.classList.remove("show-error");
+    if (errorMsg && errorMsg.classList.contains("error-msg")) {
         errorMsg.remove()
     }
 };
@@ -75,8 +75,8 @@ export const validPw = (e, msgList, pwRegex, toggleBtnState) => {
 export const visibleOn = (e) => {
     const btn = e.target;
     const input = btn.previousElementSibling;
-    input.classList.toggle("active_visible");
+    input.classList.toggle("active-visible");
 
-    input.type = input.classList.contains("active_visible") ? "text" : "password";
-    btn.src = input.classList.contains("active_visible") ? "./assets/btn_visibility_on.svg" : "./assets/btn_visibility_off.svg";
+    input.type = input.classList.contains("active-visible") ? "text" : "password";
+    btn.src = input.classList.contains("active-visible") ? "./assets/btn_visibility_on.svg" : "./assets/btn_visibility_off.svg";
 }

@@ -1,22 +1,5 @@
-@import "./styles/reset.css";
-
-:root {
-    --primary100 : #3692FF;
-    --primary200 : #1967d6;
-    --primary300 : #1251aa;
-    --error : #f74747;
-    --gray900 : #111827;
-    --gray800 : #1f2937;
-    --gray700 : #374151;
-    --gray600 : #4b5563;
-    --gray500 : #6b7280;
-    --gray400 : #9ca3af;
-    --gray200 : #e5e7eb;
-    --gray100 : #F3F4F6;
-    --gray50 : #f9fafb;
-    --box_bg : #e6f2ff;
-}
-
+@import "./reset.css";
+@import "./color.css";
 
 *,
 *::before,
@@ -27,11 +10,12 @@
 body {
     background: #ffffff;
     font-family: pretendard;
-    margin: 0;
 }
 
 #modal-bg {
-    position: absolute;
+    position: fixed;
+    top: 0;
+    left: 0;
     height: 100%;
     width: 100%;
     background-color: rgba(0,0,0,0.7);
@@ -47,7 +31,7 @@ body {
 }
 
 #modal {
-    position: absolute;
+    position: relative;
     width: 540px;
     height: 250px;
     background-color: #ffffff;
@@ -90,8 +74,8 @@ body {
 } */
 
 header {
-    margin-bottom: 40px;
     padding-top: 60px;
+    margin-bottom: 40px;
 }
 
 header > .content {
@@ -99,8 +83,12 @@ header > .content {
     justify-content: center;
 }
 
-#logo_img {
+#logo-img {
     width: 396px;
+}
+
+main {
+    padding-bottom: 60px;
 }
 
 .content {
@@ -110,18 +98,18 @@ header > .content {
     padding: 0 16px;
 }
 
-#input_form {
+#input-form {
     display: flex;
     flex-direction: column;
     gap: 24px;
 }
 
-.input_container {
+.input-container {
     display: flex;
     flex-direction: column;
 }
 
-.input_label {
+.input-label {
     color: var(--gray800);
     font-size: 1.125rem;
     font-weight: 700;
@@ -129,12 +117,12 @@ header > .content {
     margin-bottom: 16px;
 }
 
-.input_wrapper {
+.input-wrapper {
     width: 100%;
     position: relative;
 }
 
-.input_box {
+.input-box {
     width: 100%;
     height: 56px;
     background-color: var(--gray100);
@@ -150,18 +138,17 @@ header > .content {
 
 input::placeholder {
     color: var(--gray400);
-    line-height: 26px;
 }
 
 input:focus {
     outline: 1px solid var(--primary100);
 }
 
-.show_error {
+.show-error {
     outline: 1px solid var(--error);
 }
 
-.error_msg {
+.error-msg {
     color: var(--error);
     font-size: 1rem;
     font-weight: 600;
@@ -170,7 +157,7 @@ input:focus {
     padding-left: 16px;
 }
 
-.visible_btn {
+.visible-btn {
     width: 24px;
     height: 24px;
     position: absolute;
@@ -180,11 +167,11 @@ input:focus {
     cursor: pointer;
 }
 
-#login_btn_box {
+#auth-btn-box {
     margin-top: 24px;
 }
 
-#login_btn {
+#auth-btn {
     width: 100%;
     height: 56px;
     background-color: var(--gray400);
@@ -200,12 +187,11 @@ input:focus {
     cursor: pointer;
 }
 
-
-#login_btn.activate {
+#auth-btn.activate {
     background-color: var(--primary100);
 }
 
-#sns_login_box {
+#sns-login-box {
     background-color: var(--box_bg);
     width: 100%;
     height: 74px;
@@ -217,7 +203,7 @@ input:focus {
     align-items: center;
 }
 
-.main_text {
+.main-text {
     color: var(--gray800);
     font-size: 1rem;
     font-weight: 500;
@@ -225,34 +211,79 @@ input:focus {
     margin: 0;
 }
 
-#sns_img_box {
+#sns-img-box {
     width: 100px;
     display: flex;
     justify-content: space-between;
     gap: 16px;
 }
 
-.sns_img {
+.sns-img {
     width: 42px;
     height: 42px;
     cursor: pointer;
 }
 
-#find_box {
+#find-box {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 4px;
 }
 
-.main_text.light {
+.main-text.light {
     font-size: 0.875rem;
     line-height: 24px;
 }
 
-#signup_link {
+#page-link {
     color: var(--primary100);
     font-size: 0.875rem;
     line-height: 16.71px;
     cursor: pointer;
+}
+
+/* mobile size */
+@media (max-width: 743px) {
+    #modal {
+        max-width: 400px;
+        height: 220px;
+    }
+
+    #modal-msg {
+        padding-bottom: 50px;
+    }
+
+    #close-btn {
+        right: 50%;
+        transform: translateX(50%);
+    }
+
+    header {
+        padding-top: 24px;
+        margin-bottom: 24px;
+    }
+
+    #logo-img{
+        width: 198px;
+    }
+
+    /* 모바일 사이즈에서 내부 요소의 너비 400px 넘지 않는다 */
+    #content {
+        max-width: 400px;
+    }
+
+    #input-form {
+        gap: 16px;
+    }
+
+    .input-label {
+        font-size: 0.875rem;
+        line-height: 16px;
+        margin-bottom: 8px;
+    }
+
+    #auth-btn-box {
+        margin-top: 16px;
+    }
 }

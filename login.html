@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" as="style" crossorigin
     href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" />
-    <link rel="stylesheet" href="./styles/login.css" />
+    <link rel="stylesheet" href="./styles/auth.css" />
     <link rel="icon" href="./assets/logo_favicon.ico" />
 </head>
 <body>
@@ -25,58 +25,58 @@
     <header>
         <div class="content">
             <a href="/">
-                <img id="logo_img" src="./assets/logo_img.png" alt="로고 이미지 홈으로 이동" />
+                <img id="logo-img" src="./assets/logo_img.png" alt="로고 이미지 홈으로 이동" />
             </a>
         </div>
     </header>
     
-    <main id="container">
+    <main>
         <div class="content">
-            <form id="input_form">
-                <div class="input_container">
-                    <label for="email_input" class="input_label">
+            <form id="input-form">
+                <div class="input-container">
+                    <label for="email-input" class="input-label">
                         이메일
                     </label>
-                    <div class="input_wrapper">
-                        <input id="email_input" class="input_box" name="email" type="email" placeholder="이메일을 입력해주세요">
+                    <div class="input-wrapper">
+                        <input id="email-input" class="input-box" name="email" type="email" placeholder="이메일을 입력해주세요">
                     </div>
                 </div>
-                <div class="input_container">
-                    <label for="pw_input" class="input_label">
+                <div class="input-container">
+                    <label for="pw-input" class="input-label">
                         비밀번호
                     </label>
-                    <div class="input_wrapper">
-                        <input id="pw_input" class="input_box" name="password" type="password"
+                    <div class="input-wrapper">
+                        <input id="pw-input" class="input-box" name="password" type="password"
                     placeholder="비밀번호를 입력해주세요">
-                        <img class="visible_btn" src="./assets/btn_visibility_off.svg" alt="비밀번호 보기" />
+                        <img class="visible-btn" src="./assets/btn_visibility_off.svg" alt="비밀번호 보기" />
                     </div>
                 </div>
             </form>
 
-            <div id="login_btn_box">
-                <button id="login_btn">
+            <div id="auth-btn-box">
+                <button id="auth-btn">
                     로그인
                 </button>
             </div>
             
 
-            <div id="sns_login_box">
-                <p class="main_text">간편 로그인하기</p>
-                <div id="sns_img_box">
+            <div id="sns-login-box">
+                <p class="main-text">간편 로그인하기</p>
+                <div id="sns-img-box">
                     <a href="https://www.google.com/">
-                        <img class="sns_img" src="./assets/google_login_icon.png" alt="구글 로그인" />
+                        <img class="sns-img" src="./assets/google_login_icon.png" alt="구글 로그인" />
                     </a>
                     <a href="https://www.kakaocorp.com/page/">
-                        <img class="sns_img" src="./assets/kakao_login_icon.png" alt="카카오 로그인" />
+                        <img class="sns-img" src="./assets/kakao_login_icon.png" alt="카카오 로그인" />
                     </a>
                 </div>
             </div>
 
-            <div id="find_box">
-                <span class="main_text light">
+            <div id="find-box">
+                <span class="main-text light">
                     판다마켓이 처음이신가요?
                 </span>
-                <a id="signup_link" href="/signup.html">
+                <a id="page-link" href="/signup.html">
                     회원가입
                 </a>
             </div>

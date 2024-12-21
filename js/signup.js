@@ -1,17 +1,17 @@
-import { USER_DATA } from "./userData.js";
+import { USER_DATA } from "./userDataList.js";
 import { showError, clearError, showModal, closeModal, validEmail, validPw, visibleOn } from "./verifyAuth.js";
 
-const emailInput = document.querySelector("#email_input");
-const nicknameInput = document.querySelector("#nickname_input");
-const pwInput = document.querySelector("#pw_input");
-const pwConfirmInput = document.querySelector("#confirm_pw_input");
+const emailInput = document.querySelector("#email-input");
+const nicknameInput = document.querySelector("#nickname-input");
+const pwInput = document.querySelector("#pw-input");
+const pwConfirmInput = document.querySelector("#confirm-pw-input");
 
 const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 const pwRegex = /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$/;
 
-const signupBtn = document.querySelector("#signup_btn");
+const signupBtn = document.querySelector("#auth-btn");
 
-const visibleBtn = document.querySelectorAll(".visible_btn");
+const visibleBtn = document.querySelectorAll(".visible-btn");
 
 const modal = document.querySelector("#modal-bg");
 const modalMsg = document.querySelector("#modal-msg");
