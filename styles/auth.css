@@ -32,7 +32,8 @@ body {
 
 #modal {
     position: relative;
-    width: 540px;
+    width: 80%;
+    max-width: 540px;
     height: 250px;
     background-color: #ffffff;
     border-radius: 8px;
