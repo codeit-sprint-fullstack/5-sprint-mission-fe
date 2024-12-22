@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>판다마켓</title>
+    <link
+    rel="stylesheet"
+    as="style"
+    crossorigin
+    href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+  />
+    <link rel="icon" href="../assets/logo.ico" />
+    <link rel="stylesheet" href="../style/login.css" />
+  </head>
+  <body>
+    <main>
+      <a href="main.html">
+      <img
+      id="home"
+        src="../assets/logo.png"
+        alt="판다마켓"
+      /></a>
+      <form class="login-box">
+        <div class="input-box">
+        이메일<input id="email" type="email" placeholder="이메일을 입력해주세요" />
+        <p id="emailError"></p>
+      </div>
+        <div class="input-box">
+          닉네임<input placeholder="닉넴임을 입력해주세요" />
+          <p id="nickNameError"></p>
+        </div>
+        <div class="input-box">
+          비밀번호
+          <input id="pw"  type="password" placeholder="비밀번호를 입력해주세요" >
+          <img id="pwView"
+          
+          src="../assets/btn_visibility_off_24px.png"
+          />
+        </input>
+        <p id="pwError"></p>
+        </div>
+
+        <div class="input-box">
+          비밀번호 확인
+          <input  id="pwCheck" type="password" placeholder="비밀번호를 입력해주세요" >
+          <img id="pwCheckView"
+            src="../assets/btn_visibility_off_24px.png"
+          />
+        </input>
+        <p id="pwCheckError"></p>
+        </div>
+        <button id="signUp" type="button">회원가입</button>
+        <div class="social-login-box">
+          간편 로그인하기
+          <div class="icon-box">
+            <a href="https://www.google.com/"><img
+              src="../assets/google_logo_icon.png"
+             /></a>
+            <a href="https://www.kakaocorp.com/page/"><img
+              src="../assets/kakao_logo_icon.png"
+            /></a>
+          </div>
+        </div>
+        <div class="sign-up-box">
+          이미 회원이신가요?
+          <a href="login.html">로그인</a>
+        </div>
+      </form>
+      <div class="modal">
+        <div class="modal-popup">
+          <p class="modal-message"></p>
+        <button class="modal-btn">확인</button>
+      </div>
+      </div>
+    </main>
+    <script src="../js/signup.js"></script>
+  </body>
+</html>

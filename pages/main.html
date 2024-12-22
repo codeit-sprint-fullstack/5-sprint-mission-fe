@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>판다마켓</title>
+    <link rel="icon" href="../assets/logo.ico" />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css"
+    />
+    <link rel="stylesheet" href="../style/main.css" />
+
+    <!-- Google Analytics -->
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=G-H6W3E6RE1M"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "G-H6W3E6RE1M");
+    </script>
+  </head>
+
+  <body>
+    <!-- 헤더 -->
+    <header class="hd">
+      <div class="header">
+        <a href="/pages/main.html">
+          <img
+            id="home"
+            width="153px"
+            height="51px"
+            src="../assets/headerIcon.png"
+        /></a>
+        <a href="/pages/login.html" class="loginBtn">로그인</a>
+      </div>
+    </header>
+
+    <!-- 메인페이지 -->
+    <div>
+      <main>
+        <section class="blueCard">
+          <div class="blueCardBox">
+            <div>일상의 모든 물건을<br />거래해 보세요</div>
+            <a href="/pages/items.html"
+              ><button class="blueCardBoxBtn">구경하러 가기</button></a
+            >
+          </div>
+          <img src="../assets/Img_home_top.png" />
+        </section>
+
+        <section class="whiteCard">
+          <div class="whiteCardDtail">
+            <img src="../assets/hot_item.png" />
+            <div class="textBox">
+              <label>Hot item</label>
+              <p>인기 상품을<br />확인해 보세요</p>
+              <span>
+                가장 HOT한 중고거래 물품을<br />판다 마켓에서 확인해 보세요
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section class="whiteCard">
+          <div class="whiteCardDtail">
+            <div class="textBox">
+              <label>Hot item</label>
+              <p>구매를 원하는 <br />상품을 검색하세요</p>
+              <span> 구매하고 싶은 물품은 검색해서<br />쉽게 찾아보세요 </span>
+            </div>
+            <img src="../assets/search_item.png" />
+          </div>
+        </section>
+
+        <section class="whiteCard">
+          <div class="whiteCardDtail">
+            <img src="../assets/create_item.png" />
+            <div class="textBox">
+              <label>Register</label>
+              <p>판매를 원하는<br />상품을 등록하세요</p>
+              <span>
+                어떤 물건이든 판매하고 싶은 상품을<br />쉽게 등록하세요
+              </span>
+            </div>
+          </div>
+        </section>
+
+        <section class="blueCard">
+          <div class="blueCardBox">
+            <div>믿을 수 있는<br />판다마켓 중고 거래</div>
+          </div>
+          <img src="../assets/Img_home_bottom.png" />
+        </section>
+      </main>
+
+      <!-- 푸터 -->
+      <footer>
+        <div class="footerBox">
+          <div class="footerText">©codeit - 2024</div>
+          <div class="footerBtn">
+            <a href="/pages/privacy.html">Privacy Policy</a>
+            <!-- 글사이 간격을 위한 공백 -->
+            <div class="space"></div>
+            <a href="/pages/fqa.html">FAQ</a>
+          </div>
+
+          <div class="footerIcon">
+            <a href="https://www.facebook.com/codeit.kr/">
+              <img src="../assets/ic_facebook.png"
+            /></a>
+            <a>
+              <img
+                src="../assets/ic_twitter.png"
+                onclick="window.open('https://x.com/codeitkr')"
+              />
+            </a>
+            <a href="https://www.youtube.com/channel/UCCM79CPm2WbBYTRaiNEExbg">
+              <img src="../assets/ic_youtube.png" />
+            </a>
+            <a href="https://www.instagram.com/codeit_kr/">
+              <img src="../assets/ic_instagram.png" />
+            </a>
+          </div>
+        </div>
+      </footer>
+    </div>
+    <script src="../js/main.js"></script>
+  </body>
+</html>
