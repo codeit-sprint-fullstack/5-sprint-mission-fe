@@ -58,7 +58,7 @@ document.addEventListener("DOMContentLoaded", function () {
        
        
 
-        if (passiveData || user) {
+        if (passiveData|| user) {
             window.location.href = "../items/items.html";
         }
         else if(!user || user.password !== password) {
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 에러 메시지 표시 함수
     const showError = (input, message) => {
         clearError(input);
-        input.parentElement.classList.add("input-error");
+        input.classList.add("input-error");
         const errorMessage = document.createElement("div");
         errorMessage.classList.add("error-message");
         errorMessage.innerText = message;
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 에러 메시지 제거 함수
     const clearError = input => {
-        input.parentElement.classList.remove("input-error");
+        input.classList.remove("input-error");
         const nextElement = input.parentElement.nextElementSibling;
         if (nextElement && nextElement.classList.contains("error-message")) {
             nextElement.remove();

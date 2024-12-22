@@ -45,13 +45,21 @@ document.addEventListener("DOMContentLoaded", function () {
     emailInput.addEventListener("focusout", function () {
         if (!isEmailValid(emailInput.value.trim())) {
             showError(emailInput, "잘못된 이메일 형식입니다.");
+        } else {
+            clearError(emailInput);
+        }
+    });
+
+    // 이메일 유효성 검사
+    passwordInput.addEventListener("focusout", function () {
         if (!isPasswordValid(passwordInput.value.trim())) {
-            showError(passwordInput, "비밀번호는 8자 이상이어야 합니다.");
+            showError(passwordInput, "비밀번호를 8자 이상 입력해주세요.");
         } else {
             clearError(passwordInput);
         }
-    }});
+    });
 
+    
     // 비밀번호 확인 검사
     checkPasswordInput.addEventListener("focusout", function () {
         if (!isPasswordMatch(passwordInput.value.trim(), checkPasswordInput.value.trim())) {
