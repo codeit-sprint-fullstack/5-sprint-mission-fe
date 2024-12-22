@@ -37,7 +37,7 @@
       <div class="input-box">
         <h3>비밀번호</h3>
         <div class="pwd-container">
-          <input id="pwd" class="pwd" type="password" placeholder="비밀번호를 입력해주세요">
+          <input id="pwd" class="pwd" type="password" placeholder="비밀번호를 입력해주세요" autocomplete="off">
           <button class="pwd-btn"><i class="fas fa-eye-slash" data-status="hide"></i></button>
         </div>
         <p id="pwd-error" class="error-text">비밀번호를 8자 이상 입력해주세요.</p>
@@ -45,7 +45,7 @@
       <div class="input-box">
         <h3>비밀번호 확인</h3>
         <div class="pwd-container">
-          <input id="pwd-confirm" class="pwd-confirm" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요">
+          <input id="pwd-confirm" class="pwd pwd-confirm" type="password" placeholder="비밀번호를 다시 한 번 입력해주세요" autocomplete="off">
           <button class="pwd-btn"><i class="fas fa-eye-slash" data-status="hide"></i></button>
         </div>
         <p id="pwd-confirm-error" class="error-text">비밀번호가 일치하지 않습니다.</p>
@@ -67,12 +67,19 @@
     </div>
     <div class="modal">
       <div class="modal-container">
-        <span>비밀번호가 일치하지 않습니다.</span>
+        <span>사용 중인 이메일입니다.</span>
         <button>확인</button>
       </div>
     </div>
   </div>
 
   <script type="module" src="/js/signup.js"></script>
+  <script>
+    window.addEventListener('pageshow', function(event) {
+      if (event.persisted) {
+        document.querySelectorAll(".pwd").forEach(input => input.value = '');
+      }
+    });
+  </script>
 </body>
 </html>

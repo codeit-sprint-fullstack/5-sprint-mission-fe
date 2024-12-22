@@ -1,4 +1,5 @@
-import { USER_DATA, email, pwd, removeWhitespace, updateInvalidMessage } from "/js/authUtils.js";
+import { email, pwd, validateInput, removeWhitespace } from "/js/authUtils.js";
+import { createNewUser } from "/js/localstorage.js";
 
 const signupBtn = document.getElementById("signup-btn");
 const pwdBtns = document.querySelectorAll(".pwd-btn");
@@ -9,7 +10,6 @@ const pwdBtns = document.querySelectorAll(".pwd-btn");
 email.input.addEventListener("input", removeWhitespace);
 pwd.input.addEventListener("input", removeWhitespace);
 
-//유효성 검사
 const pwdConfirm = {
   input: document.getElementById("pwd-confirm"),
   error: document.getElementById("pwd-confirm-error"),
@@ -29,19 +29,9 @@ const updateSignupButtonState = () => {
   signupBtn.disabled = !(isEmailValid && isPwdValid && isPwdConfirmValid);
 };
 
-const updateSignupInput = (element, confirm) => {
-  const value = element.input.value;
-
-  updateInvalidMessage(value, element.error, element.text);
-  if (!value || !element.validator(confirm)) element.input.classList.add("error");
-  else element.input.classList.remove("error");
-
-  updateSignupButtonState();
-}
-
-email.input.addEventListener("focusout", () => updateSignupInput(email));
-pwd.input.addEventListener("focusout", () => updateSignupInput(pwd));
-pwdConfirm.input.addEventListener("focusout", () => updateSignupInput(pwdConfirm, pwd.input.value));
+email.input.addEventListener("focusout", () => validateInput(email, updateSignupButtonState));
+pwd.input.addEventListener("focusout", () => validateInput(pwd, updateSignupButtonState));
+pwdConfirm.input.addEventListener("focusout", () => validateInput(pwdConfirm, updateSignupButtonState, pwd.input.value));
 
 /**
  * 회원가입 시도
@@ -49,18 +39,14 @@ pwdConfirm.input.addEventListener("focusout", () => updateSignupInput(pwdConfirm
 const modal = document.querySelector(".modal");
 const modalBtn = document.querySelector(".modal-container button");
 
-function existUser(email) {
-  return USER_DATA.some(user => user.email === email);
-}
-
 signupBtn.addEventListener("click", () => {
   const emailValue = email.input.value;
   const pwdValue = pwd.input.value;
   const pwdConfirmValue = pwdConfirm.input.value;
 
-  const validateSignup = !existUser(emailValue) && (pwdValue === pwdConfirmValue);
+  const validateSignup = (pwdValue === pwdConfirmValue) && createNewUser(emailValue, pwdValue);
 
-  if(validateSignup) {
+  if (validateSignup) {
     window.location.href = "/login";
   } else modal.style.display = "flex";
 });

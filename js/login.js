@@ -1,4 +1,5 @@
-import { USER_DATA, email, pwd, removeWhitespace, updateInvalidMessage } from "/js/authUtils.js";
+import { email, pwd, validateInput, removeWhitespace } from "/js/authUtils.js";
+import { existEmailAndPwd } from "/js/localstorage.js";
 
 const loginBtn = document.getElementById("login-btn");
 const pwdBtn = document.getElementById("pwd-btn");
@@ -9,25 +10,14 @@ const pwdBtn = document.getElementById("pwd-btn");
 email.input.addEventListener("input", removeWhitespace);
 pwd.input.addEventListener("input", removeWhitespace);
 
-//유효성 검사
 const updateLoginButtonState = () => {
   const isEmailValid = email.validator();
   const isPwdValid = pwd.validator();
   loginBtn.disabled = !(isEmailValid && isPwdValid);
 };
 
-const updateLoginInput = (element) => {
-  const value = element.input.value;
-
-  updateInvalidMessage(value, element.error, element.text);
-  if (!value || !element.validator()) element.input.classList.add("error");
-  else element.input.classList.remove("error");
-
-  updateLoginButtonState();
-}
-
-email.input.addEventListener("focusout", () => updateLoginInput(email));
-pwd.input.addEventListener("focusout", () => updateLoginInput(pwd));
+email.input.addEventListener("focusout", () => validateInput(email, updateLoginButtonState));
+pwd.input.addEventListener("focusout", () => validateInput(pwd, updateLoginButtonState));
 
 /**
  * 로그인 시도
@@ -35,15 +25,11 @@ pwd.input.addEventListener("focusout", () => updateLoginInput(pwd));
 const modal = document.querySelector(".modal");
 const modalBtn = document.querySelector(".modal-container button");
 
-function validateUser(email, pwd) {
-  return USER_DATA.some(user => user.email === email && user.password === pwd);
-}
-
 loginBtn.addEventListener("click", () => {
   const emailValue = email.input.value;
   const pwdValue = pwd.input.value;
 
-  if(validateUser(emailValue, pwdValue)) {
+  if (existEmailAndPwd(emailValue, pwdValue)) {
     window.location.href = "/items";
   } else modal.style.display = "flex";
 });
