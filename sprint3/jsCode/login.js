@@ -67,7 +67,9 @@ document.addEventListener("DOMContentLoaded", function () {
             else {
                 showModalMessage("비밀번호가 일치하지 않습니다.");
             }
-         
+        
+        }else{
+            showModalMessage("등록되지 않은 이메일입니다.")
         }
         
 
