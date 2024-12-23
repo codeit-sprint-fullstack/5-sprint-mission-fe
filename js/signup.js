@@ -1,5 +1,6 @@
 import { USER_DATA } from "./userDataList.js";
-import { showError, clearError, showModal, closeModal, validEmail, validPw, visibleOn } from "./verifyAuth.js";
+import { validEmail, validPw, validNickname, confirmPw } from "./verifyAuth.js";
+import { showModal, closeModal, visibleOn } from "./controlUI.js";
 
 const emailInput = document.querySelector("#email-input");
 const nicknameInput = document.querySelector("#nickname-input");
@@ -58,41 +59,10 @@ const validSignup = () => {
     : (window.location.href = "./login.html");
 }
 
-//닉네임 확인 함수
-const validNickname = (e) => {
-    const nickname = e.target;
-
-    if (!nickname.value.trim()) {
-        showError(nickname, msgList.nickameInputErrorMsg);
-    }
-    else {
-        clearError(nickname);
-    }
-
-    toggleBtnState();
-}
-
-//비밀번호 확인 함수
-const confirmPw = (e) => {
-    const targetPw = e.target;
-
-    if (!targetPw.value.trim()) {
-        showError(targetPw, msgList.pwInputErrorMsg);
-    }
-    else if (targetPw.value !== pwInput.value) {
-        showError(targetPw, msgList.pwConfirmMsg);
-    }
-    else {
-        clearError(targetPw);
-    }
-
-    toggleBtnState();
-}
-
 emailInput.addEventListener("blur", (e) => validEmail(e, msgList, emailRegex, toggleBtnState));
-nicknameInput.addEventListener("blur", (e) => validNickname(e, msgList, null, toggleBtnState));
+nicknameInput.addEventListener("blur", (e) => validNickname(e, msgList, toggleBtnState));
 pwInput.addEventListener("blur", (e) => validPw(e, msgList, pwRegex, toggleBtnState));
-pwConfirmInput.addEventListener("blur", confirmPw);
+pwConfirmInput.addEventListener("blur", (e) => confirmPw(e, msgList, pwInput, toggleBtnState));
 signupBtn.addEventListener("click", validSignup);
 closeBtn.addEventListener("click", () => closeModal(modal));
 visibleBtn.forEach((btn) => btn.addEventListener("click", visibleOn));

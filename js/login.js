@@ -1,5 +1,6 @@
-import {USER_DATA} from "./userDataList.js";
-import { showError, clearError, showModal, closeModal, validEmail, validPw, visibleOn } from "./verifyAuth.js";
+import { USER_DATA } from "./userDataList.js";
+import { validEmail, validPw } from "./verifyAuth.js";
+import { showModal, closeModal, visibleOn } from "./controlUI.js";
 
 const emailInput = document.querySelector("#email-input");
 const pwInput = document.querySelector("#pw-input");
@@ -50,9 +51,12 @@ const validLogin = () => {
     const isEmailNotFound = !userData;
     const isPwIncorrect = userData && userData.password !==pwInput.value;
 
-    (isEmailNotFound || isPwIncorrect)
-    ? showModal(msgList.loginErrorModalMsg, modal, modalMsg)
-    : (window.location.href = "../items.html");
+    if (isEmailNotFound || isPwIncorrect) {
+        showModal(msgList.loginErrorModalMsg, modal, modalMsg);
+    }
+    else {
+        (window.location.href = "../items.html");
+    }
 }
 
 emailInput.addEventListener("blur", (e) => validEmail(e, msgList, emailRegex, toggleBtnState));
