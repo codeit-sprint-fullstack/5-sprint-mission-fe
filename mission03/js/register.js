@@ -41,6 +41,30 @@ const signupBtn = document.querySelector(".signup");
 const passEqualMust = document.createElement("div");
 const nickMust = document.createElement("div");
 
+signupBtn.classList.add("deactive");
+signupBtn.disabled = true;
+
+let passCheckBool = 0;
+let passEqualCheckBool = 0;
+let emailCheckBool = 0;
+let nickCheckBool = 0;
+
+function signupEnable () {
+    signupBtn.classList.remove("deactive");
+    signupBtn.classList.add("active");
+    signupBtn.disabled = false;
+}
+
+function signupDisable () {
+    signupBtn.classList.remove("active");
+    signupBtn.classList.add("deactive");
+    signupBtn.disabled = true;
+}
+
+function allCheckBool() {
+    return passCheckBool && passEqualCheckBool && emailCheckBool && nickCheckBool;
+}
+
 
 function modalPopAlert (message){
     modal.style.display = "flex";
@@ -51,26 +75,37 @@ popCloseBtn.addEventListener("click", (event) => {
     modal.style.display = "none";
 })
 
+
 function passCheck(pV) {
 
     if(!pwPattern.test(pV)){
         errorBox(errorMessages.passError, passMust, passInput);
+        passCheckBool = 0;
+        signupDisable();
         return false;
     }
+    passCheckBool = 1;
+    if(allCheckBool()) signupEnable();
     return true;
 }
 
 // login 의 emailCheck 와 다름. (+ Registered Check)
 function emailCheck(eV){
-    const emailCheckBool = !emailPattern.test(eV) || eV.length >= 30;
-    if(emailCheckBool){
+    const emailGood = !emailPattern.test(eV) || eV.length >= 30;
+    if(emailGood){
         errorBox(errorMessages.emailTypeError, emailMust,emailInput);
+        emailCheckBool = 0;
+        signupDisable();
         return false;
     }
     if(emailRegisteredCheck(eV)){
         errorBox(errorMessages.emailExistError, emailMust,emailInput);
+        emailCheckBool = 0;
+        signupDisable();
         return false;
     }
+    emailCheckBool = 1;
+    if(allCheckBool()) signupEnable();
     return true;
 }
 
@@ -79,8 +114,12 @@ function emailCheck(eV){
 function passEqualCheck (pV) {
     if(pV !== passInput.value){
         errorBox(errorMessages.passEqualError, passEqualMust,passInputEqual);
+        passEqualCheckBool = 0;
+        signupDisable();
         return false;
     }
+    passEqualCheckBool = 1;
+    if(allCheckBool()) signupEnable();
     return true;
 }
 
@@ -88,8 +127,12 @@ function passEqualCheck (pV) {
 function nickCheck (nickname) {
     if(nickname.length >= 8){
         errorBox(errorMessages.nickLengthError, nickMust, nickInput);
+        nickCheckBool = 0;
+        signupDisable();
         return false;
     }
+    nickCheckBool = 1;
+    if(allCheckBool()) signupDisable();
     return true;
 }
 
@@ -155,7 +198,7 @@ nickInput.addEventListener("focusin", (event) => {
 
 signupBtn.addEventListener("click", (event) => {
 
-    const isRegisterConfirm = !emailRegisteredCheck(emailInput.value) && emailInput.value !== ""  && passInput.value === passInputEqual.value  && emailInput.value.length < 30 && nickInput.value.length < 8  && pwPattern.test(passInput.value);
+    const isRegisterConfirm = !emailRegisteredCheck(emailInput.value) && passInput.value === passInputEqual.value
 
   
     if(isRegisterConfirm){

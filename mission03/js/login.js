@@ -38,13 +38,34 @@ const passMust = document.createElement("div");
 const emailMust = document.createElement("div");
 const loginBtn = document.querySelector(".login");
 
+loginBtn.classList.add("deactive");
+loginBtn.disabled = true;
+
+let passCheckBool = 0;
+let emailCheckBool = 0;
+
+function loginEnable () {
+    loginBtn.classList.remove("deactive");
+    loginBtn.classList.add("active");
+    loginBtn.disabled = false;
+}
+
+function loginDisable () {
+    loginBtn.classList.remove("active");
+    loginBtn.classList.add("deactive");
+    loginBtn.disabled = true;
+}
 
 function passCheck(pV) {
 
     if(!pwPattern.test(pV)){
         errorBox(errorMessages.passError, passMust, passInput);
+        passCheckBool = 0;
+        loginDisable();
         return false;
     }
+    passCheckBool = 1;
+    if(passCheckBool && emailCheckBool) loginEnable();
     return true;
 }
 
@@ -53,8 +74,12 @@ function emailCheck(eV){
     const emailPatternCheck = emailPattern.test(eV) && eV.length < 30;
     if(!emailPatternCheck){
         errorBox(errorMessages.emailTypeError, emailMust, emailInput);
+        emailCheckBool = 0;
+        loginDisable();
         return false;
     }
+    emailCheckBool = 1;
+    if(passCheckBool && emailCheckBool) loginEnable();
     return true;
 }
 
@@ -88,8 +113,7 @@ popCloseBtn.addEventListener("click", (event) => {
 })
 
 function login (email, pw) {
-    let loginPass = passCheck(pw) && emailCheck(email) && members[email];
-    if(loginPass){
+    if(members[email]){
 
         if(!window.localStorage.members) window.localStorage.members = JSON.stringify(members);
         members = JSON.parse(window.localStorage.members);
