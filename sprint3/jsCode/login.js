@@ -59,14 +59,16 @@ document.addEventListener("DOMContentLoaded", function () {
        
 
         if (passiveData|| user) {
-            window.location.href = "../items/items.html";
+            const correctPassword = (passiveData && passiveData.password === password) || (user && user.password === password);
+
+            if(correctPassword) {
+                window.location.href = "../items/items.html"; // 로그인 성공 시 이동
+            }
+            else {
+                showModalMessage("비밀번호가 일치하지 않습니다.");
+            }
+         
         }
-        else if(!user || user.password !== password) {
-            showModalMessage("비밀번호가 일치하지 않습니다.");
-        } else {
-            window.location.href = "../items/items.html"; // 로그인 성공 시 이동
-        }
-     
         
 
     };
