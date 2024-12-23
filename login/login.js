@@ -47,7 +47,7 @@ emailBox.addEventListener("input", (e) => {
 const errorMsgPwd_T =document.querySelector("#error-message-pwd-type");
 
 function pwdcheck(pwdBox) {
-  return /^[a-zA-Z0-9]{8,}$/.test(pwdBox);
+  return /^(?=.*[a-zA-Z])(?=.*\d)(?=.*[~@#$!%*?&])[a-zA-Z\d~@#$!%*?&]{8,}$/.test(pwdBox);
 }
 
 pwdBox.addEventListener("input", (e) => {
@@ -62,15 +62,20 @@ pwdBox.addEventListener("input", (e) => {
 ////로그인버튼 활성화 비활성화
 const loginButton = document.getElementById("login-btn")
 //Q.위에서 유효성 검사한 값에 알맞지 않을 경우 비활성화하는 방법 질문하기
+let loginButtonCheck = true 
+
 function checkLabel() {
   if (emailBox.value.trim() === '' || pwdBox.value.trim() === '') {
     loginButton.disabled = true;
+    loginButtonCheck = true;
     loginButton.style.backgroundColor = "#9CA3AF";
+    // console.log("버튼 비활성화");
   } else {
     loginButton.disabled = false;
+    loginButtonCheck = false;
     loginButton.style.backgroundColor = "#3692FF";
     loginButton.style.cursor = "pointer";
-    // loginButton.click.window.location.href = "../items/items.html"
+    // console.log("버튼 활성화");
   }
 }
 
@@ -83,7 +88,35 @@ function siteinItems() {
 }
 
 loginButton.addEventListener("click", (e) => {
-  if (!loginButton.disabled) {
+  // console.log("loginButtonCheck",loginButtonCheck);
+  if (!loginButtonCheck) {
+    // console.log("on2");
     siteinItems();
-  }
+  } 
 })
+
+////로그인 성공 여부
+const USER_DATA = [
+  { email: 'codeit1@codeit.com', password: "codeit101!" },
+  { email: 'codeit2@codeit.com', password: "codeit202!" },
+  { email: 'codeit3@codeit.com', password: "codeit303!" },
+  { email: 'codeit4@codeit.com', password: "codeit404!" },
+  { email: 'codeit5@codeit.com', password: "codeit505!" },
+  { email: 'codeit6@codeit.com', password: "codeit606!" },
+];
+
+function loginSuccess() {
+  var emailSuccess = document.getElementById("uid").value;
+  var pwdSuccess = document.getElementById("password").value;
+  
+  var correctEmail = USER_DATA.email;
+  var correctPwd = USER_DATA.password;
+
+  if (emailSuccess === correctEmail && pwdSuccess === correctPwd) {
+    loginButton.addEventListener("click", siteinItems);
+  } 
+  // if (!USER_DATA.hasOwnproperty(email) || USER_DATA.email] !== USER_DATA.password) {
+  //   alert("비밀번호가 일치하지 않습니다.");
+  // }
+}
+
