@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>로그인</title>
+    <link
+    rel="stylesheet"
+    href="./css/accountStyle.css" 
+    />
+    <link rel="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-5DR27C38');</script>
+    <!-- End Google Tag Manager -->
+    <link rel="icon" href="img/panda.ico">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5DR27C38"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="modal">
+        <div class="modalPop">
+            <h1 class="popMessage">TEST</h1>
+            <button class="popCloseBtn">닫기</button>
+        </div>
+    </div>
+    <div class="loginForm">
+        <div class="loginComponent">
+            <a href="/index.html"><img class="logo" src="img/logo.png" width="396px" height="132px" /></a>
+            <div class="loginEmail">
+                <div class="inputOutline">
+                    <label class="labels">이메일</label><br />
+                    <input class="emailInput" id="loginEmail" type="email" placeholder="이메일을 입력해주세요" />
+    
+                </div>
+            </div>
+            <br />
+            <div class="loginPasswd">
+                <label class="labels">비밀번호</label><br />
+                <div class="inputOutline">
+                    <input class="passInput" id="loginPass" type="password" placeholder="비밀번호를 입력해주세요" />
+                    <img class="vector" src="img/Vector.png">
+                </div>
+            </div>
+            <div class="loginButton">
+                <button class="login">로그인</button>
+            </div>
+            <div class="simpleLogin">
+                <div class="simple">
+                    간편 로그인하기
+                </div>
+                <div>
+                    <a href="https://www.google.com/"><img class="social" src="img/google_login.png"></a>
+                    <a href="https://www.kakaocorp.com/page/"><img class="social" src="img/kakao_login.png"></a>
+                </div>
+            </div>
+            <div class="unRegister">
+                판다마켓이 처음이신가요?
+                <a href="/signup.html">회원가입</a>
+            </div>
+            
+        </div>
+    </div>
+    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/accountCommon.js"></script>
+</body>
+</html>
