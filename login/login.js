@@ -27,10 +27,10 @@ pwdBox.addEventListener("focusout", (event)=> {
 
 ////이메일 유효성 검사 및 에러메세지
 const errorMsgEmail_T =document.querySelector("#error-message-email-type");
-const emailRegex = /^[a-z0-9._%+-]{1,}@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/
+const emailRegex = /^[a-z0-9._%+-]{1,}@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{3,}$/
 
 function emailcheck(emailBox) {
-  return /^[a-z0-9._%+-]{1,}@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{2,}$/.test(emailBox);
+  return /^[a-z0-9._%+-]{1,}@[a-z0-9-]+(\.[a-z0-9-]+)*\.[a-z]{3,}$/.test(emailBox);
 }
 
 emailBox.addEventListener("input", (e) => {
@@ -90,8 +90,8 @@ function siteinItems() {
 loginButton.addEventListener("click", (e) => {
   // console.log("loginButtonCheck",loginButtonCheck);
   if (!loginButtonCheck) {
-    // console.log("on2");
-    siteinItems();
+    console.log("on2");
+    // siteinItems();
   } 
 })
 
@@ -106,17 +106,16 @@ const USER_DATA = [
 ];
 
 function loginSuccess() {
-  var emailSuccess = document.getElementById("uid").value;
-  var pwdSuccess = document.getElementById("password").value;
+  const emailValue = document.getElementById("uid").value;
+  const pwdValue = document.getElementById("password").value;
   
   var correctEmail = USER_DATA.email;
   var correctPwd = USER_DATA.password;
 
-  if (emailSuccess === correctEmail && pwdSuccess === correctPwd) {
-    loginButton.addEventListener("click", siteinItems);
-  } 
-  // if (!USER_DATA.hasOwnproperty(email) || USER_DATA.email] !== USER_DATA.password) {
-  //   alert("비밀번호가 일치하지 않습니다.");
-  // }
+  const user = USER_DATA.find(user => user.email === emailValue && user.password === pwdValue);
+  console.log("데이터베이스랑 맞다1")
+  if (user) {
+    loginButton.addEventListener("click", console.log("데이터베이스랑 맞다2"));
+  }
 }
-
+  

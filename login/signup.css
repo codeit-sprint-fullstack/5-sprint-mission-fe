@@ -67,7 +67,7 @@ main {
     margin-top: 24px;
 }
 
-dt {
+label {
     font-size: 18px;
     font-weight: 700;
     line-height: 26px;
@@ -118,6 +118,10 @@ input::placeholder {
     top:10%;
 }
 
+.hide {
+  color:#F74747;
+  display: none;
+}
 
 /* #passwordcheck {
     background-image : url('btn_visibility_on_24px.png');

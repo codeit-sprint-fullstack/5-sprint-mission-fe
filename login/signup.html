@@ -18,41 +18,37 @@
     </header>
     <main>
       <div class="email_area">
-        <dt>이메일</dt>
-        <dd>
+        <label for="uid">이메일</label>
         <div class="id_box">
             <input type="text" id="uid" name="uid" maxlength="50" tabindex="1" placeholder="이메일을 입력해주세요">
         </div>
-        </dd>
+        <div id="error-message-email-none" class="hide">이메일을 입력해주세요.</div>
+        <div id="error-message-email-type" class="hide">잘못된 이메일 형식입니다.</div>
       </div>
       <div class="nick_area">
-        <dt>닉네임</dt>
-        <dd>
+        <label for="unickname">닉네임</label>
         <div class="pass_box">
             <input type="text" id="unickname" name="nickname" maxlength="15" tabindex="2" placeholder="닉네임을 입력해주세요">
         </div>
-        </dd>
       </div>
       <div class="pass_area">
-        <dt>비밀번호</dt>
-        <dd>
+        <label for="password">비밀번호</label>
         <div class="pass_box">
             <input type="password" id="password" name="password" maxlength="15" tabindex="3" placeholder="비밀번호를 입력해주세요">
             <div class="눈알1"><img src="btn_visibility_on_24px.png"></div>
+            <div id="error-message-pwd-none" class="hide">비밀번호를를 입력해주세요.</div>
+            <div id="error-message-pwd-type" class="hide">비밀번호를 8자 이상 입력해주세요.</div>
         </div>
-        </dd>
       </div>
       <div class="passcheck_area">
-        <dt>비밀번호 확인</dt>
-        <dd>
+        <label for="passwordcheck">비밀번호 확인</label>
         <div class="passcheck_box">
             <input type="password" id="passwordcheck" name="password" maxlength="15" tabindex="4" placeholder="비밀번호를 다시 한 번 입력해주세요">
             <div class="눈알2"><img src="btn_visibility_on_24px.png"></div>
         </div>
-        </dd>
       </div>
       <div class="join_area">
-        <button type="button" class="join-btn">회원가입</button>
+        <button type="button" id="join-btn" class="join-btn">회원가입</button>
       </div>
       <div class="간편_area">
         <div class="간편-contentbox"> 
