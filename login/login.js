@@ -105,17 +105,26 @@ const USER_DATA = [
   { email: 'codeit6@codeit.com', password: "codeit606!" },
 ];
 
-function loginSuccess() {
-  const emailValue = document.getElementById("uid").value;
-  const pwdValue = document.getElementById("password").value;
-  
-  var correctEmail = USER_DATA.email;
-  var correctPwd = USER_DATA.password;
-
-  const user = USER_DATA.find(user => user.email === emailValue && user.password === pwdValue);
-  console.log("데이터베이스랑 맞다1")
-  if (user) {
-    loginButton.addEventListener("click", console.log("데이터베이스랑 맞다2"));
+function handleLogin () {
+  let dataFound = false;
+  for (let i = 0; i < USER_DATA.length; i++) {
+  // console.log ("USER_DATA[i].email",USER_DATA[i].email)
+  // console.log ("USER_DATA[i].password",USER_DATA[i].password)
+  // console.log ("emailBox.value",emailBoxVal)
+  // console.log ("pwdBox.value", pwdBoxVal)
+  const emailBoxVal = emailBox.value;
+  const pwdBoxVal = pwdBox.value;
+  if (USER_DATA[i].email === emailBoxVal && USER_DATA[i].password === pwdBoxVal) {
+    console.log("데이터랑 입력값이 일치!!");
+    dataFound = true;
+    break;
   }
+} 
+if (dataFound) {
+  window.location.href = "../items/items.html";
+} else {
+  alert("비밀번호가 일치하지 않습니다.")
 }
-  
+}
+
+loginButton.addEventListener("click", handleLogin);
