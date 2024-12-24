@@ -91,9 +91,39 @@ function siteinLogin() {
   window.location.href ="./login.html";
 }
 
-joinButton.addEventListener("click", (e) =>{
-  if (!joinButtonCheck) {
-    console.log("로그인페이지로 사이트 이동");
-    siteinLogin();
+// joinButton.addEventListener("click", (e) =>{
+//   if (!joinButtonCheck) {
+//     console.log("로그인페이지로 사이트 이동");
+//     // siteinLogin();
+//   }
+// })
+
+////입력한 이메일에 따른 회원가입 성공 여부
+const USER_DATA = [
+  { email: 'codeit1@codeit.com', password: "codeit101!" },
+  { email: 'codeit2@codeit.com', password: "codeit202!" },
+  { email: 'codeit3@codeit.com', password: "codeit303!" },
+  { email: 'codeit4@codeit.com', password: "codeit404!" },
+  { email: 'codeit5@codeit.com', password: "codeit505!" },
+  { email: 'codeit6@codeit.com', password: "codeit606!" },
+];
+
+function handleJoin () {
+  let dataFound = false;
+  for(let i = 0; i < USER_DATA.length; i++) {
+    const emailValue = emailBox.value;
+    if (USER_DATA[i].email === emailValue) {
+      // console.log("데이터랑 이메일 입력값이 일치!!");
+      dataFound = true;
+      break;
+    }
   }
-})
+  if (dataFound) {
+    alert("사용 중인 이메일입니다.");
+  } else {
+    alert("회원가입이 성공적으로 완료되었습니다.");
+    window.location.href = "./login.html";
+  }
+}
+
+joinButton.addEventListener("click", handleJoin);

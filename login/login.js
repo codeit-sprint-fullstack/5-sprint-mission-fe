@@ -87,13 +87,13 @@ function siteinItems() {
   window.location.href ="../items/items.html";
 }
 
-loginButton.addEventListener("click", (e) => {
-  // console.log("loginButtonCheck",loginButtonCheck);
-  if (!loginButtonCheck) {
-    console.log("on2");
-    // siteinItems();
-  } 
-})
+// loginButton.addEventListener("click", (e) => {
+//   // console.log("loginButtonCheck",loginButtonCheck);
+//   if (!loginButtonCheck) {
+//     console.log("on2");
+//     // siteinItems();
+//   } 
+// })
 
 ////로그인 성공 여부
 const USER_DATA = [
@@ -115,7 +115,7 @@ function handleLogin () {
   const emailBoxVal = emailBox.value;
   const pwdBoxVal = pwdBox.value;
   if (USER_DATA[i].email === emailBoxVal && USER_DATA[i].password === pwdBoxVal) {
-    console.log("데이터랑 입력값이 일치!!");
+    // console.log("데이터랑 입력값이 일치!!");
     dataFound = true;
     break;
   }
