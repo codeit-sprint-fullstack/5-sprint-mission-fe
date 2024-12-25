@@ -216,6 +216,7 @@
 
     .socials {
         gap:1.5rem;
+        margin-right: 20rem;
     }
 
     .footer {
@@ -323,6 +324,7 @@
     .copyright {
         color: #9CA3AF;
         margin-left: 20rem;
+        
         font-size: 1.6rem;
     }
     
@@ -433,6 +435,7 @@
     font-size: 1.6rem;
     margin: 0 auto;
     max-width: 1920px;
+   
 }
 
 .links > a{

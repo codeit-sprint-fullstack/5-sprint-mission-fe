@@ -11,4 +11,8 @@ window.addEventListener("resize", (e) => {
         socials.style.gap = socialsGap;
         links.style.gap = socialsGap;
     }
+    else{
+        socials.style.gap = "1.5rem";
+        links.style.gap = "1.5rem";
+    }
 })
