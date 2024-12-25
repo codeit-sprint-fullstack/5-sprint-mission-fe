@@ -1,3 +1,4 @@
+// 에러 메시지 모음
 export const errorMessages =
 {
     emailTypeError : "잘못된 이메일 형식입니다.",
@@ -10,6 +11,7 @@ export const errorMessages =
     nickLengthError : "닉네임이 너무 깁니다.",
 };
 
+// Pop 메시지 모음
 export const popMessages =
 {
     loginError : "아이디 또는 비밀번호가 일치하지 않습니다.",
@@ -18,6 +20,7 @@ export const popMessages =
     registerError : "이메일과 비밀번호가 제대로 입력되었는지 다시 확인해보세요.",
 };   
 
+// 에러박스 컴포넌트
 export function errorBox (message, must, input) {
     must.textContent = message;
     must.classList.add("errorBox")
@@ -25,6 +28,7 @@ export function errorBox (message, must, input) {
     input.parentElement.parentElement.append(must);
 }
 
+// 비밀번호 숨김/보이기 기능
 let visibleStatus = 0;
 export const handleVisibilityIcon = (event) => {
     const visibilityIcon = event.target;

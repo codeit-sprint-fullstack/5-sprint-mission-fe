@@ -3,6 +3,7 @@ import {popMessages} from "./accountCommon.js";
 import {errorBox} from "./accountCommon.js";
 import {handleVisibilityIcon} from "./accountCommon.js";
 
+// members 기본 데이터
 let members = {
     'codeit@codeit.com' : {
         pw: 'codeit101!',
@@ -44,18 +45,21 @@ loginBtn.disabled = true;
 let passCheckBool = 0;
 let emailCheckBool = 0;
 
+//로그인 버튼 활성화
 function loginEnable () {
     loginBtn.classList.remove("deactive");
     loginBtn.classList.add("active");
     loginBtn.disabled = false;
 }
 
+//로그인 버튼 비활성화
 function loginDisable () {
     loginBtn.classList.remove("active");
     loginBtn.classList.add("deactive");
     loginBtn.disabled = true;
 }
 
+//비밀번호 패턴 체크
 function passCheck(pV) {
 
     if(!pwPattern.test(pV)){
@@ -69,7 +73,7 @@ function passCheck(pV) {
     return true;
 }
 
-
+//이메일 패턴 체크
 function emailCheck(eV){
     const emailPatternCheck = emailPattern.test(eV) && eV.length < 30;
     if(!emailPatternCheck){
@@ -103,22 +107,28 @@ passInput.addEventListener("focusin", (event) => {
     passInput.style.border = "1px solid var(--maincolor)";
 })
 
+//모달 Pop 보이게
 function modalPopAlert (message){
     modal.style.display = "flex";
     popMessage.textContent = message;
 }
 
+//모달 Pop 안보이게
 popCloseBtn.addEventListener("click", (event) => {
     modal.style.display = "none";
 })
 
+//로그인 버튼 누른 후 로그인 검증 로직
 function login (email, pw) {
     if(members[email]){
 
+        //브라우저 로컬스토리지 members가 비어있을 경우 기본 members 데이터 추가
         if(!window.localStorage.members) window.localStorage.members = JSON.stringify(members);
-        members = JSON.parse(window.localStorage.members);
-        const isMember = (members[email].pw === pw);
 
+        //members에 브라우저 로컬스토리지의 'members' 값을 파싱해서 가져옴
+        members = JSON.parse(window.localStorage.members);
+        
+        const isMember = (members[email].pw === pw);
         if(isMember){
             setTimeout(function(){
                 location.href="./items.html"
@@ -129,7 +139,6 @@ function login (email, pw) {
     }
     else modalPopAlert(popMessages.loginError);
 }
-
 loginBtn.addEventListener("click", (event) => {
     
     let email = emailInput.value;

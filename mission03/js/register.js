@@ -3,6 +3,7 @@ import {popMessages} from "./accountCommon.js";
 import {errorBox} from "./accountCommon.js";
 import {handleVisibilityIcon} from "./accountCommon.js";
 
+// members 기본 데이터
 let members = {
     'codeit@codeit.com' : {
         pw: 'codeit101!',
@@ -49,33 +50,37 @@ let passEqualCheckBool = 0;
 let emailCheckBool = 0;
 let nickCheckBool = 0;
 
+//회원가입 버튼 활성화
 function signupEnable () {
     signupBtn.classList.remove("deactive");
     signupBtn.classList.add("active");
     signupBtn.disabled = false;
 }
 
+//회원가입 버튼 비활성화
 function signupDisable () {
     signupBtn.classList.remove("active");
     signupBtn.classList.add("deactive");
     signupBtn.disabled = true;
 }
 
+//회원가입 버튼 활성화를 위한 조건 확인
 function allCheckBool() {
     return passCheckBool && passEqualCheckBool && emailCheckBool && nickCheckBool;
 }
 
-
+//Pop 모달창 활성화
 function modalPopAlert (message){
     modal.style.display = "flex";
     popMessage.textContent = message;
 }
 
+//Pop 모달창 비활성화
 popCloseBtn.addEventListener("click", (event) => {
     modal.style.display = "none";
 })
 
-
+//패스워드 검증 로직
 function passCheck(pV) {
 
     if(!pwPattern.test(pV)){
@@ -110,7 +115,7 @@ function emailCheck(eV){
 }
 
 
-
+// 패스워드 확인 검증
 function passEqualCheck (pV) {
     if(pV !== passInput.value){
         errorBox(errorMessages.passEqualError, passEqualMust,passInputEqual);
@@ -123,7 +128,7 @@ function passEqualCheck (pV) {
     return true;
 }
 
-
+// 닉네임 검증
 function nickCheck (nickname) {
     if(nickname.length >= 8){
         errorBox(errorMessages.nickLengthError, nickMust, nickInput);
@@ -136,7 +141,7 @@ function nickCheck (nickname) {
     return true;
 }
 
-
+//등록된 이메일 검증
 function emailRegisteredCheck (email) {
     
     //회원가입 처음 시도할 시, 로컬 스토리지에 기본으로 members 값 넣어줌
@@ -195,9 +200,10 @@ nickInput.addEventListener("focusin", (event) => {
 
 
 
-
+//회원가입 버튼 누를 시
 signupBtn.addEventListener("click", (event) => {
 
+    //등록되지 않은 이메일이고, 패스워드 확인과 패스워드의 input이 같은지.
     const isRegisterConfirm = !emailRegisteredCheck(emailInput.value) && passInput.value === passInputEqual.value
 
   

@@ -108,6 +108,7 @@
 
     .socials {
         margin-right: 20rem;
+        gap:1.5rem;
     }
 
     .footer {
@@ -202,6 +203,10 @@
         font-size: 1.6rem;
     }
 
+    .links {
+        gap:4rem;
+    }
+
 }
 
 @media all and (min-width:1200px) { 
@@ -210,7 +215,7 @@
     }
 
     .socials {
-        margin-right: 20rem;
+        gap:1.5rem;
     }
 
     .footer {
@@ -321,6 +326,9 @@
         font-size: 1.6rem;
     }
     
+    .links {
+        gap:4rem;
+    }
 
 }
 
@@ -439,13 +447,12 @@
 .links {
     display: flex;
     justify-content: space-between;
-    gap:4rem;
+    
 }
 
 .socials {
     display: flex;
     justify-content: space-between;
-    gap:1.5rem;
 }
 
 
