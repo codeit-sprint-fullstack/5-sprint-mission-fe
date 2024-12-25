@@ -1,43 +1,84 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/login_style.css">
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/login-style.css" />
     <title>Login</title>
-</head>
-<body>
-    <div id="contents_body">
-        <div><a href="/index.html"><img class="logo" src="/img/logo.png" alt="logo"></a></div>
+  </head>
+  <body>
+    <div>
+      <div>
+        <a href="/index.html"
+          ><img class="logo" src="/img/logo.png" alt="logo"
+        /></a>
+      </div>
 
-        <div class="container">
-            <form>
-                <div>
-                    <label for="signup-email">이메일</label>
-                    <input id="signup-email" name="email" placeholder="이메일을 입력해주세요">
-                </div>
-                <div>
-                    <label for="signup-password">비밀번호</label>
-                    <input id="signup-password" name="password" type="password" placeholder="비밀번호를 입력해주세요">
-                </div>
-                <button type="submit">로그인</button>
-            </form>
+      <div class="container">
+        <form id="login" onsubmit="onsubmitFunc(event)">
+          <div>
+            <label class="login-title" for="login-email">이메일</label>
+            <input
+              id="login-email"
+              class="login-form"
+              name="email"
+              placeholder="이메일을 입력해주세요"
+            />
+            <p id="email-empty" class="error-message">이메일을 입력해주세요.</p>
+            <p id="email-wrong" class="error-message">
+              잘못된 이메일 형식입니다.
+            </p>
+          </div>
+
+          <div>
+            <label class="login-title" for="login-password">비밀번호</label>
+            <input
+              id="login-password"
+              class="login-form"
+              name="password"
+              type="password"
+              placeholder="비밀번호를 입력해주세요"
+            />
+            <p id="password-empty" class="error-message">
+              비밀번호를 입력해주세요.
+            </p>
+            <p id="password-short" class="error-message">
+              비밀번호를 8자 이상 입력해주세요.
+            </p>
+          </div>
+          <button id="login-button" class="login-button" type="submit">
+            로그인
+          </button>
+        </form>
+      </div>
+
+      <!--모달 팝업-->
+      <div class="modal">
+        <div class="modal_popup">
+          <p id="modalError">비밀번호가 일치하지 않습니다.</p>
+          <button type="button" class="close_btn">확인</button>
         </div>
-        <div class="container">
-            <div id="simple_login">
-                간편 로그인하기
-                <div>
-                    <a href="https://www.google.com/">
-                        <img class="sns_login" src="/img/google.png"></a>
-    
-                    <a href="https://www.kakaocorp.com/page/">
-                        <img class="sns_login" src="/img/kakaotalk.png"></a>
-                </div>
-            </div>
+      </div>
+      <!--모달 팝업-->
+
+      <div class="container">
+        <div id="simple-login">
+          간편 로그인하기
+          <div>
+            <a href="https://www.google.com/">
+              <img class="sns-login" src="/img/google.png"
+            /></a>
+
+            <a href="https://www.kakaocorp.com/page/">
+              <img class="sns-login" src="/img/kakaotalk.png"
+            /></a>
+          </div>
         </div>
-        <div class="container" id="join">
-            판다마켓이 처음이신가요? <a href="/signup.html">회원가입</a>
-        </div>          
+      </div>
+      <div class="container" id="join">
+        판다마켓이 처음이신가요? <a href="/signup.html">회원가입</a>
+      </div>
     </div>
-</body>
+    <script src="login-js.js"></script>
+  </body>
 </html>
