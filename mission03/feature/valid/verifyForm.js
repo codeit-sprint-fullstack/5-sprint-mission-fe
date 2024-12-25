@@ -1,6 +1,6 @@
 // import
 import { validHandler } from "./handler.js";
-import { activeButton } from "../button/buttonHandlers.js";
+import { activeButton } from "../auth/authButton.js";
 
 // DOM
 const form = document.querySelector("form"); // form 요소
