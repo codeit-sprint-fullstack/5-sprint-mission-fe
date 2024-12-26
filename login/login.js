@@ -105,6 +105,9 @@ const USER_DATA = [
   { email: 'codeit6@codeit.com', password: "codeit606!" },
 ];
 
+const alertBox = document.querySelector(".alert_box");
+const alertButton = document.querySelector(".alrert-btn");
+
 function handleLogin () {
   let dataFound = false;
   for (let i = 0; i < USER_DATA.length; i++) {
@@ -123,8 +126,12 @@ function handleLogin () {
 if (dataFound) {
   window.location.href = "../items/items.html";
 } else {
-  alert("비밀번호가 일치하지 않습니다.")
+  alertBox.style.display = "block";
 }
 }
 
 loginButton.addEventListener("click", handleLogin);
+
+alertButton.addEventListener("click", (e) => {
+  alertBox.style.display = "none";
+});
