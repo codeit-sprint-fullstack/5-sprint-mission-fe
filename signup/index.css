@@ -11,11 +11,16 @@ body {
     width: 100%;
     height: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: absolute;
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
+}
+
+#panda {
+    margin-top: 60px;
+    margin-bottom: 40px;
 }
 
 #panda a{
@@ -24,8 +29,7 @@ body {
 }
 
 #panda img{
-    width: 40vh;
-    max-width: 396px;
+    width: 396px;
 }
 
 input{
@@ -40,45 +44,54 @@ input{
     box-sizing: border-box;
     width: 100%;
     font-family: Pretendard;
-
+    color: #1F2937;
 }
 
 input:focus{
     outline: 1px solid #3692FF;
 }
 
-.em_nick{
-    max-width: 640px;
-    width: 80vw;
-}
 
-.pw{
+.form_box{
     position: relative;
-    max-width: 640px;
-    width: 80vw;
+    width: 640px;
+    margin-bottom: 24px;
 }
 
-.pw > img{
-    width: 24px;
-    position: absolute;
-    width: 24px;
-    right: 15px;
-    top: 72px;
+.input_div{
+    position: relative;
+    display: flex;
+    align-items: center;
 }
+
+.pwd_img{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    border: 0px;
+    background-image: url(img/pw-img-on.png);
+    background-size: contain;
+}
+
+.off{
+    background-image: url(img/pw-img-off.png);
+}
+
+/* .on{
+    background-image: url(img/pw-img-on.png);
+} */
 
 .explain{
-    margin-top: 2.4vh;
-    margin-bottom: 1.6vh;
+    margin-bottom: 12px;
     font-size: 18px;
     font-weight: 700;
     line-height: 26px;
 }
 
 #btn_signup{
-    max-width: 640px;
-    width: 80vw;
-    margin-top: 2.8vh;
-    margin-bottom: 2.8vh;
+    width: 640px;
+    margin-bottom: 24px;
 }
 
 #btn_signup button{
@@ -97,15 +110,11 @@ input:focus{
     text-decoration-skip-ink: none;
 }
 
-#btn_signup button:hover{
-    background: #3692FF;
-}
-
 #simple{
     display: flex;
     border-radius: 8px;
-    width: 80vw;
-    height: 7vh;
+    width: 640px;
+    height: 74px;
     max-width: 640px;
     max-height: 74px;
     background: #E6F2FF;
@@ -160,4 +169,64 @@ input:focus{
 
 #login a{
     color: #3692FF;
+}
+
+.hiden{
+    display: none;
+}
+
+.hiden_text{
+    margin-top: 8px;
+    margin-left: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 17.9px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #F74747;
+}
+
+
+
+@media (max-width: 1199px) {
+    #panda{
+        margin-top: 48px;
+    }
+}
+
+
+
+@media (max-width: 743px) {
+    #content{
+        padding: 0px 16px;
+    }
+
+    #panda{
+        margin: 24px auto;
+    }
+
+    #panda img{
+        width: 198px;
+    }
+    .form_box{
+        max-width: 400px;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .explain{
+        margin-bottom: 8px;
+    }
+
+
+    #btn_signup{
+        max-width: 400px;
+        width: 100%;
+    }
+
+    #simple{
+        max-width: 400px;
+        width: 100%;
+    }
 }

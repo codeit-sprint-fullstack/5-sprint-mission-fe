@@ -12,46 +12,45 @@
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
-    
       gtag('config', 'G-Z2WRG2Q11C');
     </script>
     <title>판다마켓</title>
 </head>
 <body>
     <!-- 로그인 상단 -->
-    <div id="header_top">
+    <header id="header_top">
         <div id="header_top_img">
             <a href="/">
                 <img id="panda_img" src="img/img_panda.png" alt="">  
             </a>
         </div>
         <div id="header_top_btn">
-            <button onclick="location.href='login/login.html'">로그인</button>
+            <a href="login/">로그인</a>
         </div>
-    </div>
+    </header>
     <!-- 상단 이미지 -->
-    <div id="header_bottom">
-        <div id="header_bottom_max">
-            <div id="header_bottom_view">
-                <div id="header_bottom_view_text">
-                    <p class="header_bottom_p">
+    <nav id="nav">
+        <div id="nav_contents">
+            <div id="nav_top">
+                <div id="nav_top_text_box">
+                    <p class="nav_top_text_box_p">
                         일상의 모든 물건을
                     </p>
-                    <p class="header_bottom_p">
+                    <p class="nav_top_text_box_p">
                         거래해 보세요
                     </p>
                 </div>
-                <div id="header_bottom_btn">
-                    <button onclick="location.href='item/items.html'">구경하러 가기</button>
+                <div id="nav_top_text_btn">
+                    <a href="item/">구경하러 가기</a>
                 </div>
             </div>
-            <img id="header_bottom_view_img" src="img/Img_home_top.png" alt="">
+            <img id="nav_bottom_img" src="img/Img_home_top.png" alt="">
         </div>
-    </div>
+    </nav>
     <!-- 중간 머시기 -->
-    <div id="middle_part">
+    <section id="middle_part">
         <!-- 1번째 섹션 -->
-        <section class="middle_part_section">
+        <div class="middle_part_section">
             <div class="middle_part_section_box">
                 <img id="section_1_img" src="img/Img_home_01.png" alt="">
                 <div id="section_1_text">
@@ -68,9 +67,9 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </div>
         <!-- 2번째 섹션 -->
-        <section class="middle_part_section">
+        <div class="middle_part_section">
             <div id="middle_part_section_box_reverse" class="middle_part_section_box">         
                 <img id="section_2_img" src="img/Img_home_02.png" alt="">
                 <div id="section_2_text">
@@ -87,9 +86,9 @@
                     </p>
                 </div>
             </div>
-        </section>
+        </div>
         <!-- 3번째 섹션 -->
-        <section class="middle_part_section">
+        <div class="middle_part_section">
             <div class="middle_part_section_box">
                 <img id="section_3_img" src="img/Img_home_03.png" alt="">
                 <div id="section_3_text">
@@ -106,8 +105,8 @@
                     </p>
                 </div>
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
     <!-- 푸터 -->
     <footer>
         <div id="footer_top">
@@ -129,24 +128,24 @@
                 
                 </div>
                 <div id="footer_faq">
-                    <a href="privacy/privacy.html">
+                    <a href="privacy/">
                         <p>Privacy Policy</p>
                     </a>
-                    <a href="faq/faq.html">
+                    <a href="faq/">
                         <p>FAQ</p>
                     </a>
                 </div>
                 <div id="footer_ad">
-                    <a href="https://www.facebook.com/">
+                    <a target="_blank" href="https://www.facebook.com/">
                         <address id="facebook"></address>
                     </a>
-                    <a href="https://x.com/">
+                    <a target="_blank" href="https://x.com/">
                         <address id="twitter"></address>
                     </a>
-                    <a href="https://www.youtube.com/">
+                    <a target="_blank" href="https://www.youtube.com/">
                         <address id="yotube"></address>
                     </a>
-                    <a href="https://www.instagram.com/">
+                    <a target="_blank" href="https://www.instagram.com/">
                         <address id="instagram"></address>
                     </a>
                 </div>

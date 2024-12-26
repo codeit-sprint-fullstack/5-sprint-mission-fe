@@ -11,16 +11,25 @@ body {
     width: 100%;
     height: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     position: absolute;
     padding-left: 10px;
     padding-right: 10px;
     box-sizing: border-box;
 }
 
+#panda {
+    margin-top: 60px;
+    margin-bottom: 51px;
+}
+
+#panda a{
+    height: 100%;
+    display: inline-block;
+}
+
 #panda img{
-    width: 40vw;
-    max-width: 396px;
+    width: 396px;
 }
 
 input{
@@ -35,48 +44,57 @@ input{
     box-sizing: border-box;
     width: 100%;
     font-family: Pretendard;
-
+    color: #1F2937;
 }
 
 input:focus{
     outline: 1px solid #3692FF;
 }
 
-#em{
-    max-width: 640px;
-    width: 80vw;
-}
 
-#pw{
+.form_box{
     position: relative;
-    max-width: 640px;
-    width: 80vw;
+    width: 640px;
+    margin-bottom: 24px;
 }
 
-#pw > img{
-    width: 24px;
-    position: absolute;
-    width: 24px;
-    right: 15px;
-    top: 83px;
+.input_div{
+    position: relative;
+    display: flex;
+    align-items: center;
 }
+
+.pwd_img{
+    width: 24px;
+    height: 24px;
+    position: absolute;
+    right: 16px;
+    border: 0px;
+    background-image: url(img/pw-img-on.png);
+    background-size: contain;
+}
+
+.off{
+    background-image: url(img/pw-img-off.png);
+}
+
+/* .on{
+    background-image: url(img/pw-img-on.png);
+} */
 
 .explain{
-    margin-top: 24px;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     font-size: 18px;
     font-weight: 700;
     line-height: 26px;
 }
 
-#btn_login{
-    max-width: 640px;
-    width: 80vw;
-    margin-top: 28px;
-    margin-bottom: 28px;
+#btn_signup{
+    width: 640px;
+    margin-bottom: 24px;
 }
 
-#btn_login button{
+#btn_signup button{
     width: 100%;
     height: 50px;
     border-radius: 40px;
@@ -92,17 +110,14 @@ input:focus{
     text-decoration-skip-ink: none;
 }
 
-#btn_login button:hover{
-    background: #3692FF;
-}
-
 #simple{
     display: flex;
     border-radius: 8px;
+    width: 640px;
     height: 74px;
-    background: #E6F2FF;
     max-width: 640px;
-    width: 80vw;
+    max-height: 74px;
+    background: #E6F2FF;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
@@ -142,16 +157,77 @@ input:focus{
     margin-right: 23px;
 }
 
-#sign{
+#login{
     margin-top: 24px;
 }
 
-#sign p{
+#login p{
     font-size: 14px;
     font-weight: 500;
     line-height: 24px;
 }
 
-#sign a{
+#login a{
     color: #3692FF;
+}
+
+.hiden{
+    display: none;
+}
+
+.hiden_text{
+    margin-top: 8px;
+    margin-left: 16px;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 17.9px;
+    text-align: left;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+    color: #F74747;
+}
+
+
+
+@media (max-width: 1199px) {
+    #panda{
+        margin-top: 48px;
+        margin-bottom: 40px;
+    }
+}
+
+
+
+@media (max-width: 743px) {
+    #content{
+        padding: 0px 16px;
+    }
+
+    #panda{
+        margin: 24px auto;
+    }
+
+    #panda img{
+        width: 198px;
+    }
+    .form_box{
+        max-width: 400px;
+        width: 100%;
+        margin-bottom: 16px;
+    }
+
+    .explain{
+        margin-bottom: 8px;
+    }
+
+
+    #btn_signup{
+        max-width: 400px;
+        width: 100%;
+    }
+
+    #simple{
+        max-width: 400px;
+        width: 100%;
+    }
 }
