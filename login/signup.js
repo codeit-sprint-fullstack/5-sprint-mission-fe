@@ -108,6 +108,9 @@ const USER_DATA = [
   { email: 'codeit6@codeit.com', password: "codeit606!" },
 ];
 
+const alertBox = document.querySelector(".alert_box");
+const alertButton = document.querySelector(".alrert-btn");
+
 function handleJoin () {
   let dataFound = false;
   for(let i = 0; i < USER_DATA.length; i++) {
@@ -119,7 +122,7 @@ function handleJoin () {
     }
   }
   if (dataFound) {
-    alert("사용 중인 이메일입니다.");
+    alertBox.style.display = "block";
   } else {
     alert("회원가입이 성공적으로 완료되었습니다.");
     window.location.href = "./login.html";
@@ -127,3 +130,7 @@ function handleJoin () {
 }
 
 joinButton.addEventListener("click", handleJoin);
+
+alertButton.addEventListener("click", (e) => {
+  alertBox.style.display = "none";
+});
