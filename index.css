@@ -34,6 +34,8 @@ a{
 }
 
 #panda_img{
+    background-image: url(img/img_panda.png);
+    background-size: contain;
     width: 153px;
     height: 51px;
 }
@@ -262,6 +264,7 @@ footer{
     font-weight: 700;
     line-height: 56px;
     text-align: left;
+    color: #374151;
     text-underline-position: from-font;
     text-decoration-skip-ink: none;
 }
@@ -350,6 +353,10 @@ footer{
 
 @media (max-width: 1199px) {
 
+    #nav{
+        height: 771px;
+    }
+
     #header_top_img{
         margin-left: 24px;
     }
@@ -363,16 +370,23 @@ footer{
     }
 
     #nav_contents{
-        height: 771px;
+        height: 100%;
         align-items: center;
         justify-content: space-between;
         flex-direction: column;
     }
 
     #nav_top{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
         margin-top: 84px;
         margin-right: 0px;
         margin-bottom: 0px;
+    }
+
+    #nav_top_text_box{
+        display: flex;
     }
 
     #nav_top_text_box p:nth-child(1){
@@ -488,5 +502,88 @@ footer{
 @media (max-width: 743px) {
     body{
         font-size: 16px;
+    }
+
+    #header_top_img{
+        margin-left: 16px;
+    }
+
+    #header_top_btn{
+        margin-right: 16px;
+    }
+
+    #nav{
+        height: 540px;
+    }
+
+    #nav_top{
+        margin-top: 48px;
+    }
+
+    #nav_contents{
+        height: 540px;
+    }
+
+    #nav_top_text_box{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    #nav_bottom_img{
+        width: 100%;
+    }
+
+    #middle_part{
+        margin-top: 52px;
+        height: auto;
+    }
+
+    .middle_part_section img{
+        width: 100%;
+    }
+
+    .middle_part_section{
+        padding: 0 15px;
+        margin-bottom: 40px;
+        height: auto;
+    }
+
+    footer{
+        margin-top: 83px;
+        height: auto;
+    }
+
+    #footer_top{
+        height: 540px;
+    }
+
+    #footer_top_max{
+        height: 540px;
+        justify-content: space-between;
+    }
+
+    #footer_top_text{
+        margin-top: 121px;
+    }
+
+    #footer_top_img{
+        width: 100%;
+    }
+
+    #footer_bottom_contents{
+        padding: 32px 18px;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    #footer_ad{
+        margin: 0px;
+    }
+    
+    #footer_copyright{
+        order: 3;
+        margin-top: 25px;
+        margin-left: 0px;
     }
 }
