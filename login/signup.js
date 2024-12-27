@@ -134,3 +134,30 @@ joinButton.addEventListener("click", handleJoin);
 alertButton.addEventListener("click", (e) => {
   alertBox.style.display = "none";
 });
+
+////비밀번호 토글창
+const togglePwd1 = document.querySelector("#toggle-password1");
+const iconImage1 = togglePwd1.querySelector("img");
+
+togglePwd1.addEventListener("click", () => {
+  if (pwdBox.type === "password") {
+    pwdBox.type = "text";
+    iconImage1.src = "btn_visibility_on_24px.png";
+  } else {
+    pwdBox.type = "password";
+    iconImage1.src = "btn_visibility_off_24px.png";
+  }
+})
+
+const togglePwd2 = document.querySelector("#toggle-password2");
+const iconImage2 = togglePwd2.querySelector("img");
+
+togglePwd2.addEventListener("click", () => {
+  if (pwdCheckBox.type === "password") {
+    pwdCheckBox.type = "text";
+    iconImage2.src = "btn_visibility_on_24px.png";
+  } else {
+    pwdCheckBox.type = "password";
+    iconImage2.src = "btn_visibility_off_24px.png";
+  }
+})

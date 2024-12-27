@@ -107,6 +107,7 @@ const USER_DATA = [
 
 const alertBox = document.querySelector(".alert_box");
 const alertButton = document.querySelector(".alrert-btn");
+const overlay = document.querySelector(".overlay");
 
 function handleLogin () {
   let dataFound = false;
@@ -127,6 +128,7 @@ if (dataFound) {
   window.location.href = "../items/items.html";
 } else {
   alertBox.style.display = "block";
+  overlay.style.display = "block";
 }
 }
 
@@ -134,6 +136,7 @@ loginButton.addEventListener("click", handleLogin);
 
 alertButton.addEventListener("click", (e) => {
   alertBox.style.display = "none";
+  overlay.style.display = "none";
 });
 
 ////비밀번호 토글창

@@ -77,6 +77,7 @@ input {
     gap: 10px;
     border-radius: 12px;
     padding-left: 15px;
+    box-sizing: border-box;
 }
 
 input::placeholder {
@@ -97,20 +98,29 @@ input::placeholder {
     position: relative;
 }
 
-.눈알1 {
-    position: absolute;
-    right: 16px;
-    top:10%;
-}
-
 .passcheck_box {
-    position: relative;
+  position: relative;
 }
 
-.눈알2 {
+/* .눈알1 {
     position: absolute;
     right: 16px;
     top:10%;
+} */
+
+/* .눈알2 {
+    position: absolute;
+    right: 16px;
+    top:10%;
+} */
+
+.icon-eye {
+  position: absolute;
+  top: 10%;
+  right: 24px;
+  width: 24px; 
+  height: 24px;
+  cursor: pointer;
 }
 
 .hide {
