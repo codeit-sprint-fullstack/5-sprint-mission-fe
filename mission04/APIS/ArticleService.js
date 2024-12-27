@@ -41,6 +41,7 @@ export const getArticle = async (id) => {
 };
 
 export const createArticle = async (params) => {
+  // 게시글 등록
   const url = baseUrl;
   return fetchHandler(url, "POST", params);
 };
