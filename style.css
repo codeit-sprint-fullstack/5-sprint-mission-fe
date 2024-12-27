@@ -213,7 +213,6 @@ label{
 input{
   max-width: 640px;
   height: 56px;
-  margin-bottom: 24px;
   border-radius: 12px;
   border: none;
   background-color: #f3f4f6;
@@ -256,8 +255,7 @@ input::placeholder{
     background-color: #9ca3af;
     border: none;
     border-radius: 40px;
-    margin-bottom: 24px;
-  
+    margin:24px 0px;
     color: #f3f4f6;
     font-size: 20px;
   }
@@ -325,3 +323,25 @@ input::placeholder{
 
     
     a {color : #3692ff; margin-left: 4px;}
+
+
+
+
+  /* jS */
+  .Error {
+    border:1px solid red;
+  }
+
+  .ErrorMessage {
+    color: red;
+    font-size: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    padding : 8px 24px;
+  }
+
+
+  .blueLoginButton {
+    background-color:#3692FF
+  }
