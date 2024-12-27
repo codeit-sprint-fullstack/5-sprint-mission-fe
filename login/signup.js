@@ -5,7 +5,7 @@ const pwdCheckBox = document.querySelector("#passwordcheck");
 const errorMsgEmail_N = document.querySelector("#error-message-email-none");
 const errorMsgPwd_N = document.querySelector("#error-message-pwd-none");
 
-////focus out일 때 테두리 및 메세지지
+////focus out일 때 테두리 및 메세지
 emailBox.addEventListener("focusout", (event)=> {
   if(!event.target.value) {
     event.target.style.border = "1px solid red";
@@ -110,6 +110,7 @@ const USER_DATA = [
 
 const alertBox = document.querySelector(".alert_box");
 const alertButton = document.querySelector(".alrert-btn");
+const overlay = document.querySelector(".overlay");
 
 function handleJoin () {
   let dataFound = false;
@@ -123,6 +124,7 @@ function handleJoin () {
   }
   if (dataFound) {
     alertBox.style.display = "block";
+    overlay.style.display = "block";
   } else {
     alert("회원가입이 성공적으로 완료되었습니다.");
     window.location.href = "./login.html";
@@ -133,6 +135,7 @@ joinButton.addEventListener("click", handleJoin);
 
 alertButton.addEventListener("click", (e) => {
   alertBox.style.display = "none";
+  overlay.style.display = "none";
 });
 
 ////비밀번호 토글창

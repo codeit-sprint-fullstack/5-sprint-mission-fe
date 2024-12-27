@@ -170,9 +170,9 @@ input::placeholder {
     cursor: pointer;
 }
 
-.join-btn:hover {
+/* .join-btn:hover {
     background-color: #3692FF ;
-}
+} */
 
 /* 간편 로그인하기 */
 
@@ -284,4 +284,15 @@ input:focus {
   border-radius: 8px;
   border-style: none;
   cursor: pointer;
+}
+
+.overlay {
+  display: none; /* 기본적으로 숨기기 */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* 반투명 어두운 배경 */
+  z-index: 998;
 }
