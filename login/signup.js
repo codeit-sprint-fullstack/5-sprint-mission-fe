@@ -86,6 +86,8 @@ nickBox.addEventListener('input',checkInput);
 pwdBox.addEventListener('input',checkInput);
 pwdCheckBox.addEventListener('input',checkInput);
 
+checkInput();
+
 //활성화버튼 클릭 시 페이지 이동
 function siteinLogin() {
   window.location.href ="./login.html";

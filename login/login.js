@@ -61,7 +61,7 @@ pwdBox.addEventListener("input", (e) => {
 
 ////로그인버튼 활성화 비활성화
 const loginButton = document.getElementById("login-btn")
-//Q.위에서 유효성 검사한 값에 알맞지 않을 경우 비활성화하는 방법 질문하기
+
 let loginButtonCheck = true 
 
 function checkLabel() {
