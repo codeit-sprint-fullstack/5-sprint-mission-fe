@@ -32,23 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailValidate = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
   const pwValidate = /^(?=.*[a-zA-Z])(?=.*[0-8])(?=.*[!@#$%^*+=-]).{6,16}$/;
 
-  window.addEventListener("resize", (e) => {
-    if (e.target.innerWidth < 1200) {
-      const main = document.querySelector("main");
-      main.style.padding = "48px 52px 48px 52px";
-      main.style.width = "calc(100% - 104px)";
-      main.style.margin = "0 auto";
-      main.style.height = "calc(100vh - 96px)";
-    }
-    if (e.target.innerWidth < 744) {
-      const main = document.querySelector("main");
-      main.style.padding = "24px 15px 24px 15px";
-      main.style.width = "calc(100% - 30px)";
-      main.style.margin = "0 auto";
-      main.style.height = "calc(100vh - 48px)";
-    }
-  });
-
   const router = (button, path) => {
     button.addEventListener("click", () => {
       location.href = path;

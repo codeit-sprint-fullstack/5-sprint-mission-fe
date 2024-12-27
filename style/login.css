@@ -17,7 +17,22 @@ main > img {
   min-width: 198px;
   cursor: pointer;
 }
-
+@media (max-width: 1200px) {
+  main {
+    padding: 48px 52px;
+    width: calc(100% - 104px);
+    margin: 0 auto;
+    height: calc(100vh - 96px);
+  }
+}
+@media (max-width: 744px) {
+  main {
+    padding: 24px 15px;
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    height: calc(100vh - 48px);
+  }
+}
 .login-box {
   display: flex;
   flex-direction: column;
