@@ -1,5 +1,5 @@
 const alertValidBody = (fields) => {
-  const message = [`올바른 body 구조를 가져야 합니다.\n`, `{\n`];
+  const message = [`필수 필드가 누락되었습니다: ${field}\n`, `올바른 body 구조를 가져야 합니다.\n`, `{\n`];
   for (const [field, type] of fields) message.push(`  ${field}: ${type}\n`);
   message.push(`}\n`);
   throw new Error(message.join(""));
@@ -14,7 +14,6 @@ export const verifyParams = (fields, params) => {
   // 1. 필수 필드가 모두 있는지 확인
   for (const [field, _] of fields) {
     if (!isValidField(field, params)) {
-      console.error(`필수 필드가 누락되었습니다: ${field}`);
       alertValidBody(fields);
     }
   }

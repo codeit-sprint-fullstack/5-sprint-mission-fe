@@ -14,7 +14,6 @@ export const fetchHandler = async (url, method, params = null) => {
 
   if (params) {
     verifyParams(fields, params); // params 에러 처리
-    console.log("verifyParams");
     if (method !== "GET" && method !== "DELETE") {
       options.body = JSON.stringify(params); // GET, DELETE 요청에는 body를 포함하지 않음
     }
@@ -53,7 +52,6 @@ export const getList = (baseUrl, params) => {
     initParams(key, params);
     url.searchParams.append(key, params[key]);
   }
-  console.log(url.toString());
   return fetchHandler(url, "GET", params);
 };
 
