@@ -351,4 +351,7 @@ header {
 
 @media only screen and (min-width : 1200px) {
   /*PC 용*/ 
+  #head-box {
+    margin: 0px 400px;
+  }
 }
