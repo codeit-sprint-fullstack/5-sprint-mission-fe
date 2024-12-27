@@ -37,10 +37,14 @@ emailBox.addEventListener("focusout", (event)=> {
   emailBox.addEventListener("input", (e) => {
     if (!e.target.value.length) {
       errorMsgEmail_T.style.display = "none";
+      emailBox.style.border = "none";
       return;
     }
     if (emailcheck(e.target.value)) errorMsgEmail_T.style.display = "none";
-    else errorMsgEmail_T.style.display = "block";
+    else {
+      errorMsgEmail_T.style.display = "block";
+      emailBox.style.border = "1px solid red";
+    }
     return;
   })
 
@@ -56,9 +60,36 @@ emailBox.addEventListener("focusout", (event)=> {
     errorMsgPwd_T.style.display = "none";
     return;
   }
-  if (pwdcheck(e.target.value)) errorMsgPwd_T.style.display = "none";
-  else errorMsgPwd_T.style.display = "block";
-  })
+
+  if (pwdBox.value.length >= 8 || pwdcheck(pwdBox.value)) {
+    errorMsgPwd_T.style.display = "none";
+  } else {
+    errorMsgPwd_T.style.display = "block";
+    pwdBox.style.border = "1px solid red";
+  }
+});
+  // if (pwdcheck(e.target.value)) {
+  //   errorMsgPwd_T.style.display = "none";
+  // }
+  // else {
+  //   errorMsgPwd_T.style.display = "block";
+  //   pwdBox.style.border = "1px solid red";
+  // }
+  // })
+
+  ///비밀번호 확인인풋 유효성 검사
+const errorPwdCheck =document.querySelector("#error-message-pwd-check");
+
+pwdCheckBox.addEventListener("input", (e) => {
+  if (pwdBox.value === pwdCheckBox.value) {
+    errorPwdCheck.style.display = "none";
+    pwdCheckBox.style.border = "none";
+    return;
+  } else {
+    errorPwdCheck.style.display = "block";
+    pwdCheckBox.style.border = "1px solid red";
+  }
+})
 
 ////회원가입버튼 활성화 비활성화
 const joinButton = document.getElementById("join-btn")
