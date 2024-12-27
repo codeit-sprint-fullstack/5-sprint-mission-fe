@@ -13,14 +13,15 @@ export const getArticleList = (page, pageSize, keyword) => {
 
 
 export const getArticle = (id) => {
-    return axios 
-        .get('${API_BASE_URL}/${id}')
-        .then(response => response.data)
-        .catch(error => console.error("Error fetching article:", error));
+    return axios
+    .get(`${API_BASE_URL}/${id}`)
+    .then(response => response.data)
+    .catch(error => console.error("Error fetching article:", error));
+
 };
 
 
-export const creatArticle = (title, content, image) => {
+export const createArticle = (title, content, image) => {
     return axios
         .post(API_BASE_URL, {title, content, image})
         .then(response => response.data)

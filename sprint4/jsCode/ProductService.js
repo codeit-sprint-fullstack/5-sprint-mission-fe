@@ -24,25 +24,12 @@ export const getProduct = async (id) => {
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export const createProduct = async (name, description, price, tags, images) => {
     try {
         const response = await axios.post(API_BASE_URL, {
             name, description, price, tags, images
         });
-        return response.datal
+        return response.data;
     } catch (error) {
         console.error("Error creating product:", error);
     }
