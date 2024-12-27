@@ -1,0 +1,440 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Pretendard;
+  margin: 0;
+  font-size: 10px;
+}
+
+.topPanda {
+  overflow: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.top {
+  background-color: #FFFFFF;
+  height: 70px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  /* font-size: 1.6em; */
+}
+
+.tops {
+  max-width: 1520px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 200px;
+}
+
+.top .tops {
+  width: 100%;
+  margin: auto;
+}
+
+
+.Pandalogo {
+  cursor: pointer;
+}
+
+.login {
+  padding: 0px;
+  font-family: Pretendard;
+  border:none;
+  width: 128px;
+  height: 48px;
+  border-radius: 8px;
+  color: #F3F4F6;
+  background-color:#3692FF;
+  font-size: 1.6em;
+  cursor: pointer;
+}
+
+/* .section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+} */
+
+.banner {
+  height: 540px;
+  display: flex;
+  background-color: #CFE5FF;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+
+
+.banner-container {
+  max-height: 340px;
+  display: flex;
+  justify-content: center;
+  gap: 7px;
+}
+
+.banner .banner-container {
+  align-items: center;
+  width: 100%;
+}
+
+.watch-comment1-container {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  padding-bottom: 60px;
+}
+
+.watch {
+  font-family: Pretendard;
+  border:none;
+  width: 357px;
+  height: 56px;
+  border-radius: 40px;
+  color: #F3F4F6;
+  background-color:#3692FF;
+  font-size: 2em;
+  cursor: pointer;
+  gap: 10px;
+}
+
+.comment1 {
+  max-width: 100%;
+  line-height: 1.2;
+  font-size: calc(1.5vw + 1em);
+  color: #374151;
+  margin: 0px;
+  line-height: 56px;
+}
+
+
+
+.popular {
+  height: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.popularBackground {
+  max-width: 988px;
+  max-height: 444px;
+  width: 100%;
+  /* height: 100%; */
+  gap: 64px;
+  background-color: #FCFCFC;
+  display: flex;
+}
+
+.comment2 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  top: 103px;
+  max-width: 335px;
+  width: 100%;
+}
+
+p {
+  color: #3692FF;
+  font-size: 18px;
+  line-height: 26px;
+  margin: 0px;
+}
+
+.commentOne {
+  color: #374151;
+  font-size: 40px;
+  line-height: 56px;
+  margin: 0px;
+}
+
+.commentTwo {
+  color: #374151;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0px;
+  position: relative;
+  top: 24px;
+}
+
+.buywanted {
+  max-height: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.buywantedBackground {
+  display: flex;
+  max-width: 988px;
+  height: 444px;
+  gap: 64px;
+  background-color: #FCFCFC;
+  justify-content: flex-end;
+}
+
+.comment3 {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  top: 103px;
+  align-items: end;
+  max-width: 335px;
+  width: 100%;
+}
+
+.comment3One {
+  color: #374151;
+  font-size: 40px;
+  line-height: 56px;
+  margin: 0px;
+  text-align: right;
+}
+
+.comment3Two {
+  color: #374151;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 32px;
+  margin: 0px;
+  position: relative;
+  top: 24px;
+  text-align: right;
+}
+
+.sellwanted {
+  height: 720px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.bottom-banner-container {
+  display: flex;
+  gap: 69px;
+  align-items: center;
+  max-width: 1110px;
+}
+
+.banner .bottom-banner-container {
+  align-items: center;
+  width: 100%;
+}
+
+.CommentBottom {
+  line-height: 56px;
+  font-size: 40px;
+  color: #374151;
+  margin: 0px;
+  margin-bottom: 60px;
+}
+
+
+.footerstyle {
+  background-color: #111827;
+  height: 160px;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19.09px;
+  /* max-width: 1920px; */
+}
+
+.footerstyle .footer-navigation {
+  max-width: 1920px;
+  padding: 0 200px;
+  margin: auto;
+}
+
+.footer-navigation {
+  color: #E5E7EB;
+  list-style-type: none;
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  justify-content: space-between;
+  position: relative;
+  top: 32px;
+}
+
+.sourceYear {
+  color: #9CA3AF;
+  /* margin-left: 200px; */
+}
+
+a {
+  color: #E5E7EB;
+  text-decoration: none;
+}
+
+.source-center {
+  display: flex;
+  gap: 30px;
+}
+
+.source-icon {
+  display: flex;
+  /* margin-right: 200px; */
+  gap: 12px;
+}
+
+/* .section {
+  gap: 10px;
+} */
+
+
+@media screen and (max-width: 743px) {
+  .tops {
+    padding: 0 20px;
+    justify-content: center;
+    gap: 50px;
+  }
+
+  .login {
+    width: 100px;
+    height: 40px;
+    /* font-size: 1.2em; */
+  }
+
+  .banner {
+    height: auto;
+  }
+
+  .banner-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .comment1 {
+    font-size: 2em;
+    line-height: 1.5;
+    text-align: center;
+  }
+
+  .watch {
+    font-size: 1.2em;
+    width: auto;
+    padding: 10px 20px;
+  }
+
+  .popular, .buywanted, .sellwanted {
+    /* height: auto; */
+    padding: 20px;
+  }
+
+  .commentOne, .comment3One {
+    font-size: 1.8em;
+        line-height: 1.5;
+        text-align: center;
+  }
+  .commentTwo, .comment3Two {
+    font-size: 1.2em;
+        line-height: 1.5;
+        text-align: center;
+  }
+
+  .popularBackground, .buywantedBackground {
+    gap: 20px;
+    height: auto;
+  }
+
+  .comment2, .comment3 {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    top: 0;
+  }
+
+  .bottom-banner-container {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .footerstyle {
+    height: auto;
+    padding: 20px;
+  }
+
+  .footer-navigation {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+  }
+
+  img {
+    max-width: 60%;
+  }
+}
+
+/* 중간 화면 (768px ~ 1200px) */
+@media screen and (min-width: 744px) and (max-width: 1200px) {
+  .tops {
+    padding: 0 200px;
+  }
+
+  .login {
+    width: 110px;
+    height: 45px;
+    font-size: 1.4em;
+  }
+
+  .comment2, .comment3 {
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    top: 0;
+  }
+
+  .comment1 {
+    font-size: 3em;
+  }
+
+  .watch {
+    font-size: 1.5em;
+  }
+
+  .popularBackground, .buywantedBackground {
+    gap: 40px;
+  }
+
+  .footer-navigation {
+    padding: 0 50px;
+  }
+
+  img {
+    max-width: 80%;
+  }
+
+  .commentOne, .comment3One {
+    font-size: 3.5em;
+        line-height: 1.5;
+        text-align: center;
+  }
+  .commentTwo, .comment3Two {
+    font-size: 2.5em;
+        line-height: 1.5;
+        text-align: center;
+  }
+
+
+  .banner-container {
+    display: flex;
+  }
+}
