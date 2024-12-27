@@ -117,7 +117,7 @@ input::placeholder {
 .icon-eye {
   position: absolute;
   top: 10%;
-  right: 10%;
+  right: 5%;
   width: 24px; 
   height: 24px;
   cursor: pointer;
@@ -236,6 +236,7 @@ input:focus {
    line-height: 16.71px;
 }
 
+/*반응형 디자인*/
 @media (max-width:743px){
   /*모바일 용 스타일 */
   
@@ -244,8 +245,19 @@ input:focus {
     max-width: 400px;
     margin: 0px 16px;
   }
+
+  .icon-eye {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 24px; 
+    height: 24px;
+    cursor: pointer;
+  }
 } 
 
+
+/*모달창 디자인*/
 .alert_box {
   background-color: #ffffff;
   display: none; 

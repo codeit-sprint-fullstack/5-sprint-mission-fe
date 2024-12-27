@@ -1,8 +1,8 @@
 @import "reset.css";
 
- html,body {
-  /* margin: 0;
-  padding: 0; */
+/* html,body {
+  margin: 0;
+  padding: 0;
   width: 100%;
 }
   /* overflow-x: hidden; */
@@ -351,7 +351,4 @@ header {
 
 @media only screen and (min-width : 1200px) {
   /*PC 용*/ 
-  #head-box {
-    margin: 0px 400px;
-  }
 }

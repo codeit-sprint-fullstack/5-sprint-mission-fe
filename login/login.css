@@ -102,7 +102,7 @@ input::placeholder {
 .icon-eye {
   position: absolute;
   top: 10%;
-  right: 10%;
+  right: 5%;
   width: 24px; 
   height: 24px;
   cursor: pointer;
@@ -212,6 +212,15 @@ input:focus {
     width: 100%;
     max-width: 400px;
     margin: 0px 16px;
+  }
+
+  .icon-eye {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    width: 24px; 
+    height: 24px;
+    cursor: pointer;
   }
 } 
 
