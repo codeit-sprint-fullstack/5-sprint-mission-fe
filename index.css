@@ -1,8 +1,8 @@
 @import "reset.css";
 
-/* html,body {
-  margin: 0;
-  padding: 0;
+ html,body {
+  /* margin: 0;
+  padding: 0; */
   width: 100%;
 }
   /* overflow-x: hidden; */
@@ -296,6 +296,7 @@ header {
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
+  gap: 30px;
   /* padding: 0px 200px; */
 
 }
@@ -312,6 +313,17 @@ header {
   gap: 30px;
   text-decoration: none;
   color:#E5E7EB;
+}
+
+.ppfaq, .sns-item {
+  display: flex; /* 요소들을 한 줄로 배치 */
+  flex-wrap: nowrap; /* 요소들이 한 줄에 유지되도록 설정 */
+  justify-content: space-between; /* 요소들 사이에 일정한 간격을 설정 */
+  align-items: center; /* 요소들을 세로로 가운데 정렬 */
+}
+
+.ppfaq {
+  gap: 30px;
 }
 
 /* .sns-item {
@@ -339,4 +351,7 @@ header {
 
 @media only screen and (min-width : 1200px) {
   /*PC 용*/ 
+  #head-box {
+    margin: 0px 400px;
+  }
 }
