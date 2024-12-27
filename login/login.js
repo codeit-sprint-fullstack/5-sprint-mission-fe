@@ -55,9 +55,17 @@ pwdBox.addEventListener("input", (e) => {
     errorMsgPwd_T.style.display = "none";
     return;
   }
-  if (pwdcheck(e.target.value)) errorMsgPwd_T.style.display = "none";
-  else errorMsgPwd_T.style.display = "block";
+  // if (pwdcheck(e.target.value)) errorMsgPwd_T.style.display = "none";
+  // else errorMsgPwd_T.style.display = "block";
+  if (pwdBox.value.length >= 8 || pwdcheck(pwdBox.value)) {
+    errorMsgPwd_T.style.display = "none";
+  } else {
+    errorMsgPwd_T.style.display = "block";
+    pwdBox.style.border = "1px solid red";
+  }
 })
+
+
 
 ////로그인버튼 활성화 비활성화
 const loginButton = document.getElementById("login-btn")
