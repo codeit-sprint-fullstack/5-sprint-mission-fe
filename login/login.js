@@ -135,3 +135,17 @@ loginButton.addEventListener("click", handleLogin);
 alertButton.addEventListener("click", (e) => {
   alertBox.style.display = "none";
 });
+
+////비밀번호 토글창
+const togglePwd = document.querySelector("#toggle-password");
+const iconImage = togglePwd.querySelector("img");
+//console.log("아이콘이미지2확인",iconImage);
+togglePwd.addEventListener("click", () => {
+  if (pwdBox.type === "password") {
+    pwdBox.type = "text";
+    iconImage.src = "btn_visibility_on_24px.png";
+  } else {
+    pwdBox.type = "password";
+    iconImage.src = "btn_visibility_off_24px.png";
+  }
+})

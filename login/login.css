@@ -92,10 +92,19 @@ input::placeholder {
     position: relative;
 }
 
-.눈알 {
+/* .눈알 {
     position: absolute;
     right: 16px;
     top:10%;
+} */
+
+.icon-eye {
+  position: absolute;
+  top: 10%;
+  right: 24px;
+  width: 24px; 
+  height: 24px;
+  cursor: pointer;
 }
 
 .hide {
