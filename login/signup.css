@@ -117,11 +117,12 @@ input::placeholder {
 .icon-eye {
   position: absolute;
   top: 10%;
-  right: 24px;
+  right: 10%;
   width: 24px; 
   height: 24px;
   cursor: pointer;
 }
+
 
 .hide {
   color:#F74747;
