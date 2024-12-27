@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>판다마켓</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="icon" href="../img/판다 얼굴.png" />
+</head>
+    <title>Document</title>
+</head>
+<body>
+    <div class="login" id="modal" class="modal" >
+        <div class="loginbox">
+            <div class="loginlogo"><a href="../index.html"><img src="../img/loginpandalogo.png"></a></div>
+                <div class="email_input">
+                    <label class="email">이메일</label>
+                    <div class="input-container">
+                        <input type="email" id="emailInput" placeholder="이메일을 입력해주세요">
+                    </div>
+                </div>
+                <div class="passwd_input">
+                    <label class="password">비밀번호</label>
+                    <div class="input-container">
+                        <input type="password" id="passwordInput" placeholder="비밀번호를 입력해주세요">
+                        <img src="../img/secret.png" id="togglePassword" alt="비밀번호 보기">
+                    </div>
+                </div>
+                <div id="loginButton" class="login_text">로그인
+                </div>
+                
+                <div class="easy_login">
+                    <div class="easy_box">
+                        <div class="do_easy">
+                            간편 로그인하기
+                        </div>
+                        <div class="img">
+                            <a href="https://www.google.com/"><img src="../img/goggle.png"></a><a href="https://www.kakao.com/page/"><img src="../img/kakao.png"></a>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="join_panda">
+                    판다마켓이 처음이신가요?&nbsp;&nbsp;<a href="./signup/signup.html">회원가입</a>
+                </div>
+            </div> 
+        </div>
+    </div>
+    <div id="messageModal" class="modal">
+        <div class="modal-content">
+            <p id="modalMessage">비밀번호가 일치하지 않습니다.</p>
+            <button id="confirmButton" class="confirm-btn">확인</button>
+        </div>
+    </div>
+<script src="../jsCode/login.js"></script>
+</body>
+
+</html>
