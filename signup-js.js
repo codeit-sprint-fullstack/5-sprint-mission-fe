@@ -141,7 +141,7 @@ function onsubmitFunc(event) {
     }
   });
 
-  //비밀번호와 비밀번호 확인이 일치, 불일치 관련 모달 팝업을 구현하지 못하였습니다.
+  //비밀번호와 비밀번호 확인이 일치, 불일치 관련 함수가 제대로 작동하지 않는 듯 합니다.
 
   if (found) {
     window.location.href = "/login.html";
@@ -171,4 +171,4 @@ modalClose.addEventListener("click", function () {
   modal.style.display = "none";
 });
 
-//모달 팝업이 이메일, 비밀번호 에러 모두 제대로 작동하지 않고 있는데 어디서 코드가 잘못된 것인지 파악하지 못하였습니다.
+//모달 팝업이 제대로 작동하지 않고 있는데 어디서 코드가 잘못된 것인지 파악하지 못하였습니다.
