@@ -1,4 +1,4 @@
-const emailInput = document.querySelector("#login-email");
+const emailInput = document.querySelector("#signup-email");
 
 emailInput.addEventListener("blur", () => {
   const value = emailInput.value;
@@ -34,14 +34,15 @@ function validateEmail(email) {
   return true;
 }
 
-const passwordInput = document.querySelector("#login-password");
+const passwordInput = document.querySelector("#signup-password");
 
 passwordInput.addEventListener("blur", () => {
   const value = passwordInput.value;
   const errorEmpty = document.querySelector("#password-empty");
   const errorShort = document.querySelector("#password-short");
-  const isLength = validatePasswordLength(value);
+
   const isValid = validatePassword(value);
+  const isLength = validatePasswordLength(value);
 
   passwordInput.classList.remove("invalid");
   errorEmpty.classList.remove("visible");
@@ -66,27 +67,49 @@ passwordInput.addEventListener("blur", () => {
 const validatePassword = (password) => !!password.length;
 const validatePasswordLength = (password) => password.length >= 8;
 
-const loginButton = document.querySelector("#login-button");
+const checkPasswordsMatch = () => {
+  const password1 = document.getElementById("signup-password").value;
+  const password2 = document.getElementById("equal-Password").value;
+  return password1 === password2;
+};
+
+const signupButton = document.querySelector("#signup-button");
 
 function handleButtonVisibility() {
   const passwordValue = passwordInput.value;
   const isPasswordValid = validatePassword(passwordValue);
+  const isPasswordEqual = checkPasswordsMatch();
 
   const emailValue = emailInput.value;
   const isEmailValid = validateEmail(emailValue);
 
-  if (isPasswordValid && isEmailValid) {
-    loginButton.disabled = false;
-    loginButton.classList.add("login-button");
-    loginButton.classList.remove("button_disabled");
+  if (isPasswordValid && isEmailValid && isPasswordEqual) {
+    signupButton.disabled = false;
+    signupButton.classList.add("signup-button");
+    signupButton.classList.remove("button_disabled");
   } else {
-    loginButton.disabled = true;
-    loginButton.classList.remove("login-button");
-    loginButton.classList.add("button_disabled");
+    signupButton.disabled = true;
+    signupButton.classList.remove("signup-button");
+    signupButton.classList.add("button_disabled");
+  }
+}
+
+const passwordConfirmInput = document.querySelector("#equal-Password");
+
+passwordConfirmInput.addEventListener("blur", () => {
+  const isEqual = checkPasswordsMatch();
+  const errorUnequal = document.querySelector("#password-unequal");
+
+  passwordConfirmInput.classList.remove("invalid");
+  errorUnequal.classList.remove("visible");
+
+  if (!isEqual) {
+    passwordConfirmInput.classList.add("invalid");
+    errorUnequal.classList.add("visible");
   }
 
-  // 비밀번호가 8자 이상일때 활성화가 되지만, 그 이후 비밀번호를 8자 미만으로 줄였을 때 여전히 버튼이 활성화 상태입니다. 이런 오류는 어떻게 해결해야 할까요?
-}
+  handleButtonVisibility();
+});
 
 handleButtonVisibility();
 
@@ -111,20 +134,17 @@ function onsubmitFunc(event) {
 
   const found = USER_DATA.find((user) => {
     const validEmail = user.email;
-    const validPassword = user.password;
-    if (validEmail === emailValue && validPassword === passwordValue) {
+    if (validEmail === emailValue) {
+      return false;
+    } else {
       return true;
-    }
-    if (validEmail !== emailValue) {
-      return false;
-    }
-    if (validPassword !== passwordValue) {
-      return false;
     }
   });
 
+  //비밀번호와 비밀번호 확인이 일치, 불일치 관련 모달 팝업을 구현하지 못하였습니다.
+
   if (found) {
-    window.location.href = "items.html";
+    window.location.href = "/login.html";
     return true;
   }
 
@@ -133,32 +153,15 @@ function onsubmitFunc(event) {
     if (validEmail === emailValue) {
       return true;
     }
-    return false;
   });
 
-  if (!foundEmail) {
-    document.getElementById("modalError").innerText =
-      "등록되지 않은 이메일입니다.";
-    return true;
+  if (foundEmail) {
+    document.getElementById("modalError").innerText = "사용 중인 이메일입니다.";
   }
-
-  const foundPassword = USER_DATA.find((user) => {
-    const validPassword = user.password;
-    if (validPassword === passwordValue) {
-      return true;
-    }
-    return false;
-  });
-
-  if (!foundPassword) {
-    document.getElementById("modalError").innerText =
-      "비밀번호가 일치하지 않습니다.";
-  }
-  return false;
 }
 
 const modal = document.querySelector(".modal");
-const modalOpen = document.querySelector("#login-button");
+const modalOpen = document.querySelector("#signup-button");
 const modalClose = document.querySelector(".close_btn");
 
 modalOpen.addEventListener("click", function () {
@@ -167,3 +170,5 @@ modalOpen.addEventListener("click", function () {
 modalClose.addEventListener("click", function () {
   modal.style.display = "none";
 });
+
+//모달 팝업이 제대로 작동하지 않고 있는데 어디서 코드가 잘못된 것인지 파악하지 못하였습니다.
