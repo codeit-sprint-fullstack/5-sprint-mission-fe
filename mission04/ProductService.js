@@ -1,4 +1,5 @@
-import { instance, errHandle } from "./main.js";
+import { errHandle } from "./main.js";
+import { instances } from "./axiosSettings.js";
 
 /** 상품 리스트 조회
 * @param         { page:1, pageSize:100, keyword:"테스트" }
@@ -39,14 +40,7 @@ export async function getProduct(id) {
 **/
 export async function createProduct(param) {
   try {
-    let response = await instance.post("/products", {
-      name: param.name,
-      description: param.description,
-      price: param.price,
-      manufacturer: param.manufacturer,
-      tags: param.tags,
-      images: param.images,
-    });
+    let response = await instance.post("/products", param);
     console.log(response.data);
     return response;
   } catch (err) {
@@ -62,14 +56,7 @@ export async function createProduct(param) {
 **/
 export async function patchProduct(param, id) {
   try {
-    let response = await instance.patch(`/products/${id}`, {
-      name: param.name,
-      description: param.description,
-      price: param.price,
-      manufacturer: param.manufacturer,
-      tags: param.tags,
-      images: param.images,
-    });
+    let response = await instance.patch(`/products/${id}`, param);
     console.log(response.data);
     return response;
   } catch (err) {

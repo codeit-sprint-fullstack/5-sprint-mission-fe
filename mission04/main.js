@@ -1,41 +1,11 @@
 /*
 해결해야할 과제 1 : 로깅
 */
-
+import { createAxiosInstance } from "./axiosFunc.js";
 import { articleService } from "./ArticleService.js";
-import { productService } from "./ProductService.js";
-import axios from "axios";
+// import { productService } from "./ProductService.js";
 
-//axios instance 생성 후 설정
-export const instance = axios.create({
-  timeout: 10000,
-})
-
-instance.defaults.baseURL = "https://sprint-mission-api.vercel.app";
-
-instance.interceptors.request.use(
-  (config) => {
-    // 요청 전달 전 수행
-    console.log("서버에 연결하는 중입니다...");
-    return config;
-  }, (error) => {
-    // 요청 오류가 있으면 수행
-    console.log("request 에러");
-    return Promise.reject(error);
-  }
-);
-
-instance.interceptors.response.use(
-  (response) => {
-    console.log("response 정상적으로 확인")
-    return response;
-  }, (error) => {
-    console.log("response 에러")
-    return Promise.reject(error);
-  }
-)
-//
-
+export const sprint = await createAxiosInstance("https://sprint-mission-api.vercel.app");
 
 //메인 함수
 async function mainFunc() {
@@ -91,9 +61,13 @@ const args = {
 
 
 //에러 핸들링
-export function errHandle(e) {
-  console.log(e.response.status, "에러 : 서버와 연결 중 오류가 발생했습니다.");
-  return e;
+export function errHandle(err) {
+  try{
+    console.log(err.response.status, "에러 : 서버와 연결 중 오류가 발생했습니다.");
+  } catch(e){
+    console.log("등록되지 않은 오류 발생!")
+  }
+  return err;
 }
 
 await mainFunc();

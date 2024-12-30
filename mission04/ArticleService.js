@@ -1,4 +1,4 @@
-import { instance, errHandle } from "./main.js";
+import { errHandle, sprint } from "./main.js";
 
 /** 게시글 리스트 조회
  * @param        { page:1,   pageSize:100, keyword:"테스트" }
@@ -6,7 +6,7 @@ import { instance, errHandle } from "./main.js";
  *                {  int          int           String    }
  **/
 export async function getArticleList(param) {
-  const response = instance
+  const response = sprint
     .get(
       `/articles?page=${param.page}&pageSize=${param.pageSize}&keyword=${param.keyword}`)
     .then((res) => console.log(res.data))
@@ -18,7 +18,7 @@ export async function getArticleList(param) {
 }
 
 /** 게시글 상세 조회
- * @param param -  id
+ * @param       -  id
  * @description - 아이디
  *                 int
  **/
@@ -40,11 +40,7 @@ export async function getArticle(id) {
  **/
 export async function createArticle(param) {
   const response = instance
-    .post("/articles", {
-      title: param.title,
-      content: param.content,
-      image: param.image,
-    })
+    .post("/articles", param)
     .then((res) => console.log(res.data))
     .catch((err) => {
       const errmessage = errHandle(err);
@@ -60,11 +56,7 @@ export async function createArticle(param) {
  **/
 export async function patchArticle(param, id) {
   const response = instance
-    .patch(`/articles/${id}`, {
-      title: param.title,
-      content: param.content,
-      image: param.image,
-    })
+    .patch(`/articles/${id}`, param)
     .then((res) => console.log(res.data))
     .catch((err) => {
       const errmessage = errHandle(err);
