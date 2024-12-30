@@ -1,6 +1,4 @@
-import axios from "axios";
-
-axios.defaults.baseURL = "https://sprint-mission-api.vercel.app";
+import { instance, errHandle } from "./main.js";
 
 /** 상품 리스트 조회
 * @param         { page:1, pageSize:100, keyword:"테스트" }
@@ -9,11 +7,11 @@ axios.defaults.baseURL = "https://sprint-mission-api.vercel.app";
 **/
 export async function getProductList(param) {
   try {
-    let response = await axios.get(`/products/?page=${param.page}&pageSize=${param.pageSize}&keyword=${param.keyword}`);
+    let response = await instance.get(`/products/?page=${param.page}&pageSize=${param.pageSize}&keyword=${param.keyword}`);
     console.log(response.data);
     return response;
   } catch (err) {
-    console.log(err.response.data.message);
+    const errmessage = errHandle(err);
     return err;
   }
 }
@@ -25,11 +23,11 @@ export async function getProductList(param) {
 **/
 export async function getProduct(id) {
   try {
-    let response = await axios.get(`/products/${id}`);
+    let response = await instance.get(`/products/${id}`);
     console.log(response.data);
     return response;
   } catch (err) {
-    console.log(err.response.data.message);
+    const errmessage = errHandle(err);
     return err;
   }
 }
@@ -41,7 +39,7 @@ export async function getProduct(id) {
 **/
 export async function createProduct(param) {
   try {
-    let response = await axios.post("/products", {
+    let response = await instance.post("/products", {
       name: param.name,
       description: param.description,
       price: param.price,
@@ -52,7 +50,7 @@ export async function createProduct(param) {
     console.log(response.data);
     return response;
   } catch (err) {
-    console.log(err.response.data.message);
+    const errmessage = errHandle(err);
     return err;
   }
 }
@@ -64,7 +62,7 @@ export async function createProduct(param) {
 **/
 export async function patchProduct(param, id) {
   try {
-    let response = await axios.patch(`/products/${id}`, {
+    let response = await instance.patch(`/products/${id}`, {
       name: param.name,
       description: param.description,
       price: param.price,
@@ -75,7 +73,7 @@ export async function patchProduct(param, id) {
     console.log(response.data);
     return response;
   } catch (err) {
-    console.log(err.response.data.message);
+    const errmessage = errHandle(err);
     return err;
   }
 }
@@ -87,11 +85,11 @@ export async function patchProduct(param, id) {
 **/
 export async function deleteProduct(id) {
   try {
-    let response = await axios.delete(`/${id}`);
+    let response = await instance.delete(`/${id}`);
     console.log(response.data);
     return response;
   } catch (err) {
-    console.log(err.response.data.message);
+    const errmessage = errHandle(err);
     return err;
   }
 }
@@ -103,3 +101,5 @@ export const productService = {
   patchProduct,
   deleteProduct,
 };
+
+
