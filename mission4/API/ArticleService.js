@@ -1,11 +1,11 @@
-const BASE_URL = "https://sprint-mission-api.vercel.app/articles"
+const BASE_URL = "https://sprint-mission-api.vercel.app/articles/"
 
 // GET: Article 리스트 가져오기
 export const getArticleList = (page = 1, pageSize = 10, keyword = "") => {
   return fetch(`${BASE_URL}?${page}$pazeSize=${pageSize}&${keyword}`)
   .then((response) => {
     if (!response.ok) {
-      throw new Error(`실패: ${response.status}`);
+      throw new Error(`에러: ${response.status}`);
     }
     return response.json();
   })
@@ -17,7 +17,7 @@ export const getArticle = (id) => {
   return fetch(`${BASE_URL}/${id}`)
   .then((response) => {
     if(!response.ok) {
-      throw new Error(`실패: ${response.status}`)
+      throw new Error(`get에러: ${response.status}`)
     }
     return response.json();
   })
@@ -33,7 +33,7 @@ export const createArticle = (title, content, image) => {
   })
   .then((response) => {
     if(!response.ok) {
-      throw new Error(`실패: ${response.status}`);
+      throw new Error(`post에러: ${response.status}`);
     }
     return response.json();
   })
@@ -49,7 +49,7 @@ export const patchArticle = (id, updatedFields) => {
   })
   .then((response) => {
     if(!response.ok) {
-      throw new Error(`실패: ${response.status}`);
+      throw new Error(`patch에러: ${response.status}`);
     }
     return response.json();
   })
@@ -63,7 +63,7 @@ export const deleteArticle = (id) => {
   })
   .then((response) => {
     if(!response.ok) {
-      throw new Error(`에러: ${response.status}`);
+      throw new Error(`delete에러: ${response.status}`);
     }
     return response.json();
   })

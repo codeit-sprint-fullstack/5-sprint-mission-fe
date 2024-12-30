@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const BASE_URL = "'https://sprint-mission-api.vercel.app/products";
+const BASE_URL = "https://sprint-mission-api.vercel.app/products/";
 
 
 // Axios GET 요청 - 쿼리 파라미터 포함
