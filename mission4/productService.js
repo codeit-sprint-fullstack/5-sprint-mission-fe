@@ -38,7 +38,7 @@ const getProduct = async (id) => {
 }
 
 /** 상품 등록
- * * @param {Object} params - 상품 정보
+ * @param {Object} params - 상품 정보
  * @param {string} params.name - 상품 이름
  * @param {string} params.description - 상품 설명
  * @param {int} params.price - 상품 가격
