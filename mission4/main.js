@@ -1,8 +1,6 @@
 import * as articleService from "./articleService.js";
 import * as productService from "./productService.js";
 
-//잘 동작하는지 테스트하기 위해 전부 console.log로 출력해서 확인해보고 있는 상태.
-
 //게시글 목록 조회 호출
 console.log(await articleService.getArticleList({
     page: 1, 
@@ -34,33 +32,34 @@ console.log(articleService.deleteArticle(996));
 
 
 //상품 목록 조회 호출
-console.log(await productService.getProductList({
+await productService.getProductList({
     page: 1, 
     pageSize: 50, 
     keyword: "초콜릿"
-}));
+});
 
 //상품 상세 조회 호출
-console.log(await productService.getProduct(553));
+await productService.getProduct(118);
 
 //상품 등록 호출
-console.log(await productService.createProduct({
+await productService.createProduct({
     name: "고려은단 비타민",
     description: "고려은단 비타민c 1000",
     price: 5000,
     tags: ["비타민", "고려은단"],
     images: ["테스트 이미지"]
-}));
+});
 
 //상품 수정 호출
-console.log(await productService.patchProduct({
-    id: 553,
+await productService.patchProduct(118, {
     name: "고려은단 비타민",
     description: "고려은단 비타민c 1000",
     price: 5000,
     tags: ["비타민", "고려은단"],
     images: ["테스트 이미지"]
-}));
+});
+
+await productService.getProduct(118);
 
 //상품 삭제 호출
-console.log(await productService.deleteProduct(686));
+await productService.deleteProduct(812);
