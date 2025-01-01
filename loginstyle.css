@@ -59,6 +59,7 @@ main {
 /* 메인 */
 .login-form {
   width: 100%;
+  max-width: 640px;
   line-height: 26px;
 }
 
@@ -83,19 +84,22 @@ main {
   padding: 15px 24px;
   font-size: 1.6rem;
   font-weight: 400;
+  box-sizing: border-box;
 }
 
 #password {
+  position: relative;
   width: 100%;
-  margin-bottom: 24px;
+  height: 56px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--gray100);
+  padding: 15px 24px;
+  font-size: 1.6rem;
+  font-weight: 400;
 }
 
-.pw-input-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: relative;
-}
+
 
 input::placeholder {
   color: var(--gray400);
@@ -108,39 +112,30 @@ input:focus {
   outline: 1px solid var(--primary100);
 }
 
-.visible-btn {
-  width: 24px;
-  height: 24px;
-  cursor: pointer;
-  position: absolute;
-  right: 15px;
-  top: 15px;
+.pw-input {
+  
+  position: relative;
+  box-sizing: border-box;
+  display: flex; 
+  align-items: center;
 }
 
+.visible-btn {
+  position: absolute;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  z-index: 10;
+  right: 10px;
+}
 
-input:hover + .visible-btn,
-input:focus + .visible-btn {
+#password:hover .visible-btn,
+#password:focus-within .visible-btn {
   display: block; 
 }
 
 
-form button {
-  background-color: var(--gray400);
-  color: var(--gray100);
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 32px;
-  width: 100%;max-width: 640px;
-  padding: 12px 0;
-  border: none;
-  border-radius: 40px;
-  text-align: center;
-  cursor: pointer;
-}
 
-.login-form button:hover {
-  background-color: var(--primary100);
-}
 
 .simple-login {
   background-color: var(--box_bg);

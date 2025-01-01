@@ -66,14 +66,37 @@ main {
   flex-direction: column;
 }
 
-.form-group > label {
+.form-group label {
   font-size: 1.8rem;
   font-weight: 700;
   margin: 24px 0 16px 0;
   color: var(--gray800);
 }
 
-#email, #alias, #password {
+
+
+#email, #alias, #password, #confirmPassword {
+  height: 56px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--gray100);
+  font-size: 1.6rem;
+  color: var(--gray800);
+  line-height: 24;
+  font-weight: 400;
+  padding: 15px 24px;
+  box-sizing: border-box;
+}
+.pw-input {
+  position: relative;
+  box-sizing: border-box;
+  display: flex; 
+  align-items: center;
+}
+
+#password, #confirmPassword {
+  position: relative;
+  width: 100%;
   height: 56px;
   border-radius: 12px;
   border: none;
@@ -81,36 +104,8 @@ main {
   padding: 15px 24px;
   font-size: 1.6rem;
   font-weight: 400;
-  width: 100%;
 }
 
-.form-group {
-  position:relative;
-}
-
-#password2 {
-  width: 100%;
-  margin-bottom: 24px;
-}
-
-input {
-  height: 56px;
-  border-radius: 12px;
-  border: none;
-  background-color: #f3f4f6;
-  font-size: 1.6rem;
-  color: var(--gray800);
-  line-height: 24;
-  font-weight: 400;
-  padding: 15px 24px;
-}
-
-.pw-input-container {
-  display: flex;
-  align-items: center;
-  width: 100%;
-  position: relative;
-}
 
 input::placeholder {
   color: var(--gray400);
@@ -124,33 +119,31 @@ input:focus {
 }
 
 .visible-btn {
-  width: 24px; 
-  height: 24px;
-  cursor: pointer;
   position: absolute;
-  right: 15px;
-  top: 15px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  z-index: 10;
+  right: 10px;
+}
+.visible-btn2 {
+  position: absolute;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  z-index: 10;
+  right: 10px;
 }
 
 
-input:hover + .visible-btn,
-input:focus + .visible-btn {
+#password:hover .visible-btn,
+#password:focus-within .visible-btn {
   display: block; 
 }
 
-
-form button {
-  background-color: var(--gray400);
-  color: var(--gray100);
-  font-size: 2rem;
-  font-weight: 600;
-  line-height: 32px;
-  width: 100%;max-width: 640px;
-  padding: 12px 0;
-  border: none;
-  border-radius: 40px;
-  text-align: center;
-  cursor: pointer;
+#confirmPassword:hover .visible-btn2,
+#confirmPassword:focus-within .visible-btn2 {
+  display: block; 
 }
 
 .simple-login {

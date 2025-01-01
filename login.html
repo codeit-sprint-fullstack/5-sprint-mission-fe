@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="loginstyle.css">
+  <link rel="stylesheet" href="js.css">
   <link
   rel="stylesheet"
   as="style"
@@ -27,22 +28,22 @@
       </div>
       <div class="form-group">
         <label for="password">비밀번호</label>
-        <div class="pw-input-container">
+        <div class="pw-input">
           <input type="password" id="password" name="password" required placeholder="비밀번호를 입력해주세요">
-          <img class="visible-btn" src="eye-btn.png" alt="비밀번호 마스킹 버튼" />
+          <img class="visible-btn" src="btn_visibility_off.svg" alt="비밀번호 마스킹 토글" />
         </div>
       </div>
-      <button type="submit">로그인</button>
+      <button id="join-confirm-button" class="confirmbutton" type="submit">로그인</button>
     </form>
   
     <section class="simple-login">
       <p>간편 로그인하기</p>
       <div class="sns-login">
         <a href="https://www.google.co.kr/">
-          <img class="sns-img" src="google-icn.png" alt="구글 로그인 아이콘">
+          <img class="sns-img" src="google_icn.png" alt="구글 로그인 아이콘">
         </a>
         <a href="https://www.kakaocorp.com/page/">
-          <img class="sns-img" src="kakao-icn.png" alt="카카오 로그인 아이콘">
+          <img class="sns-img" src="kakao_icn.png" alt="카카오 로그인 아이콘">
         </a>                   
       </div>
     </section>
@@ -52,5 +53,10 @@
       <a href="\signup.html" id="signup">회원가입</a>
     </footer>  
   </main>
+  <script type="module" src="/js/validate.js"></script>
+  <script type="module" src="/js/login.js"></script>
+  <script type="module" src="/js/eventListener.js"></script>
+  <script type="module" src="/js/buttonToggle.js"></script>
 </body>
 </html>
+
