@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="kr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+    />
+
+    <link rel="icon" href="../img/ico.png" />
+
+    <link
+      rel="stylesheet"
+      as="style"
+      crossorigin
+      href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css"
+    />
+    <link rel="stylesheet" href="../css/style.css" />
+
+    <script src="../feature/toggle/toggleIcon.js" defer></script>
+    <script type="module" src="../feature/valid/condition.js" defer></script>
+    <script type="module" src="../feature/valid/handler.js" defer></script>
+    <script type="module" src="../feature/valid/setError.js" defer></script>
+    <script type="module" src="../feature/valid/verifyForm.js" defer></script>
+    <script type="module" src="../feature/auth/verifyAuth.js" defer></script>
+    <script
+      type="module"
+      src="../feature/button/buttonHandlers.js"
+      defer
+    ></script>
+    <script type="module" src="../feature/modal/modalHandler.js"></script>
+    <title>판다마켓 : 로그인</title>
+  </head>
+
+  <body>
+    <main>
+      <a id="img-logo" href="../index.html">
+        <img src="../img/logo.png" alt="판다마켓 로고 이미지" />
+      </a>
+
+      <form>
+        <section class="field">
+          <label for="email">이메일</label>
+          <div class="input-container">
+            <input
+              type="email"
+              id="email"
+              placeholder="이메일을 입력해주세요"
+            />
+          </div>
+        </section>
+
+        <section class="field">
+          <label for="password">비밀번호</label>
+          <div class="input-container">
+            <input
+              type="password"
+              id="password"
+              placeholder="비밀번호를 입력해주세요"
+            />
+            <img
+              class="eyeIcon"
+              src="../img/btn_visibility_off.png"
+              alt="비밀번호 숨기기"
+            />
+          </div>
+        </section>
+        <button id="login-button">로그인</button>
+      </form>
+
+      <section id="sns-login">
+        간편 로그인하기
+        <div id="sns-logos">
+          <a href="https://www.google.co.kr/">
+            <img src="../img/google.png" alt="구글 로그인" />
+          </a>
+          <a href="https://www.kakaocorp.com/page/">
+            <img src="../img/kakao.png" alt="카카오 로그인" />
+          </a>
+        </div>
+      </section>
+
+      <footer>
+        판다마켓이 처음이신가요?
+        <a href="signup.html">회원가입</a>
+      </footer>
+
+      <!--------------------- dialog --------------------->
+      <dialog id="dialog">
+        <p id="dialog-message"></p>
+        <form method="dialog">
+          <button value="confirm" class="modal-btn">확인</button>
+        </form>
+      </dialog>
+    </main>
+  </body>
+</html>

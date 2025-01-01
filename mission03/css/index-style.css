@@ -1,0 +1,366 @@
+@import "./reset.css";
+
+.content {
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  padding: 0 24px;
+}
+
+header {
+  position: sticky;
+  top: 0px;
+  background-color: #ffffff;
+  height: 70px;
+  display: flex;
+}
+header .content {
+  align-items: center;
+  justify-content: space-between;
+}
+header .content .button {
+  background-color: #3692ff;
+  color: #f3f4f6;
+  font-size: 1rem; /* 16px */
+  line-height: 26px;
+
+  padding: 11px 43px;
+  border: none;
+  border-radius: 8px;
+
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.landing {
+  background-color: #cfe5ff;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+}
+.landing .content {
+  gap: 7px;
+  justify-content: center;
+  align-items: end;
+  margin-top: 200px;
+}
+.landing .content .intro {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 100px;
+}
+.landing .content .intro h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  line-height: 56px;
+}
+.landing .content .intro .button {
+  background-color: #3692ff;
+  color: #f9fafb;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  line-height: 32px;
+  padding: 12px 124px;
+  border: none;
+  border-radius: 40px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.info {
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.info .card {
+  background-color: #fcfcfc;
+  width: 988px;
+  height: 444px;
+  display: flex;
+  align-items: center;
+  gap: 64px;
+  margin: 138px 0;
+}
+.hot-item,
+.register {
+  flex-direction: row;
+}
+.search {
+  flex-direction: row-reverse;
+  text-align: right;
+}
+.card-content {
+  display: flex;
+  flex-direction: column;
+}
+.info .card .card-content .badge {
+  font-size: 1.125rem; /* 18px */
+  font-weight: 700;
+  color: #3692ff;
+  margin-bottom: 12px;
+}
+.info .card .card-content h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  line-height: 56px;
+  margin-bottom: 24px;
+}
+.break-line {
+  display: inline; /* 줄바꿈 있음 */
+}
+.info .card .card-content p {
+  font-size: 1.5rem; /* 24px */
+  font-weight: 500;
+  line-height: 32px;
+}
+
+.banner {
+  background-color: #cfe5ff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+.banner .content {
+  display: flex;
+  justify-content: center;
+  align-items: end;
+  gap: 69px;
+  margin-top: 143px;
+}
+.banner h1 {
+  font-size: 2.5rem; /* 40px */
+  font-weight: 700;
+  line-height: 56px;
+  margin-bottom: 172.5px;
+}
+
+footer {
+  background-color: #111827;
+  color: #e5e7eb;
+  font-size: 1rem; /* 16px */
+  font-weight: 400;
+  display: flex;
+}
+footer .content {
+  justify-content: space-between;
+  padding: 0 24px;
+  margin-top: 32px;
+  margin-bottom: 108px;
+}
+footer .content .middle {
+  display: flex;
+  gap: 30px;
+}
+footer .content .middle a {
+  text-decoration: none;
+  cursor: pointer;
+  color: inherit;
+}
+footer .content .right {
+  display: flex;
+  gap: 12px;
+}
+
+/* image size */
+#img-logo {
+  width: 153px;
+  height: auto;
+}
+#img-landing {
+  width: 746px;
+  height: auto;
+}
+.info .card img {
+  width: 588px;
+  height: auto;
+}
+.img-sns {
+  width: 20px;
+  height: 20px;
+}
+#img-banner {
+  width: 746px;
+  height: auto;
+}
+
+/* -------------------------Tablet------------------------- */
+@media (max-width: 1200px) {
+  body {
+    font-size: 14px;
+  }
+
+  .landing {
+    height: auto;
+  }
+  .landing .content {
+    gap: 211px;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 84px;
+  }
+  .landing .content .intro {
+    text-align: center;
+    align-items: center;
+    gap: 24px;
+    margin: 0;
+  }
+
+  .info {
+    height: auto;
+    padding: 24px 24px 56px 24px;
+    gap: 52px;
+  }
+  .info .card {
+    flex-direction: column;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    gap: 24px;
+  }
+  .info .card img {
+    width: 100%;
+    height: auto;
+  }
+  .card .card-content {
+    width: 90%;
+    text-align: left;
+  }
+  .hot-item,
+  .register {
+    text-align: left;
+  }
+  .search {
+    text-align: right;
+  }
+  .info .card .card-content .badge {
+    margin-bottom: 16px;
+  }
+  .info .card .card-content h1 {
+    font-size: 2em; /* 32px */
+    line-height: 42px;
+    margin-bottom: 24px;
+  }
+  .break-line {
+    display: none; /* 줄바꿈 없음 */
+  }
+  .info .card .card-content p {
+    font-size: 1.125rem; /* 18px */
+    line-height: 26px;
+  }
+
+  .banner .content {
+    text-align: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 217px;
+    margin-top: 201px;
+  }
+  .banner h1 {
+    font-size: 2rem;
+    line-height: 48px;
+    margin-bottom: 0;
+  }
+
+  footer .content {
+    align-items: center;
+  }
+  footer .content .middle {
+    align-items: center;
+  }
+  footer .content .right {
+    justify-content: space-between;
+  }
+
+  .landing .content,
+  .banner .content {
+    padding: 0;
+  }
+
+  /* image size */
+  #img-landing,
+  #img-banner {
+    padding: 0 24px;
+  }
+}
+
+/* -------------------------mobile------------------------- */
+@media (max-width: 744px) {
+  body {
+    font-size: 12px;
+  }
+
+  .content {
+    padding: 0 16px;
+  }
+
+  .landing .break-line {
+    display: inline; /* 줄바꿈 있음 */
+  }
+  .landing .content {
+    gap: 132px;
+    margin-top: 48px;
+  }
+  .landing .content .intro h1 {
+    font-size: 2rem; /* 32px */
+    line-height: 44.8px;
+  }
+  .landing .content .intro .button {
+    font-size: 1.125rem; /* 18px */
+    line-height: 26px;
+    padding: 11px 71px;
+  }
+
+  .info {
+    gap: 40px;
+    margin-top: 52px;
+    margin-bottom: 83px;
+  }
+  .info .card .card-content .badge {
+    font-size: 1rem; /* 16px */
+    line-height: 22.4px;
+    margin-bottom: 8px;
+  }
+  .info .card .card-content h1 {
+    font-size: 1.5rem; /* 24px */
+    line-height: 33.6px;
+    margin-bottom: 16px;
+  }
+  .info .card .card-content p {
+    font-size: 1.125rem; /* 18px */
+    line-height: 25.2px;
+  }
+
+  .banner .content {
+    gap: 131px;
+    margin-top: 121px;
+  }
+  .banner h1 {
+    font-size: 2rem; /* 32px */
+    line-height: 44.8px;
+  }
+
+  footer .content {
+    flex-wrap: wrap;
+    margin-bottom: 65px;
+  }
+  footer .content .left {
+    order: 3;
+  }
+  footer .content .middle {
+    order: 1;
+  }
+  footer .content .right {
+    order: 2;
+  }
+
+  /* image size */
+  #img-landing,
+  #img-banner {
+    width: 100%;
+    height: auto;
+  }
+}
