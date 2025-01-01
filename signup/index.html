@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../reset.css">
+    <link rel="stylesheet" href="index.css">
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <title>첫신규회원</title>
+</head>
+<body>
+    <div id="content">
+        <div id="panda">
+            <a href="/">
+                <img src="img/img_panda.png" alt="">
+            </a>
+        </div>
+        <!-- 이메일 닉네임 비번 -->
+        <form id="form_email" class="form_box">
+            <p class="explain">이메일</p>
+            <input id="input_email" type="email" placeholder="이메일을 입력해주세요">
+            <p class="em_text1 hiden hiden_text">이메일을 입력해주세요.</p>
+            <p class="em_text2 hiden hiden_text">잘못된 이메일 형식입니다.</p>
+        </form>
+        <form id="nick" class="form_box">
+            <p class="explain">닉네임</p>
+            <input id="input_nickname" type="text" placeholder="닉네임을 입력해주세요">
+        </form>
+        <form id="form_password" class="form_box">
+            <p class="explain">비밀번호</p>
+            <div class="input_div">
+                <input id="input_pwd" type="password" placeholder="비밀번호를 입력해주세요">
+                <button id="pwd_hiden_img" class="pwd_img off" type="button"></button>
+            </div>
+            <p class="pwd_text1 hiden hiden_text">비밀번호를 입력해주세요.</p>
+            <p class="pwd_text2 hiden hiden_text">비밀번호를 8자 이상 입력해주세요.</p>
+        </form>
+        <form id="form_password_checkout" class="form_box">
+            <p class="explain">비밀번호 확인</p>
+            <div class="input_div">
+                <input id="input_pwd_checkout" type="password" placeholder="비밀번호를 입력해주세요">
+                <button id="pwdcheck_hiden_img" class="pwd_img off" type="button"></button>
+            </div>
+            <p class="pwd_check_text1 hiden hiden_text">비밀번호를 입력해주세요.</p>
+            <p class="pwd_check_text2 hiden hiden_text">비밀번호가 일치하지 않습니다.</p>
+        </form>
+        <!-- 로그인 -->
+        <div id="btn_signup">
+            <button id="signup">회원가입</button>
+        </div>
+        <!-- 간편 로그인 -->
+        <div id="simple">
+            <div id="simple_txt" class="simple_box">
+                <p>간편 로그인하기</p>
+            </div>
+            <div id="simple_img" class="simple_box">
+                <a target="_blank" id="google" href="https://www.google.com/"></a>
+                <a target="_blank" id="kakao" href="https://www.kakaocorp.com/page/"></a>
+            </div>
+        </div>
+        <!-- 회원가입 -->
+        <div id="login">
+            <p>
+                이미 회원이신가요? <a href="../login/">로그인</a>
+            </p>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
