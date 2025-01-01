@@ -21,28 +21,32 @@
   <div class="containor">
   <header class="header-containor">
     <div class="head-content">
-    <img class="head-img1" src="판다 얼굴.png">
-    <a  href="./index.HTML">
-    <img class="head-img2" src="판다마켓.png">
+    <img class="logo-img" src="판다 얼굴.png">
+    <a  href="./index.html">
+    <img class="logo-text-img" src="판다마켓.png">
   </div>
 </header>
   
-<main>
+<form>
+  <div id="mail-content">
   <div class="mail-containor">
 <a class="mail-title-text">이메일</a>
- <input class="main-insert-text" type="email" placeholder="이메일을 입력해주세요" />
+ <input id="email-Input" class="main-insert-text" type="email" placeholder="이메일을 입력해주세요" />
+</div>
+<div class="error-message-container"></div> 
 </div>
 
-<div>
+<div id="password-content">
 <h2 class="pass-title-text">비밀번호<h2>
 <div class="pass-containor">
-  <input class="main-insert-text" type="password" placeholder="비밀번호를 입력해주세요" />
-  <a><img src="btn_visibility_on_24px.png"></a>
+  <input id="password-Input" class="main-insert-text" type="password" placeholder="비밀번호를 입력해주세요" />
+  <img id="togglePassword" class="password-icon" src="./btn_visibility_on_24px.png">
 </div>
+<div class="error-message-container"></div> 
 </div>
 
 <div>
-<a class="login-button">로그인</a>
+<button class="login-button">로그인</button>
 </div>
 
 <div class="easylogin-cotainor">
@@ -56,14 +60,23 @@
   <img class="easylogin-img" src="Component 3.png">
 </a>
   </div>
-</div>
+ </div>
 </div>
 
 <div class="signup-cotainor">
 <a>판다마켓이 처음이신가요?</a>
 <a href="./signup.html">회원가입</a>
    </div>
-  </main>
+  </form>
+
+  <div id="error-modal" class="modal-hidden">
+    <div class="modal-content">
+      <p id="modal-message">비밀번호가 일치하지 않습니다.</p>
+      <button id="modal-closeBtn" class="modal-btn">확인</button>
+    </div>
+  </div>
+
 </div>
+<script src="login.js"></script>
  </body>
 </html>
