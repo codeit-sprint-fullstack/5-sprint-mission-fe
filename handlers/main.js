@@ -4,7 +4,7 @@ import { productService } from "../api/ProductService.js";
 /**
  * article
  */
-const articleList = await articleService.getArticleList({page: 1, pageSize: 1});
+const articleList = await articleService.getArticleList({ page: 1, pageSize: 1 });
 console.log(articleList);
 
 const article = await articleService.getArticle(354);
@@ -21,8 +21,7 @@ articleService.deleteArticle(createData.id)
 /**
  * product
  */
-
-const productList = await productService.getProductList({page: 1, pageSize: 1});
+const productList = await productService.getProductList({ page: 1, pageSize: 1, keyword: 1 });
 console.log(productList);
 
 const product = await productService.getProduct(225);

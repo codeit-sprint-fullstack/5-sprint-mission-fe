@@ -1,82 +1,53 @@
-import axios from 'axios';
+import { getAxiosInstance } from './axiosInstance.js';
 
-const host = `https://sprint-mission-api.vercel.app`;
+const productClient = getAxiosInstance(`https://sprint-mission-api.vercel.app/products`);
 
 const getProductList = async ({ page = 1, pageSize = 100, keyword = '' }) => {
-  const url = host + `/products`;
   try {
-    const response = await axios.get(url, {
+    const response = await productClient.get(`/`, {
       params: { page, pageSize, keyword }
     });
     return response.data;
   } catch (error) {
-    if (error.response) {
-      console.error(`Error: ${error.response.status} - ${error.response.statusText}`);
-    } else {
-      console.error('Axios error:', error.message);
-    }
     return [];
   }
 };
 
 const getProduct = async (id) => {
-  const url = host + `/products/${id}`;
   try {
-    const response = await axios.get(url);
+    const response = await productClient.get(`/${id}`);
     return response.data;
   } catch (error) {
-    if (error.response) {
-      console.error(`Error: ${error.response.status} - ${error.response.statusText}`);
-    } else {
-      console.error('Axios error:', error.message);
-    }
     return null;
   }
 };
 
 const createProduct = async ({ name, description, price, tags, images }) => {
-  const url = host + `/products`;
   try {
-    const response = await axios.post(url, {
+    const response = await productClient.post(`/`, {
       name, description, price, tags, images
     });
     return response.data;
   } catch (error) {
-    if (error.response) {
-      console.error(`Error: ${error.response.status} - ${error.response.statusText}`);
-    } else {
-      console.error('Axios error:', error.message);
-    }
+    return null;
   }
 };
 
 const patchProduct = async (id, { name, description, price, tags, images }) => {
-  const url = host + `/products/${id}`;
   try {
-    const response = await axios.patch(url, {
+    const response = await productClient.patch(`/${id}`, {
       name, description, price, tags, images
     });
     return response.data;
   } catch (error) {
-    if (error.response) {
-      console.error(`Error: ${error.response.status} - ${error.response.statusText}`);
-    } else {
-      console.error('Axios error:', error.message);
-    }
   }
 };
 
 const deleteProduct = async (id) => {
-  const url = host + `/products/${id}`;
   try {
-    const response = await axios.delete(url);
+    const response = await productClient.delete(`/${id}`);
     console.log("status: " + response.status + ", text: " + response.statusText);
   } catch (error) {
-    if (error.response) {
-      console.error(`Error: ${error.response.status} - ${error.response.statusText}`);
-    } else {
-      console.error('Axios error:', error.message);
-    }
     return [];
   }
 };
