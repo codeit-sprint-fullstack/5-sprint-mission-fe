@@ -1,4 +1,5 @@
 @import "./reset.css";
+@import "./color.css";
 
 
 *,
@@ -38,21 +39,32 @@ nav {
     padding: 0 24px;
 }
 
-#logo_img {
+#logo-img {
     width: 153px;
     height: 51px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8.6px;
 }
 
-#login_button {
-    background-color: #3692ff;
+#logo-icon {
+    width: 40px;
+    display: block;
+}
+
+#logo-text {
+    width: 103px;
+}
+
+#login-button {
+    background-color: var(--primary100);
     padding: 12px 23px;
     border-radius: 8px;
     cursor: pointer;
-}
 
-#login_button {
     width: 128px;
-    color: #f3f4f6;
+    color: var(--gray100);
     font-size: 1rem;
     font-weight: 600;
     line-height: 26px;
@@ -61,21 +73,21 @@ nav {
     flex-shrink: 0;
 }
 
-.bg_colored {
+.bg-colored {
     background-color: #CFE5FF;
     width: 100%;
     height: 540px;
     display: flex;
 }
 
-#top_box {
+#top-box {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     gap: 7px;
 }
 
-.msg_box {
+.msg-box {
     display: flex;
     flex-direction: column;
     gap: 32px;
@@ -83,7 +95,7 @@ nav {
     margin: 40px 0;
 }
 
-.title_box {
+.title-box {
     display: flex;
     flex-direction: column;
 }
@@ -93,35 +105,33 @@ nav {
     font-size: 2.5rem;
     font-weight: 700;
     line-height: 56px;
-    color: #374151;
+    color: var(--gray700);
     margin: 0;
 }
 
-#items_button {
+#items-button {
     font-size: 1.25rem;
     font-weight: 600;
     line-height: 32px;
     text-align: center;
-    color: #f9fafb;
+    color: var(--gray50);
     text-decoration-line: none;
-}
 
-#items_button {
     width: 357px;
     border-radius: 40px;
     padding: 16px 124px;
-    background-color: #3692ff;
+    background-color: var(--primary100);
     margin-bottom: 60px;
     cursor: pointer;
 }
 
-#top_img {
+#top-img {
     width: 100%;
     max-width: 746px;
     height: auto;
 }
 
-.main_box {
+.main-box {
     display: flex;
     align-items: center;
     height: 720px;
@@ -139,12 +149,12 @@ nav {
     margin: 0 auto;
 }
 
-.main_imgs {
+.main-imgs {
     width: 588px;
     height: auto;
 }
 
-.main_msg_box {
+.main-msg-box {
     display: flex;
     flex-direction: column;
     gap: 12px;
@@ -153,7 +163,7 @@ nav {
 }
 
 .badge {
-    color: #3692ff;
+    color: var(--primary100);
     font-size: 1.125rem;
     font-weight: 700;
     line-height: 26px;
@@ -161,7 +171,7 @@ nav {
 }
 
 .desctiption {
-    color: #374151;
+    color: var(--gray700);
     font-size: 1.5rem;
     font-weight: 500;
     line-height: 32px;
@@ -173,7 +183,7 @@ nav {
     flex-direction: row-reverse;
 }
 
-.card.reverse > .main_msg_box {
+.card.reverse > .main-msg-box {
     text-align: right;
     display: flex;
     flex-direction: column;
@@ -186,71 +196,79 @@ nav {
     padding-top: 138px;
 }
 
-#bottom_box {
+#bottom-box {
     display: flex;
     justify-content: center;
     align-items: flex-end;
     gap: 69px;
 }
 
-#bottom_box > .msg_box {
+#bottom-box > .msg-box {
     display: flex;
     align-items: center;
     margin: 112.5px 0;
 }
 
-#bottom_box .title_box {
+#bottom-box .title-box {
     margin-bottom: 60px;
 }
 
-#bottom_img {
+#bottom-img {
     width: 100%;
     max-width: 746px;
     height: auto;
 }
 
-
 footer {
     height: 160px;
-    background-color: #111827;
+    background-color: var(--gray900);
     padding: 32px 0;
+    contain: content;
+
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
 }
 
 footer > .content {
     display: flex;
     justify-content: space-between;
     padding: 0 200px;
-    margin: 0 auto;
 
     font-size: 1rem;
     font-weight: 400;
     line-height: 19.09px;
-    text-align: center;
+    color: var(--gray400);
 }
 
-.addr {
-    color: #9ca3af;
+.addr-style {
+    display: flex;
+    padding: 0 16px;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 19.09px;
+    color: var(--gray400);
 }
 
-.list_corp {
+.list-corp {
     display: flex;
     justify-content: space-between;
     gap: 30px;
 }
 
-.corp_item {
-    color: #e5e7eb;
+.corp-item {
+    color: var(--gray200);
     text-decoration-line: none;
     cursor: pointer;
 }
     
-.sns_box {
+.sns-box {
     display: flex;
     justify-content: space-between;
     gap: 12px;
 }
 
-.sns_icon {
+.sns-icon {
     width: 20px;
     height: 20px;
     cursor: pointer;
@@ -258,31 +276,33 @@ footer > .content {
 
 /* tablet size */
 @media (max-width: 1199px) {
-    .bg_colored {
+    .bg-colored {
         height: 771px;
     }
 
-    #top_box {
+    /* 태블릿 사이즈에서 텍스트, 이미지 정렬 방향 전환 */
+    #top-box {
         height: 100%;
         flex-direction : column;
         justify-content: space-between;
         align-items: center;
+        gap: 90px;
     }
 
-    .top .msg_box {
+    .top .msg-box {
         align-items: center;
         margin: 84px auto;
         gap: 24px;
     }
 
-    .title_box {
+    /* 태블릿 사이즈에서 타이틀 텍스트 줄바꿈 제거 */
+    .title-box {
         display: inline;
     }
 
-    #items_button {
+    #items-button {
         margin: 0;
     }
-
 
     main {
         width: 696px;
@@ -292,11 +312,12 @@ footer > .content {
         gap: 52px;
     }
 
-    .main_box {
+    .main-box {
         width: 100%;
         height: 708px;
     }
 
+    /* 태블릿 사이즈에서 텍스트, 이미지 정렬 방향 전환 */
     .card {
         width: 100%;
         height: 708px;
@@ -306,32 +327,33 @@ footer > .content {
         gap: 24px;
     }
 
-    .main_msg_box {
+    .main-msg-box {
         margin: 0;
         gap: 0;
     }
 
-    .main_msg_box .title_box {
+    .main-msg-box .title-box {
         margin-top: 16px;
         margin-bottom: 24px;
     }
 
-    .main_msg_box .title {
+    .main-msg-box .title {
         font-size: 2rem;
         line-height: 42px;
     }
 
-    .main_msg_box .desctiption {
+    .main-msg-box .desctiption {
         margin: 0;
         font-size: 1.125rem;
         line-height: 26px;
     }
 
-    .main_imgs {
+    .main-imgs {
         width: 696px;
         height: 524px;
     }
 
+    /* 태블릿 사이즈에서 텍스트, 이미지 정렬 방향 전환 */
     .card.reverse{
         width: 100%;
         height: 708px;
@@ -341,7 +363,7 @@ footer > .content {
         gap: 24px;
     }
 
-    .card.card.reverse > .main_msg_box {
+    .card.card.reverse > .main-msg-box {
         margin: 0;
         gap: 0;
     }
@@ -350,30 +372,142 @@ footer > .content {
         padding-top: 32px;
     }
 
-    .bottom > .bg_colored {
+    .bottom > .bg-colored {
         height: 927px;
     }
 
-    #bottom_box {
+    /* 태블릿 사이즈에서 텍스트, 이미지 정렬 방향 전환 */
+    #bottom-box {
         flex-direction: column;
         justify-content: space-between;
         align-items: center;
         gap: 0;
     }
 
-    #bottom_box > .msg_box {
+    #bottom-box > .msg-box {
         justify-content: center;
         margin-top: 201px;
         margin-bottom: 0;
     }
 
-    #bottom_box .title {
+    #bottom-box .title {
         text-align: center;
         margin: 0;
     }
 
     footer > .content {
         padding: 0 24px;
+    }
+
+}
+
+/* mobile size */
+@media (max-width: 743px) {
+    /* 모바일 사이즈에서 로고 아이콘 숨기기 */
+    #logo-icon {
+        display: none;
+    }
+
+    nav {
+        padding: 0 16px;
+    }
+
+    .bg-colored {
+        height: 100%;
+    }
+
+    .top .msg-box {
+        margin: 48px auto;
+        gap: 18px;
+    }
+
+    /* 모바일 사이즈에서 타이틀 텍스트 줄바꿈 복구 */
+    .top .title-box {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .top .title {
+        font-size: 2rem;
+        line-height: 44px;
+        text-align: center;
+    }
+
+    #items-button {
+        font-size: 1.125rem;
+        line-height: 26px;
+        padding: 11px 71px;
+
+        width: 240px;
+        height: 48px;
+    }
+
+    /* 모바일 사이즈에서 여백 32px 제외 이미지 영역이 꽉 차도록 구현 */
+    main {
+        margin: 0;
+        max-width: 100%;
+        padding: 32px;
+        gap: 40px;
+    }
+
+    .main-box {
+        height: auto;
+    }
+
+    .card {
+        height: auto;
+    }
+
+    .badge {
+        font-size: 1rem;
+    }
+
+    .main-msg-box .title-box {
+        margin-top: 8px;
+        margin-bottom: 16px;
+    }
+
+    .main-msg-box .title {
+        font-size: 1.5rem;
+        line-height: 32px;
+    }
+
+    .main-msg-box .desctiption {
+        font-size: 1rem;
+    }
+
+    .main-imgs {
+        width: 100%;
+        height: auto;
+    }
+
+    .card.reverse{
+        height: auto;
+    }
+
+    .bottom > .bg-colored {
+        height: auto;
+    }
+
+    #bottom-box {
+        gap: 10px;
+    }
+
+    #bottom-box > .msg-box {
+        margin: 120px auto;
+    }
+
+    #bottom-box .title-box {
+        margin: 0;
+    }
+
+    #bottom-box .title {
+        font-size: 2rem;
+        line-height: 44px;
+    }
+
+    footer > .content {
+        padding: 0 16px;
     }
 
 }
