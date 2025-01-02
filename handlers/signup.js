@@ -17,7 +17,7 @@ const pwdConfirm = {
     return this.input.value === pwd
   },
   text: {
-    unvalid: "비밀번호가 일치하지 않습니다.",
+    invalid: "비밀번호가 일치하지 않습니다.",
     empty: "비밀번호가 일치하지 않습니다.",
   }
 }
