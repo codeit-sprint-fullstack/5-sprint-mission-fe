@@ -1,0 +1,266 @@
+* {
+    --maincolor: #3692FF;
+    --textcolor: #1F2937;
+    margin: 0;
+    padding: 0;
+}
+
+@media all and (max-width:743px) { 
+    *{
+        font-size: 45%;
+    }
+
+    .loginComponent {
+        padding-right: 16px;
+        padding-left: 16px;
+    }
+
+    .social {
+        width: 3rem;
+        height: 3rem;
+    }
+
+
+} 
+
+@media all and (min-width:744px) and (max-width:1199px) { 
+    *{
+        font-size: 55%;
+    }
+
+
+    .loginComponent {
+        width: 520px;
+        height: 500px;
+    }
+
+    .social {
+        width: 4rem;
+        height: 4rem;
+    }
+    
+
+
+} 
+
+@media all and (min-width:1200px) { 
+    *{
+        font-size: 62.5%;
+    }
+
+
+
+    .loginComponent {
+        width: 640px;
+        height: 618px;
+    }
+
+} 
+
+input {
+    width: 100%;
+    margin-top: 20px;
+    font-family: 'Pretendard';
+    font-weight: 400;
+    font-size: 1.6rem;
+    border-radius: 12px;
+    background-color: #F3F4F6;
+    border-width: 0;
+    padding: 16px 24px 16px 24px;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+}
+
+.vector {
+    position: absolute;
+    top: 43%;
+    right: 3%;
+    cursor: pointer;
+
+}
+
+.logo {
+    margin-bottom: 50px;
+    width: 39.6rem;
+    height: 13.2rem;
+}
+
+.loginComponent {
+    margin: 0 auto;
+
+    margin-top: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+
+
+input:focus {
+    outline: 1px solid var(--maincolor);
+}
+
+
+
+
+
+
+
+
+.simpleLogin {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: 6rem;
+    background-color: #E6F2FF;
+    border-radius: 8px;
+    padding: 16px 24px 16px 24px;
+    align-items: center;
+    box-sizing: border-box;
+
+}
+
+.login {
+    width: 100%;
+    height: 56px;
+    margin-bottom: 30px;
+    border-radius: 40px;
+    border-width: 0;
+    color: #FFFFFF;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 2.0rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.login.deactive {
+    background-color: #9CA3AF;
+}
+
+.login.active {
+    background-color: var(--maincolor);
+}
+
+.signup {
+
+    width: 100%;
+    height: 56px;
+    margin-bottom: 30px;
+
+    border-radius: 40px;
+    border-width: 0;
+    color: #FFFFFF;
+    font-family: 'Pretendard';
+    font-weight: 600;
+    font-size: 2.0rem;
+    cursor: pointer;
+
+}
+
+.signup.deactive {
+    background-color: #9CA3AF;
+}
+
+.signup.active {
+    background-color: var(--maincolor);
+}
+
+
+
+.labels {
+    font-family: 'Pretendard';
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: var(--textcolor);
+}
+
+.simple {
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 1.6rem;
+    color: var(--textcolor);
+}
+
+.unRegister {
+    margin-top: 20px;
+    font-family: 'Pretendard';
+    font-weight: 500;
+    font-size: 1.4rem;
+    padding-bottom: 20px;
+    color: var(--textcolor);
+}
+
+.unRegister > a {
+    color: var(--maincolor);
+    font-size: 1.4rem;
+}
+
+.loginEmail {
+    width:100%;
+}
+
+.loginPasswd {
+    width: 100%;
+}
+
+.inputOutline {
+    position: relative;
+}
+
+.loginButton {
+    width: 98%;
+}
+
+
+
+.modal {
+    position: absolute;
+    background-color: rgba(0,0,0,0.4);
+    display: none;
+    top: 0;
+    height: 100%;
+    width: 100%;
+
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    
+}
+
+.modalPop {
+    opacity: 1;
+    position: absolute;
+    background-color: #FFFFFF;
+    width: 50rem;
+    height: 20rem;
+    border-radius: 16px;
+    padding: 12px;
+    font-size: 3rem;
+    font-family: 'Pretendard';
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.popCloseBtn {
+    background-color: var(--maincolor);
+    border: none;
+    padding: 1.2rem 5rem 1.2rem 5rem;
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    color:white;
+    border-radius: 8px;
+    cursor: pointer;
+
+}
+
+.errorBox {
+    color : red;
+    font-size: 1.6rem;
+    font-family: "Pretendard";
+    margin-bottom: 2.0rem;
+}
