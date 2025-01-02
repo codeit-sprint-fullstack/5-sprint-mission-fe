@@ -127,7 +127,7 @@ img {
   justify-content: center;
 }
 
-.popularBackground{
+.popularBackground {
   max-width: 988px;
   max-height: 444px;
   width: 100%;
@@ -299,7 +299,7 @@ a {
 } */
 
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 743px) {
   .tops {
     padding: 0 20px;
     justify-content: center;
@@ -384,7 +384,7 @@ a {
 }
 
 /* 중간 화면 (768px ~ 1200px) */
-@media screen and (min-width: 769px) and (max-width: 1200px) {
+@media screen and (min-width: 744px) and (max-width: 1200px) {
   .tops {
     padding: 0 200px;
   }
@@ -419,7 +419,7 @@ a {
   }
 
   img {
-    max-width: 60%;
+    max-width: 80%;
   }
 
   .commentOne, .comment3One {

@@ -17,7 +17,12 @@ section {
   display: flex;
   flex-direction: column;
   gap: 24px;
-  overflow: hidden;
+  /* overflow: hidden; */
+  justify-content: center;
+}
+
+ul, li {
+  list-style-type: none;
 }
 
 .container {
@@ -34,6 +39,10 @@ section {
   padding: 20px;
 }
 
+.hide {
+  display: none;
+}
+
 .email {
   gap: 16px;
 }
@@ -41,6 +50,11 @@ section {
 .font1-8em {
   font-size: 1.8em;
   font-weight: 700;
+}
+
+.input-vector {
+  display: flex;
+  align-items: center;
 }
 
 .email-input {
@@ -57,11 +71,15 @@ section {
   outline-color: #3692FF;
 }
 
-.input-background {
-  display: flex;
-  align-items: center;
+.pleaseEmail-message, .noneEmail-message, .pleasePassword-message, .strongPassword-maessage {
+  color:#F74747;
+  font-size: 1.5em;
+  line-height: 17.9px;
+  font-weight: 600;
+  position: relative;
+  left: 16px;
+  top: 8px;
 }
-
 
 
 .password-input {
@@ -79,13 +97,13 @@ section {
 }
 
 
-.Vector {
+.vector, .vector-open {
   cursor: pointer;
   position: absolute;
   right: 44px;
 }
 
-Button {
+.login-button {
   width: 100%;
   height: 56px;
   border-radius: 40px;
@@ -97,11 +115,64 @@ Button {
   line-height: 32px;
   color: #F3F4F6;
   border: none;
-  cursor: pointer;
+  pointer-events: none;
 }
 
-Button:hover{
+.login-button.active {
   background-color: #3692FF;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.7);
+  z-index: 9998;
+}
+
+.modal-box {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  max-width: 540px;
+  height: 250px;
+  width: 100%;
+  padding: 20px;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 8px;
+  background-color: #fff;
+  z-index: 9999;
+}
+
+.modal-box p{
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 19.09;
+  color: #1F2937;
+}
+
+.modal-close-btn {
+  border: none;
+  border-radius: 8px;
+  width: 120px;
+  height: 48px;
+  position: fixed;
+  top: 174px;
+  right: 28px;
+  background-color: #3692ff;
+  font-size: 1.6em;
+  font-weight: 600;
+  line-height: 19.09px;
+  color: #fff;
+  cursor: pointer;
 }
 
 .Easylogin {
@@ -139,4 +210,12 @@ a {
 
 img {
   max-width: 100%;
+}
+
+@media screen and (max-width: 743px) {
+
+}
+
+@media screen and (min-width: 744px) and (max-width: 1200px) {
+  
 }
