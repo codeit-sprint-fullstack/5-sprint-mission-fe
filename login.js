@@ -183,7 +183,7 @@ loginBtn.addEventListener("click", (e) => {
 });
 
 toggleLoginBtn();
-});
+}); 
 
 
 
