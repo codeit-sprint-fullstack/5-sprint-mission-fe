@@ -9,7 +9,10 @@ export async function getArticleList(param) {
   const response = sprint
     .get(
       `/articles?page=${param.page}&pageSize=${param.pageSize}&keyword=${param.keyword}`)
-    .then((res) => console.log(res.data))
+    .then((res) => {
+      console.log(res)
+      return res;
+    })
     .catch((err) => {
       const errmessage = errHandle(err);
       return err;
@@ -23,7 +26,7 @@ export async function getArticleList(param) {
  *                 int
  **/
 export async function getArticle(id) {
-  const response = instance
+  const response = sprint
     .get(`/articles/${id}`)
     .then((res) => console.log(res.data))
     .catch((err) => {
@@ -39,7 +42,7 @@ export async function getArticle(id) {
  *                { String    String    String }
  **/
 export async function createArticle(param) {
-  const response = instance
+  const response = sprint
     .post("/articles", param)
     .then((res) => console.log(res.data))
     .catch((err) => {
@@ -55,7 +58,7 @@ export async function createArticle(param) {
  *                { String    String    String }
  **/
 export async function patchArticle(param, id) {
-  const response = instance
+  const response = sprint
     .patch(`/articles/${id}`, param)
     .then((res) => console.log(res.data))
     .catch((err) => {
@@ -71,7 +74,7 @@ export async function patchArticle(param, id) {
  *                 int
  **/
 export async function deleteArticle(id) {
-  const response = instance
+  const response = sprint
     .delete(`/articles/${id}`)
     .then((res) => console.log(res.data))
     .catch((err) => {

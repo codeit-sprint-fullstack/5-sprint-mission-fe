@@ -1,5 +1,4 @@
-import { errHandle } from "./main.js";
-import { instances } from "./axiosSettings.js";
+import { errHandle, sprint } from "./main.js";
 
 /** 상품 리스트 조회
 * @param         { page:1, pageSize:100, keyword:"테스트" }
@@ -8,7 +7,7 @@ import { instances } from "./axiosSettings.js";
 **/
 export async function getProductList(param) {
   try {
-    let response = await instance.get(`/products/?page=${param.page}&pageSize=${param.pageSize}&keyword=${param.keyword}`);
+    let response = await sprint.get(`/products/?page=${param.page}&pageSize=${param.pageSize}&keyword=${param.keyword}`);
     console.log(response.data);
     return response;
   } catch (err) {
@@ -24,7 +23,7 @@ export async function getProductList(param) {
 **/
 export async function getProduct(id) {
   try {
-    let response = await instance.get(`/products/${id}`);
+    let response = await sprint.get(`/products/${id}`);
     console.log(response.data);
     return response;
   } catch (err) {
@@ -40,7 +39,7 @@ export async function getProduct(id) {
 **/
 export async function createProduct(param) {
   try {
-    let response = await instance.post("/products", param);
+    let response = await sprint.post("/products", param);
     console.log(response.data);
     return response;
   } catch (err) {
@@ -56,7 +55,7 @@ export async function createProduct(param) {
 **/
 export async function patchProduct(param, id) {
   try {
-    let response = await instance.patch(`/products/${id}`, param);
+    let response = await sprint.patch(`/products/${id}`, param);
     console.log(response.data);
     return response;
   } catch (err) {
@@ -72,7 +71,7 @@ export async function patchProduct(param, id) {
 **/
 export async function deleteProduct(id) {
   try {
-    let response = await instance.delete(`/${id}`);
+    let response = await sprint.delete(`/${id}`);
     console.log(response.data);
     return response;
   } catch (err) {

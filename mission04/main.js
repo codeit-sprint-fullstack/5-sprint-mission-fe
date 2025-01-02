@@ -1,6 +1,7 @@
 /*
 해결해야할 과제 1 : 로깅
 */
+
 import { createAxiosInstance } from "./axiosFunc.js";
 import { articleService } from "./ArticleService.js";
 // import { productService } from "./ProductService.js";
@@ -9,9 +10,17 @@ export const sprint = await createAxiosInstance("https://sprint-mission-api.verc
 
 //메인 함수
 async function mainFunc() {
+  const datas = await articleService.getArticleList(args.forGetArticleList);
+  for(let d in datas.data){
+    let getData = datas.data[d];
+    let dataElement = `ID: ${getData.id}
+제목: ${getData.title}
+본문: ${getData.content}
 
-  await articleService.getArticleList(args.forGetArticleList);
+`;
+    makeDiv(dataElement);
 
+  }
 }
 
 //인자 모음
@@ -72,3 +81,9 @@ export function errHandle(err) {
 
 await mainFunc();
 
+function makeDiv(data) {
+  const pretag = document.querySelector("pre");
+  const list = document.createElement("div");
+  list.textContent = data;
+  pretag.append(list);
+}
