@@ -1,12 +1,3 @@
-const PATH = {
-  HOME: "main.html",
-  LOGIN: "login.html",
-  SIGNUP: "signup.html",
-  PRIVACY: "privacy.html",
-  FQA: "fqa.html",
-  ITEMS: "items.html",
-};
-
 const USER_DATA = [
   { email: "codeit1@codeit.com", password: "codeit101!" },
   { email: "codeit2@codeit.com", password: "codeit202!" },
@@ -18,25 +9,18 @@ const USER_DATA = [
 
 document.addEventListener("DOMContentLoaded", () => {
   const email = document.getElementById("email");
-  const emailError = document.getElementById("emailError");
+  const emailError = document.getElementById("email-error");
   const pw = document.getElementById("pw");
-  const pwError = document.getElementById("pwError");
-  const pwCheck = document.getElementById("pwCheck");
-  const pwCheckError = document.getElementById("pwCheckError");
-  const pwView = document.getElementById("pwView");
-  const pwCheckView = document.getElementById("pwCheckView");
+  const pwError = document.getElementById("pw-error");
+  const pwCheck = document.getElementById("pw-check");
+  const pwCheckError = document.getElementById("pw-check-error");
+  const pwView = document.getElementById("pw-view");
+  const pwCheckView = document.getElementById("pw-check-view");
   const modal = document.querySelector(".modal");
   const modalMessage = document.querySelector(".modal-message");
   const modalBtn = document.querySelector(".modal-btn");
-  const ErorRed = "#F74747";
   const emailValidate = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
   const pwValidate = /^(?=.*[a-zA-Z])(?=.*[0-8])(?=.*[!@#$%^*+=-]).{6,16}$/;
-
-  const router = (button, path) => {
-    button.addEventListener("click", () => {
-      location.href = path;
-    });
-  };
 
   const debounce = (func, delay) => {
     let timer;
@@ -57,7 +41,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const modalClose = () => {
     modalMessage.textContent = "";
     modal.style.display = "none";
-    console.log("close");
   };
 
   const validate = (target, validate, message, error) => {
@@ -68,7 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         check = validate.test(target.value);
 
         if (!check) {
-          target.style.border = `solid 1px ${ErorRed}`;
+          target.classList.add("input-error");
           error.textContent = message;
         } else {
           target.style.border = "";
@@ -83,10 +66,10 @@ document.addEventListener("DOMContentLoaded", () => {
       "keyup",
       debounce(() => {
         if (pw1.value !== pw2.value) {
-          pw2.style.border = `solid 1px ${ErorRed}`;
+          pw2.classList.add("input-error");
           pwCheckError.textContent = message;
         } else {
-          pw2.style.border = "";
+          pw2.classList.remove("input-error");
           pwCheckError.textContent = "";
         }
       }, 500)
@@ -100,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
       USER_DATA.findIndex((user) => {
         if (user.email === email.value) {
           modalOpen("사용 중인 이메일입니다.");
-          email.style.border = `solid 1px ${ErorRed}`;
+          email.classList.add("input-error");
           emailError.textContent = "사용 중인 이메일입니다.";
           return;
         }

@@ -9,15 +9,14 @@ const USER_DATA = [
 
 document.addEventListener("DOMContentLoaded", () => {
   const pw = document.getElementById("pw");
-  const pwError = document.getElementById("pwError");
-  const pwView = document.getElementById("pwView");
+  const pwError = document.getElementById("pw-error");
+  const pwView = document.getElementById("pw-view");
   const email = document.getElementById("email");
-  const emailError = document.getElementById("emailError");
+  const emailError = document.getElementById("email-error");
   const login = document.getElementById("login");
   const modal = document.querySelector(".modal");
   const modalMessage = document.querySelector(".modal-message");
   const modalBtn = document.querySelector(".modal-btn");
-  const ErorRed = "#F74747";
   const emailValidate = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
   const pwValidate = /^(?=.*[a-zA-Z])(?=.*[0-8])(?=.*[!@#$%^*+=-]).{6,16}$/;
 
@@ -35,7 +34,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const focusOut = (target, error, message) => {
     target.addEventListener("focusout", () => {
       if (target.value === "") {
-        target.style.border = `1px solid ${ErorRed}`;
+        target.classList.add("input-error");
         error.textContent = message;
         return;
       }
@@ -55,8 +54,8 @@ document.addEventListener("DOMContentLoaded", () => {
     target.addEventListener(
       "keyup",
       debounce(() => {
-        let emailCheck = emailValidate.test(email.value);
-        let pwCheck = pwValidate.test(pw.value);
+        const emailCheck = emailValidate.test(email.value);
+        const pwCheck = pwValidate.test(pw.value);
 
         if (emailCheck && pwCheck) {
           login.disabled = false;
@@ -90,7 +89,7 @@ document.addEventListener("DOMContentLoaded", () => {
   email.addEventListener(
     "keyup",
     debounce(() => {
-      serch = USER_DATA.findIndex((d) => {
+      findEmail = USER_DATA.findIndex((d) => {
         return d.email === email.value;
       });
     }, 500)
@@ -107,11 +106,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   login.addEventListener("click", () => {
-    let serch = USER_DATA.find((d) => {
+    let findEmail = USER_DATA.find((d) => {
       return d.email === email.value;
     });
-    console.log(serch);
-    if (!serch) {
+    if (!findEmail) {
       modalOpen("일치하는 회원정보가 없습니다.");
     } else if (serch.password !== pw.value) {
       modalOpen("비밀번호가 일치하지 않습니다.");

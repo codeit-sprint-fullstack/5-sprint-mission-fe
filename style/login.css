@@ -177,3 +177,6 @@ main > img {
   font-weight: 600;
   cursor: pointer;
 }
+.input-error {
+  border: 1px solid #f74747;
+}
