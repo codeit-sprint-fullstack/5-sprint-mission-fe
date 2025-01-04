@@ -1,4 +1,4 @@
-const articleUrl = "https://sprint-mission-api.vercel.app/articles";
+const BASE_URL = "https://sprint-mission-api.vercel.app/articles";
 
 /** 게시글 목록 조회
  * @param {Object} params - 쿼리 정보
@@ -7,31 +7,32 @@ const articleUrl = "https://sprint-mission-api.vercel.app/articles";
  * @param {string} params.keyword - 검색 키워드
  */
 const getArticleList = (params) => {
-    const getArticleUrl = new URL(articleUrl);
+  const getArticleUrl = new URL(BASE_URL);
 
-    for (const [key, value] of Object.entries(params)) {
-        getArticleUrl.searchParams.append(key, value);
-    }
+  for (const [key, value] of Object.entries(params)) {
+    getArticleUrl.searchParams.append(key, value);
+  }
 
-    const response = fetch(getArticleUrl)
+  fetch(getArticleUrl)
     .then((response) => response.json())
     .then((data) => console.log(data))
-    .catch((err) => console.log("error: ", err))
-    
-    return response;
-}
+    .catch((err) => console.log(err));
+};
 
 /** 게시글 상세 조회
  * @param {int} id - 게시글 ID
  */
 const getArticle = (id) => {
-    const response = fetch((articleUrl + `/${id}`))
-    .then((response) => response.json())
+  fetch(BASE_URL + `/${id}`)
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`${response.status} 게시글을 찾을 수 없습니다.`);
+      }
+      return response.json();
+    })
     .then((data) => console.log(data))
-    .catch((err) => console.log("error: ", err))
-        
-    return response;
-}
+    .catch((err) => console.log(err));
+};
 
 /** 게시글 등록
  * @param {Object} params - 게시글 정보
@@ -40,21 +41,19 @@ const getArticle = (id) => {
  * @param {string} params.image - 이미지 링크
  */
 const createArticle = (params) => {
-    const response = fetch(articleUrl, {
-        method: "POST",
-        headers: {"Content-Type": "application/json",},
-        body: JSON.stringify({
-            title: params.title,
-            content: params.content,
-            image: params.image
-        })
-    })
+  fetch(BASE_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: params.title,
+      content: params.content,
+      image: params.image,
+    }),
+  })
     .then((response) => response.json())
     .then((data) => console.log(data))
-    .catch((err) => console.log("error: ", err))
-        
-    return response;
-}
+    .catch((err) => console.log(err));
+};
 
 /** 게시글 수정
  * @param {int} id - 게시글 ID
@@ -64,38 +63,48 @@ const createArticle = (params) => {
  * @param {string} params.image - 이미지 링크
  */
 const patchArticle = (id, params) => {
-    const response = fetch(articleUrl + `/${id}`, {
-        method: "PATCH",
-        headers: {"Content-Type": "application/json",},
-        body: JSON.stringify({
-            title: params.title,
-            content: params.content,
-            image: params.image
-        })
+  fetch(BASE_URL + `/${id}`, {
+    method: "PATCH",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      title: params.title,
+      content: params.content,
+      image: params.image,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`${response.status} 수정할 게시글을 찾을 수 없습니다.`);
+      }
+      return response.json();
     })
-    .then((response) => response.json())
     .then((data) => console.log(data))
-    .catch((err) => console.log("error: ", err))
-
-    return response;
-}
+    .catch((err) => console.log(err));
+};
 
 /** 게시글 삭제
  * @param {int} id - 게시글 ID
  * @returns 게시글 삭제 성공 시 성공 메시지 콘솔에 출력
  */
 const deleteArticle = (id) => {
-    fetch((articleUrl + `/${id}`), {
-        method: "DELETE",
-        headers: {"Content-Type": "application/json",}
-    })
+  fetch(BASE_URL + `/${id}`, {
+    method: "DELETE",
+    headers: { "Content-Type": "application/json" },
+  })
     .then((response) => {
-        if (response.status === 404) {
-            throw new Error(`${response.status}: 삭제할 게시글을 찾을 수 없습니다.`);
-        }
-        console.log("게시글을 삭제했습니다.");
+      if (response && response.status === 404) {
+        throw new Error(`${response.status} 삭제할 게시글을 찾을 수 없습니다.`);
+      }
+      console.log("게시글을 삭제했습니다.");
     })
-    .catch((err) => console.log("error: ", err))
-}
+    .catch((err) => console.log(err));
+};
 
-export { articleUrl, getArticleList, getArticle, createArticle, patchArticle, deleteArticle }
+export {
+  BASE_URL,
+  getArticleList,
+  getArticle,
+  createArticle,
+  patchArticle,
+  deleteArticle,
+};
