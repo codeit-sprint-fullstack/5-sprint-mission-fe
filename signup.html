@@ -20,25 +20,28 @@
         <form>
             <div class="FormArray">
                 <label for="UserEmail">이메일</label>
-                <input type="text" id="UserEmail" placeholder="이메일을 입력해주세요">
+                <input type="text" id="UserEmailNew" placeholder="이메일을 입력해주세요">
+                <div class="ErrorMessage" id="UserEmailNewE"></div>
             </div>
 
             <div class="FormArray">
                 <label for="Nickname">닉네임</label>
-                <input type="text" id="Nickname" placeholder="닉네임을 입력해주세요">
+                <input type="text" id="NicknameNew" placeholder="닉네임을 입력해주세요">
             </div>
 
             <div class="FormArray">
                 <label for="PassWord">비밀번호</label>
-                <input class="PWIcon" type="password" id="PassWord" placeholder="비밀번호를 입력해주세요">
+                <input class="PWIcon" type="password" id="PassWordNew" placeholder="비밀번호를 입력해주세요">
+                <div class="ErrorMessage" id="PassWordNewE"></div>
             </div>
 
             <div class="FormArray">
                 <label for="PassWordre">비밀번호 확인</label>
-                <input class="PWIcon" type="password" id="PassWordre" placeholder="비밀번호를 다시 한 번 입력해주세요">
+                <input class="PWIcon" type="password" id="PassWordreNew" placeholder="비밀번호를 다시 한 번 입력해주세요">
+                <div class="ErrorMessage" id="PassWordreNewE"></div>
             </div>
 
-            <input class="LoginButton" type="submit" value="회원가입">
+            <input class="LoginButton" id="LoginbnNew" type="submit" value="회원가입">
 
             <div class="EasyLogin">
                 <div class="EasyLoginArray">
@@ -63,6 +66,8 @@
             </div>
         </form>
     </div>
+
+    <script src="event2.js"></script>
 
 </body>
 </html>

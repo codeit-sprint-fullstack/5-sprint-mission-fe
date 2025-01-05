@@ -23,14 +23,17 @@
             <div class="FormArray">
                 <label for="UserEmail">이메일</label>
                 <input type="text" id="UserEmail" placeholder="이메일을 입력해주세요">
+                <div class="ErrorMessage" id="EmailE"></div>
             </div>
 
             <div class="FormArray">
                 <label for="PassWord">비밀번호</label>
                 <input class="PWIcon" type="password" id="PassWord" placeholder="비밀번호를 입력해주세요">
+                <div class="ErrorMessage" id="PassWordE"></div>
             </div>
 
-            <input class="LoginButton" type="submit" value="로그인">
+        
+            <input class="LoginButton" id="Loginbn" type="submit" value="로그인">
 
             <div class="EasyLogin">
                 <div class="EasyLoginArray">
@@ -55,6 +58,9 @@
             </div>
         </form>
     </div>
+
+
+    <script src="event.js"></script>
 
 </body>
 </html>
