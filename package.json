@@ -1,3 +1,15 @@
 {
-  "type": "module"
+  "type": "module",
+  "name": "5-sprint-mission-fe",
+  "version": "1.0.0",
+  "description": "## 소개",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.7.9"
+  }
 }
