@@ -11,6 +11,7 @@ const articleAxios = axios.create({
  * @param {string} [keyword=" "] - 검색 키워드 (기본값: 공백 문자열).
  * @returns {Promise<Object>} - 검색된 기사 데이터를 포함한 JSON 객체를 반환합니다.
  */
+
 const getArticleList = (page = 1, pageSize = 100, keyword = " ") => {
   const params = { page, pageSize, keyword };
   return articleAxios
@@ -30,6 +31,7 @@ const getArticleList = (page = 1, pageSize = 100, keyword = " ") => {
 /**
  * @param {number} id - 조회할 상품의 고유 ID.
  */
+
 const getArticle = async (id) => {
   try {
     const res = await articleAxios(`/${id}`);
@@ -39,7 +41,6 @@ const getArticle = async (id) => {
     return error;
   }
 };
-
 /**
  * @param {string} [title=""] - 생성할 상품의 제목 (기본값: 빈 문자열).
  * @param {string} [content=""] - 생성할 상품의 내용 (기본값: 빈 문자열).
@@ -62,6 +63,7 @@ const createArticle = async (title = "", content = "", image = "") => {
  * @param {string} [content=""] - 수정할 상품의 내용 (기본값: 빈 문자열).
  * @param {string} [image=""] - 수정할 상품의 이미지 URL (기본값: 빈 문자열).
  */
+
 const patchArticle = async (id = 0, title = "", content = "", image = "") => {
   const data = { title, content, image };
   try {
@@ -76,6 +78,7 @@ const patchArticle = async (id = 0, title = "", content = "", image = "") => {
 /**
  * @param {number} id - 삭제할 상품의 고유 ID.
  */
+
 const deleteArticle = async (id) => {
   try {
     const res = await articleAxios.delete(`/${id}`);

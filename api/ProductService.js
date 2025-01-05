@@ -10,6 +10,7 @@ const productAxios = axios.create({
  * @param {number} pageSize - 한페이지에 보여질 개수 (기본값은 100)
  * @param {string} keyword - title 및 description에 같은 문구가 있는 목록만 filter (기본값은 공백)
  */
+
 const getProductList = async (page = 1, pageSize = 100, keyword = " ") => {
   const params = { page, pageSize, keyword };
   try {
@@ -21,7 +22,6 @@ const getProductList = async (page = 1, pageSize = 100, keyword = " ") => {
     return error;
   }
 };
-
 /**
  * @param {number} id - 가져올 porduct의 id값
  */
@@ -82,6 +82,7 @@ const patchProduct = async (id, name, description, price, tags, images) => {
 /**
  * @param {number} id - 삭제할 상품의 id
  */
+
 const deleteProduct = async (id) => {
   try {
     const res = await productAxios.delete(`/${id}`);

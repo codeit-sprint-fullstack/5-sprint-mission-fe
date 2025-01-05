@@ -32,12 +32,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const emailValidate = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
   const pwValidate = /^(?=.*[a-zA-Z])(?=.*[0-8])(?=.*[!@#$%^*+=-]).{6,16}$/;
 
-  const router = (button, path) => {
-    button.addEventListener("click", () => {
-      location.href = path;
-    });
-  };
-
   const debounce = (func, delay) => {
     let timer;
     return function () {

@@ -129,3 +129,17 @@ document.addEventListener("DOMContentLoaded", () => {
   keyUp(email, emailError, "잘못된 이메일 형식입니다.");
   keyUp(pw, pwError, "비밀번호를 8자 이상 입력해주세요.");
 });
+
+class Modal extends HTMLElement {
+  constructor() {}
+
+  open(msg) {
+    this.modalMessage.textContent = msg;
+    this.modal.style.display = "block";
+  }
+
+  close() {
+    this.modalMessage.textContent = "";
+    this.modal.style.display = "none";
+  }
+}
