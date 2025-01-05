@@ -4,9 +4,7 @@
 html,
 body {
   font-size: 10px;
-  height: 100%;
   font-family: "Pretendard";
-  overflow: auto;
 }
 
 /* 헤더 부분 css  */
@@ -17,6 +15,7 @@ body {
   width: 100%;
   justify-content: center;
   background-color: #ffffff;
+  padding: 9.5px 0;
 }
 
 .header {
@@ -24,6 +23,7 @@ body {
   width: calc(100% - 400px);
   height: 70px;
   padding: 0 9px;
+  text-align: center;
   justify-content: space-between;
   align-items: center;
 }
@@ -33,17 +33,16 @@ body {
 }
 
 .loginBtn {
-  width: 128px;
-  height: 48px;
-  padding: 12px 23px;
+  padding: 11px 43px;
   background-color: var(--input-focus);
-  font-size: 1.6rem;
+  font-size: 16px;
   font-weight: 600;
   line-height: 26px;
   color: #f3f4f6;
   border-radius: 8px;
-  border: 0;
   white-space: nowrap;
+  cursor: pointer;
+  text-decoration: none;
 }
 
 /* 메인 부분 css */
@@ -66,7 +65,7 @@ body {
   padding: 40px 7px 40px 0;
 }
 
-.blueCardBox > button {
+.blueCardBoxBtn {
   width: 100%;
   height: 56px;
   padding: 16px 0;
@@ -160,15 +159,18 @@ footer {
   line-height: 19.09px;
   text-align: center;
 }
-
 .footerBtn {
+  display: flex;
+  justify-content: space-between;
+}
+.footerBtn > a {
   display: flex;
   color: #e5e7eb;
   font-size: 1.6rem;
   font-weight: 400;
   line-height: 19.09px;
-  text-align: center;
   cursor: pointer;
+  text-decoration: none;
 }
 .footerIcon {
   word-spacing: 12px;
@@ -212,6 +214,7 @@ footer {
   }
   .footerBtn {
     flex-direction: column;
+    align-items: center;
   }
   .footerIcon {
     display: flex;

@@ -1,15 +1,99 @@
-const path = {
-  HOME: "main.html",
-  LOGIN: "login.html",
-  SIGNUP: "signup.html",
-  PRIVACY: "privacy.html",
-  FQA: "fqa.html",
-  ITEMS: "items.html",
-};
+const USER_DATA = [
+  { email: "codeit1@codeit.com", password: "codeit101!" },
+  { email: "codeit2@codeit.com", password: "codeit202!" },
+  { email: "codeit3@codeit.com", password: "codeit303!" },
+  { email: "codeit4@codeit.com", password: "codeit404!" },
+  { email: "codeit5@codeit.com", password: "codeit505!" },
+  { email: "codeit6@codeit.com", password: "codeit606!" },
+];
 
 document.addEventListener("DOMContentLoaded", () => {
   const pw = document.getElementById("pw");
-  const pwView = document.getElementById("pwView");
+  const pwError = document.getElementById("pw-error");
+  const pwView = document.getElementById("pw-view");
+  const email = document.getElementById("email");
+  const emailError = document.getElementById("email-error");
+  const login = document.getElementById("login");
+  const modal = document.querySelector(".modal");
+  const modalMessage = document.querySelector(".modal-message");
+  const modalBtn = document.querySelector(".modal-btn");
+  const emailValidate = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-za-z0-9\-]+/;
+  const pwValidate = /^(?=.*[a-zA-Z])(?=.*[0-8])(?=.*[!@#$%^*+=-]).{6,16}$/;
+
+  const debounce = (func, delay) => {
+    let timer;
+    return function () {
+      const args = arguments;
+      clearTimeout(timer);
+      timer = setTimeout(() => {
+        func.apply(this, args);
+      }, delay);
+    };
+  };
+
+  const focusOut = (target, error, message) => {
+    target.addEventListener("focusout", () => {
+      if (target.value === "") {
+        target.classList.add("input-error");
+        error.textContent = message;
+        return;
+      }
+    });
+  };
+
+  const modalOpen = (msg) => {
+    modalMessage.textContent = msg;
+    modal.style.display = "block";
+  };
+  const modalClose = () => {
+    modalMessage.textContent = "";
+    modal.style.display = "none";
+  };
+
+  const keyUp = (target, error, message) => {
+    target.addEventListener(
+      "keyup",
+      debounce(() => {
+        const emailCheck = emailValidate.test(email.value);
+        const pwCheck = pwValidate.test(pw.value);
+
+        if (emailCheck && pwCheck) {
+          login.disabled = false;
+        } else {
+          login.disabled = true;
+        }
+
+        if (target.id === "email") {
+          if (!emailCheck) {
+            target.style.border = `1px solid ${ErorRed}`;
+            error.textContent = message;
+          } else {
+            target.style.border = "";
+            error.textContent = "";
+          }
+        }
+
+        if (target.id === "pw") {
+          if (!pwCheck) {
+            target.style.border = `1px solid ${ErorRed}`;
+            error.textContent = message;
+          } else {
+            target.style.border = "";
+            error.textContent = "";
+          }
+        }
+      }, 500)
+    );
+  };
+
+  email.addEventListener(
+    "keyup",
+    debounce(() => {
+      findEmail = USER_DATA.findIndex((d) => {
+        return d.email === email.value;
+      });
+    }, 500)
+  );
 
   pwView.addEventListener("click", () => {
     if (pw.type === "password") {
@@ -21,13 +105,25 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  const home = document.getElementById("home");
-  const signUp = document.getElementById("signUp");
+  login.addEventListener("click", () => {
+    let findEmail = USER_DATA.find((d) => {
+      return d.email === email.value;
+    });
+    if (!findEmail) {
+      modalOpen("일치하는 회원정보가 없습니다.");
+    } else if (serch.password !== pw.value) {
+      modalOpen("비밀번호가 일치하지 않습니다.");
+    } else {
+      location.href = "./items.html";
+    }
+  });
 
-  home.addEventListener("click", () => {
-    location.href = path.HOME;
+  modalBtn.addEventListener("click", () => {
+    modalClose();
   });
-  signUp.addEventListener("click", () => {
-    location.href = path.SIGNUP;
-  });
+
+  focusOut(email, emailError, "이메일을 입력해 주세요");
+  focusOut(pw, pwError, "패스워드를 입력해 주세요.");
+  keyUp(email, emailError, "잘못된 이메일 형식입니다.");
+  keyUp(pw, pwError, "비밀번호를 8자 이상 입력해주세요.");
 });

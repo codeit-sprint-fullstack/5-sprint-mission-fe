@@ -4,46 +4,48 @@
 html,
 body {
   font-family: Pretandard;
-  width: 100%;
-  height: 100%;
 }
-section {
+main {
   width: 100%;
   height: 100%;
   align-content: center;
   justify-items: center;
   gap: 24px;
 }
-section > img {
+main > img {
+  width: 100%;
+  min-width: 198px;
   cursor: pointer;
 }
-
-.loginBox {
+@media (max-width: 1200px) {
+  main {
+    padding: 48px 52px;
+    width: calc(100% - 104px);
+    margin: 0 auto;
+    height: calc(100vh - 96px);
+  }
+}
+@media (max-width: 744px) {
+  main {
+    padding: 24px 15px;
+    width: calc(100% - 30px);
+    margin: 0 auto;
+    height: calc(100vh - 48px);
+  }
+}
+.login-box {
   display: flex;
   flex-direction: column;
   max-width: 640px;
   width: 100%;
-  gap: 24px;
+  min-width: 344px;
+  gap: 16px;
   font-size: 18px;
   font-weight: 700;
   line-height: 26px;
 }
 
-.loginBox > input {
-  max-height: calc(56px - 30px);
-  padding: 15px 24px;
-  border: 0;
-  border-radius: 12px;
-  background-color: var(--input-bg);
-  outline: none;
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 26px;
-}
-.loginBox > input:focus {
-  border: 1px solid var(--input-focus);
-}
-.loginBox > button {
+.login-box > button {
   font-size: 20px;
   font-weight: 600;
   line-height: 32px;
@@ -55,18 +57,23 @@ section > img {
   border: 0;
   cursor: pointer;
 }
-.loginBox > button:hover {
+
+.login-box > button:hover {
   background-color: var(--input-focus);
 }
-.passwordBox {
+.login-box > button:disabled {
+  cursor: not-allowed;
+  background-color: var(--login-btn-bg);
+}
+.input-box {
   display: flex;
   flex-direction: column;
   max-width: 640px;
   width: 100%;
-  gap: 16px;
+  gap: 8px;
   position: relative;
 }
-.passwordBox > input {
+.input-box > input {
   max-height: calc(56px - 30px);
   height: 56px;
   padding: 15px 24px;
@@ -77,17 +84,26 @@ section > img {
   font-size: 16px;
   font-weight: 400;
   line-height: 26px;
+  /* margin-top: 8px; */
 }
-.passwordBox > input:focus {
+.input-box > input:focus {
   border: 1px solid var(--input-focus);
 }
-.passwordBox img {
-  top: 16px;
+.input-box > img {
+  top: 48px;
   right: 16px;
   position: absolute;
 }
+.input-box > p {
+  color: #f74747;
+  padding: 0px 16px;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 17.9px;
+  text-align: left;
+}
 
-.socialLoginBox {
+.social-login-box {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -95,22 +111,21 @@ section > img {
   border-radius: 8px;
   background-color: var(--sicial-login-bg);
 }
-.iconBox {
+.icon-box {
   word-spacing: 16px;
 }
-.iconBox > img {
+.icon-box > img {
   cursor: pointer;
 }
 
-.signUpBox {
+.sign-up-box {
   text-align: center;
   font-size: 14px;
   font-weight: 500;
   line-height: 24px;
 }
 
-.signUpBox > a {
-  font-family: Pretendard;
+.sign-up-box > a {
   color: var(--login-link);
   font-size: 14px;
   font-weight: 500;
@@ -119,4 +134,49 @@ section > img {
   text-decoration-style: solid;
   text-underline-position: from-font;
   cursor: pointer;
+}
+
+.modal {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(0, 0, 0, 0.5);
+}
+.modal-popup {
+  justify-content: center;
+  align-content: center;
+  position: absolute;
+  max-width: 540px;
+  min-width: 327px;
+  max-height: 250px;
+  min-height: 220px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 28px;
+  background-color: white;
+  border-radius: 8px;
+}
+.modal-message {
+  text-align: center;
+}
+.modal-btn {
+  position: absolute;
+  bottom: 28px;
+  right: 28px;
+  background-color: var(--input-focus);
+  color: white;
+  padding: 12px 23px;
+  border-radius: 8px;
+  border: 0;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.input-error {
+  border: 1px solid #f74747;
 }
