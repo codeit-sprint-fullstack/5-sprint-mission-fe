@@ -1,5 +1,5 @@
 import articleAPI from "./article.js";
-import productAPI from "./product.js";
+import productAPI from "./products.js";
 
 // .then()과 .catch()를 사용하여 게시글 목록 가져오기
 // 게시글 목록을 가져오고 상태 코드가 2XX가 아닐 경우 오류를 처리.
