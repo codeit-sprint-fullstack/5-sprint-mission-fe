@@ -124,6 +124,7 @@ function NewjudgeBtn() {
             }
         });
 
+        
     } else {
         LOGBUTTON.classList.remove('blueLoginButton');
     }
