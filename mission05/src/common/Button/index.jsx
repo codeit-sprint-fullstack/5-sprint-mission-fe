@@ -3,7 +3,7 @@ import { styled } from "styled-components";
 export default function Button({ children }) {
   return (
     <>
-      <CommonBTN>children</CommonBTN>
+      <CommonBTN>{children}</CommonBTN>
     </>
   );
 }
