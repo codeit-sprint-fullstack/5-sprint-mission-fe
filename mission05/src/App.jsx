@@ -1,11 +1,11 @@
-import { styled } from "styled-components";
 import Header from "./components/Header";
+import Favorites from "./components/Favorites";
 
 function App() {
   return (
     <>
       <Header />
-      <p>Favorites</p>
+      <Favorites />
       <p>Sales</p>
     </>
   );
