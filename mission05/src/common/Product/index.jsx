@@ -1,18 +1,25 @@
 import { styled } from "styled-components";
+import Likes from "../Likes";
+
+const formatPrice = (price) => {
+  return new Intl.NumberFormat("ko-KR").format(price);
+};
 
 export default function Product({ data }) {
   return (
     <CommonProduct>
-      <ProductIMG src="" alt="" />
+      <ProductIMG src={data.images[0]} alt={data.name} />
       <ProductContent>
-        <Title>{data}</Title>
-        <Price>{data}</Price>
+        <Title>{data.name}</Title>
+        <Price>{formatPrice(data.price)}원</Price>
+        <Likes favoriteCount={data.favoriteCount} />
       </ProductContent>
     </CommonProduct>
   );
 }
 
 const CommonProduct = styled.section`
+  width: 100%; /* 부모 요소의 너비가 100%인지 확인 */
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -20,7 +27,9 @@ const CommonProduct = styled.section`
 
 const ProductIMG = styled.img`
   width: 100%;
-  height: auto;
+  aspect-ratio: 1 / 1;
+  border: none;
+  border-radius: 16px;
 `;
 
 const ProductContent = styled.div`

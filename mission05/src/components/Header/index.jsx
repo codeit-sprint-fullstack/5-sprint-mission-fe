@@ -23,10 +23,13 @@ export default function Header() {
 
 const HeaderContainer = styled.div`
   width: 100%;
+  background-color: #ffffff;
   border-bottom: 1px solid #dfdfdf;
 
   position: sticky;
   top: 0;
+
+  z-index: 10;
 `;
 
 const HeaderWrapper = styled.header`

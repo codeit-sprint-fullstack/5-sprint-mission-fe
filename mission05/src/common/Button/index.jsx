@@ -1,6 +1,6 @@
 import { styled } from "styled-components";
 
-export default function Button({ children, onClick }) {
+export default function Button({ children, onClick = () => {} }) {
   return (
     <>
       <CommonBTN onClick={onClick}>{children}</CommonBTN>
@@ -19,6 +19,7 @@ const CommonBTN = styled.button`
   border-radius: 8px;
 
   padding: 8px 23px;
+  box-sizing: border-box;
 
   &:hover {
     cursor: pointer;
