@@ -1,6 +1,6 @@
 import panda from "../assets/Group 19.png";
 import login from "../assets/로그인.png";
-import "./Nav.css";
+import "../App.css";
 
 function Nav() {
   return (
@@ -14,7 +14,7 @@ function Nav() {
             <a>자유게시판</a>
             <a>중고마켓</a>
           </div>
-          <a href="./login/login.html">
+          <a href="./">
             <img class="login-img" src={login} />
           </a>
         </div>

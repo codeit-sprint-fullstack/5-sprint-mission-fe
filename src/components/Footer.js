@@ -1,4 +1,4 @@
-import "./Footer.css";
+import "../App.css";
 import facebookimg from "../assets/facebook.png";
 import twitterimg from "../assets/twitter.png";
 import youtubeimg from "../assets/Group.png";
@@ -12,8 +12,9 @@ function Footer() {
           <nav class="tail-nav">
             <li>@codeit-2024</li>
             <li>
-              <a href="./privacy/privacy.html">Privacy Policy</a>
-              <a href="./faq/faq.html">FAQ</a>
+              <a href="./">Privacy Policy</a>
+              &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              <a href="./">FAQ</a>
             </li>
             <li class="frame">
               <a href="https://www.facebook.com">
