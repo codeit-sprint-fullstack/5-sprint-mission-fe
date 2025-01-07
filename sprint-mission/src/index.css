@@ -1,0 +1,20 @@
+@import "../src/utils/styles/reset.css";
+@import "../src/utils/styles/color.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  font-family: pretendard, sans-serif;
+  margin: 0;
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}

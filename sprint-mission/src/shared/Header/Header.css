@@ -1,0 +1,115 @@
+@import "../../utils/styles/color.css";
+
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dfdfdf;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+}
+
+nav {
+  width: 100%;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+#logo-img {
+  width: 153px;
+  height: 51px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8.6px;
+}
+
+#logo-icon {
+  width: 40px;
+  display: block;
+}
+
+#logo-text {
+  width: 103px;
+}
+
+header .link-list {
+  display: flex;
+}
+
+header .link-item {
+  padding: 21px 15px;
+  color: var(--gray600);
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 26px;
+  text-align: center;
+  text-decoration: none;
+}
+
+#login-btn {
+  background-color: var(--primary100);
+  padding: 12px 23px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  color: var(--gray100);
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 26px;
+  text-align: center;
+  text-decoration-line: none;
+  display: block;
+}
+
+#profile-img {
+  width: 40px;
+  height: 40px;
+}
+
+/* 태블릿 사이즈 동일 */
+
+/* 모바일 사이즈 미디어쿼리 */
+@media (max-width: 743px) {
+  /* 모바일 사이즈에서 로고 아이콘 숨기기 */
+  #logo-icon {
+    display: none;
+  }
+
+  nav {
+    padding: 0 16px;
+  }
+
+  .nav-menu {
+    gap: 8px;
+  }
+
+  #logo-img {
+    width: 100%;
+  }
+
+  #logo-text {
+    width: 80px;
+  }
+
+  header .link-list {
+    gap: 8px;
+  }
+
+  header .link-item {
+    padding: 20px 0;
+    color: var(--gray600);
+    font-size: 1rem;
+  }
+}
