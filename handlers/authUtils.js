@@ -5,7 +5,7 @@ export const email = {
     return /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/i.test(this.input.value)
   },
   text: {
-    unvalid: "잘못된 이메일 형식입니다.",
+    invalid: "잘못된 이메일 형식입니다.",
     empty: "이메일을 입력해주세요."
   }
 };
@@ -17,7 +17,7 @@ export const pwd = {
     return this.input.value.length >= 8
   },
   text: {
-    unvalid: "비밀번호를 8자 이상 입력해주세요.",
+    invalid: "비밀번호를 8자 이상 입력해주세요.",
     empty: "비밀번호를 입력해주세요.",
   }
 }
@@ -26,15 +26,15 @@ export const pwd = {
 //e.g. "a  b" -> "ab"
 export const removeWhitespace = (e) => e.target.value = e.target.value.replace(/\s+/g, "");
 
-export const updateInvalidMessage = (value, error, text) => {
+const updateErrorMessage = (value, error, text) => {
   if (!value) error.textContent = text.empty;
-  else error.textContent = text.unvalid;
+  else error.textContent = text.invalid;
 };
 
 export const validateInput = (element, updateButtonState, confirm) => {
   const value = element.input.value;
 
-  updateInvalidMessage(value, element.error, element.text);
+  updateErrorMessage(value, element.error, element.text);
   if (!value || !element.validator(confirm)) element.input.classList.add("error");
   else element.input.classList.remove("error");
 
