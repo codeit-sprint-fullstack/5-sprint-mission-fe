@@ -1,12 +1,13 @@
 import styled from "styled-components";
 import PageItem from "./PageItem";
 import imgArrowBtn from "../../assets/img/pagenation/arrow_right.png";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const length = 5;
 
-export default function Pagination({ count, page, setPage }) {
+export default function Pagination({ count, page, keyword, setPage }) {
   const [startIndex, setStartIndex] = useState(1);
+  const [pageArray, setPageArray] = useState([]);
 
   const handlePrev = () => {
     if (startIndex > 1) {
@@ -19,12 +20,27 @@ export default function Pagination({ count, page, setPage }) {
       setStartIndex((prev) => prev + length);
     }
   };
+
+  useEffect(() => {
+    const newArray = Array.from({ length }, (_, i) => startIndex + i).filter(
+      (number) => number <= count
+    );
+    setPageArray(() => newArray);
+  }, [startIndex, count, keyword]);
+
+  // 검색어 변경시 첫 페이지로 이동
+  useEffect(() => {
+    setStartIndex(1);
+    setPage(1);
+  }, [keyword, setPage]);
+
   return (
     <PaginationWrapper>
       <PageItem onClick={handlePrev}>
         <ImgRightArrow src={imgArrowBtn} alt="왼쪽으로" />
       </PageItem>
-      {Array.from({ length }, (_, i) => startIndex + i).map((number, idx) => (
+
+      {pageArray.map((number, idx) => (
         <PageItem key={idx} isSelect={+page === +number} onClick={setPage}>
           {number}
         </PageItem>

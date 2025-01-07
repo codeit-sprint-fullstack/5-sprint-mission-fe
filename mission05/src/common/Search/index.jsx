@@ -8,7 +8,6 @@ export default function Search({ children, setKeyword }) {
   const debouncedValue = useDebounce(inputValue, 500);
 
   useEffect(() => {
-    console.log("debouncedValue :", debouncedValue);
     setKeyword(debouncedValue);
   }, [debouncedValue, setKeyword]);
 

@@ -24,11 +24,7 @@ export default function Filter({ sortType, setSortType }) {
       {isShow && (
         <SelectItems>
           {Object.values(SORT_TYPE).map((value) => (
-            <SelectItem
-              key={value.key}
-              onClick={() => selectItem(value)}
-              isSelected={sortType.key === value.key}
-            >
+            <SelectItem key={value.key} onClick={() => selectItem(value)}>
               {value.label}
             </SelectItem>
           ))}

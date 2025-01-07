@@ -8,6 +8,7 @@ import Filter from "../../common/Filter";
 import Search from "../../common/Search";
 import Product from "../../common/Product";
 import Pagination from "../Pagination";
+import useWidthSize from "../../hooks/useWindowSize.js";
 
 const calculatePageSize = (width) => {
   if (width > 1200) {
@@ -28,23 +29,16 @@ export default function Sales() {
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
   const [pageSize, setPageSize] = useState(initPageSize); // 현재 보이는 Product 개수
+  const widthSize = useWidthSize(); // 화면 크기 상태 값
 
   // width로 pageSize 제어
   useEffect(() => {
-    const handleResize = () => {
-      const width = window.innerWidth;
-      const newCount = calculatePageSize(width);
-      setPageSize(newCount);
-    };
-
-    handleResize(); // 초기 실행
-    window.addEventListener("resize", handleResize); // 리스너 추가
-    return () => window.removeEventListener("resize", handleResize); // 리스너 제거
-  }, []);
+    const newPageSize = calculatePageSize(widthSize);
+    setPageSize(newPageSize);
+  }, [widthSize]);
 
   // fetch data
   useEffect(() => {
-    console.log("keyword: ", keyword);
     const fetchData = async () => {
       try {
         const data = await getProductList({
@@ -61,7 +55,7 @@ export default function Sales() {
     };
 
     fetchData();
-  }, [sortType, page, keyword]);
+  }, [sortType, page, keyword, pageSize]);
 
   return (
     <section>
@@ -82,8 +76,9 @@ export default function Sales() {
 
       <PaginationWrapper>
         <Pagination
-          count={Math.floor(totalCount / pageSize)}
+          count={Math.ceil(totalCount / pageSize)}
           page={page}
+          keyword={keyword}
           setPage={setPage}
         />
       </PaginationWrapper>
