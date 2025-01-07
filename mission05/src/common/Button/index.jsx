@@ -19,4 +19,8 @@ const CommonBTN = styled.button`
   border-radius: 8px;
 
   padding: 8px 23px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
