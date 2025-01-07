@@ -1,0 +1,11 @@
+@font-face {
+  font-family: "PretendardBold";
+  src: url("./font/public/static/Pretendard-Bold.otf") format("opentype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+body {
+  font-family: "PretendardBold", sans-serif;
+  margin: 0 auto;
+}

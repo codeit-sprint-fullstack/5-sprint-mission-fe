@@ -1,0 +1,14 @@
+.sellProducts {
+  display: flex;
+  justify-content: space-between;
+}
+
+.mainContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.bestMainContainer {
+  display: flex;
+  justify-content: center;
+}
