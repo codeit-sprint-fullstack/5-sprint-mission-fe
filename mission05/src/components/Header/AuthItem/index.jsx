@@ -1,22 +1,23 @@
 import { useState } from "react";
-import Button from "../../common/Button";
 import styled from "styled-components";
+import Button from "../../../common/Button";
+import imgProfile from "../../../assets/img/mock/profile.png";
 
-export default function Auth() {
-  const [isLogin, setIsLogin] = useState();
+export default function AuthItem() {
+  const [isLogin, setIsLogin] = useState(false);
 
   const handleClick = () => setIsLogin((prev) => !prev);
 
   return (
     <>
       {isLogin ? (
-        <Button onClick={handleClick}>로그아웃</Button>
-      ) : (
         <ImgProfile
-          src="../../assets/img/mock/profile.png" // 임시 이미지 URL
+          src={imgProfile}
           alt="프로필 이미지"
           onClick={handleClick}
         />
+      ) : (
+        <Button onClick={handleClick}>로그인</Button>
       )}
     </>
   );

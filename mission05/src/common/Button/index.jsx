@@ -1,16 +1,16 @@
 import { styled } from "styled-components";
 
-export default function Button({ children }) {
+export default function Button({ children, onClick }) {
   return (
     <>
-      <CommonBTN>{children}</CommonBTN>
+      <CommonBTN onClick={onClick}>{children}</CommonBTN>
     </>
   );
 }
 
 const CommonBTN = styled.button`
   background-color: #3692ff;
-  color: "#F3F4F6";
+  color: #f3f4f6;
   font-size: 1rem;
   font-weight: 600;
   line-height: 26px;
