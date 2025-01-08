@@ -26,7 +26,7 @@ export const useBestItems = () => {
     const params = {
       page: 1,
       pageSize, //setPageSize로 변경된 pageSize 쿼리로 전달
-      orderBy: ORDER_BY.FAVORITE, //정렬 기준: 베스트상품
+      orderBy: ORDER_BY.FAVORITE.value, //정렬 기준: 베스트상품
     };
 
     try {

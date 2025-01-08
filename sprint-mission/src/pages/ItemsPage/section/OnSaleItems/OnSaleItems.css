@@ -7,26 +7,237 @@
   gap: 24px;
 }
 
-.utility-box {
-  height: 42px;
+.section-top {
+  width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+.utility-box {
+  display: flex;
+  align-items: center;
   gap: 12px;
 }
 
-/* TODO: 스페이스비트윈 안벌어짐. 컴포넌트 완성 후에 확인필요 */
-.section-top {
+/* SearchItems */
+#search-items-wrapper {
+  position: relative;
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  align-items: center;
+  gap: 4px;
+  height: 42px;
 }
 
-.cards-box {
+#input-search-keyword {
+  width: 100%;
+  border-radius: 12px;
+  background-color: var(--gray100);
+  padding: 9px 0;
+  padding-left: 40px;
+  padding-right: 20px;
+  border: none;
+
+  font-family: pretendard, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 26px;
+  color: var(--gray800);
+}
+
+input::placeholder {
+  color: var(--gray400);
+}
+
+input:focus {
+  outline: 1px solid var(--primary100);
+}
+
+#item-search-icon {
+  width: 15px;
+  height: 15px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 16px;
+}
+
+/* PostItems */
+#post-item-btn {
+  height: 42px;
+  background-color: var(--primary100);
+  border: none;
+  border-radius: 8px;
+  padding: 8px 23px;
+
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 26px;
+  text-decoration: none;
+  color: var(--gray100);
+  cursor: pointer;
+}
+
+/* SortItems */
+.sort-items-wrapper {
+  position: relative;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-radius: 12px;
+  border: 1px solid var(--gray200);
+  padding: 8px 20px;
+  cursor: pointer;
+}
+
+.sort-items-text {
+  display: show;
+  color: var(--gray800);
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 26px;
+}
+
+.sort-items-text.mobile {
+  display: none;
+}
+
+#dropdown-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.dropdown-box {
+  display: none;
+  position: absolute;
+  top: 50px;
+  right: 0px;
+  width: 130px;
+  background-color: #fff;
+  border: 1px solid var(--gray200);
+  border-radius: 12px;
+  overflow: hidden;
+  z-index: 2;
+}
+
+.dropdown-box.show {
+  display: block;
+}
+
+.dropdown-text {
+  font-size: 1.6rem;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: center;
+  color: var(--gray800);
+  border-bottom: 1px solid var(--gray200);
+  margin: 0 auto;
+  padding: 8px 0;
+  cursor: pointer;
+}
+
+.dropdown-text:last-child {
+  border-bottom: none;
+}
+
+/* ItemsCard */
+#on-sale-items .cards-box {
   display: grid;
   gap: 40px 24px;
   grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
 }
 
+#on-sale-items .item-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#on-sale-items .item-img {
+  width: 221px;
+  height: 221px;
+  border-radius: 16px;
+}
+
+/* PaginationItems */
 .section-bottom {
   padding-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.pagination-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.page-btn {
+  width: 40px;
+  height: 40px;
+  background-color: #fff;
+  border-radius: 50%;
+  border: 1px solid var(--gray200);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  font-family: pretendard, sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
+  line-height: 26px;
+  color: var(--gray500);
+}
+
+.arrow-img {
+  width: 16px;
+  height: 16px;
+}
+
+.page-btn.selected {
+  background-color: var(--primary100);
+  border: 1px solid var(--primary100);
+  color: var(--gray50);
+}
+
+/* TODO: 인풋박스 텍스트 깨짐 해결해보자. */
+/* 태블릿 사이즈 미디어쿼리 */
+@media (max-width: 1199px) {
+  #input-search-keyword {
+    /* width: 242px; */
+  }
+
+  #on-sale-items .cards-box {
+    gap: 40px 16px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* 모바일 사이즈 미디어쿼리 */
+@media (max-width: 743px) {
+  #input-search-keyword {
+    /* width: 288px; */
+  }
+
+  /* TODO: 모바일 사이즈 그리드 바꾸기 */
+  .section-top {
+  }
+
+  .sort-items {
+    width: 42px;
+    height: 42px;
+    padding: 9px;
+  }
+
+  #on-sale-items .cards-box {
+    gap: 32px 8px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #on-sale-items .item-img {
+    width: 168px;
+    height: 168px;
+    border-radius: 12px;
+  }
 }

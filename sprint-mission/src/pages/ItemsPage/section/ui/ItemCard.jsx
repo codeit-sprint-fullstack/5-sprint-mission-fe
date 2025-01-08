@@ -14,7 +14,9 @@ export function ItemCard({ product }) {
 
       <div className="item-card-text">
         <p className="product-name">{productName}</p>
-        <p className="product-price">{productPrice}</p>
+        <p className="product-price">
+          {new Intl.NumberFormat("ko-KR").format(productPrice)}원
+        </p>
         <div className="fav-count-box">
           <img className="fav-heart-icon" src={favHeart} alt="좋아요 아이콘" />
           <p className="product-fav-count">{productFavCount}</p>

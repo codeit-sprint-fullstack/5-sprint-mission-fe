@@ -23,6 +23,6 @@ export const getItemsListAPI = async (params = {}) => {
 };
 
 export const ORDER_BY = {
-  FAVORITE: "favorite",
-  RECENT: "recent",
+  RECENT: { value: "recent", name: "최신순" },
+  FAVORITE: { value: "favorite", name: "좋아요순" },
 };
