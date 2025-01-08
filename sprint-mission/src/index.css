@@ -19,16 +19,18 @@ body {
   margin: 0 auto;
 }
 
-/* 태블릿 사이즈 미디어쿼리리 */
+/* 태블릿 사이즈 미디어쿼리 */
 @media (max-width: 1199px) {
   .content {
-    max-width: 696px;
+    min-width: 696px;
+    padding: 0 24px;
   }
 }
 
-/* 모바일 사이즈 미디어쿼리리 */
+/* 모바일 사이즈 미디어쿼리 */
 @media (max-width: 743px) {
   .content {
-    max-width: 344px;
+    min-width: 344px;
+    padding: 0 15px;
   }
 }
