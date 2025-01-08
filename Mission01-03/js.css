@@ -1,0 +1,65 @@
+:root {
+  --primary100 : #3692FF;
+  --primary200 : #1967d6;
+  --primary300 : #1251aa;
+  --error : #f74747;
+  --gray900 : #111827;
+  --gray800 : #1f2937;
+  --gray700 : #374151;
+  --gray600 : #4b5563;
+  --gray500 : #6b7280;
+  --gray400 : #9ca3af;
+  --gray200 : #e5e7eb;
+  --gray100 : #F3F4F6;
+  --gray50 : #f9fafb;
+  --box_bg : #e6f2ff;
+}
+.error-message {
+  color: red;
+  font-size: 1.5rem; 
+  font-weight: 600;
+  line-height: 18px;
+  margin-top: 8px;
+  margin-left: 16px;
+}
+
+
+.confirmbutton {
+  background-color: var(--gray400);
+  color: var(--gray100);
+  font-size: 2rem;
+  font-weight: 600;
+  line-height: 32px;
+  width: 100%;max-width: 640px;
+  padding: 12px 0;
+  border: none;
+  border-radius: 40px;
+  text-align: center;
+  cursor: unset;
+  margin: 24px 0;
+}
+
+
+
+/* Disabled state */
+.confirmbutton:disabled {
+  background-color: var(--gray400);
+  color: var(--gray100);
+  font-size: 2rem;
+  cursor: unset;
+  /* Ensure the disabled state does not resize the button */
+  padding: 12px 0;
+  width: 100%;
+  max-width: 640px;
+  border-radius: 40px;
+}
+
+
+
+
+/* Hover effect, only when enabled and .hover-enabled class is applied */
+.confirmbutton.hover-enabled:hover {
+  background-color: var(--primary100);
+  color: var(--gray100);
+  cursor: pointer;
+}

@@ -1,0 +1,216 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+:root {
+  --primary100 : #3692FF;
+  --primary200 : #1967d6;
+  --primary300 : #1251aa;
+  --error : #f74747;
+  --gray900 : #111827;
+  --gray800 : #1f2937;
+  --gray700 : #374151;
+  --gray600 : #4b5563;
+  --gray500 : #6b7280;
+  --gray400 : #9ca3af;
+  --gray200 : #e5e7eb;
+  --gray100 : #F3F4F6;
+  --gray50 : #f9fafb;
+  --box_bg : #e6f2ff;
+}
+
+html {
+  font-size: 10px;
+  font-family:  "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+header {
+  margin-top: 231px;
+}
+
+main {
+  width: 640px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 0;
+  margin: 0 auto;
+  padding-bottom: 178px;
+}
+
+
+#logo {
+  width: auto; 
+  height: 132px; 
+  margin-bottom: 40px;
+}
+
+
+/* 메인 */
+.signup-form {
+  width: 100%;
+  line-height: 26px;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group label {
+  font-size: 1.8rem;
+  font-weight: 700;
+  margin: 24px 0 16px 0;
+  color: var(--gray800);
+}
+
+
+
+#email, #alias, #password, #confirmPassword {
+  height: 56px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--gray100);
+  font-size: 1.6rem;
+  color: var(--gray800);
+  line-height: 24;
+  font-weight: 400;
+  padding: 15px 24px;
+  box-sizing: border-box;
+}
+.pw-input {
+  position: relative;
+  box-sizing: border-box;
+  display: flex; 
+  align-items: center;
+}
+
+#password, #confirmPassword {
+  position: relative;
+  width: 100%;
+  height: 56px;
+  border-radius: 12px;
+  border: none;
+  background-color: var(--gray100);
+  padding: 15px 24px;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+
+input::placeholder {
+  color: var(--gray400);
+  line-height: 26px;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+input:focus {
+  outline: 1px solid var(--primary100);
+}
+
+.visible-btn {
+  position: absolute;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  z-index: 10;
+  right: 10px;
+}
+.visible-btn2 {
+  position: absolute;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  z-index: 10;
+  right: 10px;
+}
+
+
+#password:hover .visible-btn,
+#password:focus-within .visible-btn {
+  display: block; 
+}
+
+#confirmPassword:hover .visible-btn2,
+#confirmPassword:focus-within .visible-btn2 {
+  display: block; 
+}
+
+.simple-login {
+  background-color: var(--box_bg);
+  width: 100%;
+  height: 74px;
+  padding: 16px 23px;
+  margin: 24px 0px;
+  border-radius: 8px;  
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.simple-login p{
+  font-size: 1.6rem;
+  font-weight: 500;
+  line-height: 26px;
+  color: var(--gray800);
+}
+.sns-login {
+  display: flex; 
+  justify-content: space-between;
+  align-items:center;
+  gap: 16px; 
+  font-size: 0;
+  
+}
+
+.sns-login a {
+  font-size: 1.6rem;
+}
+
+.sns-login img {
+  width: 42px;
+  height: 42px;
+  object-fit: contain;
+}
+
+footer {
+  font-size: 1.4rem;
+  font-weight: 500;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+footer span {
+  line-height: 24px;
+  color: var(--gray800);
+  margin: 3.5px 0;
+}
+
+#login-page {
+  color: var(--primary100);
+  text-decoration:underline;
+}
+
+/* 반응형 스타일 */
+@media (max-width: 680px) {
+  header {
+    width: 100%;
+    padding: 0 20px;
+  }
+
+  main {
+    padding: 80px 20px;
+    width: 90%;
+  }
+}

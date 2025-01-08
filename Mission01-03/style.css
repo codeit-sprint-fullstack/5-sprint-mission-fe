@@ -1,0 +1,981 @@
+* {
+  box-sizing: border-box;
+}
+:root {
+  --primary100 : #3692FF;
+  --primary200 : #1967d6;
+  --primary300 : #1251aa;
+  --error : #f74747;
+  --gray900 : #111827;
+  --gray800 : #1f2937;
+  --gray700 : #374151;
+  --gray600 : #4b5563;
+  --gray500 : #6b7280;
+  --gray400 : #9ca3af;
+  --gray200 : #e5e7eb;
+  --gray100 : #F3F4F6;
+  --gray50 : #f9fafb;
+  --box_bg : #e6f2ff;
+}
+html {
+  font-size: 10px; 
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f9ff;
+  color: #333;
+}
+
+/* 헤더 */
+header {
+  background-color: white;
+  display: flex;
+  height: 70px;
+  position: sticky;
+  top:0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+}
+
+header .container {
+  max-width: 1120px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+#logo {
+  width: 153px;
+  height: 51PX;
+  /* margin-right: 10px; */
+}
+
+header .container a.button {
+  background-color: #3692ff;
+  border: none;
+  border-radius: 8px;
+  color:#f3f4f6;
+  font-size: 1.6rem;
+  text-decoration: none;
+  padding: 11px 43px;
+  cursor: pointer;
+  line-height: 26px;
+}
+
+
+.landing {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+
+.landing .container {
+  align-items: flex-end;
+  justify-content: center;
+  gap: 7px;
+  max-width: 1200px; 
+  width: 100%;
+  line-height: 0;
+  text-align: center;
+}
+
+
+.landing .container .top {
+  width: 357px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start; 
+  margin-bottom: 100px;
+  text-align: left;
+}
+
+
+.landing .container .top h1 {
+  font-size: 4rem; 
+  font-weight: 700;
+  color: var(--gray700);
+  line-height: 5.6rem;
+  word-break: keep-all;
+  margin: 0;
+}
+
+.landing .container a.button {
+  display: inline-flex; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: #3692ff;
+  border: none;
+  border-radius: 40px;
+  color: #f3f4f6;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 12px 14px;
+  text-decoration: none;
+  height: 5.6rem; 
+  line-height: 3.2rem; 
+  width: calc(100% - 4rem); 
+  max-width: 600px; 
+  margin: 1rem auto; /* 상하 간격과 가운데 정렬 */
+}
+
+#landing-img {
+  width: 50%;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  display: flex;/* 이미지 위치를 정확히 제어 */
+  bottom: 0; /* 섹션 하단에 붙임 */
+  left: 50%; /* 수평 중앙 정렬 */
+}
+
+
+/* 섹션 */
+.section {
+  display: flex;
+  padding: 50px 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  margin: 20px auto;
+}
+
+.home-img {
+  max-width: 100%;
+  height: auto;
+  margin: 0px;
+}
+
+h1 {
+  color: #374151;
+}
+
+.section h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+.section p {
+  font-size: 1em;
+}
+
+.home {
+  display: flex;
+  background-color: white;
+  height: 720px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home .card {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.home .card .card-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-image {
+  width: 50%;
+}
+
+.home .card .card-box .badge {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3692ff;
+  margin-bottom: 12px;
+}
+
+.home .card .card-box h1 {
+  font-size:4rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.home .card .card-box p {
+  font-size:2.5rem;
+  font-weight: 500;
+}
+
+.summary {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+}
+
+.summary .container{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.summary .container .bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.summary .container .bottom h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #374151;
+  text-align: left;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.space {
+ background-color: rgb(241, 238, 238);
+ height: 160px;
+}
+
+/* 푸터  */
+footer {
+  text-align: center;
+  display: flex;
+  background-color: #111827;
+  height: 160px;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+footer .container {
+  justify-content: space-around;
+  max-width: 1120px;
+  height: auto;
+  padding: 0 10px;
+  margin-top: 32px;
+}
+
+footer .container .left {
+  color: #9CA3AF;
+  display: flex;
+}
+
+
+
+footer .container .middle {
+  display: flex;
+  gap: 30px;
+
+}
+
+footer .container .middle > a {
+  color: #E5E7EB;
+
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+footer .container .right {
+  display: flex;
+  gap: 12px;
+}
+
+.sns-ic {
+  width: 20px;
+  height: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px; 
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f9ff;
+  color: #333;
+}
+
+/* 헤더 */
+header {
+  background-color: white;
+  display: flex;
+  height: 70px;
+  position: sticky;
+  top:0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+}
+
+header .container {
+  max-width: 1120px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+#logo {
+  width: 153px;
+  height: 51PX;
+  /* margin-right: 10px; */
+}
+
+header .container a.button {
+  background-color: #3692ff;
+  border: none;
+  border-radius: 8px;
+  color:#f3f4f6;
+  font-size: 1.6rem;
+  text-decoration: none;
+  padding: 11px 43px;
+  cursor: pointer;
+  line-height: 26px;
+}
+
+
+.landing {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+
+.landing .container {
+  align-items: flex-end;
+  justify-content: center;
+  gap: 7px;
+  max-width: 1200px; 
+  width: 100%;
+  line-height: 0;
+  text-align: center;
+}
+
+
+.landing .container .top {
+  width: 357px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start; 
+  margin-bottom: 100px;
+  text-align: left;
+}
+
+
+.landing .container .top h1 {
+  font-size: 4rem; 
+  font-weight: 700;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.landing .container a.button {
+  display: inline-flex; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: #3692ff;
+  border: none;
+  border-radius: 40px;
+  color: #f3f4f6;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 12px 14px;
+  text-decoration: none;
+  height: 5.6rem; 
+  line-height: 3.2rem; 
+  width: calc(100% - 4rem); 
+  max-width: 600px; 
+  margin: 1rem auto; /* 상하 간격과 가운데 정렬 */
+}
+
+#landing-img {
+  width: 50%;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  display: flex;/* 이미지 위치를 정확히 제어 */
+  bottom: 0; /* 섹션 하단에 붙임 */
+  left: 50%; /* 수평 중앙 정렬 */
+}
+
+
+/* 섹션 */
+.section {
+  display: flex;
+  padding: 50px 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  margin: 20px auto;
+}
+
+.home-img {
+  max-width: 100%;
+  height: auto;
+  margin: 0px;
+}
+
+h1 {
+  color: #374151;
+}
+
+.section h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+.section p {
+  font-size: 1em;
+}
+
+.home {
+  display: flex;
+  background-color: white;
+  height: 720px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home .card {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.home .card .card-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-image {
+  width: 50%;
+}
+
+.home .card .card-box .badge {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3692ff;
+  margin-bottom: 12px;
+}
+
+.home .card .card-box h1 {
+  font-size:4rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.home .card .card-box p {
+  font-size:2.5rem;
+  font-weight: 500;
+}
+
+.summary {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+}
+
+.summary .container{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.summary .container .bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.summary .container .bottom h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #374151;
+  text-align: left;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.space {
+ background-color: rgb(241, 238, 238);
+ height: 160px;
+}
+
+/* 푸터  */
+footer {
+  text-align: center;
+  display: flex;
+  background-color: #111827;
+  height: 160px;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+footer .container {
+  justify-content: space-around;
+  max-width: 1120px;
+  height: auto;
+  padding: 0 10px;
+  margin-top: 32px;
+}
+
+footer .container .left {
+  color: #9CA3AF;
+  display: flex;
+}
+
+
+
+footer .container .middle {
+  display: flex;
+  gap: 30px;
+
+}
+
+footer .container .middle > a {
+  color: #E5E7EB;
+
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+footer .container .right {
+  display: flex;
+  gap: 12px;
+}
+
+.sns-ic {
+  width: 20px;
+  height: 20px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 10px; 
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+}
+
+body {
+  min-height: 100dvh;
+  font-family: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f9ff;
+  color: #333;
+}
+
+/* 헤더 */
+header {
+  background-color: white;
+  display: flex;
+  height: 70px;
+  position: sticky;
+  top:0px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+.container {
+  width: 100%;
+  display: flex;
+  margin: 0 auto;
+}
+
+header .container {
+  max-width: 1120px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 10px;
+}
+
+#logo {
+  width: 153px;
+  height: 51PX;
+  /* margin-right: 10px; */
+}
+
+header .container a.button {
+  background-color: #3692ff;
+  border: none;
+  border-radius: 8px;
+  color:#f3f4f6;
+  font-size: 1.6rem;
+  text-decoration: none;
+  padding: 11px 43px;
+  cursor: pointer;
+  line-height: 26px;
+}
+
+
+.landing {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+  flex-direction: column; 
+  justify-content: flex-end;
+  overflow: hidden;
+}
+
+
+.landing .container {
+  align-items: flex-end;
+  justify-content: center;
+  gap: 7px;
+  max-width: 1200px; 
+  width: 100%;
+  line-height: 0;
+  text-align: center;
+}
+
+
+.landing .container .top {
+  width: 357px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  align-items: flex-start; 
+  margin-bottom: 100px;
+  text-align: left;
+}
+
+
+.landing .container .top h1 {
+  font-size: 4rem; 
+  font-weight: 700;
+  color: #374151;
+  line-height: 1.4;
+}
+
+.landing .container a.button {
+  display: inline-flex; 
+  justify-content: center; 
+  align-items: center; 
+  background-color: #3692ff;
+  border: none;
+  border-radius: 40px;
+  color: #f3f4f6;
+  font-size: 2rem;
+  font-weight: 600;
+  padding: 12px 14px;
+  text-decoration: none;
+  height: 5.6rem; 
+  line-height: 3.2rem; 
+  width: calc(100% - 4rem); 
+  max-width: 600px; 
+  margin: 1rem auto; /* 상하 간격과 가운데 정렬 */
+}
+
+#landing-img {
+  width: 50%;
+  max-width: 100%;
+  height: auto;
+  margin: 0;
+  display: flex;/* 이미지 위치를 정확히 제어 */
+  bottom: 0; /* 섹션 하단에 붙임 */
+  left: 50%; /* 수평 중앙 정렬 */
+}
+
+
+/* 섹션 */
+.section {
+  display: flex;
+  padding: 50px 20px;
+  text-align: center;
+  background-color: #f9f9f9;
+  margin: 20px auto;
+}
+
+.home-img {
+  max-width: 100%;
+  height: auto;
+  margin: 0px;
+}
+
+h1 {
+  color: #374151;
+}
+
+.section h2 {
+  font-size: 1.8em;
+  margin-bottom: 20px;
+}
+.section p {
+  font-size: 1em;
+}
+
+.home {
+  display: flex;
+  background-color: white;
+  height: 720px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.home .card {
+  display: flex;
+  align-items: center;
+  gap: 64px;
+}
+
+.home .card .card-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.home-image {
+  width: 50%;
+}
+
+.home .card .card-box .badge {
+  font-size: 18px;
+  font-weight: 700;
+  color: #3692ff;
+  margin-bottom: 12px;
+}
+
+.home .card .card-box h1 {
+  font-size:4rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+}
+
+.home .card .card-box p {
+  font-size:2.5rem;
+  font-weight: 500;
+}
+
+.summary {
+  background-color: #cfe5ff;
+  height: 540px;
+  display: flex;
+}
+
+.summary .container{
+  display: flex;
+  justify-content: center;
+  align-items: end;
+}
+.summary .container .bottom {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.summary .container .bottom h1 {
+  font-size: 4rem;
+  font-weight: 700;
+  color: #374151;
+  text-align: left;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.space {
+ background-color: rgb(241, 238, 238);
+ height: 160px;
+}
+
+/* 푸터  */
+footer {
+  text-align: center;
+  display: flex;
+  background-color: #111827;
+  height: 160px;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+footer .container {
+  justify-content: space-around;
+  max-width: 1120px;
+  height: auto;
+  padding: 0 10px;
+  margin-top: 32px;
+}
+
+footer .container .left {
+  color: #9CA3AF;
+  display: flex;
+}
+
+
+
+footer .container .middle {
+  display: flex;
+  gap: 30px;
+
+}
+
+footer .container .middle > a {
+  color: #E5E7EB;
+
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+footer .container .right {
+  display: flex;
+  gap: 12px;
+}
+
+.sns-ic {
+  width: 20px;
+  height: 20px;
+}
+
+/* 공통 반응형 스타일 */
+@media (max-width: 1200px) {
+  /* 텍스트 크기 조정 */
+  .landing .container .top h1,
+  .summary .container .bottom h1,
+  .home .card .card-box h1 {
+    font-size: 3.5rem;
+  }
+  .home .card .card-box p {
+    font-size: 2rem;
+  }
+  header .container a.button {
+    font-size: 1.4rem;
+    padding: 10px 36px;
+  } 
+
+  /* 이미지 크기 조정 */
+   #landing-img,
+  .home .home-image {
+    width: 60%;
+  }
+
+  /* Summary 섹션 */
+  .summary .container .bottom {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    text-align: center;
+    line-height: 1.4;
+  }
+}
+
+/* 중간 화면 반응형 스타일 */
+@media (max-width: 768px) {
+  /* 레이아웃 변경*/
+  .landing .container,
+  .home .card {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  /* 텍스트 크기 조정 */
+  .landing .container .top h1,
+  .summary .container .bottom h1,
+  .home .card .card-box h1 {
+    font-size: 3rem;
+  }
+  .home .card .card-box p {
+    font-size: 1.8rem;
+  }
+  header .container a.button {
+    font-size: 1.2rem;
+    padding: 8px 30px; 
+  }
+
+  /* 이미지 크기 조정 */
+  #landing-img {
+    width: 60%;
+  }
+  .home .home-image {
+    width: 80%;
+  }
+
+  /* Summary 섹션 */
+  .summary .container img#landing-img {
+    width: 70%;
+  }
+}
+
+
+/* 작은 화면 반응형 스타일*/
+@media (max-width: 480px) {
+  
+  header .container {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .landing .container a.button,
+  footer .container {
+    width: 90%;
+    padding: 10px;
+    align-items: center;
+  }
+
+  .landing .container .top h1,
+  .summary .container .bottom h1,
+  .home .card .card-box h1 {
+    font-size: 2.5rem;
+  }
+  .home .card .card-box p {
+    font-size: 1.5rem;
+  }
+  header .container a.button {
+    font-size: 1rem;
+    padding: 6px 20px;
+  }
+
+  /* 이미지 크기 조정 */
+  #landing-img {
+    width: 60%;
+  }
+  .home .home-image {
+    width: 90%;
+  } 
+
+  /* Summary 섹션 */
+  .summary .container {
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+    text-align: left;
+    line-height: 1.3;
+  }
+  .summary .container img#landing-img {
+    width: 90%;
+  }
+}
