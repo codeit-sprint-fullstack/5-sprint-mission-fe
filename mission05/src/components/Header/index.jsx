@@ -7,7 +7,7 @@ import AuthItem from "./AuthItem";
 export default function Header() {
   return (
     <HeaderContainer>
-      <HeaderWrapper>
+      <Content>
         <LogoNavContainer>
           <LogoWrapper>
             <LogoIMG src={logoImg} alt="판다마켓" />
@@ -16,12 +16,12 @@ export default function Header() {
           <Nav />
         </LogoNavContainer>
         <AuthItem />
-      </HeaderWrapper>
+      </Content>
     </HeaderContainer>
   );
 }
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   width: 100%;
   background-color: #ffffff;
   border-bottom: 1px solid #dfdfdf;
@@ -32,7 +32,7 @@ const HeaderContainer = styled.div`
   z-index: 10;
 `;
 
-const HeaderWrapper = styled.header`
+const Content = styled.div`
   margin: 0 auto;
   padding: 0 24px;
 

@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
 import imgHeart from "../../assets/img/likes/ic_heart.png";
 
@@ -19,6 +20,10 @@ const CommonLikes = styled.div`
   font-size: 0.75rem;
   font-weight: 500;
   line-height: 18px;
+
+  &:hover {
+    cursor: pointer;
+  }
 `;
 
 const ImgHeart = styled.img`

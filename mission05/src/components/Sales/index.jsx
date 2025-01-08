@@ -8,19 +8,13 @@ import Filter from "../../common/Filter";
 import Search from "../../common/Search";
 import Product from "../../common/Product";
 import Pagination from "../Pagination";
-import useWidthSize from "../../hooks/useWindowSize.js";
+import useDeviceType from "../../hooks/useDeviceType.js";
 
-const calculatePageSize = (width) => {
-  if (width > 1200) {
-    return 10;
-  } else if (width > 744) {
-    return 6;
-  } else {
-    return 4;
-  }
+const PAGE_SIZE_BY_DEVICE_TYPE = {
+  PC: 10,
+  Tablet: 6,
+  Mobile: 4,
 };
-
-const initPageSize = calculatePageSize(window.innerWidth);
 
 export default function Sales() {
   const [sortType, setSortType] = useState(SORT_TYPE.RECENT);
@@ -28,14 +22,14 @@ export default function Sales() {
   const [productList, setProductList] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
   const [page, setPage] = useState(1);
-  const [pageSize, setPageSize] = useState(initPageSize); // 현재 보이는 Product 개수
-  const widthSize = useWidthSize(); // 화면 크기 상태 값
+  const [pageSize, setPageSize] = useState(10);
+  const deviceType = useDeviceType();
 
-  // width로 pageSize 제어
+  // deviceType으로 pageSize 제어
   useEffect(() => {
-    const newPageSize = calculatePageSize(widthSize);
+    const newPageSize = PAGE_SIZE_BY_DEVICE_TYPE[deviceType];
     setPageSize(newPageSize);
-  }, [widthSize]);
+  }, [deviceType]);
 
   // fetch data
   useEffect(() => {
@@ -60,15 +54,21 @@ export default function Sales() {
   return (
     <section>
       <SalesHeader>
-        <Title>판매 중인 상품</Title>
-        <Right>
+        <TitleGrid>
+          <Title>판매 중인 상품</Title>
+        </TitleGrid>
+        <SearchGrid>
           <Search setKeyword={setKeyword}>검색할 상품을 입력해주세요</Search>
+        </SearchGrid>
+        <ButtonGrid>
           <Button>상품 등록하기</Button>
+        </ButtonGrid>
+        <FilterGrid>
           <Filter sortType={sortType} setSortType={setSortType} />
-        </Right>
+        </FilterGrid>
       </SalesHeader>
 
-      <ProductGrid>
+      <ProductGrid $pageSize={pageSize}>
         {productList.slice(0, pageSize).map((data, idx) => (
           <Product key={idx} data={data} />
         ))}
@@ -76,7 +76,7 @@ export default function Sales() {
 
       <PaginationWrapper>
         <Pagination
-          count={Math.ceil(totalCount / pageSize)}
+          endPageIndex={Math.ceil(totalCount / pageSize)}
           page={page}
           keyword={keyword}
           setPage={setPage}
@@ -87,46 +87,54 @@ export default function Sales() {
 }
 
 const SalesHeader = styled.div`
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap; /* 줄바꿈 허용 */
+  display: grid;
+  grid-template-columns: auto 1fr auto auto auto;
+  gap: 12px;
   align-items: center;
-  justify-content: space-between;
 
   @media (max-width: 744px) {
-    justify-content: flex-start;
-    gap: 12px; /* 요소 간 간격 조정 */
+    grid-template-columns: 1fr auto auto;
+    grid-template-areas:
+      "title button button"
+      "search search filter";
   }
 `;
 
-const Right = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 12px;
-  max-width: 100%; /* 부모 크기를 초과하지 않도록 제한 */
+const TitleGrid = styled.div`
+  grid-column: 1 / 2;
 
   @media (max-width: 744px) {
-    width: 100%; /* 화면 크기에 맞게 확장 */
-    justify-content: flex-start;
+    grid-area: title;
+  }
+`;
 
-    & > button {
-      order: 1; /* Button이 Title 옆으로 */
-      margin-left: auto; /* Title 옆으로 이동 */
-    }
-    & > div:first-child {
-      order: 2; /* Search가 두 번째 줄 첫 번째로 배치 */
-      flex: 1; /* Search가 가능한 한 넓게 차지 */
-    }
-    & > div:last-child {
-      order: 3; /* Filter가 Search 옆으로 배치 */
-    }
+const SearchGrid = styled.div`
+  grid-column: 3 / 4;
+
+  @media (max-width: 744px) {
+    grid-area: search;
+  }
+`;
+
+const ButtonGrid = styled.div`
+  grid-column: 4 / 5;
+
+  @media (max-width: 744px) {
+    grid-area: button;
+  }
+`;
+
+const FilterGrid = styled.div`
+  grid-column: 5 / 6;
+
+  @media (max-width: 744px) {
+    grid-area: filter;
   }
 `;
 
 const ProductGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr); // 5열
+  grid-template-columns: repeat(${(props) => props.$pageSize / 2}, 1fr); // 5열
   grid-template-rows: repeat(2, 1fr); // 2행
   gap: 24px; /* 카드 간의 간격 */
 
@@ -134,18 +142,12 @@ const ProductGrid = styled.div`
   margin-bottom: 43px;
 
   @media (max-width: 1200px) {
-    grid-template-columns: repeat(3, 1fr); /* 중간 화면에서는 2열 */
-    grid-template-rows: repeat(2, 1fr); // 2행
     gap: 16px; /* 카드 간의 간격 */
-
     margin-bottom: 40px;
   }
 
   @media (max-width: 744px) {
-    grid-template-columns: repeat(2, 1fr); /* 작은 화면에서는 1열 */
-    grid-template-rows: repeat(2, 1fr); // 2행
     gap: 8px; /* 카드 간의 간격 */
-
     margin-top: 16px;
   }
 `;
