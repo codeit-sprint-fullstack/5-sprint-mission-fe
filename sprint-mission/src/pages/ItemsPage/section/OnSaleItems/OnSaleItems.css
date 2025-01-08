@@ -1,0 +1,32 @@
+@import "../../../../shared/styles/color.css";
+
+#on-sale-items {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+.utility-box {
+  height: 42px;
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+/* TODO: 스페이스비트윈 안벌어짐. 컴포넌트 완성 후에 확인필요 */
+.section-top {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.cards-box {
+  display: grid;
+  gap: 40px 24px;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.section-bottom {
+  padding-top: 20px;
+}

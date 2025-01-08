@@ -1,4 +1,4 @@
-@import "../../utils/styles/color.css";
+@import "../../shared/styles/color.css";
 
 header {
   background-color: #ffffff;
@@ -51,7 +51,7 @@ header .link-list {
 header .link-item {
   padding: 21px 15px;
   color: var(--gray600);
-  font-size: 1.125rem;
+  font-size: 1.8rem;
   font-weight: 700;
   line-height: 26px;
   text-align: center;
@@ -65,7 +65,7 @@ header .link-item {
   cursor: pointer;
 
   color: var(--gray100);
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 600;
   line-height: 26px;
   text-align: center;
@@ -110,6 +110,6 @@ header .link-item {
   header .link-item {
     padding: 20px 0;
     color: var(--gray600);
-    font-size: 1rem;
+    font-size: 1.6rem;
   }
 }

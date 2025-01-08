@@ -6,12 +6,12 @@ import { FooterSns } from "./ui/FooterSns";
 export function Footer() {
   return (
     <footer>
-      <div class="content">
+      <div className="content">
         <div id="addr">©codeit - 2024</div>
 
         <FooterLink />
 
-        <div class="sns-box">
+        <div className="sns-box">
           {SNS_LINK_LIST.map((sns, idx) => (
             <FooterSns sns={sns} key={idx} />
           ))}

@@ -1,7 +1,7 @@
-import facebookIcon from "./assets/facebook_icon.png";
-import twitterIcon from "./assets/twitter_icon.png";
-import youtubeIcon from "./assets/youtube_icon.png";
-import instaIcon from "./assets/insta_icon.png";
+import facebookIcon from "../shared/assets/facebook_icon.png";
+import twitterIcon from "../shared/assets/twitter_icon.png";
+import youtubeIcon from "../shared/assets/youtube_icon.png";
+import instaIcon from "../shared/assets/insta_icon.png";
 
 //TODO: 나중에 로그인/회원가입에서 SNS로그인 버튼도 여기에 추가할 생각
 export const SNS_LINK_LIST = [

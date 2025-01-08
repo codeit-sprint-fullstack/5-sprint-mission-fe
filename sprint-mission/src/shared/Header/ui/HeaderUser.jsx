@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import defaultProfile from "../../../utils/assets/default_profile.png";
+import defaultProfile from "../../../shared/assets/default_profile.png";
 
 export function HeaderUser({ isLoggedIn, handleClick }) {
   return (

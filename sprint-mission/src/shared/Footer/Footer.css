@@ -1,4 +1,4 @@
-@import "../../utils/styles/color.css";
+@import "../../shared/styles/color.css";
 
 footer {
   height: 160px;
@@ -6,19 +6,19 @@ footer {
   padding: 32px 0;
   contain: content;
 
-  /* FIXME: 나중에 addr 미디어쿼리떄문에 추가된 부분 */
+  /* FIXME: addr 미디어쿼리떄문에 추가된 부분. 나머지 부분 완성하고 다시 건드려보자.*/
   display: flex;
   flex-direction: column;
   gap: 24px;
 }
 
-.content {
+footer .content {
   display: flex;
   justify-content: space-between;
   max-width: 1520px;
   padding: 0 24px;
 
-  font-size: 1rem;
+  font-size: 1.6rem;
   font-weight: 400;
   line-height: 19.09px;
   color: var(--gray400);
@@ -52,7 +52,7 @@ footer .link-item {
 
 /* 모바일 사이즈 미디어쿼리 */
 @media (max-width: 743px) {
-  .content {
+  footer .content {
     padding: 0 16px;
   }
 }

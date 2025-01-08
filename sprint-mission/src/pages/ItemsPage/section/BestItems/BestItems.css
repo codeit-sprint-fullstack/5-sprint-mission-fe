@@ -1,0 +1,22 @@
+#best-items {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#best-items .cards-box {
+  display: flex;
+  gap: 24px;
+}
+
+#best-items .item-card {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+#best-items .item-img {
+  width: 282px;
+  height: 282px;
+  border-radius: 16px;
+}

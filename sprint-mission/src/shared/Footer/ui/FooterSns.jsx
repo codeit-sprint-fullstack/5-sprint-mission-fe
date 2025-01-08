@@ -3,7 +3,7 @@ export function FooterSns({ sns }) {
 
   return (
     <a href={sns.href} target="_blank" rel="noopener noreferrer">
-      <img class="sns-icon" src={sns.src} alt={alt} />
+      <img className="sns-icon" src={sns.src} alt={alt} />
     </a>
   );
 }

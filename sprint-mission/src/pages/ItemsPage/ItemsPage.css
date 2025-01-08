@@ -1,1 +1,59 @@
+@import "../../shared/styles/color.css";
 
+#items-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
+.content {
+  padding-top: 25px;
+  padding-bottom: 140px;
+}
+
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: 32px;
+  color: var(--gray900);
+}
+
+/* 카드 텍스트 영역은 BestItems/OnSaleItems 섹션 동일, 반응형 변화 없어서 부모 컴포넌트 css에서 한번에 관리 */
+.item-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.product-name {
+  font-size: 1.4rem;
+  font-weight: 500;
+  line-height: 24px;
+  color: var(--gray800);
+}
+
+.product-price {
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 26px;
+  color: var(--gray800);
+}
+
+.fav-count-box {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.fav-heart-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.product-fav-count {
+  font-size: 1.2rem;
+  font-weight: 500;
+  line-height: 18px;
+  color: var(--gray600);
+}
