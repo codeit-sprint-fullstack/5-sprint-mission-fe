@@ -3,7 +3,7 @@ import useDebounce from "./useDebounce";
 
 function useDeviceType() {
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-  const debouncedWidth = useDebounce(windowWidth, 300); // 300ms 디바운스
+  const debouncedWidth = useDebounce(windowWidth, 200); // 300ms 디바운스
   const [deviceType, setDeviceType] = useState(
     getDeviceType(window.innerWidth)
   );
