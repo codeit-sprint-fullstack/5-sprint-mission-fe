@@ -1,0 +1,35 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 200px;
+}
+
+.navigationMobile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 10px;
+}
+
+.navigationMenus {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 20px;
+}
+
+.logoAndMenus {
+    display: flex;
+}
+
+.line {
+    background:rgb(228, 228, 228);
+    height: 1px;
+    border: 0;
+}
