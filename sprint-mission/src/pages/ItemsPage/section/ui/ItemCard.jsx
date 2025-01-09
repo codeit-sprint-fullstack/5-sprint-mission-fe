@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import favHeart from "../../../../shared/assets/favorite_heart.png";
 
 export function ItemCard({ product }) {
@@ -9,7 +10,8 @@ export function ItemCard({ product }) {
   } = product;
 
   return (
-    <div className="item-card">
+    //TODO: 나중에 카드 클릭하면 각 상품 상세페이지로 이동하도록 링크 수정
+    <Link className="item-card" to="/">
       <img className="item-img" src={productImg} alt="대표 이미지" />
 
       <div className="item-card-text">
@@ -22,6 +24,6 @@ export function ItemCard({ product }) {
           <p className="product-fav-count">{productFavCount}</p>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
