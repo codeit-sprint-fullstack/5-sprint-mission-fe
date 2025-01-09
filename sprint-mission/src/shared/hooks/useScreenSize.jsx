@@ -27,7 +27,6 @@ export const useScreenSize = () => {
   //window객체에 스크린사이즈 변경 이벤트 핸들러 등록
   useEffect(() => {
     const handleResize = () => setScreenSize(getScreenSize());
-
     window.addEventListener("resize", handleResize);
 
     // 컴포넌트 언마운트 시 이벤트 리스너 정리
