@@ -5,17 +5,11 @@
   flex-direction: column;
   align-items: center;
   gap: 40px;
-}
-
-.content {
   padding-top: 25px;
   padding-bottom: 140px;
 }
 
 .section-title {
-  font-size: 2rem;
-  font-weight: 700;
-  line-height: 32px;
   color: var(--gray900);
 }
 
@@ -29,19 +23,6 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-}
-
-.product-name {
-  font-size: 1.4rem;
-  font-weight: 500;
-  line-height: 24px;
-  color: var(--gray800);
-}
-
-.product-price {
-  font-size: 1.6rem;
-  font-weight: 700;
-  line-height: 26px;
   color: var(--gray800);
 }
 
@@ -56,9 +37,6 @@
   height: 16px;
 }
 
-.product-fav-count {
-  font-size: 1.2rem;
-  font-weight: 500;
-  line-height: 18px;
+.fav-count {
   color: var(--gray600);
 }

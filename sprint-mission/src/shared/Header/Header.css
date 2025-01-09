@@ -27,7 +27,7 @@ nav {
   gap: 25px;
 }
 
-#logo-img {
+#logo-img-box {
   width: 153px;
   height: 51px;
   display: flex;
@@ -36,12 +36,12 @@ nav {
   gap: 8.6px;
 }
 
-#logo-icon {
+#logo-icon-img {
   width: 40px;
   display: block;
 }
 
-#logo-text {
+#logo-text-img {
   width: 103px;
 }
 
@@ -52,9 +52,6 @@ header .link-list {
 header .link-item {
   padding: 21px 15px;
   color: var(--gray600);
-  font-size: 1.8rem;
-  font-weight: 700;
-  line-height: 26px;
   text-align: center;
   text-decoration: none;
 }
@@ -66,9 +63,6 @@ header .link-item {
   cursor: pointer;
 
   color: var(--gray100);
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 26px;
   text-align: center;
   text-decoration-line: none;
   display: block;
@@ -84,11 +78,6 @@ header .link-item {
 
 /* 모바일 사이즈 미디어쿼리 */
 @media (max-width: 743px) {
-  /* 모바일 사이즈에서 로고 아이콘 숨기기 */
-  #logo-icon {
-    display: none;
-  }
-
   nav {
     padding: 0 16px;
   }
@@ -97,11 +86,16 @@ header .link-item {
     gap: 8px;
   }
 
-  #logo-img {
+  #logo-img-box {
     width: 100%;
   }
 
-  #logo-text {
+  /* 모바일 사이즈에서 로고 아이콘 숨기기 */
+  #logo-icon-img {
+    display: none;
+  }
+
+  #logo-text-img {
     width: 80px;
   }
 
@@ -112,6 +106,5 @@ header .link-item {
   header .link-item {
     padding: 20px 0;
     color: var(--gray600);
-    font-size: 1.6rem;
   }
 }

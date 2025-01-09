@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import defaultProfile from "../../../shared/assets/default_profile.png";
+import { Typo, typoStyles } from "../../Typo/Typo";
 
 export function HeaderUser({ isLoggedIn, handleClick }) {
   return (
@@ -9,7 +10,7 @@ export function HeaderUser({ isLoggedIn, handleClick }) {
       ) : (
         // TODO: 링크 수정하기 "/login"
         <Link id="login-btn" to="/">
-          로그인
+          <Typo className={typoStyles.textLgSemibold} content="로그인" />
         </Link>
       )}
     </div>

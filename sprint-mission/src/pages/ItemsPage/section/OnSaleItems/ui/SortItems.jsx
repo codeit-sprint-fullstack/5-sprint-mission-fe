@@ -1,6 +1,7 @@
 import { useOrderBy } from "../hooks/useOrderBy";
 import { useScreenSize } from "../../../../../shared/hooks/useScreenSize";
 import { ORDER_BY } from "../../../../../utils/APIs/getItemsListAPI";
+import { typoStyles } from "../../../../../shared/Typo/Typo";
 import sortIcon from "../../../../../shared/assets/sort_icon.png";
 import mobileSortIcon from "../../../../../shared/assets/mobile_sort_icon.png";
 
@@ -12,8 +13,8 @@ export function SortItems({ onSortChange }) {
   const { selectedName, showDropdown, handleSelectSort, toggleDropdown } =
     useOrderBy(ORDER_BY.RECENT);
 
-  const dropdownBoxClassName = showDropdown ? "show" : "";
-  const sortItemsTextClassName = screenSize === "MOBILE" ? "mobile" : "";
+  const dropdownMenuClassName = showDropdown ? "show" : "";
+  const sortItemsLabelClassName = screenSize === "MOBILE" ? "mobile" : "";
   const sortItemsIcon = screenSize === "MOBILE" ? mobileSortIcon : sortIcon;
 
   //console.log("선택한 메뉴 이름", selectedName);
@@ -21,16 +22,20 @@ export function SortItems({ onSortChange }) {
   //console.log("--------");
 
   return (
-    <div className="sort-items-wrapper" onClick={toggleDropdown}>
-      <p className={`sort-items-text ${sortItemsTextClassName}`}>
+    <div
+      id="sort-items-wrapper"
+      className={typoStyles.textLgRegular}
+      onClick={toggleDropdown}
+    >
+      <p className={`sort-items-label ${sortItemsLabelClassName}`}>
         {selectedName}
       </p>
       <img id="dropdown-icon" src={sortItemsIcon} alt="정렬 아이콘" />
 
-      <div className={`dropdown-box ${dropdownBoxClassName}`}>
+      <div className={`dropdown-menu ${dropdownMenuClassName}`}>
         {ORDER_BY_VALUE_ARR.map((item, idx) => (
           <p
-            className="dropdown-text"
+            className="dropdown-option"
             onClick={() => {
               handleSelectSort(item);
               onSortChange(item.value);

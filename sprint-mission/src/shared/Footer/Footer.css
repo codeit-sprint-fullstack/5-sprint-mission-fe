@@ -10,12 +10,9 @@ footer {
 footer .content {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   max-width: 1520px;
   padding: 0 24px;
-
-  font-size: 1.6rem;
-  font-weight: 400;
-  line-height: 19.09px;
   color: var(--gray400);
 }
 
@@ -34,6 +31,7 @@ footer .link-item {
 .sns-box {
   display: flex;
   justify-content: flex-end;
+  align-items: center;
   gap: 12px;
 }
 

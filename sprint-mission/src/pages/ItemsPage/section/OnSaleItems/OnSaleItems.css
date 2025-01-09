@@ -11,6 +11,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   position: relative;
 }
 
@@ -37,11 +38,6 @@
   padding-left: 40px;
   padding-right: 20px;
   border: none;
-
-  font-family: pretendard, sans-serif;
-  font-size: 1.6rem;
-  font-weight: 400;
-  line-height: 26px;
   color: var(--gray800);
 }
 
@@ -69,37 +65,30 @@ input:focus {
   border: none;
   border-radius: 8px;
   padding: 8px 23px;
-
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 26px;
   text-decoration: none;
   color: var(--gray100);
   cursor: pointer;
 }
 
 /* SortItems */
-.sort-items-wrapper {
-  position: relative;
+#sort-items-wrapper {
   height: 42px;
+  position: relative;
   display: flex;
   align-items: center;
   gap: 24px;
   border-radius: 12px;
   border: 1px solid var(--gray200);
+  color: var(--gray800);
   padding: 8px 20px;
   cursor: pointer;
 }
 
-.sort-items-text {
+.sort-items-label {
   display: show;
-  color: var(--gray800);
-  font-size: 1.6rem;
-  font-weight: 400;
-  line-height: 26px;
 }
 
-.sort-items-text.mobile {
+.sort-items-label.mobile {
   display: none;
 }
 
@@ -108,7 +97,7 @@ input:focus {
   height: 24px;
 }
 
-.dropdown-box {
+.dropdown-menu {
   display: none;
   position: absolute;
   top: 50px;
@@ -121,23 +110,19 @@ input:focus {
   z-index: 2;
 }
 
-.dropdown-box.show {
+.dropdown-menu.show {
   display: block;
 }
 
-.dropdown-text {
-  font-size: 1.6rem;
-  font-weight: 400;
-  line-height: 26px;
+.dropdown-option {
   text-align: center;
-  color: var(--gray800);
   border-bottom: 1px solid var(--gray200);
   margin: 0 auto;
   padding: 8px 0;
   cursor: pointer;
 }
 
-.dropdown-text:last-child {
+.dropdown-option:last-child {
   border-bottom: none;
 }
 
@@ -162,13 +147,8 @@ input:focus {
 }
 
 /* PaginationItems */
-.section-bottom {
+#pagination-box {
   padding-top: 20px;
-  display: flex;
-  justify-content: center;
-}
-
-.pagination-wrapper {
   display: flex;
   align-items: center;
   gap: 4px;
@@ -183,11 +163,6 @@ input:focus {
   display: flex;
   justify-content: center;
   align-items: center;
-
-  font-family: pretendard, sans-serif;
-  font-size: 1.6rem;
-  font-weight: 600;
-  line-height: 26px;
   color: var(--gray500);
   cursor: pointer;
 }
@@ -230,7 +205,7 @@ input:focus {
     gap: 14px;
   }
 
-  .sort-items-wrapper {
+  #sort-items-wrapper {
     width: 42px;
     height: 42px;
     padding: 9px;

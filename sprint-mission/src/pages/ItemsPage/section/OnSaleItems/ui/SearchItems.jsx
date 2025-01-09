@@ -1,4 +1,5 @@
 import searchIcon from "../../../../../shared/assets/search_icon.png";
+import { typoStyles } from "../../../../../shared/Typo/Typo";
 
 export function SearchItems({ onSearch }) {
   //입력받은 키워드 상위 컴포넌트에 전달해 파라미터 업데이트
@@ -18,6 +19,7 @@ export function SearchItems({ onSearch }) {
     <div id="search-items-wrapper">
       <input
         id="input-search-keyword"
+        className={typoStyles.textLgRegular}
         name="keyword"
         type="text"
         placeholder="검색할 상품을 입력해주세요"

@@ -3,6 +3,7 @@ import { ItemCard } from "../ui/ItemCard";
 import { SCREEN_SIZES } from "../../../../shared/hooks/useScreenSize";
 import { usePageSize } from "../../../../shared/hooks/usePageSize";
 import { useBestItems } from "./hooks/useBestItems";
+import { Typo, typoStyles } from "../../../../shared/Typo/Typo";
 
 const SCREEN_SIZES_TO_PAGE_SIZE = {
   [SCREEN_SIZES.MOBILE]: 1,
@@ -16,8 +17,10 @@ export function BestItems() {
 
   return (
     <section id="best-items">
-      <p className="section-title">베스트 상품</p>
-
+      <Typo
+        className={`${typoStyles.textXlBold} section-title`}
+        content="베스트 상품"
+      />
       <div className="cards-box">
         {productList.map((product, idx) => (
           <ItemCard product={product} key={idx} />

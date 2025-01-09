@@ -8,6 +8,7 @@ import { SCREEN_SIZES } from "../../../../shared/hooks/useScreenSize";
 import { usePageSize } from "../../../../shared/hooks/usePageSize";
 import { useOnSaleItems } from "./hooks/useOnSaleItems";
 import { useEffect, useState } from "react";
+import { Typo, typoStyles } from "../../../../shared/Typo/Typo";
 
 const SCREEN_SIZES_TO_PAGE_SIZE = {
   [SCREEN_SIZES.MOBILE]: 4,
@@ -36,7 +37,10 @@ export function OnSaleItems() {
   return (
     <section id="on-sale-items">
       <div className="section-top">
-        <p className="section-title">판매 중인 상품</p>
+        <Typo
+          className={`${typoStyles.textXlBold} section-title`}
+          content="판매 중인 상품"
+        />
         <div className="utility-box">
           <SearchItems onSearch={(keyword) => updateParams({ keyword })} />
           <PostItems />
@@ -50,13 +54,11 @@ export function OnSaleItems() {
         ))}
       </div>
 
-      <div className="section-bottom">
-        <PaginationItems
-          currentPage={params.page}
-          totalPageCount={totalPageCount}
-          onPageChange={(page) => updateParams({ page })}
-        />
-      </div>
+      <PaginationItems
+        currentPage={params.page}
+        totalPageCount={totalPageCount}
+        onPageChange={(page) => updateParams({ page })}
+      />
     </section>
   );
 }
