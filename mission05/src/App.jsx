@@ -1,5 +1,7 @@
+import Footer from "./common/layouts/Footer";
+
 function App() {
-  return <></>;
+  return <Footer></Footer>;
 }
 
 export default App;
