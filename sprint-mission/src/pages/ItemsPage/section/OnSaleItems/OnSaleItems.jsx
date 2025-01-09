@@ -4,16 +4,21 @@ import { PostItems } from "./ui/PostItems";
 import { SortItems } from "./ui/SortItems";
 import { ItemCard } from "../ui/ItemCard";
 import { PaginationItems } from "./ui/PaginationItems";
-import { usePageSize } from "./hooks/usePageSize";
+import { SCREEN_SIZES } from "../../../../shared/hooks/useScreenSize";
+import { usePageSize } from "../../../../shared/hooks/usePageSize";
 import { useOnSaleItems } from "./hooks/useOnSaleItems";
 import { useEffect, useState } from "react";
 
+const SCREEN_SIZES_TO_PAGE_SIZE = {
+  [SCREEN_SIZES.MOBILE]: 4,
+  [SCREEN_SIZES.TABLET]: 6,
+  [SCREEN_SIZES.DESKTOP]: 10,
+};
+
 export function OnSaleItems() {
-  const { pageSize } = usePageSize(); //반응형으로 pageSize 가져오기
+  const { pageSize } = usePageSize(SCREEN_SIZES_TO_PAGE_SIZE); //반응형으로 pageSize 가져오기
   const [params, setParams] = useState({
-    // page: 1,
     pageSize,
-    // orderBy: "recent",
   }); //현재 스크린사이즈에 따른 pageSize 초기값 설정
 
   //스크린사이즈 달라지면 파라미터 업데이트

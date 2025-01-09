@@ -1,16 +1,7 @@
-import {
-  useScreenSize,
-  SCREEN_SIZES,
-} from "../../../../../shared/hooks/useScreenSize";
+import { useScreenSize } from "./useScreenSize";
 import { useEffect, useState } from "react";
 
-const SCREEN_SIZES_TO_PAGE_SIZE = {
-  [SCREEN_SIZES.MOBILE]: 4,
-  [SCREEN_SIZES.TABLET]: 6,
-  [SCREEN_SIZES.DESKTOP]: 10,
-};
-
-export const usePageSize = () => {
+export const usePageSize = (SCREEN_SIZES_TO_PAGE_SIZE) => {
   const screenSize = useScreenSize();
   const [pageSize, setPageSize] = useState(
     SCREEN_SIZES_TO_PAGE_SIZE[screenSize]
