@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-//TODO: 헤더, 푸터의 미디어쿼리 분기 포인트랑 일치시키자.
 const BREAKPOINTS = {
   MOBILE: 743,
   TABLET: 1199,

@@ -11,6 +11,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  position: relative;
 }
 
 .utility-box {
@@ -188,6 +189,7 @@ input:focus {
   font-weight: 600;
   line-height: 26px;
   color: var(--gray500);
+  cursor: pointer;
 }
 
 .arrow-img {
@@ -201,13 +203,8 @@ input:focus {
   color: var(--gray50);
 }
 
-/* TODO: 인풋박스 텍스트 깨짐 해결해보자. */
 /* 태블릿 사이즈 미디어쿼리 */
 @media (max-width: 1199px) {
-  #input-search-keyword {
-    /* width: 242px; */
-  }
-
   #on-sale-items .cards-box {
     gap: 40px 16px;
     grid-template-columns: repeat(3, 1fr);
@@ -216,20 +213,30 @@ input:focus {
 
 /* 모바일 사이즈 미디어쿼리 */
 @media (max-width: 743px) {
-  #input-search-keyword {
-    /* width: 288px; */
-  }
-
-  /* TODO: 모바일 사이즈 그리드 바꾸기 */
+  /* 상단 그리드 변경 */
   .section-top {
+    display: block;
   }
 
-  .sort-items {
+  #post-item-btn {
+    position: absolute;
+    top: -5px;
+    right: 0px;
+  }
+
+  .utility-box {
+    margin-top: 14px;
+    justify-content: space-between;
+    gap: 14px;
+  }
+
+  .sort-items-wrapper {
     width: 42px;
     height: 42px;
     padding: 9px;
   }
 
+  /* 상품 카드 ui 변경 */
   #on-sale-items .cards-box {
     gap: 32px 8px;
     grid-template-columns: repeat(2, 1fr);
