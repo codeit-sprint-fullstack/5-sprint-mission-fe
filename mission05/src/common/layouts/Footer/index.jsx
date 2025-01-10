@@ -28,7 +28,6 @@ const navigateTo = (url) => {
   window.open(url, "_blank", "noopener,noreferrer");
 };
 
-// eslint-disable-next-line react/prop-types
 function FooterSNS({ type }) {
   return (
     <>
