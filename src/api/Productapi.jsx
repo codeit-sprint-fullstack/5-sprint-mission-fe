@@ -12,7 +12,7 @@ export const getProductList = async (page, pageSize, orderBy, keyword = "") => {
         keyword: keyword,
       },
     });
-    console.log(res.data);
+
     return res.data;
   } catch (error) {
     console.error("Failed to fetch product list:", error);
