@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
-import { useScreenSize } from "../../hooks/useScreenSize";
+import { useMediaQuery } from "../../store/useScreenSizeStore";
 import { Typo, typoStyles } from "../../Typo/Typo";
 
 export function HeaderLink() {
-  const screenSize = useScreenSize();
+  const screenSize = useMediaQuery();
+  //스크린 사이즈에 따라 텍스트스타일 변경
   const linkTypoClassName =
     screenSize === "MOBILE" ? typoStyles.textLgBold : typoStyles.text2lgBold;
 

@@ -3,8 +3,12 @@ import favHeart from "../../../../shared/assets/favorite_heart.png";
 import defaultItem from "../../../../shared/assets/default_item.png";
 import { CardImg } from "../../../../shared/ui/CardImg";
 import { Typo, typoStyles } from "../../../../shared/Typo/Typo";
+import { SkeletonCard } from "./SkeletonCard";
 
-export function ItemCard({ product }) {
+export function ItemCard({ product, isLoading }) {
+  //로딩중일 때 스켈레톤 ui 보여주기
+  if (isLoading) return <SkeletonCard />;
+
   const {
     images: [productImg], //반환된 배열에서 첫번째 링크 대표 이미지로 사용
     name: productName,

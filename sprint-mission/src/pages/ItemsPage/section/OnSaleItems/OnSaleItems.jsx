@@ -4,35 +4,41 @@ import { PostItems } from "./ui/PostItems";
 import { SortItems } from "./ui/SortItems";
 import { ItemCard } from "../ui/ItemCard";
 import { PaginationItems } from "./ui/PaginationItems";
-import { SCREEN_SIZES } from "../../../../shared/hooks/useScreenSize";
-import { usePageSize } from "../../../../shared/hooks/usePageSize";
-import { useOnSaleItems } from "./hooks/useOnSaleItems";
-import { useEffect, useState } from "react";
 import { Typo, typoStyles } from "../../../../shared/Typo/Typo";
+import { useMediaQuery } from "../../../../shared/store/useScreenSizeStore";
+import { useItemsFetch } from "../hooks/useItemsFetch";
+import { useCallback, useEffect, useState } from "react";
 
+//sizeConfig
 const SCREEN_SIZES_TO_PAGE_SIZE = {
-  [SCREEN_SIZES.MOBILE]: 4,
-  [SCREEN_SIZES.TABLET]: 6,
-  [SCREEN_SIZES.DESKTOP]: 10,
+  MOBILE: 4,
+  TABLET: 6,
+  DESKTOP: 10,
 };
 
 export function OnSaleItems() {
-  const { pageSize } = usePageSize(SCREEN_SIZES_TO_PAGE_SIZE); //반응형으로 pageSize 가져오기
+  const screenSize = useMediaQuery();
+  const pageSize = SCREEN_SIZES_TO_PAGE_SIZE[screenSize];
   const [params, setParams] = useState({
-    pageSize,
-  }); //현재 스크린사이즈에 따른 pageSize 초기값 설정
+    pageSize, //현재 screenSize에 해당하는 pageSize 쿼리로 전달
+  });
 
-  //스크린사이즈 달라지면 파라미터 업데이트
+  //screenSize가 변경될 때 쿼리의 pageSize만 업데이트
   useEffect(() => {
     setParams((prev) => ({ ...prev, pageSize }));
-  }, [pageSize]);
+  }, [screenSize]);
 
-  const { productList, totalPageCount } = useOnSaleItems(params); //변경된 params를 전달하여 받은 데이터 가져오기
+  /**
+   * 파라미터 업데이트
+   * @description 기존의 파라미터 복사, 새로운 파라미터를 기존 상태에 추가(덮어씌우기)
+   */
+  const updateParams = useCallback((newParams) => {
+    setParams((prev) => ({ ...prev, ...newParams })); //FIXME: 페이지네이션 동작이 어색해서 page 파라미터 업데이트 방식을 수정해야할 것 같은데 잘 모르겠다
+  }, []);
 
-  //파라미터 업데이트: 기존의 파라미터 복사하고 새로운 파라미터를 기존 상태에 추가(덮어씌우기)
-  const updateParams = (newParams) => {
-    setParams((prev) => ({ ...prev, ...newParams }));
-  };
+  //api 호출
+  const { productList, totalCount, isLoading } = useItemsFetch(params);
+  const totalPageCount = Math.ceil(totalCount / params.pageSize); //페이지네이션에 필요한 전체 페이지 수 계산
 
   return (
     <section id="on-sale-items">
@@ -50,7 +56,7 @@ export function OnSaleItems() {
 
       <div className="cards-box">
         {productList.map((product, idx) => (
-          <ItemCard product={product} key={idx} />
+          <ItemCard product={product} key={idx} isLoading={isLoading} />
         ))}
       </div>
 

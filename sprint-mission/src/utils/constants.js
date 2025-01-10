@@ -26,3 +26,8 @@ export const SNS_LINK_LIST = [
     src: instaIcon,
   },
 ];
+
+export const BREAKPOINTS = {
+  MOBILE: 743,
+  TABLET: 1199,
+};

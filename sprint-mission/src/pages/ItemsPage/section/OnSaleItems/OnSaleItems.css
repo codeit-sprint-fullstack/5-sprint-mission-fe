@@ -85,7 +85,7 @@ input:focus {
 }
 
 .sort-items-label {
-  display: show;
+  display: block;
 }
 
 .sort-items-label.mobile {
