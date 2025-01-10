@@ -1,8 +1,9 @@
-import Product from "../../components/Product";
 import { useEffect, useState } from "react";
 import { getProductList } from "../../../apis/productService";
 import useFetch from "../../../common/hooks/useFetch";
 import useDeviceType from "../../../common/hooks/useDeviceType";
+import Product from "../../components/Product";
+import ProductSkeleton from "../../components/ProductSkeleton";
 import { SORT_TYPE } from "../../../common/components/ProductFilter";
 import _ from "lodash";
 
@@ -55,7 +56,10 @@ export default function ProductForBest() {
           productList
             .slice(0, +query.pageSize)
             .map((data, idx) => <Product key={idx} data={data} />)}
-        {isLoading && <p>로딩 중...</p>}
+        {isLoading &&
+          Array.from({ length: query.pageSize }, (_, i) => i + 1).map((idx) => (
+            <ProductSkeleton key={idx} />
+          ))}
       </div>
     </section>
   );
