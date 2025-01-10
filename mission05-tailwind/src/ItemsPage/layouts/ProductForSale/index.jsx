@@ -57,7 +57,7 @@ export default function ProductForSale() {
 
   return (
     <section>
-      <div className="grid grid-cols-[auto_1fr_auto_auto_auto] gap-[12px] items-center md:grid-cols-[auto_1fr_auto_auto] md: grid-rows-2">
+      <div className="grid grid-rows-1 grid-cols-[auto_1fr_auto_auto_auto] gap-[12px] items-center md:grid-cols-[auto_1fr_auto_auto] md:grid-rows-2">
         <div className="col-start-1 col-end-2">
           <h2 className="text-gray-900 text-xl font-bold leading-[32px]">
             판매 중인 상품
@@ -78,7 +78,7 @@ export default function ProductForSale() {
       </div>
 
       <div
-        className={`grid ${PAGE_SIZE_BY_DEVICE_TYPE[deviceType].ui} grid-rows-2 gap-[24px] mt-[24px] mb-[43px] md:gap-[16px] md:mb-[40px] sm:gap-[8px] sm:mt-[16px]`}
+        className={`grid ${PAGE_SIZE_BY_DEVICE_TYPE[deviceType].ui} grid-rows-2 gap-[24px] mt-[24px] mb-[43px] md:gap-[16px] md:mb-[40px] md:mt-[16px] sm:gap-[8px] `}
       >
         {!isLoading &&
           productList.map((data, idx) => <Product key={idx} data={data} />)}
