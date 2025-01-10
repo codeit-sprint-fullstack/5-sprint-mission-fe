@@ -1,4 +1,4 @@
-export default function PaginationItem({ children, isSelect }) {
+export default function PaginationItem({ children, isSelect, onMove }) {
   return (
     <div
       className={`
@@ -8,6 +8,7 @@ export default function PaginationItem({ children, isSelect }) {
             ? "bg-[#2F80ED] text-white border-[#2F80ED]"
             : "bg-white text-[#6B7280] border-[#e5e7eb]"
         }`}
+      onClick={onMove}
     >
       {children}
     </div>
