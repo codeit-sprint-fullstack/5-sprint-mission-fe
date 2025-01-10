@@ -32,7 +32,7 @@ export const useScreenSizeStore = create((set, get) => ({
   },
 }));
 
-//TODO: 파일이름뭘로하지. 스토어랑 훅이랑 분리해야되나 고민~
+//파일이름뭘로하지. 스토어랑 훅이랑 분리해야되나 고민~
 //스토어에서 변경된 스크린사이즈 불러오기
 export const useMediaQuery = () =>
   useScreenSizeStore((state) => state.screenSize);
