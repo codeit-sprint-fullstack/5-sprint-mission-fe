@@ -1,0 +1,46 @@
+.page-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.page-bar button {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.page-bar button:hover {
+  background-color: #f0f0f0;
+}
+
+.page-bar button.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+.page-bar button.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.page-bar .arrow {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  color: #333;
+}
+
+.page-bar .arrow:hover {
+  color: #007bff;
+}

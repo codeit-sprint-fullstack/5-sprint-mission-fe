@@ -1,0 +1,94 @@
+.product-list {
+  display: flex;
+  gap: 20px;
+}
+
+.sale-products {
+  padding: 20px;
+  font-family: Arial, sans-serif;
+}
+
+.sale-products-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.sale-products-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.search-and-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.search-input {
+  flex: 1;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.register-button {
+  background-color: #007bff;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.sort-dropdown {
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(24px, 1fr));
+  padding: 0px;
+  gap: 20px;
+}
+
+.product-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: left;
+}
+
+.product-image {
+  width: 282px;
+  height: 282px;
+  /* width: 100%;
+  height: auto; */
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.product-name {
+  font-weight: bold;
+  margin: 10px 0 5px;
+}
+
+.product-price {
+  font-size: 1rem;
+  color: #333;
+  margin: 5px 0;
+}
+
+.product-favorite {
+  font-size: 0.9rem;
+  color: #888;
+}
