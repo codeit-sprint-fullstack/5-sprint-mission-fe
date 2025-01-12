@@ -1,6 +1,7 @@
 import panda from "../assets/Group 19.png";
 import login from "../assets/로그인.png";
 import "../App.css";
+import loginImg from "../assets/Frame2609463.png";
 
 function Nav() {
   return (
@@ -15,7 +16,13 @@ function Nav() {
             <a>중고마켓</a>
           </div>
           <a href="./">
-            <img class="login-img" src={login} />
+            <picture class="login-img">
+              <source
+                media="(min-width: 375px) and (max-width: 1199px)"
+                srcset={loginImg}
+              />
+              <img src={login} alt="로그인" />
+            </picture>
           </a>
         </div>
       </nav>

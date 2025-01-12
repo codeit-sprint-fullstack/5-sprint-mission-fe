@@ -2,16 +2,15 @@ import React, { useEffect, useState } from "react";
 import "../../App.css";
 import heart from "../../assets/ic_heart.png";
 
-function ProductList({ sortKey }) {
+function ProductList({ sortKey, page }) {
   const [products, setProducts] = useState([]);
-  const [page, setPage] = useState(1); // 페이지 (1부터 시작)
 
-  // page나 sortKey가 바뀔 때마다 데이터 새로 Fetch + 정렬
+  // page나 sortKey가 바뀔 때마다 데이터 Fetch 및 정렬
   useEffect(() => {
     async function fetchProductsByPage(currentPage) {
       try {
-        // page=1 → ID 1~10, page=2 → 11~20, ...
-        const startId = (currentPage - 1) * 10 + 1;
+        // 페이지에 따라 데이터 범위 계산 (10개씩)
+        const startId = (currentPage - 1) * 10 + 1; // 페이지당 10개
         const endId = currentPage * 10;
 
         const requests = [];
@@ -24,38 +23,31 @@ function ProductList({ sortKey }) {
         }
 
         const result = await Promise.all(requests);
-        // null 제외
+        // null 제거
         const filtered = result.filter((item) => item !== null);
         // 정렬 수행
         const sorted = sortProducts(filtered, sortKey);
 
-        // 이번 예제에서는 "이전 목록에 추가"가 아니라 "덮어쓰기"라고 가정
+        // 덮어쓰기 방식으로 설정
         setProducts(sorted);
       } catch (error) {
         console.error("Fetching products failed:", error);
       }
     }
 
-    fetchProductsByPage(page);
+    fetchProductsByPage(page); // 현재 페이지에 해당하는 데이터 Fetch
   }, [page, sortKey]);
 
   // 정렬 로직
   function sortProducts(items, key) {
     const newArr = [...items];
     if (key === "latest") {
-      // createdAt 최신순(내림차순)
       newArr.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
     } else if (key === "heart") {
-      // 좋아요순(내림차순)
       newArr.sort((a, b) => b.favoriteCount - a.favoriteCount);
     }
     return newArr;
   }
-
-  // "더 보기" 버튼: page 증가 -> 새 fetch -> 새 10개만 렌더링(덮어쓰기)
-  const handleLoadMore = () => {
-    setPage((prevPage) => prevPage + 1);
-  };
 
   return (
     <div className="product-container">
@@ -79,11 +71,6 @@ function ProductList({ sortKey }) {
           </div>
         );
       })}
-
-      {/* 더 보기 버튼 */}
-      <div style={{ textAlign: "center", marginTop: "20px" }}>
-        <button onClick={handleLoadMore}>더 보기</button>
-      </div>
     </div>
   );
 }
