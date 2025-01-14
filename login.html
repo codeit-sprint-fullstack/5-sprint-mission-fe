@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>판다마켓 : 로그인</title>
+    <link rel="stylesheet" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="WindowView">
+
+    
+    
+    <div id="LoginWrapper">
+        <div>
+            <a href="index.html">
+                <img src="image/Group 19.png" alt="판다마켓 로고"
+                width="396px"
+                height="132px">
+            </a>
+        </div>
+        <form>
+            <div class="FormArray">
+                <label for="UserEmail">이메일</label>
+                <input type="text" id="UserEmail" placeholder="이메일을 입력해주세요">
+                <div class="ErrorMessage" id="EmailE"></div>
+            </div>
+
+            <div class="FormArray">
+                <label for="PassWord">비밀번호</label>
+                <input class="PWIcon" type="password" id="PassWord" placeholder="비밀번호를 입력해주세요">
+                <div class="ErrorMessage" id="PassWordE"></div>
+            </div>
+
+        
+            <input class="LoginButton" id="Loginbn" type="submit" value="로그인">
+
+            <div class="EasyLogin">
+                <div class="EasyLoginArray">
+                    <p>간편 로그인하기</p>
+                    <div class="EasyLoginIcon">
+                        
+                        <a href="https://www.kakaocorp.com/page/">
+                            <img src="image/kakao.png" alt="Kakaotalk" width="42px">
+                        </a>
+
+                        <a href="https://www.google.com/">
+                            <img src="image/google.png" alt="Google" width="42px">
+                        </a>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="EasyLoginRetuen">
+                <p>판다마켓이 처음이신가요?</p>
+                <a href="signup.html" style="font-weight: bolder">회원가입</a>
+            </div>
+        </form>
+    </div>
+
+
+    <script src="event.js"></script>
+
+</body>
+</html>
