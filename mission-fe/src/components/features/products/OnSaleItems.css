@@ -1,0 +1,225 @@
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.sectionHeader h2 {
+  font-size: 2rem;
+}
+
+.searchBox {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.searchInput {
+  position: relative;
+  width: 32.5rem;
+}
+
+.searchIcon {
+  position: absolute;
+  top: 50%;
+  left: 1.6rem;
+  transform: translateY(-50%);
+  width: 1.5rem;
+  height: 1.5rem;
+  z-index: 1;
+}
+
+.searchInput input {
+  width: 100%;
+  height: 100%;
+  padding: 0.9rem 10.7rem 0.9rem 4.4rem;
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  border: none;
+  border-radius: 1.2rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.register-button {
+  padding: 0.8rem 1.6rem;
+  background-color: var(--blue);
+  color: white;
+  border: none;
+  border-radius: 0.8rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.onSale-itemGrid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 2rem;
+  justify-content: center;
+}
+
+/* 태블릿 화면 */
+@media screen and (max-width: 1024px) {
+  .onSale-itemGrid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.6rem;
+  }
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 768px) {
+  .onSale-itemGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.2rem;
+  }
+
+  .sectionHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.2rem;
+  }
+
+  .searchBox {
+    width: 100%;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .header-buttons {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 1.2rem;
+  }
+
+  .register-button {
+    flex: 1;
+  }
+
+  .dropdown {
+    flex: 1;
+  }
+
+  .dropdownButton {
+    width: 100%;
+  }
+}
+
+.itemCard {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 1px solid #dfdfdf;
+  border-radius: 1.6rem;
+  overflow: hidden;
+  margin-bottom: 1.2rem;
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.itemCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.itemInfo {
+  padding: 1.2rem 0.8rem;
+}
+
+.itemInfo h3 {
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: #1f2937;
+  margin-bottom: 0.6rem;
+}
+
+.itemInfo p {
+  font-size: 1.6rem;
+  font-weight: 700;
+  margin-bottom: 0.6rem;
+}
+
+.itemInfo span {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #4b5563;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.heartIcon {
+  width: 1.6rem;
+  height: 1.6rem;
+}
+
+.sortToggle {
+  display: flex;
+  background-color: #f3f4f6;
+  border-radius: 0.8rem;
+  padding: 0.2rem;
+}
+
+.sortToggle button {
+  padding: 0.8rem 1.6rem;
+  background: none;
+  border: none;
+  border-radius: 0.6rem;
+  font-size: 1.4rem;
+  color: #6b7280;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sortToggle button.active {
+  background-color: white;
+  color: var(--blue);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown {
+  position: relative;
+}
+
+.dropdownButton {
+  padding: 0.8rem 1.6rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.8rem;
+  font-size: 1.4rem;
+  color: #1f2937;
+  cursor: pointer;
+  min-width: 10rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  margin-top: 0.4rem;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.8rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  min-width: 100%;
+  padding: 0.4rem;
+}
+
+.dropdownMenu button {
+  width: 100%;
+  padding: 0.8rem 1.6rem;
+  text-align: center;
+  border: none;
+  background: white;
+  font-size: 1.4rem;
+  color: #1f2937;
+}

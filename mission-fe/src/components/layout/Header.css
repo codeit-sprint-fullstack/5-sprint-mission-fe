@@ -1,0 +1,93 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20rem;
+  background-color: #ffffff;
+  border-bottom: 0.1rem solid #dfdfdf;
+  z-index: 1000;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+}
+
+.nav-menu-container {
+  margin-left: 2.4rem;
+}
+
+.login-button {
+  background-color: var(--blue);
+  color: #ffffff;
+  padding: 1.2rem 2.4rem;
+  border-radius: 0.8rem;
+  text-decoration: none;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.login-button:hover {
+  background-color: #1967d6;
+}
+
+.avatar-button {
+  display: none;
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+.avatar-button img {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+}
+
+.mobile-logo {
+  display: none;
+}
+
+/* 태블릿 화면 */
+@media screen and (max-width: 1024px) {
+  .header {
+    padding: 0 2.4rem;
+  }
+
+  .login-button {
+    display: none;
+  }
+
+  .avatar-button {
+    display: block;
+  }
+}
+
+/* 모바일 화면 */
+@media screen and (max-width: 768px) {
+  .header {
+    padding: 0 1.6rem;
+  }
+
+  .desktop-logo {
+    display: none;
+  }
+
+  .mobile-logo {
+    display: block;
+    width: 8rem;
+  }
+
+  .nav-menu-container {
+    margin-left: 0.8rem;
+    min-width: 100%;
+  }
+}
