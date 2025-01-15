@@ -1,0 +1,20 @@
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/variable/pretendardvariable.css");
+
+* {
+  font-family: "Pretendard Variable";
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --color_footer_bg: #111827;
+  --color_button_active2_bg: #f9fafb;
+  --color_button_active1_bg: #3692ff;
+  --color_button_hover_bg: #1967d6;
+  --color_button_click_bg: #1251aa;
+  --color_button_inactive_bg: #9ca3af;
+  --color_lending_top_bg: #cfe5ff;
+  --color_lending_bottom_bg: #cfe5ff;
+  --color_lending_section_bg: #fcfcfc;
+}

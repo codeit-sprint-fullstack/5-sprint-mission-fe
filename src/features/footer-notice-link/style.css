@@ -1,0 +1,10 @@
+.notice-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+
+.notice-link-item {
+  text-decoration: none;
+}

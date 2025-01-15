@@ -1,0 +1,9 @@
+.sns-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sns-link > a > img {
+  width: 20px;
+  height: 20px;
+}
