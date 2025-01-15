@@ -1,0 +1,35 @@
+@import "../src/shared/styles/reset.css";
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  background: #ffffff;
+  font-family: pretendard, sans-serif;
+  margin: 0;
+}
+
+.content {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* 태블릿 사이즈 미디어쿼리 */
+@media (max-width: 1199px) {
+  .content {
+    min-width: 696px;
+    padding: 0 24px;
+  }
+}
+
+/* 모바일 사이즈 미디어쿼리 */
+@media (max-width: 743px) {
+  .content {
+    min-width: 344px;
+    padding: 0 15px;
+  }
+}

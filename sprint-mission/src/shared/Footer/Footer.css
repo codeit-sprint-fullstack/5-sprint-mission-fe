@@ -1,0 +1,69 @@
+@import "../../shared/styles/color.css";
+
+footer {
+  height: 160px;
+  background-color: var(--gray900);
+  padding: 32px 0;
+  contain: content;
+}
+
+footer .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1520px;
+  padding: 0 24px;
+  color: var(--gray400);
+}
+
+footer .link-list {
+  display: flex;
+  justify-content: flex-start;
+  gap: 30px;
+}
+
+footer .link-item {
+  color: var(--gray200);
+  text-decoration-line: none;
+  cursor: pointer;
+}
+
+.sns-box {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+}
+
+.sns-icon {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+/* 태블릿 사이즈 동일 */
+
+/* 모바일 사이즈 미디어쿼리 */
+@media (max-width: 743px) {
+  footer .content {
+    padding: 0 16px;
+    display: grid;
+    grid-template-areas:
+      "link sns"
+      "addr .";
+    grid-template-columns: 1fr 1fr;
+    row-gap: 24px;
+  }
+
+  #addr {
+    grid-area: addr;
+  }
+
+  footer .link-list {
+    grid-area: link;
+  }
+
+  .sns-box {
+    grid-area: sns;
+  }
+}

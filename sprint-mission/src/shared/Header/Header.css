@@ -1,0 +1,110 @@
+@import "../../shared/styles/color.css";
+
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #dfdfdf;
+  height: 70px;
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+nav {
+  width: 100%;
+  max-width: 1520px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 25px;
+}
+
+#logo-img-box {
+  width: 153px;
+  height: 51px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8.6px;
+}
+
+#logo-icon-img {
+  width: 40px;
+  display: block;
+}
+
+#logo-text-img {
+  width: 103px;
+}
+
+header .link-list {
+  display: flex;
+}
+
+header .link-item {
+  padding: 21px 15px;
+  color: var(--gray600);
+  text-align: center;
+  text-decoration: none;
+}
+
+#login-btn {
+  background-color: var(--primary100);
+  padding: 12px 23px;
+  border-radius: 8px;
+  cursor: pointer;
+
+  color: var(--gray100);
+  text-align: center;
+  text-decoration-line: none;
+  display: block;
+}
+
+#profile-img {
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+}
+
+/* 태블릿 사이즈 동일 */
+
+/* 모바일 사이즈 미디어쿼리 */
+@media (max-width: 743px) {
+  nav {
+    padding: 0 16px;
+  }
+
+  .nav-menu {
+    gap: 8px;
+  }
+
+  #logo-img-box {
+    width: 100%;
+  }
+
+  /* 모바일 사이즈에서 로고 아이콘 숨기기 */
+  #logo-icon-img {
+    display: none;
+  }
+
+  #logo-text-img {
+    width: 80px;
+  }
+
+  header .link-list {
+    gap: 8px;
+  }
+
+  header .link-item {
+    padding: 20px 0;
+    color: var(--gray600);
+  }
+}

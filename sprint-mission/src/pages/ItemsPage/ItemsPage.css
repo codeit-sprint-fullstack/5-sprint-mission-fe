@@ -1,0 +1,69 @@
+@import "../../shared/styles/color.css";
+
+#items-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding-top: 25px;
+  padding-bottom: 140px;
+}
+
+/* BestItems/OnSaleItems 섹션 동일, 반응형 변화 없어서 부모 컴포넌트 css에서 한번에 관리 */
+.section-title {
+  color: var(--gray900);
+}
+
+.item-card {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.item-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: var(--gray800);
+}
+
+.fav-count-box {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+}
+
+.fav-heart-icon {
+  width: 16px;
+  height: 16px;
+}
+
+.fav-count {
+  color: var(--gray600);
+}
+
+/* SkeletonCard */
+.skeleton-card-text {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.skeleton-name {
+  height: 24px;
+  background-color: var(--gray200);
+  border-radius: 4px;
+}
+
+.skeleton-price {
+  height: 26px;
+  background-color: var(--gray200);
+  border-radius: 4px;
+}
+
+.skeleton-fav {
+  width: 42px;
+  height: 18px;
+  background-color: var(--gray200);
+  border-radius: 4px;
+}
