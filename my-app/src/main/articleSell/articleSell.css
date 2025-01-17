@@ -1,0 +1,205 @@
+#articleSell {
+  margin-bottom: 40px;
+}
+
+#articleSellBox {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 24px;
+}
+
+#productBestTitle {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #111827;
+}
+
+#articleSellHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+#articleSellHeaderMobile {
+  display: none;
+}
+
+#articleSellHeader > p {
+  font-size: 20px;
+  font-weight: 700;
+  line-height: 32px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+#articleSellHeaderAbilityBox {
+  display: flex;
+  align-items: center;
+}
+
+.heartBox {
+  display: flex;
+  align-items: center;
+}
+
+.heartBox img {
+  width: 16px;
+  margin-right: 4px;
+}
+
+.heartBox p {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #4b5563;
+}
+
+#articleSellHeaderAbilityBoxRegistration {
+  position: relative;
+}
+
+#articleSellHeaderAbilityBoxRegistration input {
+  margin-right: 12px;
+  background-color: #f3f4f6;
+  width: 325px;
+  border-radius: 12px;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  text-underline-position: from-font;
+  padding: 9px 9px 9px 44px;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border: none;
+  outline: none;
+  color: #9ca3af;
+  box-sizing: border-box;
+}
+
+#articleSellHeaderAbilityBoxRegistration input::placeholder {
+  color: #9ca3af;
+  font-family: Pretendard;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 26px;
+  text-align: left;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+}
+
+#articleSellHeaderAbilityBoxRegistration img {
+  position: absolute;
+  left: 3%;
+  top: 20%;
+  width: 24px;
+}
+
+#articleSellHeaderAbilityBoxBtn {
+  width: 133px;
+  height: 42px;
+  border-radius: 8px;
+  background-color: #3692ff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #f3f4f6;
+  border: none;
+  margin-right: 12px;
+}
+
+.articleSellProductImg {
+  width: 221px;
+  height: 221px;
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  margin-bottom: 16px;
+}
+
+.articleSellProductName {
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 24px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 6px;
+}
+
+.articleSellProductPrice {
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 26px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  margin-bottom: 6px;
+}
+
+/* pc : 1200px이상  tablet : 744px이상  mobile : 743px이하 375px이상 */
+/* 판매중인상품 pc : 5x2  tablet : 3x2   mobile : 2x2 */
+
+@media screen and (max-width: 1199px) {
+  #articleSellBox {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  #articleSellHeaderAbilityBoxRegistration input {
+    width: 242px;
+  }
+}
+
+@media screen and (max-width: 743px) {
+  #articleSellHeader {
+    display: none;
+  }
+
+  #articleSellHeaderMobile {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+  }
+
+  .articleSellHeaderMobileBox {
+    display: flex;
+    gap: 15%;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+
+  .articleSellHeaderMobileBox > p {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 32px;
+    text-underline-position: from-font;
+    text-decoration-skip-ink: none;
+  }
+
+  #articleSellBox {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #articleSellHeaderAbilityBox {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  #articleSellHeaderAbilityBoxRegistration input {
+    width: 288px;
+  }
+
+  .articleSellProductImg {
+    width: 168px;
+    height: 168px;
+  }
+}

@@ -1,0 +1,39 @@
+#login button {
+  width: 88px;
+  height: 42px;
+  border-radius: 8px;
+  background-color: #3692ff;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  text-underline-position: from-font;
+  text-decoration-skip-ink: none;
+  color: #f3f4f6;
+  border: none;
+}
+
+.loginImg {
+  display: none;
+}
+
+@media screen and (max-width: 1199px) {
+  .loginImg {
+    width: 40px;
+    display: inline;
+  }
+
+  .loginButton {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 743px) {
+  .loginImg {
+    width: 40px;
+    display: inline;
+  }
+
+  .loginButton {
+    display: none;
+  }
+}
