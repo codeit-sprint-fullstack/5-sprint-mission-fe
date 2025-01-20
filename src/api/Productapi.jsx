@@ -1,31 +1,55 @@
 import axios from "axios";
 
-const BASE_URL = "https://panda-market-api.vercel.app/products";
+const BASE_URL = "https://five-sprint-mission-be-jswo.onrender.com/product";
 
-export const getProductList = async (page, pageSize, orderBy, keyword = "") => {
+// 상품 목록 조회
+export const fetchProductList = async (
+  page,
+  pagesize,
+  orderBy,
+  keyword = ""
+) => {
   try {
     const res = await axios.get(`${BASE_URL}`, {
       params: {
         page: page,
-        pageSize: pageSize,
+        pagesize: pagesize,
         orderBy: orderBy,
         keyword: keyword,
       },
     });
-
+    console.log("res.data", res.data);
     return res.data;
-  } catch (error) {
-    console.error("Failed to fetch product list:", error);
-    return { products: [] };
+  } catch (err) {
+    console.error("Failed to fetch product list:", err);
+    return console.log("error", err);
   }
 };
 
-export const getProduct = async (id) => {
+//상품 등록 name, description, price, tags
+export const createProduct = async (productData) => {
+  try {
+    const res = await axios.post(`${BASE_URL}`, {
+      name: productData.name,
+      description: productData.description,
+      price: productData.price,
+      tags: productData.tags,
+    });
+    console.log("res.data", res.data);
+    return res.data;
+  } catch (err) {
+    console.error("Failed to fetch product list:", err);
+    return console.log("error", err);
+  }
+};
+
+//상품 상세 조회
+export const fetchProductDetail = async (id) => {
   try {
     const res = await axios.get(`${BASE_URL}/${id}`);
     return res.data;
-  } catch (error) {
-    console.error("상품을 찾을 수 없음", error);
-    console.log("상품 상세 조회 실패!", error.message);
+  } catch (err) {
+    console.error("Failed to fetch product list:", err);
+    return console.log("error", err);
   }
 };
