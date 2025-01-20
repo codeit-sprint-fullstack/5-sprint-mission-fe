@@ -1,0 +1,129 @@
+
+.registrationTitle {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.registrationDiv {
+    margin: 0 auto;
+}
+
+.registerBtn {
+    width: 7.4rem;
+    height: 4.2rem;
+    font-size: 1.6rem;
+    background-color: #9CA3AF;
+    color: #F3F4F6;
+    border-radius: 0.8rem;
+    border:none;
+}
+
+.registerBtnEnabled {
+    width: 7.4rem;
+    height: 4.2rem;
+    font-size: 1.6rem;
+    background-color: #3692FF;
+    color: #F3F4F6;
+    border-radius: 0.8rem;
+    border:none;
+    cursor: pointer;
+}
+
+.registerBtnEnabled:hover {
+    background-color: #3585e7;
+}
+
+
+h3 {
+    font-size: 2rem;
+}
+
+h4 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.inputDiv > * {
+    width: 100%;
+}
+
+.descriptionInput {
+    height: 30rem;
+    background-color: #F3F4F6;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2rem;
+    box-sizing: border-box;
+    resize: none;
+}
+
+.descriptionInputNotChecked {
+    height: 30rem;
+    background-color: #F3F4F6;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2rem;
+    box-sizing: border-box;
+    resize: none;
+    outline: 1px solid #F74747;
+}
+
+.descriptionInput:focus {
+    outline: 1px solid #3692FF;
+    border: none;
+}
+
+.inputDiv > input {
+    background-color: #F3F4F6;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.tagInputDiv > * {
+    width: 100%;
+}
+
+.tagInputDiv > input {
+    background-color: #F3F4F6;
+    font-size: 1.6rem;
+    border: none;
+    border-radius: 1.2rem;
+    padding: 2rem;
+    box-sizing: border-box;
+}
+
+.tagInput:focus{
+    outline: 1px solid #3692FF;
+    border: none;
+}
+
+.unchecked {
+    outline: 1px solid #F74747;
+}
+
+
+.inputDiv > input:focus {
+    outline: 1px solid #3692FF;
+    border: none;
+}
+
+.tags {
+    display: flex;
+    gap: 1.4rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
+}
+
+.errorMessage {
+    padding: 1rem;
+    font-size: 1.4rem;
+    color: #F74747;
+}

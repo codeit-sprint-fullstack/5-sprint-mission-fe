@@ -1,0 +1,23 @@
+.title {
+    margin-bottom: 20px;
+}
+
+.bestItemList {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    margin-bottom: 50px;
+    gap: 20px;
+}
+
+.tabletBestItemList {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 50px;
+    gap: 10px;
+}
+
+.mobileBestItemList {
+    display: grid;
+    grid-template-columns: 1fr;
+    margin-bottom: 50px;
+}

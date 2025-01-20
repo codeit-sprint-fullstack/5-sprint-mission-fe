@@ -1,0 +1,26 @@
+.bestProductImage {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율 유지하며 꽉 채우기 */
+    border-radius: 2rem;
+}
+
+.bestItem {
+    margin: 0 auto;
+    margin-bottom: 5rem;
+    width:100%;
+}
+
+.bestProductPrice {
+    font-size: 1.8rem;
+    font-weight: 700;
+}
+
+.imgArea {
+    width: 100%;
+    padding-bottom: 100%; /* 정사각형 비율 유지 */
+    position: relative;
+}

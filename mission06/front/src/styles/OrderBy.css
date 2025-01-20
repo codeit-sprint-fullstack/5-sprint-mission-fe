@@ -1,0 +1,110 @@
+.nowOrderBy {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 9rem;
+    height: 1.6rem;
+    border: 1px solid #E5E7EB;
+    border-radius: 1rem;
+    padding: 1.2rem 2rem 1.2rem 2rem;
+    cursor: pointer;
+}
+
+.nowOrderByMobile {
+    display:flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30px;
+    border: 1px solid #E5E7EB;
+    border-radius: 0.5rem;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.orderArea {
+    margin: auto 0;
+}
+
+.selectOrderBy {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    margin-top: 5px;
+    padding: 4px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 1000;
+}
+
+.selectOrderByMobile {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    margin-top: 5px;
+    padding: 4px;
+    cursor: pointer;
+    position: absolute;
+    right: 10px;
+    z-index: 1000;
+}
+
+.recentOrder {
+    width:100%;
+    text-align: center;
+    border: 1px solid #E5E7EB;
+    background-color: white;
+    border-radius: 1rem 1rem 0 0;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 1.6rem;
+}
+
+.recentOrderChecked {
+    padding-top: 8px;
+    padding-bottom: 8px;
+    width:100%;
+    text-align: center;
+    border: 1px solid #E5E7EB;
+    background-color: rgb(240, 240, 240);
+    border-radius: 1rem 1rem 0 0;
+    font-size: 1.6rem;
+}
+
+.favoriteOrder {
+    width: 100%;
+    text-align: center;
+    border-radius: 0 0 1rem 1rem;
+    border-bottom: 1px solid #E5E7EB;
+    border-left: 1px solid #E5E7EB;
+    border-right: 1px solid #E5E7EB;
+    background-color: white;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 1.6rem;
+}
+
+.favoriteOrderChecked {
+    width: 100%;
+    text-align: center;
+    border-radius: 0 0 1rem 1rem;
+    border-bottom: 1px solid #E5E7EB;
+    border-left: 1px solid #E5E7EB;
+    border-right: 1px solid #E5E7EB;
+    background-color: rgb(240, 240, 240);;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    font-size: 1.6rem;
+}
+
+.arrowImg {
+    position: relative;
+    top: 3px;
+}
+
+.fontSizeSet {
+    font-size: 1.6rem;
+}

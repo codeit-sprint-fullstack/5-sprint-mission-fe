@@ -1,0 +1,35 @@
+.selectPage {
+    display : flex;
+    justify-content: center;
+    margin-bottom: 5rem;
+    gap : 1rem;
+}
+
+.pageClickBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #E5E7EB;
+    padding: 1px;
+    border-radius: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    cursor: pointer;
+    font-size: 1.6rem;
+    color: #6B7280;
+}
+
+.pageClickedBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #2F80ED;
+    color:#F9FAFB;
+    border: 1px solid #2F80ED;
+    padding: 1px;
+    border-radius: 2rem;
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1.6rem;
+    
+}

@@ -1,0 +1,27 @@
+.mobileReverseServSectionBoundary {
+    display:flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    margin: 5rem auto;
+}
+
+.mobileReserveServSectionRight {
+    margin-top: 2rem;
+    width: 98%;
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+}
+
+.reverseServSectionRight {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    padding-left: 8rem;
+    padding-right: 3rem;
+    margin: auto 0;
+    width: 27.3rem;
+    text-align: end;
+}
