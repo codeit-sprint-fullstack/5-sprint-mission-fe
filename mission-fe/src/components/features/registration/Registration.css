@@ -1,0 +1,97 @@
+.registration-container {
+  max-width: 1200px;
+  margin: 96px auto 162px;
+  padding: 0 20px;
+}
+
+.registration-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.registration-container h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.registration-button.inactive {
+  background-color: #9ca3af;
+}
+
+.form-group {
+  margin-bottom: 24px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 16px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 16px 24px;
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  background-color: #f3f4f6;
+}
+
+/* input focus 시 기본 파란 테두리 제거 및 에러 스타일 우선 적용 */
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border: 1px solid #2563eb;
+}
+
+.form-group input.error,
+.form-group textarea.error {
+  border: 1px solid #f74747;
+}
+
+/* error 상태일 때 focus 스타일 덮어쓰기 */
+.form-group input.error:focus,
+.form-group textarea.error:focus {
+  border: 1px solid #f74747;
+}
+
+.form-group textarea {
+  resize: vertical;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.tag {
+  background-color: #f0f0f0;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.error-message {
+  color: #f74747;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 8px;
+}
+
+.tag-error {
+  color: #f74747;
+  font-weight: 600;
+  font-size: 14px;
+  margin-top: 4px;
+}
