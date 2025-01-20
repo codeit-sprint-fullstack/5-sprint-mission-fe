@@ -10,7 +10,7 @@ const Header = () => {
         <div className="header">
           <LogoButton />
           <Button size={"sm48"}>
-            <Text size={"lg"} weight={"semibold"} color={"#f3f4f6"}>
+            <Text size={"lg"} weight={"semibold"} style={{ color: "#f3f4f6" }}>
               로그인
             </Text>
           </Button>

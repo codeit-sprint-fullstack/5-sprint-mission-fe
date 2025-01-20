@@ -9,7 +9,7 @@ const Footer = () => {
     <footer>
       <div className="footer-wrapper">
         <div className="footer">
-          <Text size={"lg"} weight={"regular"} color={"#9ca3af"}>
+          <Text size={"lg"} weight={"regular"} style={{ color: "#9ca3af" }}>
             @codeit - {currentYear}
           </Text>
           <FooterNoticeLink />
