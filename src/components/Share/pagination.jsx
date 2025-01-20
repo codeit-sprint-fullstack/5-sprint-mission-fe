@@ -1,6 +1,6 @@
 import styled from "styled-components";
-import BtnLeft from "./img/btn_left.png";
-import BtnRight from "./img/btn_right.png";
+import BtnLeft from "../img/btn_left.png";
+import BtnRight from "../img/btn_right.png";
 
 export function Pagination({ currentPage, totalPages, onPageChange }) {
   const maxPagesShow = 5; // 한 번에 보여줄 페이지 수
@@ -74,8 +74,8 @@ const PageBtn = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 40px;
-  height: 40px;
+  width: 3.5rem;
+  height: 2.5rem;
   font-size: 16px;
   font-weight: 600;
   color: ${(props) => (props.active ? "#f9fafb" : "#6b7280")};
