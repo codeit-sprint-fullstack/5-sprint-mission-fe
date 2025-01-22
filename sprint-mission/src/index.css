@@ -18,6 +18,14 @@ body {
   margin: 0 auto;
 }
 
+input:focus {
+  outline: 1px solid var(--primary100);
+}
+
+textarea:focus {
+  outline: 1px solid var(--primary100);
+}
+
 /* 태블릿 사이즈 미디어쿼리 */
 @media (max-width: 1199px) {
   .content {

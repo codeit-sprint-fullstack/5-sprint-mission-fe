@@ -1,7 +1,7 @@
 import arrowLeft from "../../../../../shared/assets/arrow_left.png";
 import arrowRight from "../../../../../shared/assets/arrow_right.png";
 import { typoStyles } from "../../../../../shared/Typo/Typo";
-import { usePagination } from "../hooks/usePagination";
+import { usePagination } from "../../../../../shared/hooks/paginationHook";
 
 export function PaginationItems({
   currentPage = 1,

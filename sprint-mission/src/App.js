@@ -1,20 +1,18 @@
 import { Routes, Route } from "react-router-dom";
-import RouteLayout from "./shared/ui/RouteLayout";
+import RootLayout from "./shared/ui/RootLayout";
+import { LandingPage } from "./pages/LandingPage/LandingPage";
 import { ItemsPage } from "./pages/ItemsPage/ItemsPage";
+import { RegistrationItemsPage } from "./pages/RegistrationItemsPage/RegistrationItemsPage";
 
 function App() {
   return (
     <Routes>
-      {/* TODO: "/" element <LandingPage />로 수정 */}
-      {/* TODO: <ItemsPage /> path "/items"로 수정 */}
-      <Route
-        path="/"
-        element={
-          <RouteLayout>
-            <ItemsPage />
-          </RouteLayout>
-        }
-      />
+      <Route path="/" element={<RootLayout />}>
+        <Route index element={<LandingPage />} />
+        <Route path="items" element={<ItemsPage />} />
+        {/* <Route path="items/:id" element={<ItemDetailPage />} /> */}
+        <Route path="registration" element={<RegistrationItemsPage />} />
+      </Route>
     </Routes>
   );
 }

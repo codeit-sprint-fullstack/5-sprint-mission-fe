@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export function useOrderBy(initValue) {
+export function useResponseSort(initValue) {
   //초기값은 최신순으로 설정
   const [selectedName, setSelectedName] = useState(initValue.name);
   const [showDropdown, setShowDropdown] = useState(false);

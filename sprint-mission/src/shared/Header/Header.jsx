@@ -7,10 +7,7 @@ import { useState } from "react";
 export function Header() {
   //TODO: 추후 유저데이터 관련 API 추가할 때 다시 수정. 지금은 임시로 버튼 클릭만 하면 로그인/로그아웃 전환되는 상태.
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const handleClickUserBtn = () => {
-    setIsLoggedIn((prev) => !prev); //로그인 여부 토글
-  };
+  const handleClickUserBtn = () => setIsLoggedIn((prev) => !prev); //로그인 여부 토글
 
   return (
     <header>

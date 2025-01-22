@@ -1,3 +1,9 @@
+.text-4xl {
+  font-family: pretendard;
+  font-size: 4rem;
+  line-height: 56px;
+}
+
 .text-3xl {
   font-family: pretendard;
   font-size: 3.2rem;

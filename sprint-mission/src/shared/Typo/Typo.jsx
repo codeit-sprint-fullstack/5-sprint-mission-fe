@@ -8,6 +8,7 @@ import "./Typo.css";
  * weight 옵션: bold, semibold, medium, regular
  */
 export const typoStyles = {
+  text4xlBold: "text-4xl bold",
   text3xlBold: "text-3xl bold",
   text3xlSemibold: "text-3xl semibold",
   text2xlBold: "text-2xl bold",
