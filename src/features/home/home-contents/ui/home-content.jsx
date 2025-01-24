@@ -1,7 +1,7 @@
 import { useMediaQuery } from "shared/hooks/useMediaQuery";
 import "./style.css";
 
-const HomeContent = ({ children, align, img }) => {
+const HomeContent = ({ children, align, img, onClick }) => {
   const media = useMediaQuery();
   const isAlignLeft = align === "left";
   const isPc = media === "pc";
@@ -17,7 +17,11 @@ const HomeContent = ({ children, align, img }) => {
 
   return (
     <section className="home-content__wrapper">
-      <div className="home-content__container" style={containerStyle}>
+      <div
+        className="home-content__container"
+        style={containerStyle}
+        onClick={onClick}
+      >
         {!isPc && <img src={img} alt="" />}
         {!isAlignLeft && <div className="home-content__text">{children}</div>}
         {isPc && <img src={img} alt="" />}

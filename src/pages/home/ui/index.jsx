@@ -6,12 +6,18 @@ import { useMediaQuery } from "shared/hooks/useMediaQuery";
 import { HomeContents } from "features";
 import { Header } from "widgets/header";
 import { Footer } from "widgets/footer";
+import { useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   const media = useMediaQuery();
   const isPc = media === "pc";
   const isTablet = media === "tablet";
   const isMobile = media === "mobile";
+
+  const handleNavigateButton = (to) => {
+    navigate(to);
+  };
 
   return (
     <>
@@ -26,7 +32,10 @@ const Home = () => {
         >
           일상의 모든 물건을{isTablet ? " " : <br />}거래해 보세요
         </Text>
-        <Button size={isMobile ? "md" : "lg"}>
+        <Button
+          size={isMobile ? "md" : "lg"}
+          handleClick={() => handleNavigateButton("/items")}
+        >
           <Text size={"xl"} weight={"semibold"} style={{ color: "#f9fafb" }}>
             구경하러 가기
           </Text>

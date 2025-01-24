@@ -6,6 +6,7 @@
 .home-content__container {
   background-color: var(--color_lending_section_bg);
   margin: 128px auto;
+  cursor: pointer;
 }
 
 .home-content__container > img {

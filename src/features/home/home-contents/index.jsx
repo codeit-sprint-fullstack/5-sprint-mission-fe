@@ -4,17 +4,27 @@ import imgHomeSearch from "shared/assets/images/home_content_search.png";
 import imgHomeRegister from "shared/assets/images/home_content_register.png";
 import { Text } from "shared/ui";
 import { useMediaQuery } from "shared/hooks/useMediaQuery";
+import { useNavigate } from "react-router-dom";
 
 const HomeContents = () => {
+  const navigate = useNavigate();
   const media = useMediaQuery();
   const isPc = media === "pc";
   const isTablet = media === "tablet";
   const sizeOfTextTitle = isPc ? "4xl" : isTablet ? "3xl" : "2xl";
   const sizeOfTextContent = isPc ? "2xl" : isTablet ? "2lg" : "lg";
 
+  const handleNavigateButton = (to) => {
+    navigate(to);
+  };
+
   return (
     <>
-      <HomeContent align={"left"} img={imgHomeHotItem}>
+      <HomeContent
+        align={"left"}
+        img={imgHomeHotItem}
+        onClick={() => handleNavigateButton("/items")}
+      >
         <Text
           size={"2lg"}
           weight={"bold"}
@@ -62,7 +72,11 @@ const HomeContents = () => {
         </Text>
       </HomeContent>
 
-      <HomeContent align={"left"} img={imgHomeRegister}>
+      <HomeContent
+        align={"left"}
+        img={imgHomeRegister}
+        onClick={() => handleNavigateButton("/registration")}
+      >
         <Text
           size={"2lg"}
           weight={"bold"}
