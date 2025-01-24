@@ -1,0 +1,15 @@
+.input-box {
+  width: 100%;
+  padding: 16px 24px;
+  font-size: 16px;
+  font-weight: 400;
+  color: #9ca3af;
+  line-height: 26px;
+  border: none;
+  border-radius: 12px;
+  background-color: var(--color_inputbox_bg);
+}
+
+.input-box:focus {
+  outline: none;
+}

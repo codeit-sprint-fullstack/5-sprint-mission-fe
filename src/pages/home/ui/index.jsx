@@ -4,6 +4,8 @@ import imgHomeTop from "shared/assets/images/home_wrapper_top.png";
 import imgHomeBottom from "shared/assets/images/home_wrapper_bottom.png";
 import { useMediaQuery } from "shared/hooks/useMediaQuery";
 import { HomeContents } from "features";
+import { Header } from "widgets/header";
+import { Footer } from "widgets/footer";
 
 const Home = () => {
   const media = useMediaQuery();
@@ -13,6 +15,7 @@ const Home = () => {
 
   return (
     <>
+      <Header />
       <HomeWrapper img={imgHomeTop}>
         <Text
           size={isMobile ? "3xl" : "4xl"}
@@ -44,6 +47,7 @@ const Home = () => {
           판다마켓 중고 거래
         </Text>
       </HomeWrapper>
+      <Footer />
     </>
   );
 };

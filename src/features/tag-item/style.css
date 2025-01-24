@@ -1,0 +1,20 @@
+.tag-item {
+  padding: 6px 12px;
+  border-radius: 26px;
+  background-color: var(--color_tag-item_bg);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.tag-item > button {
+  border: none;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+}
+
+.tag-item > button > img {
+  width: 24px;
+  height: 24px;
+}
