@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { getProductList } from "../../api/Productapi";
-import Like from "./img/Like_Icon.png";
+import { getProductList } from "../../../api/Productapi";
+import Like from "../../img/Like_Icon.png";
 
 export function BestProduct({ title, page, pageSize, orderBy }) {
   const [products, setProducts] = useState([]);
