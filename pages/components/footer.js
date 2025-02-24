@@ -20,7 +20,7 @@ export default function Footer() {
           </Link>
         </div>
 
-        <div className="flex gap-4">
+        <div className="flex gap-4 items-center">
           <Link href="https://www.facebook.com" target="_blank">
             <Image src={facebookImg} alt="Facebook" width={24} height={24} />
           </Link>

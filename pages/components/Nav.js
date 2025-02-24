@@ -12,12 +12,12 @@ export default function Nav() {
       <div className="max-w-screen-xl mx-auto flex justify-between items-center py-2 px-4 md:px-6 lg:px-10">
         <div className="flex items-center gap-10 text-gray-600 text-lg">
           <Link href="/">
-            <Image src={panda} alt="Panda Market" width={100} height={40} />
+            <Image src={panda} alt="Panda Market" width={153} height={51} />
           </Link>
-          <Link href="/articles" className="hover:text-blue-500">
+          <Link href="/articles" className="hover:text-blue-500 font-bold">
             자유게시판
           </Link>
-          <Link href="/market" className="hover:text-blue-500">
+          <Link href="/market" className="hover:text-blue-500 font-bold">
             중고마켓
           </Link>
         </div>
@@ -27,7 +27,7 @@ export default function Nav() {
               media="(min-width: 375px) and (max-width: 1199px)"
               srcSet={loginImg.src}
             />
-            <Image src={login} alt="로그인" width={80} height={30} />
+            <Image src={login} alt="로그인" width={88} height={42} />
           </picture>
         </Link>
       </div>
