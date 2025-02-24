@@ -5,8 +5,10 @@ import ArticleList from "../components/articleList";
 export default function ProductList() {
   return (
     <>
-      <BestArticleList />
-      <ArticleList />
+      <div className="flex flex-col items-center w-full">
+        <BestArticleList />
+        <ArticleList />
+      </div>
     </>
   );
 }

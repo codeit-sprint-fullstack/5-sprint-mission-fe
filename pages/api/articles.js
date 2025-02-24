@@ -1,0 +1,34 @@
+import axios from "axios";
+
+const API_URL = "http://localhost:8000/api";
+
+export const fetchArticles = async () => {
+  const response = await axios.get(`${API_URL}/articles`);
+  return response.data;
+};
+
+export const fetchArticleComments = async (articleId) => {
+  const response = await axios.get(`${API_URL}/articles/${articleId}/comments`);
+  return response.data;
+};
+
+export const createArticle = async ({ title, content, username, image }) => {
+  const response = await axios.post(`${API_URL}/articles`, {
+    title,
+    content,
+    username,
+    image,
+  });
+  return response.data;
+};
+
+export const createComment = async ({ articleId, content, username }) => {
+  const response = await axios.post(
+    `${API_URL}/articles/${articleId}/comments`,
+    {
+      content,
+      username,
+    }
+  );
+  return response.data;
+};
