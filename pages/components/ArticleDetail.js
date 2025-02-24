@@ -11,6 +11,11 @@ export default function ArticleDetail({ article }) {
   const [comments, setComments] = useState(article.comments || []);
   const router = useRouter();
 
+  const refreshComments = async () => {
+    const updateComments = await fetchArticleComments(article._id);
+    setComments(updateComments);
+  };
+
   const handleSubmit = async () => {
     if (commentContent.trim().length === 0) {
       alert("댓글을 1글자 이상 입력해주세요.");
@@ -25,8 +30,7 @@ export default function ArticleDetail({ article }) {
       });
       setCommentContent("");
       alert("댓글이 등록되었습니다.");
-      const updatedComments = await fetchArticleComments(article._id);
-      setComments(updatedComments);
+      await refreshComments();
     } catch (error) {
       console.error(error);
       alert("댓글 등록에 실패했습니다.");
@@ -102,7 +106,11 @@ export default function ArticleDetail({ article }) {
         </button>
       </div>
 
-      <CommentsList articleId={article._id} comments={comments} />
+      <CommentsList
+        articleId={article._id}
+        comments={comments} // 명칭을 comments로 수정하여 전달
+        refreshComments={refreshComments}
+      />
     </div>
   );
 }
