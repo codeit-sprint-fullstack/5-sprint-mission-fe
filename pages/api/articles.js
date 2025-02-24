@@ -32,3 +32,39 @@ export const createComment = async ({ articleId, content, username }) => {
   );
   return response.data;
 };
+
+export const updateArticle = async ({
+  articleId,
+  title,
+  content,
+  username,
+}) => {
+  const response = await axios.patch(`${API_URL}/articles/${articleId}`, {
+    title,
+    content,
+    username,
+  });
+  return response.data;
+};
+
+export const updateComment = async ({ articleId, commentId, content }) => {
+  const response = await axios.patch(
+    `${API_URL}/articles/${articleId}/comments/${commentId}`,
+    {
+      content,
+    }
+  );
+  return response.data;
+};
+
+export const deleteArticle = async ({ articleId }) => {
+  const response = await axios.delete(`${API_URL}/articles/${articleId}`);
+  return response.data;
+};
+
+export const deleteComment = async ({ articleId, commentId }) => {
+  const response = await axios.delete(
+    `${API_URL}/articles/${articleId}/comments/${commentId}`
+  );
+  return response.data;
+};

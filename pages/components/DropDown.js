@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 
-export default function DropdownMenu() {
+export default function DropdownMenu({ onEdit, onDelete }) {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
 
@@ -14,7 +14,15 @@ export default function DropdownMenu() {
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
+  const handleEdit = () => {
+    onEdit();
+    setIsOpen(false);
+  };
 
+  const handleDelete = () => {
+    onDelete();
+    setIsOpen(false);
+  };
   return (
     <div className="relative inline-block" ref={dropdownRef}>
       <img
@@ -26,10 +34,16 @@ export default function DropdownMenu() {
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-32 bg-white rounded-md shadow-lg z-10">
-          <button className="block px-4 py-2 w-full hover:bg-gray-100">
+          <button
+            className="block px-4 py-2 w-full hover:bg-gray-100"
+            onClick={handleEdit}
+          >
             수정하기
           </button>
-          <button className="block px-4 py-2 w-full hover:bg-gray-100">
+          <button
+            className="block px-4 py-2 w-full hover:bg-gray-100"
+            onClick={handleDelete}
+          >
             삭제하기
           </button>
         </div>
