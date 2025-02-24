@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { fetchArticleComments } from "../api/articles";
 import Image from "next/image";
+import DropdownMenu from "./DropDown";
 
 export default function CommentsList({ articleId }) {
   const [comments, setComments] = useState([]);
@@ -20,7 +21,7 @@ export default function CommentsList({ articleId }) {
               <div className=" font-normal text-sm text-[#1f2937]">
                 {comment.content}
               </div>
-              <div>수정삭제</div>
+              <DropdownMenu />
             </div>
             <div className="flex gap-2 pb-3">
               <Image

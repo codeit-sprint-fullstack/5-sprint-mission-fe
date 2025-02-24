@@ -1,5 +1,6 @@
 import CommentsList from "./commentsList";
 import Image from "next/image";
+import DropdownMenu from "./DropDown";
 
 export default function ArticleDetail({ article }) {
   return (
@@ -7,7 +8,7 @@ export default function ArticleDetail({ article }) {
       <div className="w-full max-w-[1200px] border-b pb-4 mb-6">
         <div className="flex justify-between">
           <div className="text-xl font-bold mb-4">{article.title}</div>
-          <div>수정 · 삭제</div>
+          <DropdownMenu />
         </div>
         <div className="flex justify-between max-w-[354px]  ">
           <div className="flex space-x-2 items-center gap-2">
@@ -37,16 +38,15 @@ export default function ArticleDetail({ article }) {
       </div>
       <div className="w-full max-w-[1200px] ">
         <div className="font-semibold mb-[9px]">댓글 달기</div>
-        <input
-          type="text"
+        <textarea
           placeholder="댓글을 입력해주세요"
-          className="w-full bg-gray-100 p-4 rounded-lg outline-none"
+          className="w-full h-[104px] bg-[#f3f4f6] p-4 rounded-lg outline-none resize-none"
         />
       </div>
       <div className="w-full max-w-[1200px] flex justify-end">
-        <div className="border rounded-lg py-2 px-[23px] mt-4 text-white bg-[#9ca3af] ">
+        <button className="border rounded-lg py-2 px-[23px] mt-4 text-white bg-[#9ca3af] ">
           등록
-        </div>
+        </button>
       </div>
 
       <CommentsList articleId={article._id} />

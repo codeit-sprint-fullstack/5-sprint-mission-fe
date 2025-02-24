@@ -56,7 +56,13 @@ export default function ArticleList() {
               </div>
             </div>
             <div className="flex justify-between mb-6">
-              <div className="text-sm text-gray-500">
+              <div className="text-sm text-gray-500 flex items-center gap-2">
+                <Image
+                  src="/smallprofile.png"
+                  alt="user icon"
+                  width={24}
+                  height={24}
+                />
                 {article.username} ·{" "}
                 {new Date(article.createdAt).toLocaleDateString()}
               </div>

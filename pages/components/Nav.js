@@ -8,7 +8,7 @@ import loginImg from "../../assets/Frame2609463.png";
 
 export default function Nav() {
   return (
-    <nav className="bg-white sticky top-0 z-10">
+    <nav className="bg-white sticky top-0 z-10 border-b mb-6">
       <div className="max-w-screen-xl mx-auto flex justify-between items-center py-2 px-4 md:px-6 lg:px-10">
         <div className="flex items-center gap-10 text-gray-600 text-lg">
           <Link href="/">

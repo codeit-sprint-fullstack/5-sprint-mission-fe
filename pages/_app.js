@@ -7,9 +7,13 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <ArticleProvider>
-        <Nav />
-        <Component {...pageProps} />
-        <Footer />
+        <div className="min-h-screen flex flex-col">
+          <Nav />
+          <main className="flex-1">
+            <Component {...pageProps} />
+          </main>
+          <Footer />
+        </div>
       </ArticleProvider>
     </>
   );
