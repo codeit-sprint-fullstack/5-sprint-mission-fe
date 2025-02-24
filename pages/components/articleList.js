@@ -2,9 +2,16 @@ import { useEffect, useState } from "react";
 import { fetchArticles } from "../api/articles";
 import Image from "next/image";
 import Link from "next/link";
+import { useContext } from "react";
+import { ArticleContext } from "@/context/ArticleContext";
 
 export default function ArticleList() {
   const [articles, setArticles] = useState([]);
+  const { setSelectedArticle } = useContext(ArticleContext);
+
+  const handleClick = (article) => {
+    setSelectedArticle(article);
+  };
 
   useEffect(() => {
     fetchArticles().then(setArticles).catch(console.error);
@@ -31,7 +38,14 @@ export default function ArticleList() {
         {articles.map((article) => (
           <div key={article._id} className="  bg-[#fcfcfc] mb-6 border-b">
             <div className="flex justify-between mb-4">
-              <div className="text-lg font-semibold mb-2">{article.title}</div>
+              <Link href={`/articles/${article._id}`}>
+                <div
+                  onClick={() => handleClick(article)}
+                  className="text-lg font-semibold mb-2"
+                >
+                  {article.title}
+                </div>
+              </Link>
               <div className="flex justify-center items-center w-[72px] h-[72px] border rounded-[8px] object-cover bg-white">
                 <img
                   src={article.image}
