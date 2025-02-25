@@ -69,10 +69,12 @@ export default function CommentsList({ articleId, comments, refreshComments }) {
                     {comment.content}
                   </div>
                 )}
-                <DropdownMenu
-                  onEdit={() => handleEdit(comment)}
-                  onDelete={() => handleDelete(comment._id)}
-                />
+                {editingCommentId !== comment._id && (
+                  <DropdownMenu
+                    onEdit={() => handleEdit(comment)}
+                    onDelete={() => handleDelete(comment._id)}
+                  />
+                )}
               </div>
               {editingCommentId === comment._id && (
                 <div className="flex justify-end mb-4 gap-1">
@@ -109,8 +111,18 @@ export default function CommentsList({ articleId, comments, refreshComments }) {
             </div>
           ))
         ) : (
-          <div className="text-center text-[#9CA3AF] text-sm">
-            댓글이 없어요.
+          <div className="flex flex-col items-center text-center text-[#9CA3AF] text-sm">
+            <div>
+              <Image
+                src="/Img_reply_empty.png"
+                alt="noooo"
+                width={100}
+                height={100}
+              />
+            </div>
+            <div>
+              아직 댓글이 없어요, <br /> 지금 댓글을 달아보세요!
+            </div>
           </div>
         )}
       </div>
