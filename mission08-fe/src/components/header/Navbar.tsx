@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 const menu = [
   {
     name: "자유게시판",
-    href: "/board",
+    href: "/article",
   },
   {
     name: "중고마켓",

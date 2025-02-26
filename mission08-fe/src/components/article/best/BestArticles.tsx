@@ -30,7 +30,7 @@ export default function BestArticles({ top3 }: { top3: Post[] }) {
       <h1 className="text-gray-800 font-bold text-xl">베스트 게시글</h1>
       <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-4 xl:grid-cols-3 xl:gap-6">
         {top3?.slice(0, count).map((post) => (
-          <Link href={`/board/${post.id}`} key={post.id}>
+          <Link href={`/article/${post.id}`} key={post.id}>
             <BestPostItem post={post} />
           </Link>
         ))}

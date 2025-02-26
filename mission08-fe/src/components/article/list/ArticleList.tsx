@@ -62,7 +62,7 @@ export default function ArticleList() {
     <>
       <section className="flex items-center justify-between mb-4 md:mb-6">
         <h1 className="text-gray-800 font-bold text-xl">게시글</h1>
-        <Link href="/board/create">
+        <Link href="/article/new">
           <Button isActive={true}>글쓰기</Button>
         </Link>
       </section>
@@ -86,7 +86,7 @@ export default function ArticleList() {
       {postList.length > 0 && (
         <section className="flex flex-col gap-6">
           {postList.map((post) => (
-            <Link href={`/board/${post.id}`} key={post.id}>
+            <Link href={`/article/${post.id}`} key={post.id}>
               <PostItem key={post.id} post={post} />
             </Link>
           ))}
