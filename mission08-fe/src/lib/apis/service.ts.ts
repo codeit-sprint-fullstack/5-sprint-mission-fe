@@ -1,3 +1,5 @@
+"use server";
+
 import type { Query } from "@/types";
 import { apiLocal as api } from "./axios";
 import { revalidateTag } from "next/cache";
@@ -33,10 +35,12 @@ export const postData = async <T>(
   data: T,
   tags?: string[]
 ): Promise<boolean> => {
+  console.log("postData tags: ", tags);
+
   try {
     await api.post(endPoint, data);
 
-    if (tags) {
+    if (tags && Array.isArray(tags)) {
       for (const tag of tags) {
         revalidateTag(tag);
       }

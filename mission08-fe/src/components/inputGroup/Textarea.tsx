@@ -3,10 +3,16 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import { TRANSLATE } from "@/constants";
 import useValidation from "@/hooks/useValidation";
-import { useSubmitState } from "@/contexts/SubmitContext";
+import type { SubmitContext } from "@/contexts/SubmitContextFactory";
 
+interface State {
+  status: boolean;
+  message: string;
+}
 interface TextareaProps {
   name: "content" | "comment";
+  useSubmitState: () => Pick<SubmitContext, "setSubmitState">;
+  state?: State | null;
 }
 
 const HEIGHT = {
@@ -14,7 +20,11 @@ const HEIGHT = {
   comment: 104,
 };
 
-export default function Textarea({ name }: TextareaProps) {
+export default function Textarea({
+  name,
+  useSubmitState,
+  state = null,
+}: TextareaProps) {
   const [value, setValue] = useState(""); // 입력값 상태
   const { error, handleChange, handleBlur } = useValidation(name);
   const { setSubmitState } = useSubmitState();
@@ -31,6 +41,16 @@ export default function Textarea({ name }: TextareaProps) {
       [name]: error === null,
     }));
   }, [error, setSubmitState, name]);
+
+  useEffect(() => {
+    if (!state) return;
+
+    if (state.status) {
+      setValue("");
+      state.status = false;
+      state.message = "";
+    }
+  }, [state]);
 
   return (
     <div className="w-full flex flex-col">

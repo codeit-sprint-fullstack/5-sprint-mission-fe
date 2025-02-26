@@ -5,8 +5,8 @@ import useDebounce from "./useDebounce";
 
 export default function useDeviceType() {
   // 클라이언트에서만 window 객체를 사용할 수 있도록 처리
-  const [windowWidth, setWindowWidth] = useState<number | undefined>(undefined);
-  const debouncedWidth = useDebounce<number | undefined>(windowWidth, 100); // 100ms 디바운스
+  const [windowWidth, setWindowWidth] = useState<number>(0);
+  const debouncedWidth = useDebounce<number>(windowWidth, 5); // 5ms 디바운스
   const [deviceType, setDeviceType] = useState<string>("Mobile");
 
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function useDeviceType() {
   }, []);
 
   useEffect(() => {
-    if (debouncedWidth !== undefined) {
+    if (debouncedWidth > 0) {
       setDeviceType(getDeviceType(debouncedWidth));
     }
   }, [debouncedWidth]);

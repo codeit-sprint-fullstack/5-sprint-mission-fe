@@ -1,16 +1,17 @@
 "use client";
 
-import { useSubmitState } from "@/contexts/SubmitContext";
 import { useState, ChangeEvent, useEffect } from "react";
 import { TRANSLATE } from "@/constants";
 import useValidation from "@/hooks/useValidation";
+import type { SubmitContext } from "@/contexts/SubmitContextFactory";
 
 interface InputProps {
   type: "text" | "email";
   name: "title" | "email";
+  useSubmitState: () => Pick<SubmitContext, "setSubmitState">;
 }
 
-export default function Input({ type, name }: InputProps) {
+export default function Input({ type, name, useSubmitState }: InputProps) {
   const [value, setValue] = useState(""); // 입력값 상태
   const { error, handleChange, handleBlur } = useValidation(name);
   const { setSubmitState } = useSubmitState();

@@ -28,10 +28,12 @@ export default function BestArticles({ top3 }: { top3: Article[] }) {
   return (
     <section className="flex flex-col gap-4 md:gap-6 mb-6 xl:mb-10">
       <h1 className="text-gray-800 font-bold text-xl">베스트 게시글</h1>
-      <div className="grid grid-cols-1 gap-0 md:grid-cols-2 md:gap-4 xl:grid-cols-3 xl:gap-6">
-        {top3?.slice(0, count).map((post) => (
-          <Link href={`/article/${post.id}`} key={post.id}>
-            <BestPostItem post={post} />
+      <div
+        className={`grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 md:gap-4 xl:gap-6`}
+      >
+        {top3?.slice(0, count).map((article) => (
+          <Link href={`/article/${article.id}`} key={article.id}>
+            <BestPostItem article={article} />
           </Link>
         ))}
       </div>

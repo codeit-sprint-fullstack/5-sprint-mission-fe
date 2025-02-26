@@ -1,8 +1,16 @@
 import { ReactNode } from "react";
 import Button from "./ButtonRectangle";
-import { useSubmitState } from "@/contexts/SubmitContext";
+import type { SubmitContext } from "@/contexts/SubmitContextFactory";
 
-export default function ButtonSubmit({ children }: { children: ReactNode }) {
+interface ButtonSubmitProps {
+  children: ReactNode;
+  useSubmitState: () => Pick<SubmitContext, "submitState">;
+}
+
+export default function ButtonSubmit({
+  children,
+  useSubmitState,
+}: ButtonSubmitProps) {
   const { submitState } = useSubmitState();
   const isActive = Object.values(submitState).every((value) => value === true);
 

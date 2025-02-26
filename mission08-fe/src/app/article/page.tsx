@@ -3,7 +3,7 @@ import ArticleList from "@/components/article/list/ArticleList";
 import { fetchData } from "@/lib/apis/service.ts";
 import type { Article } from "@/types";
 
-export default async function Article() {
+export default async function Page() {
   const top3 = await fetchData<Article[]>("/article/best", {
     next: { revalidate: 3 },
   });
