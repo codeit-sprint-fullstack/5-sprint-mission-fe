@@ -126,12 +126,14 @@ export default function CommentsList({ articleId, comments, refreshComments }) {
           </div>
         )}
       </div>
-      <Link href="/articles">
-        <div className="flex gap-2 rounded-[40px] py-[11px] px-[42px] border-none bg-[#3692ff] text-white items-center">
-          목록으로 돌아가기
-          <Image src="/ic_back.png" alt="user icon" width={24} height={24} />
-        </div>
-      </Link>
+      <div className="pb-[200px]">
+        <Link href="/articles">
+          <div className="flex gap-2 rounded-[40px] py-[11px] px-[42px] border-none bg-[#3692ff] text-white items-center ">
+            목록으로 돌아가기
+            <Image src="/ic_back.png" alt="user icon" width={24} height={24} />
+          </div>
+        </Link>
+      </div>
     </>
   );
 }

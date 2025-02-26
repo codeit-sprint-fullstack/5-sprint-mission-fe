@@ -11,9 +11,9 @@ export default function BestArticleList() {
 
   useEffect(() => {
     const updateDisplayCount = () => {
-      if (window.innerWidth < 744) {
+      if (window.innerWidth < 640) {
         setDisplayCount(1);
-      } else if (window.innerWidth < 1200) {
+      } else if (window.innerWidth < 1024) {
         setDisplayCount(2);
       } else {
         setDisplayCount(3);
