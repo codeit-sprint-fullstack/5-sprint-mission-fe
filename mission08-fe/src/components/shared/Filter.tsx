@@ -5,7 +5,7 @@ import iconSort from "@/assets/icons/ic_sort.png";
 import iconArrowDown from "@/assets/icons/ic_arrow_down.png";
 import { useState } from "react";
 import Menu from "./Menu";
-import { SortBy } from "@/types";
+import type { SortBy } from "@/types";
 
 interface FilterProps {
   sortBy: SortBy;

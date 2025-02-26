@@ -1,3 +1,5 @@
+export type Name = keyof typeof INPUT_VALID;
+
 export const INPUT_VALID = {
   title: {
     pattern: /^.{2,30}$/, // 2~30자

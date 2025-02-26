@@ -4,9 +4,9 @@ import Image from "next/image";
 import iconProfile from "@/assets/icons/ic_profile.png";
 import iconHeart from "@/assets/icons/ic_heart.png";
 import defaultImage from "@/assets/images/default.png";
-import { Post } from "@/types";
+import type { Article } from "@/types";
 
-export default function ArticleItem({ post }: { post: Post }) {
+export default function ArticleItem({ post }: { post: Article }) {
   const { title, likes, author, updatedAt } = post;
 
   return (

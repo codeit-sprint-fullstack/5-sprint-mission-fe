@@ -27,6 +27,11 @@
   ::backdrop,
   ::file-selector-button {
     border-color: var(--color-gray-200, currentColor);
+    box-sizing: border-box;
+    border: 0 solid;
+  }
+  .google-map * {
+    border-style: none;
   }
 }
 

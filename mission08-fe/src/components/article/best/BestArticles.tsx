@@ -1,6 +1,6 @@
 "use client";
 
-import { Post } from "@/types";
+import type { Article } from "@/types";
 import Link from "next/link";
 import BestPostItem from "./BestArticleItem";
 import { useEffect, useState } from "react";
@@ -12,7 +12,7 @@ const COUNT_BY_DEVICE_TYPE = {
   Mobile: 1,
 };
 
-export default function BestArticles({ top3 }: { top3: Post[] }) {
+export default function BestArticles({ top3 }: { top3: Article[] }) {
   const deviceType = useDeviceType() as keyof typeof COUNT_BY_DEVICE_TYPE;
   const [count, setCount] = useState<number>(
     COUNT_BY_DEVICE_TYPE[deviceType] || 1

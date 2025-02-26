@@ -1,19 +1,20 @@
-import { Query } from "@/types";
-import { apiLocal } from "./axios";
+import type { Query } from "@/types";
+import { apiLocal as api } from "./axios";
+import { revalidateTag } from "next/cache";
 
 type FetchOptions =
   | { cache: "no-store" | "no-cache" | "force-cache" }
   | { next: { revalidate: number } }
   | { next: { tags: string[] } };
 
-// GET 요청 함수
+// 조회 요청 함수
 export const fetchData = async <T>(
   endPoint: string,
   fetchOptions: FetchOptions = { cache: "no-store" },
   params?: Query
 ): Promise<T | null> => {
   try {
-    const response = await apiLocal.get(endPoint, {
+    const response = await api.get(endPoint, {
       adapter: "fetch",
       fetchOptions,
       params,
@@ -26,39 +27,64 @@ export const fetchData = async <T>(
   }
 };
 
-// POST 요청 함수
+// 생성 요청 함수
 export const postData = async <T>(
   endPoint: string,
-  data: T
-): Promise<T | null> => {
+  data: T,
+  tags?: string[]
+): Promise<boolean> => {
   try {
-    const response = await apiLocal.post(endPoint, data);
-    const result: T = response.data;
-    return result;
+    await api.post(endPoint, data);
+
+    if (tags) {
+      for (const tag of tags) {
+        revalidateTag(tag);
+      }
+    }
+
+    return true;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 
-// PATCH 요청 함수
+// 수정 요청 함수
 export const patchData = async <T>(
   endPoint: string,
-  data: T
-): Promise<T | null> => {
+  data: T,
+  tags?: string[]
+): Promise<boolean> => {
   try {
-    const response = await apiLocal.patch(endPoint, data);
-    const result: T = response.data;
-    return result;
+    await api.patch(endPoint, data);
+
+    if (tags) {
+      for (const tag of tags) {
+        revalidateTag(tag);
+      }
+    }
+
+    return true;
   } catch (error) {
     console.error(error);
-    return null;
+    return false;
   }
 };
 
-export const deleteData = async (endPoint: string): Promise<boolean> => {
+// 삭제 요청 함수
+export const deleteData = async (
+  endPoint: string,
+  tags?: string[]
+): Promise<boolean> => {
   try {
-    await apiLocal.delete(endPoint);
+    await api.delete(endPoint);
+
+    if (tags) {
+      for (const tag of tags) {
+        revalidateTag(tag);
+      }
+    }
+
     return true;
   } catch (error) {
     console.error(error);

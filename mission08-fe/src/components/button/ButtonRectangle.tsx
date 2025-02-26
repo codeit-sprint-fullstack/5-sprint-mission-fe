@@ -12,12 +12,13 @@ export default function ButtonRectangle({
   children,
   ...props
 }: ButtonProps) {
-  const bgColorStyle = isActive ? "bg-primary-100" : "bg-gray-400";
-  const hoverStyle = isActive ? "hover:bg-primary-200" : ""; // isActive일 때만 hover 스타일 적용
+  const activeStyle = isActive
+    ? "bg-primary-100 hover:bg-primary-200 cursor-pointer"
+    : "bg-gray-400";
 
   return (
     <button
-      className={`${bgColorStyle} ${hoverStyle} px-6 py-3 rounded-lg transition-colors duration-300 ease-in-out`}
+      className={`${activeStyle} px-6 py-3 rounded-lg transition-colors duration-300 ease-in-out`}
       disabled={!isActive} // 버튼 비활성화
       {...props} // type, onClick 등 기타 속성 전달
     >

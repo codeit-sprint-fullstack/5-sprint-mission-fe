@@ -4,7 +4,7 @@ import Button from "@/components/button/ButtonRectangle";
 import Link from "next/link";
 import Filter from "@/components/shared/Filter";
 import Search from "@/components/shared/Search";
-import { Post, Query } from "@/types";
+import type { Article, Query } from "@/types";
 import PostItem from "./ArticleItem";
 import { fetchData } from "@/lib/apis/service.ts";
 import { useEffect, useState } from "react";
@@ -12,13 +12,13 @@ import { useEffect, useState } from "react";
 interface FetchCursorData {
   hasNextPage: boolean;
   nextCursor: string;
-  postList: Post[];
+  postList: Article[];
 }
 
 // 로컬 스토리지 나중에 생각하기
 
 export default function ArticleList() {
-  const [postList, setPostList] = useState<Post[]>([]);
+  const [postList, setPostList] = useState<Article[]>([]);
   const [query, setQuery] = useState<Query>({
     keyword: "",
     sortBy: "latest",
@@ -30,7 +30,7 @@ export default function ArticleList() {
   useEffect(() => {
     const fetchPosts = async () => {
       const data = await fetchData<FetchCursorData>(
-        "/post",
+        "/article",
         { next: { revalidate: 3 } },
         query
       );
@@ -62,7 +62,7 @@ export default function ArticleList() {
     <>
       <section className="flex items-center justify-between mb-4 md:mb-6">
         <h1 className="text-gray-800 font-bold text-xl">게시글</h1>
-        <Link href="/article/new">
+        <Link href="/article/create">
           <Button isActive={true}>글쓰기</Button>
         </Link>
       </section>

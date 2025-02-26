@@ -3,10 +3,10 @@ import defaultImage from "@/assets/images/default.png";
 import iconHeart from "@/assets/icons/ic_heart.png";
 import titleFormatter from "@/utils/titleFormatter";
 import dateFormatter from "@/utils/dateFormatter";
-import { Post } from "@/types";
+import type { Article } from "@/types";
 import Badge from "./Badge";
 
-export default function BestArticleItem({ post }: { post: Post }) {
+export default function BestArticleItem({ post }: { post: Article }) {
   const { title, author, likes, createdAt } = post;
 
   return (

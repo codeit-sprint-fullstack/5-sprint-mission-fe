@@ -2,7 +2,7 @@ export interface PageIdParams {
   params: Promise<{ id: string }>;
 }
 
-export interface Post {
+export interface Article {
   id: string;
   title: string;
   content: string;
@@ -10,14 +10,14 @@ export interface Post {
   likes: number;
   createdAt: Date;
   updatedAt: Date;
-  comments?: Comment[];
+  comments?: ArticleComment[];
 }
 
-export interface Comment {
+export interface ArticleComment {
   id: string;
   content: string;
   author: string;
-  postId: string;
+  articleId: string;
   createdAt: Date;
   updatedAt: Date;
 }
