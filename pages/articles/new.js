@@ -34,7 +34,7 @@ export default function NewArticlePage() {
   };
 
   return (
-    <div className="max-w-screen-xl mx-auto my-10">
+    <div className="max-w-screen-xl mx-auto my-10 px-[15px] ">
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-xl font-semibold">게시글 쓰기</h1>
         <button

@@ -56,7 +56,7 @@ export default function ArticleDetail({ article }) {
     }
   };
   return (
-    <div className="flex flex-col items-center w-full ">
+    <div className="flex flex-col items-center w-full px-6 ">
       <div className="w-full max-w-[1200px] border-b pb-4 mb-6">
         <div className="flex justify-between">
           <div className="text-xl font-bold mb-4">{article.title}</div>
@@ -108,7 +108,7 @@ export default function ArticleDetail({ article }) {
 
       <CommentsList
         articleId={article._id}
-        comments={comments} // 명칭을 comments로 수정하여 전달
+        comments={comments}
         refreshComments={refreshComments}
       />
     </div>

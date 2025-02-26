@@ -23,10 +23,6 @@ export default function Nav() {
         </div>
         <Link href="/">
           <picture className="cursor-pointer">
-            <source
-              media="(min-width: 375px) and (max-width: 1199px)"
-              srcSet={loginImg.src}
-            />
             <Image src={login} alt="로그인" width={88} height={42} />
           </picture>
         </Link>

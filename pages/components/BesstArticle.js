@@ -6,45 +6,59 @@ import Image from "next/image";
 
 export default function BestArticleList() {
   const [articles, setArticles] = useState([]);
+  const [displayCount, setDisplayCount] = useState(3);
   const { setSelectedArticle } = useContext(ArticleContext);
+
+  useEffect(() => {
+    const updateDisplayCount = () => {
+      if (window.innerWidth < 744) {
+        setDisplayCount(1);
+      } else if (window.innerWidth < 1200) {
+        setDisplayCount(2);
+      } else {
+        setDisplayCount(3);
+      }
+    };
+
+    updateDisplayCount();
+    window.addEventListener("resize", updateDisplayCount);
+    return () => window.removeEventListener("resize", updateDisplayCount);
+  }, []);
 
   useEffect(() => {
     const getBestArticles = async () => {
       try {
         const data = await fetchArticles();
 
-        if (!Array.isArray(data)) {
-          return;
-        }
+        if (!Array.isArray(data)) return;
 
-        const topArticles = [...data]
+        const sortedArticles = [...data]
           .filter((article) => article.likeCount !== undefined)
-          .sort((a, b) => b.likeCount - a.likeCount)
-          .slice(0, 3);
+          .sort((a, b) => b.likeCount - a.likeCount);
 
-        setArticles(topArticles);
-      } catch (error) {}
+        setArticles(sortedArticles);
+      } catch (error) {
+        console.error("Failed to fetch articles", error);
+      }
     };
 
     getBestArticles();
   }, []);
 
   return (
-    <div className="w-full max-w-[1200px] ">
-      <div className="text-xl font-bold mb-6">베스트 게시글 </div>
+    <div className="p-6 w-full max-w-[1200px]">
+      <div className="text-xl font-bold mb-6">베스트 게시글</div>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {articles.length > 0 ? (
-          articles.map((article) => (
+          articles.slice(0, displayCount).map((article) => (
             <Link
               key={article._id}
               href={`/articles/${article._id}`}
               className="block"
             >
               <div
-                className="flex flex-col px-6 pb-4 bg-[#f9faf8] rounded-lg  hover:shadow-xl transition gap-4"
-                onClick={() => {
-                  setSelectedArticle(article);
-                }}
+                className="flex flex-col px-6 pb-4 bg-[#f9faf8] rounded-lg hover:shadow-xl transition gap-4"
+                onClick={() => setSelectedArticle(article)}
               >
                 <Image
                   src="/img_badge (1).png"
@@ -57,10 +71,8 @@ export default function BestArticleList() {
                   <div className="flex justify-center items-center w-[72px] h-[72px] border rounded-[8px] object-cover bg-white">
                     <img
                       src={article.image}
-                      className="w-[48px] h-[48px] object-cover "
+                      className="w-[48px] h-[48px] object-cover"
                     />
-
-                    <div className="flex items-center space-x-1 text-gray-600"></div>
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
@@ -68,15 +80,14 @@ export default function BestArticleList() {
                     <div className="text-sm text-[#4b5563] font-normal">
                       {article.username}
                     </div>
-
-                    <div className=" flex items-center gap-1">
+                    <div className="flex items-center gap-1">
                       <Image
                         src="/small_heart.png"
                         alt="123"
                         width={16}
                         height={16}
                       />
-                      <div className=" text-sm text-[#4b5563] font-normal ">
+                      <div className="text-sm text-[#4b5563] font-normal">
                         {article.likeCount}
                       </div>
                     </div>

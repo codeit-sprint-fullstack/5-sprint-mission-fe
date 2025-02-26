@@ -7,8 +7,8 @@ import instagramImg from "../../assets/instagram.png";
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-gray-400 py-10">
-      <div className="max-w-screen-xl mx-auto px-4 flex justify-between items-center">
+    <footer className="bg-gray-900 text-gray-400 pt-10 pb-[108px]">
+      <div className="max-w-screen-xl mx-auto px-6  flex justify-between items-center">
         <p className="text-sm">©codeit-2024</p>
 
         <div className="flex gap-6 text-sm">

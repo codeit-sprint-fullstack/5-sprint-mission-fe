@@ -53,7 +53,7 @@ export default function CommentsList({ articleId, comments, refreshComments }) {
 
   return (
     <>
-      <div className="w-full max-w-[1200px] py-8 px-4">
+      <div className="w-full max-w-[1200px] py-8 ">
         {comments.length > 0 ? (
           comments.map((comment) => (
             <div key={comment._id} className="bg-[#fcfcfc] mb-[24px] border-b">
