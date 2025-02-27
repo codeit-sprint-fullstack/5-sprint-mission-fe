@@ -1,7 +1,9 @@
-import Header from "@/layouts/Header";
 import "./globals.css";
-import Footer from "@/layouts/Footer";
 import { pretendard } from "@/app/font";
+import Header from "@/layouts/Header";
+import Footer from "@/layouts/Footer";
+import ScrollToTop from "@/layouts/ScrollToTop";
+import { Providers } from "./providers";
 
 export default function RootLayout({
   children,
@@ -10,10 +12,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko" className={`${pretendard.variable} font-pretendard`}>
-      <body>
+      <body className="relative">
         <Header />
-        {children}
+        <Providers>{children}</Providers>
         <Footer />
+        <ScrollToTop />
       </body>
     </html>
   );

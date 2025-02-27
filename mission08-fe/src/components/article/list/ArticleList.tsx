@@ -5,58 +5,76 @@ import Link from "next/link";
 import Filter from "@/components/shared/Filter";
 import Search from "@/components/shared/Search";
 import type { Article, Query } from "@/types";
-import PostItem from "./ArticleItem";
+import ArticleItem from "./ArticleItem";
 import { fetchData } from "@/lib/apis/service.ts";
-import { useEffect, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
+import EmptyArticle from "@/components/empty/EmptyArticle";
+import { useInfiniteQuery } from "@tanstack/react-query";
+import SkeletonArticleItem from "@/components/skeleton/skeleton-article-item";
 
 interface FetchCursorData {
-  hasNextPage: boolean;
-  nextCursor: string;
-  postList: Article[];
+  articleList: Article[]; // 게시글 목록
+  hasNextPage: boolean; // 다음 페이지 존재 여부
+  nextCursor: string | undefined; // 다음 페이지 커서
 }
 
-// 로컬 스토리지 나중에 생각하기
+const LIMIT_COUNT = 8; // 한 번에 가져올 게시글 수
 
 export default function ArticleList() {
-  const [postList, setPostList] = useState<Article[]>([]);
+  const sentinelRef = useRef<HTMLDivElement | null>(null); // IntersectionObserver 감지 요소
+  const observerRef = useRef<IntersectionObserver | null>(null); // IntersectionObserver
   const [query, setQuery] = useState<Query>({
+    limit: LIMIT_COUNT,
     keyword: "",
     sortBy: "latest",
-    cursorId: undefined,
   });
-  const [hasNextPage, setHasNextPage] = useState<boolean>(false);
-  const [nextCursor, setNextCursor] = useState<string | undefined>(undefined);
+
+  const {
+    data,
+    error,
+    fetchNextPage,
+    hasNextPage,
+    isPending,
+    isError,
+    isFetching,
+    isFetchingNextPage,
+  } = useInfiniteQuery<FetchCursorData>({
+    queryKey: ["articles", query.keyword, query.sortBy], // 동적 쿼리 키
+    queryFn: ({ pageParam }) =>
+      fetchData<FetchCursorData>("/article", undefined, {
+        limit: LIMIT_COUNT,
+        keyword: query.keyword,
+        sortBy: query.sortBy,
+        cursorId: pageParam as string | undefined,
+      }),
+    initialPageParam: undefined,
+    getNextPageParam: (lastPage) =>
+      lastPage.hasNextPage ? lastPage.nextCursor : undefined,
+  });
+
+  const articleList = useMemo(
+    () => data?.pages.flatMap((page) => page.articleList) ?? [],
+    [data]
+  );
 
   useEffect(() => {
-    const fetchPosts = async () => {
-      const data = await fetchData<FetchCursorData>(
-        "/article",
-        { next: { revalidate: 3 } },
-        query
-      );
+    if (!sentinelRef.current || !hasNextPage) return; // sentinelRef가 없거나 다음 페이지가 없는 경우
 
-      if (!data) {
-        return setPostList([]);
-      }
+    observerRef.current = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting) {
+          fetchNextPage();
+        }
+      },
+      { rootMargin: "100px" } // 스크롤이 sentinelRef보다 100px 위에서 감지됨
+    );
 
-      if (query.cursorId) {
-        setPostList((prev) => [...prev, ...data.postList]);
-      } else {
-        setPostList(data.postList);
-      }
+    observerRef.current.observe(sentinelRef.current);
 
-      setHasNextPage(data.hasNextPage);
-      setNextCursor(data.nextCursor);
+    return () => {
+      observerRef.current?.disconnect();
     };
-
-    fetchPosts();
-  }, [query]);
-
-  const loadMorePosts = () => {
-    if (hasNextPage) {
-      setQuery((prev) => ({ ...prev, cursorId: nextCursor }));
-    }
-  };
+  }, [hasNextPage, fetchNextPage]);
 
   return (
     <>
@@ -81,26 +99,47 @@ export default function ArticleList() {
         />
       </section>
 
-      {postList.length < 1 && <div>게시글이 없습니다.</div>}
+      {/* 페치 에러일 경우 */}
+      {isError && <p>Error: {error?.message}</p>}
 
-      {postList.length > 0 && (
+      {/* 검색 결과 또는 게시글이 없는 경우 */}
+      {!isPending && articleList.length < 1 && (
+        <div className="flex flex-row mx-auto my-20">
+          <EmptyArticle keyword={query.keyword} />
+        </div>
+      )}
+
+      {/* 로딩 중인 경우 */}
+      {isPending && articleList.length < 1 && (
         <section className="flex flex-col gap-6">
-          {postList.map((post) => (
-            <Link href={`/article/${post.id}`} key={post.id}>
-              <PostItem key={post.id} post={post} />
+          {Array.from({ length: LIMIT_COUNT }, (_, index) => (
+            <SkeletonArticleItem key={`article-${index}`} />
+          ))}
+        </section>
+      )}
+
+      {/* 게시글 목록 */}
+      {!isPending && (
+        <section className="flex flex-col gap-6">
+          {articleList.map((article) => (
+            <Link href={`/article/${article.id}`} key={`article-${article.id}`}>
+              <ArticleItem article={article} />
             </Link>
           ))}
         </section>
       )}
 
-      {/* 더보기 버튼 */}
-      {hasNextPage && (
-        <div className="flex justify-center mt-4">
-          <Button isActive={true} onClick={loadMorePosts}>
-            더 보기
-          </Button>
+      {/* IntersectionObserver 감지 요소 */}
+      <div ref={sentinelRef} className="h-10"></div>
+
+      {/* 더 이상 페칭될 데이터가 없을 때 표시 */}
+      {!isFetchingNextPage && !hasNextPage && (
+        <div className="text-center text-gray-500 mt-4">
+          더 이상 게시글이 없습니다.
         </div>
       )}
+
+      <div>{isFetching && !isFetchingNextPage ? "Fetching..." : null}</div>
     </>
   );
 }

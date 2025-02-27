@@ -5,6 +5,16 @@ import titleFormatter from "@/utils/titleFormatter";
 import dateFormatter from "@/utils/dateFormatter";
 import type { Article } from "@/types";
 import Badge from "./Badge";
+import SkeletonBestArticleItem from "@/components/skeleton/skeleton-best-article-item";
+import { Suspense } from "react";
+
+export function SkeletonBestArticle({ article }: { article: Article }) {
+  return (
+    <Suspense fallback={<SkeletonBestArticleItem />}>
+      <BestArticleItem article={article} />
+    </Suspense>
+  );
+}
 
 export default function BestArticleItem({ article }: { article: Article }) {
   const { title, author, likes, createdAt } = article;

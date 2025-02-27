@@ -6,7 +6,7 @@ import iconBack from "@/assets/icons/ic_back.png";
 import iconProfile from "@/assets/icons/ic_profile.png";
 import dateFormatter from "@/utils/dateFormatter";
 import Like from "@/components/shared/Like";
-import EmptyComment from "@/components/article/comment/EmptyComment";
+import EmptyComment from "@/components/empty/EmptyComment";
 import CommentItem from "@/components/article/comment/CommentItem";
 import ButtonRound from "@/components/button/ButtonRound";
 import CommentForm from "@/components/article/comment/CommentForm";

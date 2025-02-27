@@ -6,8 +6,8 @@ import iconHeart from "@/assets/icons/ic_heart.png";
 import defaultImage from "@/assets/images/default.png";
 import type { Article } from "@/types";
 
-export default function ArticleItem({ post }: { post: Article }) {
-  const { title, likes, author, updatedAt } = post;
+export default function ArticleItem({ article }: { article: Article }) {
+  const { title, likes, author, updatedAt } = article;
 
   return (
     <article className="bg-gradient-to-t from-[#FCFCFC] to-white hover:from-gray-100 border-b border-gray-200 flex flex-col gap-4">

@@ -4,16 +4,17 @@ import type { Query } from "@/types";
 import { apiLocal as api } from "./axios";
 import { revalidateTag } from "next/cache";
 
+type EndPoint = `/${string}`;
 type FetchOptions =
   | { cache: "no-store" | "no-cache" | "force-cache" }
   | { next: { revalidate?: number; tags?: string[] } };
 
 // 조회 요청 함수
 export const fetchData = async <T>(
-  endPoint: string,
-  fetchOptions: FetchOptions = { cache: "no-store" },
+  endPoint: EndPoint,
+  fetchOptions?: FetchOptions,
   params?: Query
-): Promise<T | null> => {
+): Promise<T> => {
   try {
     const response = await api.get(endPoint, {
       adapter: "fetch",
@@ -24,13 +25,13 @@ export const fetchData = async <T>(
     return result;
   } catch (error) {
     console.error(error);
-    return null;
+    throw error;
   }
 };
 
 // 생성 요청 함수
 export const postData = async <T>(
-  endPoint: string,
+  endPoint: EndPoint,
   data: T,
   tags?: string[]
 ): Promise<boolean> => {
@@ -52,7 +53,7 @@ export const postData = async <T>(
 
 // 수정 요청 함수
 export const patchData = async <T>(
-  endPoint: string,
+  endPoint: EndPoint,
   data: T,
   tags?: string[]
 ): Promise<boolean> => {
@@ -74,7 +75,7 @@ export const patchData = async <T>(
 
 // 삭제 요청 함수
 export const deleteData = async (
-  endPoint: string,
+  endPoint: EndPoint,
   tags?: string[]
 ): Promise<boolean> => {
   try {
@@ -91,4 +92,10 @@ export const deleteData = async (
     console.error(error);
     return false;
   }
+};
+
+export const reactQueryGet = async <T>(endPoint: EndPoint) => {
+  const response = await api.get(endPoint);
+  const data: T = response.data;
+  return data;
 };

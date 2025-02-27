@@ -23,6 +23,7 @@ export interface ArticleComment {
 }
 
 export interface Query {
+  limit: number;
   keyword: string;
   sortBy: SortBy;
   cursorId?: string;
