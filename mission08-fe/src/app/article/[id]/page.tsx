@@ -14,15 +14,15 @@ import Link from "next/link";
 
 export default async function Page({ params }: PageIdParams) {
   const { id } = await params;
-  const post = await fetchData<Article>(`/article/${id}`, {
+  const article = await fetchData<Article>(`/article/${id}`, {
     next: { tags: [`article-${id}`] },
   });
 
-  if (!post) {
+  if (!article) {
     notFound();
   }
 
-  const { author, title, content, comments, createdAt } = post;
+  const { author, title, content, comments, createdAt } = article;
   const isEmpty = comments?.length === 0;
 
   return (
@@ -38,7 +38,7 @@ export default async function Page({ params }: PageIdParams) {
             <p className="text-gray-400">{dateFormatter(createdAt)}</p>
           </span>
           <div className="h-[34px] w-[1px] bg-gray-200 mx-8"></div>
-          <Like likes={post.likes} />
+          <Like likes={article.likes} />
         </div>
       </section>
 

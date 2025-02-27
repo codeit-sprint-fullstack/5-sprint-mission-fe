@@ -1,4 +1,4 @@
-"use server";
+"use server"; // revalidateTag 사용을 위해 필요
 
 import type { Query } from "@/types";
 import { apiLocal as api } from "./axios";
@@ -6,8 +6,7 @@ import { revalidateTag } from "next/cache";
 
 type FetchOptions =
   | { cache: "no-store" | "no-cache" | "force-cache" }
-  | { next: { revalidate: number } }
-  | { next: { tags: string[] } };
+  | { next: { revalidate?: number; tags?: string[] } };
 
 // 조회 요청 함수
 export const fetchData = async <T>(
@@ -35,8 +34,6 @@ export const postData = async <T>(
   data: T,
   tags?: string[]
 ): Promise<boolean> => {
-  console.log("postData tags: ", tags);
-
   try {
     await api.post(endPoint, data);
 
