@@ -21,6 +21,7 @@ export const fetchData = async <T>(
       fetchOptions,
       params,
     });
+    console.log("response: ", response);
     const result: T = response.data;
     return result;
   } catch (error) {

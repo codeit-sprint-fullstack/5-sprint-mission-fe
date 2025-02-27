@@ -27,6 +27,7 @@ export default function ArticleList() {
     limit: LIMIT_COUNT,
     keyword: "",
     sortBy: "latest",
+    cursorId: undefined,
   });
 
   const {
@@ -39,7 +40,7 @@ export default function ArticleList() {
     isFetching,
     isFetchingNextPage,
   } = useInfiniteQuery<FetchCursorData>({
-    queryKey: ["articles", query.keyword, query.sortBy], // 동적 쿼리 키
+    queryKey: ["articles", query.keyword, query.sortBy],
     queryFn: ({ pageParam }) =>
       fetchData<FetchCursorData>("/article", undefined, {
         limit: LIMIT_COUNT,
@@ -47,15 +48,17 @@ export default function ArticleList() {
         sortBy: query.sortBy,
         cursorId: pageParam as string | undefined,
       }),
-    initialPageParam: undefined,
+    initialPageParam: query.cursorId,
     getNextPageParam: (lastPage) =>
       lastPage.hasNextPage ? lastPage.nextCursor : undefined,
   });
 
-  const articleList = useMemo(
-    () => data?.pages.flatMap((page) => page.articleList) ?? [],
-    [data]
-  );
+  const articleList = useMemo(() => {
+    if (!data) return [];
+    console.log("data.pageParams: ", data.pageParams);
+    console.log("data.pages: ", data.pages);
+    return data.pages.flatMap((page) => page.articleList) ?? [];
+  }, [data]);
 
   useEffect(() => {
     if (!sentinelRef.current || !hasNextPage) return; // sentinelRef가 없거나 다음 페이지가 없는 경우
@@ -66,7 +69,7 @@ export default function ArticleList() {
           fetchNextPage();
         }
       },
-      { rootMargin: "100px" } // 스크롤이 sentinelRef보다 100px 위에서 감지됨
+      { rootMargin: "200px", threshold: 1.0 } // 스크롤이 sentinelRef보다 100px 위에서 감지됨
     );
 
     observerRef.current.observe(sentinelRef.current);

@@ -7,6 +7,7 @@ import createArticleAction from "@/lib/actions/create-article.action";
 import { useActionState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import SubmitContextFactory from "@/contexts/SubmitContextFactory";
+import { useQueryClient } from "@tanstack/react-query";
 
 // 동적 Context 생성
 const { SubmitProvider, useSubmitState } = new SubmitContextFactory([
@@ -15,6 +16,7 @@ const { SubmitProvider, useSubmitState } = new SubmitContextFactory([
 ]).createContext();
 
 export default function Page() {
+  const queryClient = useQueryClient();
   const router = useRouter();
   const [state, formAction, isPending] = useActionState(
     createArticleAction,
@@ -25,11 +27,14 @@ export default function Page() {
     if (!state) return;
 
     if (state.status) {
+      // 게시글 작성 성공 시
+      queryClient.invalidateQueries({ queryKey: ["articles"] }); // 캐시 초기화 (SWR이라서 캐싱되어 있어서 업데이트가 따로 안됨)
       router.push("/article");
     } else {
+      // 게시글 작성 실패 시
       alert(state.message);
     }
-  }, [state, router]);
+  }, [state, router, queryClient]);
 
   return (
     <SubmitProvider>
