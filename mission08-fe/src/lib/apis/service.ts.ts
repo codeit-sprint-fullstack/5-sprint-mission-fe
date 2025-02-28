@@ -4,10 +4,17 @@ import type { Query } from "@/types";
 import { apiLocal as api } from "./axios";
 import { revalidateTag } from "next/cache";
 
-type EndPoint = `/${string}`;
+function refetchWith(tags: string[] | undefined) {
+  if (!tags) return;
+  for (const tag of tags) {
+    revalidateTag(tag);
+  }
+}
+
+type EndPoint = `/${string}`; // EndPoint 리터럴 타입
 type FetchOptions =
   | { cache: "no-store" | "no-cache" | "force-cache" }
-  | { next: { revalidate?: number; tags?: string[] } };
+  | { next: { revalidate?: number; tags?: string[] } }; // next fetch options
 
 // 조회 요청 함수
 export const fetchData = async <T>(
@@ -21,8 +28,8 @@ export const fetchData = async <T>(
       fetchOptions,
       params,
     });
-    console.log("response: ", response);
     const result: T = response.data;
+
     return result;
   } catch (error) {
     console.error(error);
@@ -38,12 +45,7 @@ export const postData = async <T>(
 ): Promise<boolean> => {
   try {
     await api.post(endPoint, data);
-
-    if (tags && Array.isArray(tags)) {
-      for (const tag of tags) {
-        revalidateTag(tag);
-      }
-    }
+    refetchWith(tags);
 
     return true;
   } catch (error) {
@@ -60,12 +62,7 @@ export const patchData = async <T>(
 ): Promise<boolean> => {
   try {
     await api.patch(endPoint, data);
-
-    if (tags) {
-      for (const tag of tags) {
-        revalidateTag(tag);
-      }
-    }
+    refetchWith(tags);
 
     return true;
   } catch (error) {
@@ -81,22 +78,11 @@ export const deleteData = async (
 ): Promise<boolean> => {
   try {
     await api.delete(endPoint);
-
-    if (tags) {
-      for (const tag of tags) {
-        revalidateTag(tag);
-      }
-    }
+    refetchWith(tags);
 
     return true;
   } catch (error) {
     console.error(error);
     return false;
   }
-};
-
-export const reactQueryGet = async <T>(endPoint: EndPoint) => {
-  const response = await api.get(endPoint);
-  const data: T = response.data;
-  return data;
 };
