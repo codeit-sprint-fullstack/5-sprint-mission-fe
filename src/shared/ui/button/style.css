@@ -1,0 +1,38 @@
+.btn {
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.btn-disabled {
+  background-color: var(--color_button_inactive_bg);
+}
+.btn:not(.btn-disabled) {
+  cursor: pointer;
+  background-color: var(--color_button_active1_bg);
+}
+.btn:hover.btn:not(.btn-disabled) {
+  background-color: var(--color_button_hover_bg);
+}
+.btn:active.btn:not(.btn-disabled) {
+  background-color: var(--color_button_click_bg);
+}
+
+.btn-lg {
+  padding: 1rem 7.75rem;
+  border-radius: 2.5rem;
+}
+.btn-md {
+  padding: 0.75rem 4.4375rem;
+  border-radius: 2.5rem;
+}
+.btn-sm42 {
+  padding: 0.75rem 1.4375rem;
+  border-radius: 0.5rem;
+  height: 2.625rem;
+}
+.btn-sm48 {
+  padding: 0.75rem 1.4375rem;
+  border-radius: 0.5rem;
+  height: 3rem;
+}

@@ -1,0 +1,13 @@
+.header-nav {
+  display: flex;
+}
+
+.header-nav > a {
+  text-decoration: none;
+  padding: 0 15px;
+  color: #4b5563;
+}
+
+.header-nav > a.active-link > div {
+  color: #3692ff;
+}

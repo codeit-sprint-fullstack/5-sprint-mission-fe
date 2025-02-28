@@ -1,0 +1,25 @@
+.registration-items {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 26px 16px 94px;
+  display: flex;
+  flex-direction: column;
+}
+
+.registration__header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.registration__item {
+  margin-bottom: 32px;
+}
+
+.registration__tags {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
