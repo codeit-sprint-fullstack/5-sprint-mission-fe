@@ -1,0 +1,17 @@
+export const colors = {
+  gray1: "#F3F4F6",
+  gray2: "#f9fafb",
+  gray3: "#e5e7eb",
+  gray4: "#6b7280",
+  gray5: "#9CA3AF",
+  gray6: "#4B5563",
+  gray7: "##374151",
+  gray8: "#1F2937",
+  gray9: "#111827",
+  box_bg: "#e6f2ff",
+  landingBackground: "#CFE5FF",
+  buttonBlue: "#3692FF",
+  blue2: "#1967d6",
+  blue3: "#1251aa",
+  error: "#f74747",
+};
