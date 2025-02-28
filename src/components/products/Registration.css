@@ -1,0 +1,114 @@
+.registration {
+  display: flex;
+  justify-content: center;
+}
+
+.registrationContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  width: 100%;
+  margin-left: 16px;
+  margin-right: 16px;
+}
+
+.registrationTitle {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 20px;
+  width: 100%;
+}
+
+.registrationTitleButton {
+  display: flex;
+  justify-content: center;
+  font-size: 16px;
+  width: 74px;
+  height: 42px;
+  border-radius: 8px;
+  align-items: center;
+  background-color: #9ca3af;
+  color: #f3f4f6;
+  cursor: pointer;
+}
+
+.registrationInputContainer {
+  font-size: 18px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 16px;
+  margin: 16px 0px 16px 0px;
+}
+.registrationInputBox1 {
+  font-family: inherit;
+  font-size: 16px;
+  color: #9ca3af;
+  height: 56px;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: left;
+  vertical-align: top;
+  resize: none;
+  overflow-y: auto;
+}
+.registrationInputBox2 {
+  font-family: inherit;
+  font-size: 16px;
+  color: #9ca3af;
+  height: 282px;
+  background-color: #f3f4f6;
+  border: none;
+  border-radius: 12px;
+  padding: 16px 24px;
+  text-align: left;
+  vertical-align: top;
+  resize: none;
+  overflow-y: auto;
+}
+
+.registrationInputBox1:focus {
+  outline: 2px solid #9ca3af;
+}
+
+.registrationInputBox2:focus {
+  outline: 2px solid #9ca3af;
+}
+
+.error-border {
+  border: 1px solid red;
+}
+.error-border:focus {
+  border: 1px solid red;
+  outline: none;
+}
+
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+.tags-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.tag {
+  background-color: #f3f4f6;
+  color: #333;
+  padding: 5px 15px;
+  border-radius: 26px;
+  display: flex;
+  align-items: center;
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+.remove-tag {
+  display: flex;
+  margin-left: 8px;
+}
