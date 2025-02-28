@@ -1,0 +1,148 @@
+/* * {
+    outline: 1px solid rgb(216, 127, 127)
+} */
+
+.mainSectionBoundary {
+    width:100%;
+    background-color: #CFE5FF;
+    font-size:1.6rem;
+}
+
+.bottomSectionBoundary {
+    width:100%;
+    background-color: #CFE5FF;
+    font-size:1.6rem;
+    position: relative;
+    top: 2rem;
+}
+
+.mainSectionTitle{
+    font-size: 4rem;
+    font-weight: 700;
+    color: #374151;
+}
+
+.mainSection {
+    padding-top: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.caliber {
+    margin-top: 2rem;
+    border: none;
+    font-size: 2rem;
+    color: #F9FAFB;
+    background-color: #3692FF;
+    border-radius: 4rem;
+    width:35.7rem;
+    height:5.6rem;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.mobileCaliber {
+    margin-top: 2rem;
+    border: none;
+    font-size: 2rem;
+    color: #F9FAFB;
+    background-color: #3692FF;
+    border-radius: 4rem;
+    width:35.7rem;
+    height:5.6rem;
+    box-sizing: border-box;
+    cursor: pointer;
+    margin-bottom: 15rem;
+}
+
+.caliber:hover {
+    background-color: #2d7bda;
+}
+
+.mobileCaliber:hover {
+    background-color: #2d7bda;
+}
+
+.mainSectionRight {
+    width: 74.6rem;
+    margin-right: 20rem;
+}
+
+
+.mobileMainSection{
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.mobileMainSectionRight {
+    width: 100%;
+}
+
+.mainSectionLeft {
+    width: 35.7rem;
+    margin-left: 20rem;
+}
+
+.bottomSectionLeft {
+    width: 32.5rem;
+    margin-left: 20rem;
+}
+
+.bottomSectionTitle {
+    width: 100%;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #374151;
+    white-space : nowrap
+}
+
+.tabletMainSectionLeft {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.mobileMainSectionLeft {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+
+.mainSectionImg {
+    width: 100%;
+    position: relative;
+    top: 0.1rem;
+}
+
+
+
+.mainSectionTitle {
+    width: 34rem;
+}
+
+.tabletMainSectionTitle {
+    text-align: center;
+    width: 100%;
+    font-size: 4rem;
+    font-weight: 700;
+    color: #374151;
+}
+
+.tabletBottomTitles {
+    text-align: center;
+    width: 100%;
+    margin-bottom: 15rem;
+}
+
+.titles {
+
+}

@@ -1,0 +1,21 @@
+.tagElementDiv {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    border-radius: 2.6rem;
+    background-color: #F3F4F6;
+    width: 12rem;
+    height: 3.6rem;
+    color: #1F2937;
+}
+
+.tagElementDiv > div {
+    font-size: 1.6rem;
+}
+
+.imgX {
+    cursor: pointer;
+    position: relative;
+    top: 0.2rem;
+}
