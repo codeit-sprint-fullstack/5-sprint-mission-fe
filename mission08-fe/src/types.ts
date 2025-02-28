@@ -39,3 +39,6 @@ export type FK<T, K extends keyof T> = K extends `${string}Id` ? T[K] : never;
 
 // 브랜트 타입스크립트
 export type Brand<T, B> = T & { __brand: B };
+
+// Brand 타입 예시
+// export type Tags = Brand<string[], "Tags">;

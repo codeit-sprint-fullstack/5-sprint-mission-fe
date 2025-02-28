@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import Button from "./ButtonRectangle";
-import type { SubmitContext } from "@/contexts/SubmitContextFactory";
+import type { SubmitContext } from "@/contexts/submit-context-factory";
 
 interface ButtonSubmitProps {
   children: ReactNode;

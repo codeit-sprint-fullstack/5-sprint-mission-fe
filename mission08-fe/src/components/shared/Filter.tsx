@@ -3,7 +3,7 @@
 import Image from "next/image";
 import iconSort from "@/assets/icons/ic_sort.png";
 import iconArrowDown from "@/assets/icons/ic_arrow_down.png";
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import Menu from "./Menu";
 import type { SortBy } from "@/types";
 
@@ -15,24 +15,27 @@ interface FilterProps {
 export default function Filter({ sortBy, onSort }: FilterProps) {
   const [isShow, setIsShow] = useState(false);
 
-  const handleClick = () => setIsShow((prev) => !prev);
+  const handleClick = useCallback(() => setIsShow((prev) => !prev), []);
 
-  const menuItems = [
-    {
-      label: "최신순",
-      onClick: () => {
-        onSort("latest");
-        handleClick();
+  const menuItems = useMemo(
+    () => [
+      {
+        label: "최신순",
+        onClick: () => {
+          onSort("latest");
+          handleClick();
+        },
       },
-    },
-    {
-      label: "인기순",
-      onClick: () => {
-        onSort("favorite");
-        handleClick();
+      {
+        label: "인기순",
+        onClick: () => {
+          onSort("favorite");
+          handleClick();
+        },
       },
-    },
-  ];
+    ],
+    [onSort, handleClick]
+  );
 
   return (
     <div className="relative ">

@@ -1,3 +1,5 @@
+import { memo } from "react";
+
 type MenuItem = {
   label: string;
   onClick: () => void;
@@ -7,7 +9,7 @@ interface MenuProps {
   menuItems: MenuItem[];
 }
 
-export default function menu({ menuItems }: MenuProps) {
+function Menu({ menuItems }: MenuProps) {
   return (
     <ul className="absolute right-0 top-full mt-2 w-[130px] bg-white border border-gray-200 rounded-xl shadow-lg z-5">
       {menuItems.map((item) => (
@@ -22,3 +24,5 @@ export default function menu({ menuItems }: MenuProps) {
     </ul>
   );
 }
+
+export default memo(Menu);

@@ -1,6 +1,6 @@
 import { postData } from "../apis/service.ts";
 
-export default async function CreateArticleCommentAction(
+export default async function createArticleCommentAction(
   _: unknown,
   formData: FormData
 ) {

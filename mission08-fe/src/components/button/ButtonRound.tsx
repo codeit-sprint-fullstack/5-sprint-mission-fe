@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function ButtonRound({ children, ...props }: ButtonProps) {
   return (
     <button
-      className="w-60 flex items-center justify-center gap-2 py-3 bg-primary-100 rounded-3xl text-white mx-auto mt-10 md:mt-12 xl:mt-16"
+      className="w-60 flex items-center justify-center gap-2 py-3 bg-primary-100 rounded-3xl text-white"
       {...props}
     >
       {children}

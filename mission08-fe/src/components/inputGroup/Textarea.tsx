@@ -3,7 +3,7 @@
 import { useState, ChangeEvent, useEffect } from "react";
 import { TRANSLATE } from "@/constants";
 import useValidation from "@/hooks/useValidation";
-import type { SubmitContext } from "@/contexts/SubmitContextFactory";
+import type { SubmitContext } from "@/contexts/submit-context-factory";
 
 interface State {
   status: boolean;
@@ -13,6 +13,7 @@ interface TextareaProps {
   name: "content" | "comment";
   useSubmitState: () => Pick<SubmitContext, "setSubmitState">;
   state?: State | null;
+  initValue?: string; // edit일 경우 기존 값
 }
 
 const HEIGHT = {
@@ -24,8 +25,9 @@ export default function Textarea({
   name,
   useSubmitState,
   state = null,
+  initValue,
 }: TextareaProps) {
-  const [value, setValue] = useState(""); // 입력값 상태
+  const [value, setValue] = useState(initValue || ""); // 입력값 상태
   const { error, handleChange, handleBlur } = useValidation(name);
   const { setSubmitState } = useSubmitState();
 

@@ -5,14 +5,18 @@ import Button from "@/components/button/ButtonSubmit";
 import { useActionState, useEffect } from "react";
 import CreateArticleCommentAction from "@/lib/actions/create-article-comment.action";
 import type { Article, PK } from "@/types";
-import SubmitContextFactory from "@/contexts/SubmitContextFactory";
+import SubmitContextFactory from "@/contexts/submit-context-factory";
 
 // 동적 Context 생성
 const { SubmitProvider, useSubmitState } = new SubmitContextFactory([
   "comment",
 ]).createContext();
 
-export default function CommentForm({ articleId }: { articleId: PK<Article> }) {
+export default function CommentCreateForm({
+  articleId,
+}: {
+  articleId: PK<Article>;
+}) {
   const [state, formAction, isPending] = useActionState(
     CreateArticleCommentAction,
     null

@@ -1,9 +1,18 @@
+"use client";
+
 import Image from "next/image";
 import arrow from "@/assets/icons/ic_arrow_down.png";
 
 export default function ScrollToTop() {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
+
   return (
-    <div className="fixed bottom-5 right-5 md:bottom-10 md:right-10 rounded-full border border-gray-300 p-5 cursor-pointer backdrop-filter backdrop-blur-md">
+    <div
+      onClick={scrollToTop}
+      className="bg-primary-100 fixed bottom-5 right-5 md:bottom-10 md:right-10 rounded-full p-5 cursor-pointer"
+    >
       <Image
         src={arrow}
         alt="맨 위로 가기"
