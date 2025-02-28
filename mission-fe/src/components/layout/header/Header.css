@@ -22,7 +22,7 @@
   margin-left: 2.4rem;
 }
 
-.login-button {
+.button {
   background-color: var(--blue);
   color: #ffffff;
   padding: 1.2rem 2.4rem;
@@ -32,7 +32,7 @@
   font-weight: 600;
 }
 
-.login-button:hover {
+.button:hover {
   background-color: #1967d6;
 }
 
@@ -61,14 +61,14 @@
   .header {
     padding: 0 2.4rem;
   }
-
-  .login-button {
+  /* 
+  .button {
     display: none;
   }
 
   .avatar-button {
     display: block;
-  }
+  } */
 }
 
 /* 모바일 화면 */
@@ -90,4 +90,8 @@
     margin-left: 0.8rem;
     min-width: 100%;
   }
+}
+
+.nav-menu-container .active {
+  color: #3692ff;
 }
