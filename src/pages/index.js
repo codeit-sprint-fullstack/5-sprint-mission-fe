@@ -1,8 +1,13 @@
-import { useRouter } from "next/router";
+export const getServerSideProps = async () => {
+  return {
+    redirect: {
+      destination: "/community",
+      permanent: true, // true: 301 리다이렉트, false: 302 리다이렉트
+    },
+  };
+};
 
 export default function Home() {
-  const router = useRouter();
-  router.push("/community");
   return (
     <>
       <div className="flex min-h-screen items-center justify-center bg-gray-50">
