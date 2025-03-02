@@ -36,7 +36,8 @@ const Header = () => {
           <LogoContainer>
             <Link href="/" passHref legacyBehavior>
               <LogoLink>
-                <img src="https://i.imgur.com/iUEWHTG.png" alt="Logo" />
+                <img src="/panda_face.svg" alt="판다마켓 로고" />
+                <LogoText>판다마켓</LogoText>
               </LogoLink>
             </Link>
           </LogoContainer>
@@ -107,7 +108,15 @@ const LogoContainer = styled.div`
 const LogoLink = styled.a`
   display: flex;
   align-items: center;
+  gap: 8px;
   cursor: pointer;
+`;
+
+// 로고 텍스트 스타일
+const LogoText = styled.span`
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #3692ff;
 `;
 
 // 네비게이션 메뉴 스타일

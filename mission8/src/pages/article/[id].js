@@ -13,7 +13,6 @@ import {
   deleteComment,
 } from "@/services/articleService";
 import Loading from "@/components/common/Loading";
-import Pagination from "@/components/common/Pagination";
 import ArticleComments from "@/components/article/ArticleComments";
 
 /**
@@ -45,15 +44,15 @@ export async function getStaticPaths() {
  */
 export async function getStaticProps({ params }) {
   try {
-    const article = await getArticleById(params.id);
+    const article = await getArticleById(params.id, true); // 항상 최신 데이터 사용
 
     return {
       props: {
         article,
         error: null,
       },
-      // 30초마다 페이지 재생성
-      revalidate: 30,
+      // 10초마다 페이지 재생성 (기존 30초에서 더 짧게 조정)
+      revalidate: 10,
     };
   } catch (error) {
     return {
@@ -61,7 +60,7 @@ export async function getStaticProps({ params }) {
         article: null,
         error: error.message,
       },
-      revalidate: 30,
+      revalidate: 10,
     };
   }
 }
@@ -82,6 +81,39 @@ const ArticlePage = ({ article: initialArticle, error: initialError }) => {
   // 댓글 페이지네이션 상태
   const [commentPage, setCommentPage] = useState(1);
   const commentsPerPage = 5;
+
+  // 게시글 최신 데이터 로딩 (쿠키 또는 query 파라미터 확인)
+  useEffect(() => {
+    const loadFreshArticleData = async () => {
+      if (router.isReady && article?.id) {
+        // 쿠키 또는 query 파라미터를 확인하여 강제 새로고침이 필요한지 확인
+        const forceRefreshCookie = document.cookie
+          .split("; ")
+          .find((row) => row.startsWith("forceRefresh="));
+        const needRefresh =
+          forceRefreshCookie || router.query.refresh === "true";
+
+        if (needRefresh) {
+          try {
+            setLoading(true);
+            console.log("게시글 데이터 새로고침 중...");
+            const freshArticle = await getArticleById(article.id, true); // skipCache = true
+            setArticle(freshArticle);
+            console.log("게시글 데이터 새로고침 완료:", freshArticle.title);
+
+            // 쿠키 삭제
+            document.cookie = "forceRefresh=; path=/; max-age=0";
+          } catch (error) {
+            console.error("게시글 데이터 새로고침 오류:", error);
+          } finally {
+            setLoading(false);
+          }
+        }
+      }
+    };
+
+    loadFreshArticleData();
+  }, [router.isReady, router.query, article?.id]);
 
   // 게시글 데이터와 댓글 데이터 로딩
   useEffect(() => {
@@ -313,7 +345,7 @@ const ArticlePage = ({ article: initialArticle, error: initialError }) => {
   };
 
   // 게시글 수정 페이지로 이동
-  const handleEdit = () => router.push(`/article/edit/${article.id}`);
+  const handleEdit = () => router.push(`/article/write?id=${article.id}`);
 
   if (loading) return <Loading />;
 
@@ -345,7 +377,14 @@ const ArticlePage = ({ article: initialArticle, error: initialError }) => {
           </ArticleMeta>
         </ArticleHeader>
 
-        <ArticleImage src={article.imageUrl} alt={article.title} />
+        <ArticleImage
+          src={article.imageUrl}
+          alt={article.title}
+          onError={(e) => {
+            e.target.onerror = null; // 무한 루프 방지
+            e.target.src = "/img_default.svg"; // 기본 이미지 경로
+          }}
+        />
         <ArticleContent>{article.content}</ArticleContent>
 
         {/* 좋아요 버튼 섹션 */}

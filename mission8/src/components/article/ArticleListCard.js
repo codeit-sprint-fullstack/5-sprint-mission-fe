@@ -26,6 +26,10 @@ const ArticleListCard = ({ article, isBest = false }) => {
                 src={article.imageUrl}
                 alt={article.title}
                 isBest={isBest}
+                onError={(e) => {
+                  e.target.onerror = null; // 무한 루프 방지
+                  e.target.src = "/img_default.svg"; // 기본 이미지 경로
+                }}
               />
             </MainContent>
             <MetaContainer>
@@ -55,6 +59,10 @@ const ArticleListCard = ({ article, isBest = false }) => {
                 src={article.imageUrl}
                 alt={article.title}
                 isBest={isBest}
+                onError={(e) => {
+                  e.target.onerror = null; // 무한 루프 방지
+                  e.target.src = "/img_default.svg"; // 기본 이미지 경로
+                }}
               />
             </MainContent>
             <MetaContainer>

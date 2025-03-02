@@ -65,7 +65,7 @@ export async function getArticles({
       }`
     );
     const controller = new AbortController();
-    const timeoutId = setTimeout(() => controller.abort(), 8000); // 8초 타임아웃
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
 
     try {
       const response = await fetch(
@@ -83,7 +83,6 @@ export async function getArticles({
 
       const data = await response.json();
 
-      // 백엔드 응답 구조가 다른 경우를 위한 처리
       const articles = Array.isArray(data) ? data : data.articles || [];
       const pageInfo =
         !Array.isArray(data) && data.pageInfo
@@ -102,7 +101,7 @@ export async function getArticles({
           id: article.id || String(Math.random()),
           title: article.title || "",
           content: article.content || "",
-          imageUrl: article.imageUrl || "https://via.placeholder.com/800x400",
+          imageUrl: article.imageUrl || "/img_default.svg",
           createdAt: article.createdAt || new Date().toISOString(),
           likes: article.likes || 0,
           author: {
@@ -113,7 +112,6 @@ export async function getArticles({
         pageInfo,
       };
 
-      // 결과를 캐시에 저장
       cache.set(cacheKey, {
         data: result,
         timestamp: Date.now(),
@@ -124,7 +122,6 @@ export async function getArticles({
     } catch (error) {
       clearTimeout(timeoutId);
       if (error.name === "AbortError") {
-        // 타임아웃 시 캐시된 데이터 반환 또는 기본값 반환
         return (
           cachedData?.data || {
             articles: [],
@@ -196,19 +193,35 @@ export async function getArticleById(id, skipCache = false) {
 
 export async function createArticle(articleData) {
   try {
+    console.log("게시글 생성 요청:", articleData);
     const response = await fetch(`${API_BASE_URL}/api/articles`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        // 테스트용 사용자 ID 추가
+        "X-User-Id": "2b1d9484-b7c9-4a45-84c1-9c9208df777a",
       },
       body: JSON.stringify(articleData),
     });
 
     if (!response.ok) {
-      throw new Error("게시글 작성에 실패했습니다");
+      // 응답 내용을 텍스트로 읽어봅니다
+      const errorText = await response
+        .text()
+        .catch(() => "응답 텍스트 읽기 실패");
+      console.error(`API 오류 응답: ${errorText}`);
+      throw new Error(
+        `게시글 작성에 실패했습니다 (상태 코드: ${response.status})`
+      );
     }
 
-    return await response.json();
+    const newArticle = await response.json();
+    console.log("생성된 게시글:", newArticle);
+
+    // 목록 캐시 초기화
+    clearArticleCache();
+
+    return newArticle;
   } catch (error) {
     console.error("게시글 작성 중 오류가 발생했습니다:", error);
     throw error;
@@ -217,19 +230,45 @@ export async function createArticle(articleData) {
 
 export async function updateArticle(id, articleData) {
   try {
+    console.log(`게시글 수정 요청: ID ${id}`, articleData);
+
+    // 수정 전에 먼저 캐시를 초기화합니다
+    clearArticleCache(id);
+
     const response = await fetch(`${API_BASE_URL}/api/articles/${id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
+        // 테스트용 사용자 ID 추가
+        "X-User-Id": "2b1d9484-b7c9-4a45-84c1-9c9208df777a",
       },
       body: JSON.stringify(articleData),
     });
 
     if (!response.ok) {
-      throw new Error("게시글 수정에 실패했습니다");
+      // 응답 내용을 텍스트로 읽어봅니다
+      const errorText = await response
+        .text()
+        .catch(() => "응답 텍스트 읽기 실패");
+      console.error(`API 오류 응답: ${errorText}`);
+      throw new Error(
+        `게시글 수정에 실패했습니다 (상태 코드: ${response.status})`
+      );
     }
 
-    return await response.json();
+    const updatedArticle = await response.json();
+    console.log("업데이트된 게시글:", updatedArticle);
+
+    // 수정 성공 시 캐시 초기화 (전체 캐시 초기화)
+    clearArticleCache();
+
+    // 브라우저 환경에서는 로컬스토리지에도 업데이트 표시
+    if (typeof window !== "undefined") {
+      localStorage.setItem("lastArticleUpdate", Date.now().toString());
+      localStorage.setItem("lastUpdatedArticleId", id);
+    }
+
+    return updatedArticle;
   } catch (error) {
     console.error("게시글 수정 중 오류가 발생했습니다:", error);
     throw error;
@@ -276,21 +315,17 @@ export async function deleteArticle(id) {
 
 export async function incrementArticleLike(id) {
   try {
-    // POST 요청을 /api/articles/:id/like 엔드포인트로 보냅니다 (항상 +1 증가)
     console.log(`좋아요 증가 요청: ${API_BASE_URL}/api/articles/${id}/like`);
     const response = await fetch(`${API_BASE_URL}/api/articles/${id}/like`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // 테스트용 사용자 ID 추가
         "X-User-Id": "2b1d9484-b7c9-4a45-84c1-9c9208df777a",
       },
     });
 
-    // 응답 상태 확인을 위한 로깅 추가
     console.log(`API 응답 상태: ${response.status}`);
 
-    // 응답 본문 미리 확인
     const responseClone = response.clone();
     const responseText = await responseClone.text();
     console.log("API 응답 본문:", responseText);
@@ -299,11 +334,10 @@ export async function incrementArticleLike(id) {
       throw new Error(`좋아요 증가 실패 (상태 코드: ${response.status})`);
     }
 
-    // 좋아요가 변경되었으므로 캐시 초기화 (목록 페이지에 즉시 반영)
+    // 좋아요가 변경되었으므로 캐시 초기화
     clearArticleCache(id);
     console.log(`게시글 ID ${id}의 좋아요 증가 후 캐시 초기화됨`);
 
-    // 응답이 비어있지 않은 경우만 JSON 파싱
     let likeResponse;
     if (responseText.trim()) {
       try {
@@ -313,28 +347,23 @@ export async function incrementArticleLike(id) {
         throw new Error("API 응답을 처리할 수 없습니다");
       }
     } else {
-      // 비어있는 응답인 경우 게시글 다시 조회
       console.log("API 응답이 비어있어 게시글 정보를 다시 조회합니다");
-      // 캐시를 사용하지 않고 새로운 데이터를 가져오기 위해 캐시 초기화
       clearArticleCache(id);
-      likeResponse = await getArticleById(id, true); // skipCache=true 전달
+      likeResponse = await getArticleById(id, true);
     }
 
     console.log("좋아요 증가 응답:", likeResponse);
 
-    // 좋아요 응답이 불완전한 경우, 기존 게시글 정보를 가져와서 업데이트된 좋아요 정보만 적용
     if (!likeResponse || !likeResponse.author) {
       console.log(
         "좋아요 응답에 author 필드가 없어 게시글 정보를 다시 가져옵니다"
       );
-      // 최신 데이터를 가져오기 위해 캐시 초기화
       clearArticleCache(id);
-      const fullArticle = await getArticleById(id, true); // skipCache=true 전달
+      const fullArticle = await getArticleById(id, true);
 
-      // 좋아요 응답에서 필요한 필드(likes)만 업데이트
       return {
         ...fullArticle,
-        likes: likeResponse?.likes || fullArticle.likes, // 응답이 없으면 가져온 게시글 데이터 사용
+        likes: likeResponse?.likes || fullArticle.likes,
       };
     }
 
@@ -351,7 +380,7 @@ export async function incrementArticleLike(id) {
   }
 }
 
-// 기존 함수를 새 함수명으로 매핑 (하위 호환성 유지)
+// 하위 호환성 유지 (기존 코드에서 참조하는 경우가 있을 수 있음)
 export const toggleArticleLike = incrementArticleLike;
 
 /**
@@ -369,7 +398,7 @@ export const getCommentsByArticleId = async (articleId) => {
     }
     return await response.json();
   } catch (error) {
-    console.error("Error fetching comments:", error);
+    console.error("댓글 목록 조회 중 오류:", error);
     throw error;
   }
 };
@@ -385,7 +414,6 @@ export const createComment = async (commentData) => {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        // 테스트용 사용자 ID 추가 - 게시글 삭제에 사용된 것과 동일한 ID
         "X-User-Id": "2b1d9484-b7c9-4a45-84c1-9c9208df777a",
       },
       body: JSON.stringify(commentData),
@@ -397,7 +425,7 @@ export const createComment = async (commentData) => {
 
     return await response.json();
   } catch (error) {
-    console.error("Error creating comment:", error);
+    console.error("댓글 생성 중 오류:", error);
     throw error;
   }
 };
@@ -410,22 +438,17 @@ export const createComment = async (commentData) => {
  */
 export const updateComment = async (commentId, commentData) => {
   try {
-    console.log(
-      `댓글 수정 API 호출: ${API_BASE_URL}/api/comments/${commentId}`,
-      commentData
-    );
+    console.log(`댓글 수정 요청: ${commentId}`, commentData);
 
     const response = await fetch(`${API_BASE_URL}/api/comments/${commentId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
-        // 테스트용 사용자 ID 추가 - 게시글 삭제에 사용된 것과 동일한 ID
         "X-User-Id": "2b1d9484-b7c9-4a45-84c1-9c9208df777a",
       },
       body: JSON.stringify(commentData),
     });
 
-    // 응답 복제하여 텍스트와 JSON으로 모두 처리할 수 있도록 함
     const responseClone = response.clone();
     const responseText = await responseClone.text();
     console.log("API 응답 텍스트:", responseText);
@@ -438,20 +461,17 @@ export const updateComment = async (commentId, commentData) => {
     }
 
     try {
-      // 빈 응답이 아닌 경우에만 JSON 파싱 시도
       if (responseText.trim()) {
         return JSON.parse(responseText);
       } else {
-        // 응답이 비어 있으면 기존 데이터를 그대로 반환
         return { ...commentData, id: commentId };
       }
     } catch (jsonError) {
       console.error("JSON 파싱 오류:", jsonError);
-      // JSON 파싱 오류시 기본 데이터 반환
       return { ...commentData, id: commentId };
     }
   } catch (error) {
-    console.error("Error updating comment:", error);
+    console.error("댓글 수정 중 오류:", error);
     throw error;
   }
 };
@@ -463,20 +483,16 @@ export const updateComment = async (commentId, commentData) => {
  */
 export const deleteComment = async (commentId) => {
   try {
-    console.log(
-      `댓글 삭제 API 호출: ${API_BASE_URL}/api/comments/${commentId}`
-    );
+    console.log(`댓글 삭제 요청: ${commentId}`);
 
     const response = await fetch(`${API_BASE_URL}/api/comments/${commentId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
-        // 테스트용 사용자 ID 추가 - 게시글 삭제에 사용된 것과 동일한 ID
         "X-User-Id": "2b1d9484-b7c9-4a45-84c1-9c9208df777a",
       },
     });
 
-    // 응답 텍스트 확인
     const responseClone = response.clone();
     const responseText = await responseClone.text();
     console.log("API 응답 텍스트:", responseText);
@@ -490,7 +506,7 @@ export const deleteComment = async (commentId) => {
 
     return;
   } catch (error) {
-    console.error("Error deleting comment:", error);
+    console.error("댓글 삭제 중 오류:", error);
     throw error;
   }
 };

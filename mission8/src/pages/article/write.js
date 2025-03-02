@@ -32,32 +32,33 @@ const WritePage = () => {
   // 수정 모드일 경우 기존 게시글 데이터 가져오기
   useEffect(() => {
     const fetchArticle = async () => {
-      if (isEditMode) {
+      if (isEditMode && router.isReady) {
         try {
           setLoading(true);
-          const article = await getArticleById(id);
+          console.log("게시글 데이터 가져오기:", id);
+          const article = await getArticleById(id, true);
           setFormData({
             title: article.title || "",
             content: article.content || "",
             imageUrl: article.imageUrl || "",
           });
+          console.log("게시글 데이터 로드 완료:", article.title);
         } catch (err) {
           setError("게시글을 불러오는데 실패했습니다.");
-          console.error(err);
+          console.error("게시글 로드 오류:", err);
         } finally {
           setLoading(false);
         }
       }
     };
 
-    if (id) {
+    if (router.isReady && id) {
       fetchArticle();
     }
-  }, [id, isEditMode]);
+  }, [id, isEditMode, router.isReady]);
 
   /**
    * 입력 필드 변경 핸들러
-   * @param {Event} e - 입력 이벤트 객체
    */
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -70,7 +71,6 @@ const WritePage = () => {
   /**
    * 폼 제출 핸들러
    * 게시글을 생성하거나 수정하고 성공 시 해당 게시글 상세 페이지로 이동
-   * @param {Event} e - 폼 제출 이벤트 객체
    */
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -86,14 +86,25 @@ const WritePage = () => {
 
       if (isEditMode) {
         // 게시글 수정
+        console.log("게시글 수정 요청:", id);
         result = await updateArticle(id, formData);
+        console.log("게시글 수정 완료:", result);
+
+        // 수정 후 캐시 초기화 처리를 위한 쿠키 설정
+        document.cookie = "forceRefresh=true; path=/";
       } else {
         // 새 게시글 작성
+        console.log("새 게시글 작성 요청");
         result = await createArticle(formData);
+        console.log("새 게시글 작성 완료:", result.id);
       }
 
       // 생성/수정된 게시글의 상세 페이지로 이동
-      router.push(`/article/${result.id}`);
+      router.push(
+        isEditMode
+          ? `/article/${result.id}?refresh=true`
+          : `/article/${result.id}`
+      );
     } catch (err) {
       setError(
         err.message || `게시글 ${isEditMode ? "수정" : "작성"}에 실패했습니다.`
@@ -139,6 +150,18 @@ const WritePage = () => {
             placeholder="이미지 URL을 입력해주세요 (예: https://example.com/image.jpg)"
             required
           />
+          {formData.imageUrl && (
+            <ImagePreviewContainer>
+              <ImagePreview
+                src={formData.imageUrl}
+                alt="미리보기"
+                onError={(e) => {
+                  e.target.onerror = null; // 무한 루프 방지
+                  e.target.src = "/img_default.svg"; // 기본 이미지 경로
+                }}
+              />
+            </ImagePreviewContainer>
+          )}
         </FormGroup>
 
         {/* 내용 입력 필드 */}
@@ -290,6 +313,22 @@ const ErrorMessage = styled.div`
   padding: 1rem;
   border-radius: 6px;
   margin-bottom: 1.5rem;
+`;
+
+// 이미지 미리보기 컨테이너 스타일
+const ImagePreviewContainer = styled.div`
+  margin-top: 1rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  overflow: hidden;
+  max-height: 200px;
+`;
+
+// 이미지 미리보기 스타일
+const ImagePreview = styled.img`
+  width: 100%;
+  max-height: 200px;
+  object-fit: contain;
 `;
 
 export default WritePage;
