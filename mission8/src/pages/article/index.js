@@ -34,21 +34,38 @@ export async function getServerSideProps(context) {
   const search = query.search || "";
   const sort = query.sort || "latest";
 
+  // 이전에 좋아요 상태가 변경되었는지 확인
+  const wasArticleLiked = context.req.cookies?.articleLiked === "true";
+  const forceRefresh = context.req.cookies?.forceRefresh === "true";
+
   try {
-    // 일반 게시글 데이터 요청
+    // 캐시 사용 여부 결정
+    const skipCache = wasArticleLiked || forceRefresh;
+
+    // 일반 게시글 데이터 요청 - 좋아요가 변경되었으면 캐시 무시
     const initialData = await getArticles({
       page,
       limit: 5,
       search,
       sort,
+      skipCache,
     });
 
-    // 베스트 게시글 데이터 요청 (좋아요 순으로 정렬)
+    // 베스트 게시글 데이터 요청 (좋아요 순으로 정렬) - 좋아요가 변경되었으면 캐시 무시
     const bestArticles = await getArticles({
       page: 1,
       limit: 3,
       sort: "likes",
+      skipCache,
     });
+
+    // 쿠키 초기화를 위한 응답 헤더 설정
+    if (wasArticleLiked || forceRefresh) {
+      context.res.setHeader("Set-Cookie", [
+        "articleLiked=false; Path=/; Max-Age=0",
+        "forceRefresh=false; Path=/; Max-Age=0",
+      ]);
+    }
 
     return {
       props: {
@@ -99,11 +116,30 @@ const ArticleList = ({
     setLoading(true);
 
     if (router.isReady) {
+      // localStorage에서 좋아요 상태를 확인
+      if (typeof window !== "undefined") {
+        const wasArticleLiked = localStorage.getItem("articleLiked") === "true";
+        const likedArticleId = localStorage.getItem("likedArticleId");
+
+        if (wasArticleLiked && likedArticleId) {
+          console.log("좋아요 상태 감지됨. 데이터 새로고침:", likedArticleId);
+
+          // 좋아요 상태를 초기화
+          localStorage.removeItem("articleLiked");
+          localStorage.removeItem("likedArticleId");
+
+          // 이전 페이지에서 캐시가 초기화되었을 테지만, 확실히 하기 위해
+          // 페이지를 강제로 새로고침
+          router.replace(router.asPath);
+          return;
+        }
+      }
+
       setTimeout(() => {
         setLoading(false);
       }, 100);
     }
-  }, [router.isReady]);
+  }, [router.isReady, router.asPath]);
 
   // props가 변경될 때 상태 업데이트
   useEffect(() => {

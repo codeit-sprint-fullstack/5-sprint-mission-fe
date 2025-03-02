@@ -6,7 +6,7 @@ import {
   getArticleById,
   deleteArticle,
   getArticles,
-  toggleArticleLike,
+  incrementArticleLike,
   getCommentsByArticleId,
   createComment,
   updateComment,
@@ -169,20 +169,48 @@ const ArticlePage = ({ article: initialArticle, error: initialError }) => {
   const handleLike = async () => {
     try {
       setLoading(true);
-      console.log("좋아요 토글 버튼 클릭, 현재 게시글:", article);
-      const updatedArticle = await toggleArticleLike(article.id);
-      console.log("업데이트된 게시글:", updatedArticle);
+      console.log("Current like count:", article.likes);
 
-      // article 상태 업데이트 전 author 필드 유효성 확인
-      if (!updatedArticle.author && article.author) {
-        // author 필드가 없는 경우, 기존 author 정보 유지
-        updatedArticle.author = article.author;
+      // 좋아요 버튼 클릭 시 쿠키에 상태를 저장 (서버 사이드에서 인식하기 위해)
+      document.cookie = `articleLiked=true; path=/`;
+      document.cookie = `likedArticleId=${article.id}; path=/`;
+
+      // localStorage에도 저장 (클라이언트 측 호환성 유지)
+      if (typeof window !== "undefined") {
+        localStorage.setItem("articleLiked", "true");
+        localStorage.setItem("likedArticleId", article.id);
       }
 
-      setArticle(updatedArticle);
-    } catch (err) {
-      console.error("좋아요 오류:", err);
-      alert("좋아요 처리에 실패했습니다.");
+      const response = await incrementArticleLike(article.id);
+
+      if (response) {
+        // 응답에서 author 정보가 없으면 현재 article의 author 정보 유지
+        if (!response.author && article.author) {
+          response.author = article.author;
+        }
+        setArticle(response);
+        console.log("Like count updated from API:", response.likes);
+      } else {
+        // API 응답이 없는 경우 에러 처리
+        throw new Error("좋아요 처리 중 오류가 발생했습니다. 응답이 없습니다.");
+      }
+    } catch (error) {
+      console.error("Error incrementing like:", error);
+      // 에러 발생 시 사용자에게 알림
+      alert(
+        `좋아요를 처리할 수 없습니다: ${
+          error.message || "알 수 없는 오류가 발생했습니다."
+        }`
+      );
+
+      // 좋아요 상태 초기화
+      document.cookie = "articleLiked=false; path=/; max-age=0";
+      document.cookie = "likedArticleId=; path=/; max-age=0";
+
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("articleLiked");
+        localStorage.removeItem("likedArticleId");
+      }
     } finally {
       setLoading(false);
     }

@@ -114,9 +114,6 @@ const Footer = () => {
             </IconLink>
           </Link>
         </SocialIcons>
-        <Copyright>
-          © {new Date().getFullYear()} Article Board. All rights reserved.
-        </Copyright>
       </FooterContent>
     </FooterContainer>
   );
