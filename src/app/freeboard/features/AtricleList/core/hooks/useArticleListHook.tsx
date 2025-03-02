@@ -57,14 +57,11 @@ export const useArticleList = () => {
     return isDisabled;
   }, [body]);
 
-  //TODO: 게시글 등록 api 요청 기다리는 동안 로딩 표시 되면 좋겠다
   const usePostArticle = useCallback(async (): Promise<void> => {
     try {
       const { title, content } = body;
       const reqBody = { title, content };
-      //   console.log("게시글 등록 요청: ", reqBody);
       const response = await createArticleAPI(reqBody);
-      // console.log("상품 등록 완료 :", response);
       const articleId = response.id;
       router.push(`/freeboard/${articleId}`);
     } catch (error) {

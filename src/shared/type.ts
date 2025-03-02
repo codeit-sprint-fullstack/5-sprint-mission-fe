@@ -91,3 +91,17 @@ export interface ArticleList {
   totalPages: number;
   totalArticles: number;
 }
+
+export interface Comment {
+  id: string;
+  content: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface CommentList {
+  status: number;
+  idField: string;
+  commentsList: Comment[];
+  lastCursor: string | null;
+}

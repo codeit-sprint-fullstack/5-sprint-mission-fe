@@ -50,7 +50,6 @@ export const AtricleList = () => {
     }
   }, [inView, hasNextPage, fetchNextPage, isFetchingNextPage]);
 
-  //TODO: 스켈레톤, 게시글 없을 때 ui 수정하기
   return (
     <Stack sx={articleListContainerStyle}>
       <Stack sx={articleListHeaderStyle}>
@@ -73,14 +72,34 @@ export const AtricleList = () => {
       </Stack>
       <Stack sx={articleListItemWrapperStyle}>
         {isShowSkeleton ? (
-          <CircularProgress size={20} />
+          <Stack
+            sx={{
+              width: "100%",
+              height: "200px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <CircularProgress size={30} />
+          </Stack>
         ) : hasNoResults ? (
-          <Typo
-            className="text16Regular"
-            content="게시글이 없습니다."
-            color={colorChips.gray800}
-            customStyle={{ padding: "0 8px" }}
-          />
+          <Stack
+            sx={{
+              width: "100%",
+              height: "200px",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typo
+              className="text16Regular"
+              content="게시글이 없습니다."
+              color={colorChips.gray800}
+              customStyle={{ padding: "0 8px" }}
+            />
+          </Stack>
         ) : (
           <Stack sx={{ flexDirection: "column", width: "100%" }}>
             {articles.map((article, idx) => {
@@ -109,7 +128,17 @@ export const AtricleList = () => {
             {hasNextPage && (
               <>
                 <div ref={ref} style={{ height: "20px", marginTop: "20px" }} />
-                <CircularProgress size={20} />
+                <Stack
+                  sx={{
+                    width: "100%",
+                    height: "100px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <CircularProgress size={30} />
+                </Stack>
               </>
             )}
           </Stack>

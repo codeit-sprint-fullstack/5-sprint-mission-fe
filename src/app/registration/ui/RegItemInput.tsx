@@ -27,7 +27,7 @@ export const RegItemInput: React.FC<RegItemInputProps> = ({
       //enter키다운으로 blur되면 handleBlur가 중복 실행되지 않도록 제외함
       //-> 마우스 클릭, Tab키로 포커스 아웃시 실행
       const value = e.target.value.trim();
-      console.log("블러이벤트발생!: ", value);
+      // console.log("블러이벤트발생!: ", value);
 
       onInput(value);
       //input값 저장 후, 태그 input일 때만 input값 초기화해주기.
@@ -48,7 +48,7 @@ export const RegItemInput: React.FC<RegItemInputProps> = ({
       enterPressRef.current = true;
       target.blur();
       const value = target.value.trim();
-      console.log("키다운이벤트발생!: ", value);
+      // console.log("키다운이벤트발생!: ", value);
 
       onInput(value);
       if (label === "태그") {

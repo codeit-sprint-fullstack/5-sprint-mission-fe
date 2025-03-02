@@ -1,26 +1,42 @@
 "use client";
 
 import { Stack } from "@mui/material";
-import { Typo } from "@/shared/Typo/Typo";
-import { colorChips } from "@/shared/styles/colorChips";
-import { Features } from "./feature";
 import { useParams } from "next/navigation";
 import { CommonLayout } from "@/shared/layout/CommonLayout";
+import { Features } from "./feature";
+import { CommentInput } from "@/shared/components/CommentInput/CommentInput";
+import { CommentList } from "@/shared/components/CommentList/CommentList";
+import { ReturnToListBtn } from "@/shared/components/CommentList/ReturnToListBtn";
 
 export default function Page() {
-  const { articleId } = useParams();
-  // const { data, isLoading } = useCompanyDetail();
+  const params = useParams();
+  const articleId = Array.isArray(params.articleId)
+    ? params.articleId[0]
+    : params.articleId;
 
-  //   if (isLoading || !data) return <Features.CompanyDetailSkeleton />;
+  //FIXME: 게시글 ID가 없는 경우 404나 알림 띄우는거 추가하면 좋을 듯
+  if (!articleId) {
+    return null;
+  }
+  const commentInputLabel = "댓글 달기";
+  const commentInputPlaceholder = "댓글을 입력해주세요.";
 
-  // const { intro, about, interview, news, info, hotPlaces } = data;
+  const returnUrl = "/freeboard";
 
   return (
     <CommonLayout>
       <Stack sx={articleDetailContainerStyle}>
-        <Features.ArticleDetails />
-        <Features.CommentList />
-        <Features.CommentInput />
+        <Features.ArticleDetails articleId={articleId} />
+        <Stack sx={articleCommentsContainerStyle}>
+          <CommentInput
+            itemId={articleId}
+            type="articles"
+            inputLabel={commentInputLabel}
+            placeholder={commentInputPlaceholder}
+          />
+          <CommentList itemId={articleId} type="articles" />
+          <ReturnToListBtn returnUrl={returnUrl} />
+        </Stack>
       </Stack>
     </CommonLayout>
   );
@@ -34,4 +50,13 @@ const articleDetailContainerStyle = {
   pt: { xs: "24px", sm: "26px", md: "34px" },
   pb: "100px",
   gap: "32px",
+};
+
+const articleCommentsContainerStyle = {
+  width: "100%",
+  maxWidth: "1200px",
+  margin: "0 auto",
+  flexDirection: "column",
+  justifyContent: "center",
+  alignItems: "center",
 };

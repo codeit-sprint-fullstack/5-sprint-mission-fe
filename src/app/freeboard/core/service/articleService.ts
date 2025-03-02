@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { instance } from "@/utils/APIs/axiosInstance";
+import { instance } from "@/shared/utils/APIs/axiosInstance";
 import {
   OrderByType,
   GetArticleApiQueryParams,
@@ -55,7 +55,7 @@ export const createArticleAPI = async (
       params
     );
 
-    console.log("post 성공:", response.data);
+    // console.log("post 성공:", response.data);
     return response.data;
   } catch (err) {
     throw err;

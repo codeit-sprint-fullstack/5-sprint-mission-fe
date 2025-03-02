@@ -1,12 +1,15 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { useParams } from "next/navigation";
-import { getArticleDetailAPI } from "../service/getArticleDetailApi";
+import { useQuery, useQueryClient, useMutation } from "@tanstack/react-query";
+import {
+  getArticleDetailAPI,
+  patchArticleAPI,
+  deleteArticleAPI,
+  PatchArticleApiProps,
+  DeleteArticleApiProps,
+} from "../service/articleDetailService";
 import { Article } from "@/shared/type";
 import { articleKeys } from "@/app/freeboard/core/hooks/useArticleListQuery";
 
-export const useArticleDetail = () => {
-  const { articleId } = useParams();
-
+export const useGetArticleDetail = (articleId: string) => {
   if (typeof articleId === "string") {
     const { data, isLoading } = useQuery<Article>({
       queryKey: articleKeys.detail(articleId),
@@ -33,4 +36,36 @@ export const useArticleDetail = () => {
     data: null,
     isLoading: false,
   };
+};
+
+export const useUpdateArticle = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<Article, Error, PatchArticleApiProps>({
+    mutationFn: (params: PatchArticleApiProps) => patchArticleAPI(params),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: articleKeys.detail(variables.articleId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: articleKeys.all,
+      });
+    },
+  });
+};
+
+export const useDeleteArticle = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation<void, Error, DeleteArticleApiProps>({
+    mutationFn: (params: DeleteArticleApiProps) => deleteArticleAPI(params),
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({
+        queryKey: articleKeys.detail(variables.articleId),
+      });
+      queryClient.invalidateQueries({
+        queryKey: articleKeys.all,
+      });
+    },
+  });
 };

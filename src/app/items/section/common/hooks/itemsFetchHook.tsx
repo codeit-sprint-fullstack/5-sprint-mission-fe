@@ -1,5 +1,5 @@
 import { useEffect, useCallback, useState } from "react";
-import { getItemsListAPI } from "../../../../../utils/APIs/getItemsListAPI";
+import { getItemsListAPI } from "../../../../../shared/utils/APIs/getItemsListAPI";
 import { GetProdApiQueryParams, Product, ProductList } from "@/shared/type";
 import { ProductState } from "@/shared/type";
 

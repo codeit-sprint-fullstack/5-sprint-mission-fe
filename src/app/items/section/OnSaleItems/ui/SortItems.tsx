@@ -1,5 +1,5 @@
 import { useResponseSort } from "@/shared/hooks/responseSortHook";
-import { ORDER_BY } from "@/utils/APIs/getItemsListAPI";
+import { ORDER_BY } from "@/shared/utils/APIs/getItemsListAPI";
 import { useMediaQuery } from "@/shared/hooks/mediaQueryHook";
 import { OrderByItem, ScreenSizeType } from "@/shared/type";
 import React from "react";

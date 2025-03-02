@@ -23,7 +23,7 @@ export const getItemsListAPI = async (
       }
     );
     response.status;
-    console.log("getItemsList", response.data);
+    // console.log("getItemsList", response.data);
     return response.data;
   } catch (err) {
     throw err;

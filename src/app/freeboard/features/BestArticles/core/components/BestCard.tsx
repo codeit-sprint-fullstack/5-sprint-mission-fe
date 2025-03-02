@@ -1,7 +1,7 @@
 "use client";
 
 import { useDefaultImg } from "@/shared/hooks/useDefaultImg";
-import { formatDate } from "@/app/freeboard/features/core/utils/formatDate";
+import { formatDate } from "@/shared/utils/getFormattedDate";
 import { colorChips } from "@/shared/styles/colorChips";
 import { Article } from "@/shared/type";
 import { Typo } from "@/shared/Typo/Typo";
@@ -13,8 +13,6 @@ interface BestCardProps {
   isLoading: boolean;
   onClick: () => void;
 }
-
-//TODO: 로딩중 스켈레톤 표시
 
 export const BestCard = ({ article, isLoading, onClick }: BestCardProps) => {
   //FIXME: 아직 user 정보가 없어서 임시 닉네임 설정

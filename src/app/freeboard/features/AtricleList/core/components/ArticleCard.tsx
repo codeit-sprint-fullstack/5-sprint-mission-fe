@@ -1,7 +1,7 @@
 "use client";
 
 import { useDefaultImg } from "@/shared/hooks/useDefaultImg";
-import { formatDate } from "@/app/freeboard/features/core/utils/formatDate";
+import { formatDate } from "@/shared/utils/getFormattedDate";
 import { colorChips } from "@/shared/styles/colorChips";
 import { Article } from "@/shared/type";
 import { Typo } from "@/shared/Typo/Typo";
@@ -11,9 +11,6 @@ import Image from "next/image";
 interface ArticleCardProps {
   article: Article;
 }
-
-//TODO: 카드 클릭 시 게시글 상세 페이지로 이동
-//TODO: 로딩중 스켈레톤 표시
 
 export const ArticleCard = ({ article }: ArticleCardProps) => {
   //FIXME: 아직 user 정보가 없어서 임시 닉네임 설정
