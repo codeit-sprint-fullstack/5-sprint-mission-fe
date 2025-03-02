@@ -1,10 +1,10 @@
 "use client";
 
+import type { Article, PK } from "@/types";
+import { useActionState, useEffect } from "react";
 import Textarea from "@/components/inputGroup/Textarea";
 import Button from "@/components/button/ButtonSubmit";
-import { useActionState, useEffect } from "react";
-import CreateArticleCommentAction from "@/lib/actions/create-article-comment.action";
-import type { Article, PK } from "@/types";
+import createArticleCommentAction from "@/lib/actions/create-article-comment.action";
 import SubmitContextFactory from "@/contexts/submit-context-factory";
 
 // 동적 Context 생성
@@ -18,7 +18,7 @@ export default function CommentCreateForm({
   articleId: PK<Article>;
 }) {
   const [state, formAction, isPending] = useActionState(
-    CreateArticleCommentAction,
+    createArticleCommentAction,
     null
   );
 
@@ -26,7 +26,7 @@ export default function CommentCreateForm({
     if (!state) return;
 
     if (!state.status && state.message !== "") {
-      alert(state.message);
+      alert(`댓글 작성: ${state.message}`);
     }
   }, [state]);
 

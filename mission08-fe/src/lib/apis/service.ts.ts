@@ -57,7 +57,7 @@ export const postData = async <T>(
 // 수정 요청 함수
 export const patchData = async <T>(
   endPoint: EndPoint,
-  data: T,
+  data: Partial<T>,
   tags?: string[]
 ): Promise<boolean> => {
   try {

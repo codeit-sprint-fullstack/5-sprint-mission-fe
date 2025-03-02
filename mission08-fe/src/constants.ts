@@ -22,6 +22,6 @@ export const INPUT_VALID = {
 export const TRANSLATE = {
   title: { label: "제목", placeholder: "제목을 입력해주세요" },
   content: { label: "내용", placeholder: "내용을 입력해주세요" },
-  comment: { label: "댓글달기", placeholder: "댓글을 입력해주세요" },
+  comment: { label: "댓글", placeholder: "댓글을 입력해주세요" },
   email: { label: "이메일", placeholder: "이메일을 입력해주세요" },
 };

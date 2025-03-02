@@ -7,18 +7,41 @@ import Like from "@/components/shared/Like";
 import Control from "@/components/shared/Control";
 import { useRouter } from "next/navigation";
 import { useArticle } from "@/app/article/[id]/layout";
+import { useActionState, useEffect, useRef } from "react";
+import deleteArticleAction from "@/lib/actions/delete-article.action";
+import { useQueryClient } from "@tanstack/react-query";
 
 export default function ArticleDetail() {
   const router = useRouter();
+  const queryClient = useQueryClient();
   const { value: article } = useArticle();
-  const { author, title, content, createdAt } = article;
+  const { id, author, title, content, createdAt } = article;
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, formAction] = useActionState(deleteArticleAction, null);
+
+  useEffect(() => {
+    if (!state) return;
+
+    if (state.status) {
+      // 게시글 삭제 성공 시
+      queryClient.invalidateQueries({ queryKey: ["articles"] });
+      router.replace("/article");
+    } else {
+      // 게시글 삭제 실패 시
+      alert(`게시글 삭제: ${state.message}`);
+    }
+  }, [state, router, queryClient]);
 
   return (
     <>
+      <form action={formAction} ref={formRef} className="hidden">
+        <input name="articleId" value={id} hidden readOnly />
+      </form>
+
       <section className="border-b border-gray-200 mb-4 xl:mb-6 relative">
         <Control
           onDelete={() => {
-            router.push("/article");
+            formRef.current?.requestSubmit();
           }}
           onEdit={() => router.push(`/article/${article.id}/edit`)}
         />

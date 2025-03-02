@@ -9,7 +9,6 @@ import { useRouter } from "next/navigation";
 import SubmitContextFactory from "@/contexts/submit-context-factory";
 import { useQueryClient } from "@tanstack/react-query";
 import editArticleAction from "@/lib/actions/edit-article.action";
-import { useArticle } from "@/contexts/readonly-context-factory";
 import type { Article } from "@/types";
 
 // 동적 Context 생성
@@ -19,20 +18,18 @@ const { SubmitProvider, useSubmitState } = new SubmitContextFactory([
 ]).createContext();
 
 interface ArticleFormProps {
-  action: "create" | "update";
-  value?: Article;
+  action: "create" | "edit";
+  article?: Article;
 }
 
-export default function ArticleForm({ action }: ArticleFormProps) {
+export default function ArticleForm({ action, article }: ArticleFormProps) {
   const queryClient = useQueryClient();
   const router = useRouter();
   const isCreate = action === "create";
   const serverAction = isCreate ? createArticleAction : editArticleAction;
   const [state, formAction, isPending] = useActionState(serverAction, null);
 
-  // useArticle은 항상 호출되지만, update일 때만 값을 사용
-  const { value: article } = useArticle();
-  const { title = "", content = "" } = article; // 기본값 추가로 안전성 확보
+  const { title = "", content = "" } = article || {};
 
   useEffect(() => {
     if (!state) return;
@@ -43,7 +40,7 @@ export default function ArticleForm({ action }: ArticleFormProps) {
       router.replace("/article"); // 게시글 목록으로 이동 후 뒤로가기 방지가 안되네...? 나중에 다시 보기
     } else {
       // 게시글 작성 실패 시
-      alert(state.message);
+      alert(`게시글 작성: ${state.message}`);
     }
   }, [state, router, queryClient]);
 

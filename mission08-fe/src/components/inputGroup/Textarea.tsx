@@ -58,6 +58,7 @@ export default function Textarea({
     <div className="w-full flex flex-col">
       <label htmlFor={name} className="text-gray-800 font-bold text-lg mb-3">
         {TRANSLATE[name].label}
+        {!initValue && name === "comment" ? " 작성" : " 수정"}
       </label>
 
       <textarea

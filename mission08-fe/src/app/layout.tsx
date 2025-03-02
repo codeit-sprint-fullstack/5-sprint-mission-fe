@@ -1,9 +1,9 @@
 import "./globals.css";
-import { pretendard } from "@/app/font";
+import { pretendard } from "@/fonts/font";
 import Header from "@/layouts/Header";
 import Footer from "@/layouts/Footer";
 import ScrollToTop from "@/layouts/ScrollToTop";
-import { Providers } from "./providers";
+import { Providers } from "../contexts/tanstack-query-providers";
 
 export default function RootLayout({
   children,

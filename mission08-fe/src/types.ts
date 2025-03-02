@@ -13,13 +13,20 @@ export interface Article {
   comments?: ArticleComment[];
 }
 
-export interface ArticleComment {
+export interface BaseComment {
   id: string;
   content: string;
   author: string;
-  articleId: string;
   createdAt: Date;
   updatedAt: Date;
+}
+
+export interface ArticleComment extends BaseComment {
+  articleId: string;
+}
+
+export interface ProductComment extends BaseComment {
+  productId: string;
 }
 
 export interface Query {

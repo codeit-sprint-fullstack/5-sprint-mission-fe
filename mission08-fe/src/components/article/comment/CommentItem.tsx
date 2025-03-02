@@ -5,22 +5,36 @@ import iconProfile from "@/assets/icons/ic_profile.png";
 import Image from "next/image";
 import timeTracker from "@/utils/timeTracker";
 import Control from "@/components/shared/Control";
-import { useState } from "react";
-import CommentEditForm from "./CommentEditForm";
-import { deleteData } from "@/lib/apis/service.ts";
+import { useActionState, useEffect, useRef, useState } from "react";
+import ArticleCommentEditForm from "../../form/CommentEditForm";
+import deleteArticleCommentAction from "@/lib/actions/delete-article-comment.action";
 
 export default function CommentItem({ comment }: { comment: ArticleComment }) {
-  const { content, author, articleId, updatedAt } = comment;
+  const formRef = useRef<HTMLFormElement>(null);
+  const [state, deleteFormAction] = useActionState(
+    deleteArticleCommentAction,
+    null
+  );
+  const { id, content, author, articleId, updatedAt } = comment;
   const [isEdit, setIsEdit] = useState(false);
 
   const handleEdit = () => setIsEdit(true);
-  const handleDelete = () =>
-    deleteData(`/article/comment/${comment.id}`, [
-      `article-detail-${articleId}`,
-    ]);
+  const handleDelete = () => formRef.current?.requestSubmit(); // 강제 폼 제출
+
+  useEffect(() => {
+    if (!state) return;
+
+    if (!state.status) alert(`댓글(${comment.id}) 삭제: ${state.message}`);
+  }, [state, comment]);
 
   return (
     <>
+      {/* 댓글 삭제용 숨김 폼 */}
+      <form action={deleteFormAction} ref={formRef} className="hidden">
+        <input name="articleId" value={articleId} hidden readOnly />
+        <input name="commentId" value={comment.id} hidden readOnly />
+      </form>
+
       {!isEdit && (
         <article className="bg-[#fcfcfc] border-b border-gray-200 relative">
           <Control onDelete={handleDelete} onEdit={handleEdit} />
@@ -35,9 +49,12 @@ export default function CommentItem({ comment }: { comment: ArticleComment }) {
         </article>
       )}
 
+      {/* 댓글 수정용 폼 */}
       {isEdit && (
-        <CommentEditForm
+        <ArticleCommentEditForm
+          originComment={comment.content}
           articleId={articleId}
+          commentId={id}
           onDone={() => setIsEdit(false)}
         />
       )}

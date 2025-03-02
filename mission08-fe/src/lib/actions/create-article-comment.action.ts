@@ -17,7 +17,7 @@ export default async function createArticleCommentAction(
   const isSuccess = await postData(
     `/article/${articleId}/comment`,
     { content: comment },
-    [`article-${articleId}`]
+    [`article-detail-${articleId}`]
   );
 
   return {
