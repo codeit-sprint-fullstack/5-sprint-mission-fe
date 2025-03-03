@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand-color-100: #3692ff;
+  --brand-color-200: #1967d6;
+  --brand-color-300: #1251aa;
+  --gray-900: #111827;
+  --gray-800: #1f2937;
+  --gray-700: #374151;
+  --gray-600: #4b5563;
+  --gray-500: #6b7280;
+  --gray-400: #9ca3af;
+  --gray-200: #e5e7eb;
+  --gray-100: #f3f4f6;
+  --gray-50: #f9fafb;
+  --error-color: #f74747;
+}
+
+@font-face {
+  font-family: "Pretendard";
+  src: url("../assets/fonts/pretendard-variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+body {
+  font-family: "Pretendard", sans-serif;
+}
