@@ -1,12 +1,13 @@
 import kebabImg from "@/public/imgs/ic_kebab.png";
 import Image from "next/image";
 import profileImg from "@/public/imgs/ic_profile.png";
-import { CommentCard } from "@/types/ArticleCard";
+import { CommentCard } from "@/types/commentCard";
 import { timeAgo } from "@/functions/timeAgo";
 import { useEffect, useState } from "react";
 import Button from "./common/Button";
 import api from "@/utils/axiosInstance";
 import { useRouter } from "next/router";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 interface CommentProps {
   comment: CommentCard;
@@ -18,10 +19,17 @@ export default function Comment({ comment }: CommentProps) {
   const [commentVal, setCommentVal] = useState(comment.content);
   const [isVerified, setIsVerified] = useState(false);
 
-  useEffect(()=> {
-    if(commentVal === "") setIsVerified(false);
+  const queryClient = useQueryClient();
+
+  useEffect(() => {
+    if (commentVal === "") setIsVerified(false);
     else setIsVerified(true);
-  },[commentVal])
+  }, [commentVal]);
+
+  const mutation = useMutation({
+    mutationFn: patchComment,
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["comments"]}),
+  })
 
   const router = useRouter();
 
@@ -38,22 +46,19 @@ export default function Comment({ comment }: CommentProps) {
     setIsEditMod(false);
   }
 
-  function handleCommentVal (e: React.ChangeEvent<HTMLTextAreaElement>) {
+  function handleCommentVal(e: React.ChangeEvent<HTMLTextAreaElement>) {
     const value = e.target.value;
     setCommentVal(value);
   }
 
-
-
-  async function patchComment () {
+  async function patchComment() {
     setIsEditMod(false);
     await api.patch(`/comment/${comment.id}`, {
       content: commentVal,
-    })
-    router.replace(router.asPath);
+    });
   }
 
-  async function deleteComment () {
+  async function deleteComment() {
     setIsMenuBar(false);
     await api.delete(`/comment/${comment.id}`);
     router.replace(router.asPath);
@@ -86,7 +91,10 @@ export default function Comment({ comment }: CommentProps) {
                   >
                     수정하기
                   </div>
-                  <div className="bg-white border-x border-b border-[#D1D5DB] pt-[16px] pb-[12px] w-[102px] rounded-bl-lg rounded-br-lg flex justify-center text-[#6B7280] z-50 cursor-pointer hover:bg-slate-50" onClick={deleteComment}>
+                  <div
+                    className="bg-white border-x border-b border-[#D1D5DB] pt-[16px] pb-[12px] w-[102px] rounded-bl-lg rounded-br-lg flex justify-center text-[#6B7280] z-50 cursor-pointer hover:bg-slate-50"
+                    onClick={deleteComment}
+                  >
                     삭제하기
                   </div>
                 </div>
@@ -121,8 +129,14 @@ export default function Comment({ comment }: CommentProps) {
             </div>
           </div>
           <div className="flex gap-6 items-center">
-            <div className="cursor-pointer" onClick={handleCancel}>취소</div>
-            <Button name="수정 완료"  disabled={!isVerified} click={patchComment}/>
+            <div className="cursor-pointer" onClick={handleCancel}>
+              취소
+            </div>
+            <Button
+              name="수정 완료"
+              disabled={!isVerified}
+              click={() => mutation.mutate()}
+            />
           </div>
         </div>
       ) : (

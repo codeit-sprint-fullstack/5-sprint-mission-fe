@@ -1,5 +1,5 @@
 import Button from "@/components/common/Button";
-import { ArticleCard } from "@/types/ArticleCard";
+import { ArticleCard } from "@/types/articleCard";
 import api from "@/utils/axiosInstance";
 import { GetServerSideProps } from "next";
 import { notFound } from "next/navigation";
@@ -47,23 +47,23 @@ export default function Edit({ article }: EditProps) {
     else setIsVerified(false);
   }, [title, content]);
 
-  async function submit() {
+  async function onSubmit() {
     setIsVerified(false);
     try {
       await api.patch(`/article/${article.id}`, {
         title: title,
         content: content,
       });
-      router.push(`/board/post/${article.idx}`);
+      router.push(`/board/${article.idx}`);
     } catch (err) {
       console.log(err);
     }
   }
   return (
-    <div className="flex flex-col gap-[32px] w-[100%] mb-[500px]">
+    <form className="flex flex-col gap-[32px] w-[100%] mb-[500px]">
       <div className=" flex justify-between">
         <div className="font-bold text-[20px]">게시글 수정</div>
-        <Button name="수정" disabled={!isVerified} click={submit} />
+        <Button name="수정" disabled={!isVerified} click={onSubmit} />
       </div>
       <div className="flex flex-col gap-3">
         <div className="font-bold text-[18px]">*제목</div>
@@ -83,6 +83,6 @@ export default function Edit({ article }: EditProps) {
           value={content}
         />
       </div>
-    </div>
+    </form>
   );
 }

@@ -5,62 +5,43 @@ import Button from "@/components/common/Button";
 import Link from "next/link";
 import api from "@/utils/axiosInstance";
 import { GetServerSideProps } from "next";
-import { ArticleCard } from "@/types/ArticleCard";
+import { ArticleCard } from "@/types/articleCard";
 import { useEffect, useRef, useState } from "react";
 import useDebounce from "@/hooks/useDebounce";
 import { useWindowSize } from "@/hooks/useWindowSize";
 import PaginationButton from "@/components/common/PaginationButton";
 import { useRouter } from "next/router";
 import { refresh } from "@/functions/refresh";
+import { useQuery } from "@tanstack/react-query";
 
 interface ArticleData {
   articles: ArticleCard[];
   totalSize: number;
 }
 
-export const getServerSideProps = (async (context) => {
-  const { page = 1 } = context.query;
-  const res = await api.get<ArticleData>(`/article?page=${page}`);
-  const { articles, totalSize } = res.data;
-
-  return {
-    props: { articlesInitial: articles, totalSize: totalSize },
-  };
-}) satisfies GetServerSideProps<{
-  articlesInitial: ArticleCard[];
-  totalSize: number;
-}>;
-
-type BoardProps = {
-  articlesInitial: ArticleCard[];
-  totalSize: number;
-};
-
-export default function Board({ articlesInitial, totalSize }: BoardProps) {
-  const [articles, setArticles] = useState(articlesInitial);
-  const [totalCount, setTotalCount] = useState(totalSize);
+export default function BoardPage() {
   const [searchVal, setSearchVal] = useState("");
   const { width, height } = useWindowSize();
   const [maxCount, setMaxCount] = useState(3);
   const [order, setOrder] = useState("newest");
   const [isOrderMenu, setIsOrderMenu] = useState(false);
   const router = useRouter();
-  const [currentPage, setCurrentPage] = useState(1);
-  const [startPage, setStartPage] = useState(1);
+  const debounceSearchVal = useDebounce<string>(searchVal, 1000);
+
+  const { data, isLoading, isError } = useQuery({
+    queryKey: ["articles", debounceSearchVal, order],
+    queryFn: () => getArticlesByKeyword(debounceSearchVal, order),
+    staleTime: 60 * 1000,
+  });
+
+  const articles = data?.data.articles;
+  console.log(articles);
 
   useEffect(() => {
     if (width > 1280) setMaxCount(3);
     else if (width > 768) setMaxCount(2);
     else setMaxCount(1);
   }, [width]);
-
-  const handlePagination = (pageNum : number) => {
-    router.push(`/board?page=${pageNum}`).then(() => {
-      router.reload();
-    });
-  };
-
-  const debounceSearchVal = useDebounce<string>(searchVal, 1000);
 
   function handleSearch(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
@@ -81,24 +62,12 @@ export default function Board({ articlesInitial, totalSize }: BoardProps) {
     setIsOrderMenu(false);
   }
 
-  async function getArticlesByKeyword(keyword: string) {
-    try {
-      const res = await api.get<ArticleData>(
-        `/article/?keyword=${keyword}&order=${order}`
-      );
-      const { articles, totalSize } = res.data;
-      setArticles(articles);
-      setTotalCount(totalSize);
-    } catch (err) {
-      console.log(err);
-    }
+  async function getArticlesByKeyword(keyword: string, order: string) {
+    const res = await api.get<ArticleData>(
+      `/article/?keyword=${keyword}&order=${order}`
+    );
+    return res;
   }
-
-  useEffect(() => {
-    if (debounceSearchVal === "" && order === "newest")
-      setArticles(articlesInitial);
-    else getArticlesByKeyword(debounceSearchVal);
-  }, [debounceSearchVal, order]);
 
   return (
     <div className="flex flex-col gap-[40px] min-h-[100vh] w-[100%]">
@@ -110,7 +79,7 @@ export default function Board({ articlesInitial, totalSize }: BoardProps) {
               return (
                 <Link
                   key={`bestArticle-${article.id}`}
-                  href={`/board/post/${article.idx}`}
+                  href={`/board/${article.idx}`}
                 >
                   <BestArticle article={article} />
                 </Link>
@@ -211,20 +180,10 @@ export default function Board({ articlesInitial, totalSize }: BoardProps) {
         </div>
         {articles?.map((article, index) => {
           return (
-            <Link
-              key={`article-${article.id}`}
-              href={`/board/post/${article.idx}`}
-            >
+            <Link key={`article-${article.id}`} href={`/board/${article.idx}`}>
               <Article article={article} />
             </Link>
           );
-        })}
-      </div>
-      <div className="flex gap-2 justify-center">
-        {[...Array(5)].map((_, key) => {
-          if (key + 1 <= totalCount / 10 + 1) {
-            return <PaginationButton num={key + 1} click={() => handlePagination(key + 1)} key={key} />;
-          }
         })}
       </div>
     </div>
