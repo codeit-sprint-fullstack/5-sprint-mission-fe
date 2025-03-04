@@ -8,6 +8,7 @@ import Pagination from "@/components/common/Pagination";
 import { getArticles } from "@/services/articleService";
 import Loading from "@/components/common/Loading";
 import ArticleListCard from "@/components/article/ArticleListCard";
+import ArticleSkeletonCard from "@/components/article/ArticleSkeletonCard";
 
 // 정렬 옵션 설정
 const sortOptions = [
@@ -25,67 +26,48 @@ const defaultPageInfo = {
 };
 
 /**
- * 서버 사이드 데이터 페칭 함수
+ * ISR을 이용한 정적 페이지 생성 함수
  * 검색, 정렬, 페이지 정보에 따른 게시글 및 베스트 게시글 데이터를 가져옴
  */
-export async function getServerSideProps(context) {
-  const { query } = context;
-  const page = parseInt(query.page) || 1;
-  const search = query.search || "";
-  const sort = query.sort || "latest";
-
-  // 이전에 좋아요 상태가 변경되었는지 확인
-  const wasArticleLiked = context.req.cookies?.articleLiked === "true";
-  const forceRefresh = context.req.cookies?.forceRefresh === "true";
-
+export async function getStaticProps() {
   try {
-    // 캐시 사용 여부 결정
-    const skipCache = wasArticleLiked || forceRefresh;
-
-    // 일반 게시글 데이터 요청 - 좋아요가 변경되었으면 캐시 무시
+    // 기본 게시글 데이터 요청
     const initialData = await getArticles({
-      page,
+      page: 1,
       limit: 5,
-      search,
-      sort,
-      skipCache,
+      sort: "latest",
     });
 
-    // 베스트 게시글 데이터 요청 (좋아요 순으로 정렬) - 좋아요가 변경되었으면 캐시 무시
+    // 베스트 게시글 데이터 요청 (좋아요 순으로 정렬)
     const bestArticles = await getArticles({
       page: 1,
       limit: 3,
       sort: "likes",
-      skipCache,
     });
-
-    // 쿠키 초기화를 위한 응답 헤더 설정
-    if (wasArticleLiked || forceRefresh) {
-      context.res.setHeader("Set-Cookie", [
-        "articleLiked=false; Path=/; Max-Age=0",
-        "forceRefresh=false; Path=/; Max-Age=0",
-      ]);
-    }
 
     return {
       props: {
         initialArticles: initialData.articles || [],
         initialPageInfo: initialData.pageInfo || defaultPageInfo,
         bestArticles: bestArticles.articles || [],
-        currentSearch: search,
-        currentSort: sort,
+        currentSearch: "",
+        currentSort: "latest",
       },
+      // 페이지를 10초마다 재생성 (필요에 따라 시간 조정)
+      revalidate: 10,
     };
   } catch (error) {
+    console.error("게시글 데이터 가져오기 실패:", error);
     // 에러 발생 시 기본값 반환
     return {
       props: {
         initialArticles: [],
         initialPageInfo: defaultPageInfo,
         bestArticles: [],
-        currentSearch: search,
-        currentSort: sort,
+        currentSearch: "",
+        currentSort: "latest",
       },
+      revalidate: 10,
     };
   }
 }
@@ -105,89 +87,78 @@ const ArticleList = ({
   // 상태 관리
   const [articles, setArticles] = useState(initialArticles);
   const [pageInfo, setPageInfo] = useState(initialPageInfo);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+  const [isLoadingData, setIsLoadingData] = useState(false);
+  const [initialLoading, setInitialLoading] = useState(true); // 초기 로딩 상태 추가
   const [error, setError] = useState(null);
-  const [searchTerm, setSearchTerm] = useState(currentSearch);
-  const [sortBy, setSortBy] = useState(currentSort);
+  const [searchTerm, setSearchTerm] = useState("");
+  const [sortBy, setSortBy] = useState("latest");
+  const [bestArticlesList, setBestArticlesList] = useState(bestArticles);
   const [windowWidth, setWindowWidth] = useState(1200);
 
-  // 컴포넌트 마운트 시 초기 로딩 상태 설정
+  // 컴포넌트 마운트 후 초기 로딩 상태 해제
   useEffect(() => {
-    setLoading(true);
+    // 초기 로딩 상태를 짧은 시간 이후에 비활성화
+    const timer = setTimeout(() => {
+      setInitialLoading(false);
+    }, 1000); // 1초 후 로딩 상태 해제 (필요에 따라 조정)
 
-    if (router.isReady) {
-      // localStorage에서 좋아요 상태를 확인
-      if (typeof window !== "undefined") {
-        const wasArticleLiked = localStorage.getItem("articleLiked") === "true";
-        const likedArticleId = localStorage.getItem("likedArticleId");
+    return () => clearTimeout(timer);
+  }, []);
 
-        if (wasArticleLiked && likedArticleId) {
-          console.log("좋아요 상태 감지됨. 데이터 새로고침:", likedArticleId);
+  // 라우터 쿼리 파라미터에 따라 데이터 로드
+  useEffect(() => {
+    if (!router.isReady) return;
 
-          // 좋아요 상태를 초기화
-          localStorage.removeItem("articleLiked");
-          localStorage.removeItem("likedArticleId");
+    const fetchData = async () => {
+      setIsLoadingData(true);
 
-          // 이전 페이지에서 캐시가 초기화되었을 테지만, 확실히 하기 위해
-          // 페이지를 강제로 새로고침
-          router.replace(router.asPath);
-          return;
+      // 쿼리 파라미터 추출
+      const page = parseInt(router.query.page) || 1;
+      const search = router.query.search || "";
+      const sort = router.query.sort || "latest";
+
+      if (page !== 1 || search !== "" || sort !== "latest") {
+        try {
+          // 쿼리 파라미터가 있을 경우 클라이언트 사이드에서 데이터 패칭
+          const result = await getArticles({
+            page,
+            limit: 5,
+            search,
+            sort,
+          });
+
+          setArticles(result.articles || []);
+          setPageInfo(result.pageInfo || defaultPageInfo);
+
+          // 검색어나 정렬이 변경된 경우 베스트 게시글도 다시 가져옴
+          if (search !== currentSearch || sort !== currentSort) {
+            const bestResult = await getArticles({
+              page: 1,
+              limit: 3,
+              sort: "likes",
+              search,
+            });
+            setBestArticlesList(bestResult.articles || []);
+          }
+
+          setSearchTerm(search);
+          setSortBy(sort);
+        } catch (err) {
+          console.error("데이터 가져오기 실패:", err);
+          setError("데이터를 불러오는데 실패했습니다.");
         }
+      } else {
+        // 기본 페이지일 경우 초기 데이터 사용
+        setSearchTerm(currentSearch);
+        setSortBy(currentSort);
       }
 
-      setTimeout(() => {
-        setLoading(false);
-      }, 100);
-    }
-  }, [router.isReady, router.asPath]);
-
-  // props가 변경될 때 상태 업데이트
-  useEffect(() => {
-    if (router.isReady) {
-      setArticles(initialArticles);
-      setPageInfo(initialPageInfo);
-      setSearchTerm(currentSearch);
-      setSortBy(currentSort);
-      setLoading(false);
-    }
-  }, [
-    initialArticles,
-    initialPageInfo,
-    currentSearch,
-    currentSort,
-    router.isReady,
-  ]);
-
-  // 라우터 이벤트 리스너 (페이지 전환 시 로딩 상태 관리)
-  useEffect(() => {
-    const handleRouteChangeComplete = (url) => {
-      if (url.startsWith("/article")) {
-        setTimeout(() => setLoading(false), 150);
-      }
+      setIsLoadingData(false);
     };
 
-    const handleRouteChangeStart = (url) => {
-      if (url.startsWith("/article")) {
-        setLoading(true);
-      }
-    };
-
-    const handleRouteChangeError = () => {
-      setLoading(false);
-    };
-
-    // 이벤트 리스너 등록
-    router.events.on("routeChangeComplete", handleRouteChangeComplete);
-    router.events.on("routeChangeStart", handleRouteChangeStart);
-    router.events.on("routeChangeError", handleRouteChangeError);
-
-    // 컴포넌트 언마운트 시 이벤트 리스너 제거
-    return () => {
-      router.events.off("routeChangeComplete", handleRouteChangeComplete);
-      router.events.off("routeChangeStart", handleRouteChangeStart);
-      router.events.off("routeChangeError", handleRouteChangeError);
-    };
-  }, [router]);
+    fetchData();
+  }, [router.isReady, router.query]);
 
   // 윈도우 리사이즈 이벤트 처리 (반응형 UI를 위한 화면 너비 추적)
   useEffect(() => {
@@ -210,64 +181,131 @@ const ArticleList = ({
    * 검색 처리 함수
    * @param {string} searchTerm - 검색어
    */
-  const handleSearch = (searchTerm) => {
-    const currentSearch = router.query.search || "";
-    const searchTermValue = searchTerm || "";
+  const handleSearch = async (searchValue) => {
+    // 상태 업데이트
+    setIsLoadingData(true);
 
-    // 검색어가 변경된 경우에만 검색 실행
-    if (searchTermValue !== currentSearch) {
-      setLoading(true);
+    try {
+      // 검색 파라미터를 URL에 저장 (새로고침해도 상태 유지)
       const query = new URLSearchParams(router.query);
 
-      // 검색어 설정
-      if (searchTermValue) {
-        query.set("search", searchTermValue);
+      if (searchValue) {
+        query.set("search", searchValue);
       } else {
         query.delete("search");
       }
 
-      // 페이지 초기화 및 페이지 새로고침
+      // 페이지 초기화
       query.set("page", "1");
-      window.location.href = `/article?${query.toString()}`;
+
+      // URL 업데이트 (페이지 새로고침 없이)
+      router.push(`/article?${query.toString()}`, undefined, { shallow: true });
+
+      // 데이터 가져오기
+      const result = await getArticles({
+        page: 1,
+        limit: 5,
+        search: searchValue,
+        sort: sortBy,
+      });
+
+      // 베스트 게시글도 필터링된 결과로 업데이트
+      const bestResult = await getArticles({
+        page: 1,
+        limit: 3,
+        sort: "likes",
+        search: searchValue,
+      });
+
+      // 상태 업데이트
+      setArticles(result.articles || []);
+      setPageInfo(result.pageInfo || defaultPageInfo);
+      setBestArticlesList(bestResult.articles || []);
+      setSearchTerm(searchValue);
+    } catch (err) {
+      console.error("검색 결과 가져오기 실패:", err);
+      setError("검색 결과를 불러오는데 실패했습니다.");
     }
+
+    setIsLoadingData(false);
   };
 
   /**
    * 정렬 변경 처리 함수
    * @param {string} sortValue - 정렬 방식 (latest 또는 likes)
    */
-  const handleSort = (sortValue) => {
-    const currentSort = router.query.sort || "latest";
+  const handleSort = async (sortValue) => {
+    setIsLoadingData(true);
 
-    // 정렬 값이 변경된 경우에만 실행
-    if (sortValue !== currentSort) {
-      setLoading(true);
+    try {
+      // 정렬 파라미터 URL에 저장
       const query = new URLSearchParams(router.query);
-
-      // 정렬 값 설정 및 페이지 초기화
       query.set("sort", sortValue);
-      query.set("page", "1");
 
-      // 페이지 새로고침
-      window.location.href = `/article?${query.toString()}`;
+      // URL 업데이트 (페이지 새로고침 없이)
+      router.push(`/article?${query.toString()}`, undefined, { shallow: true });
+
+      // 데이터 가져오기
+      const result = await getArticles({
+        page: pageInfo.currentPage,
+        limit: 5,
+        search: searchTerm,
+        sort: sortValue,
+      });
+
+      // 상태 업데이트
+      setArticles(result.articles || []);
+      setPageInfo(result.pageInfo || defaultPageInfo);
+      setSortBy(sortValue);
+    } catch (err) {
+      console.error("정렬된 데이터 가져오기 실패:", err);
+      setError("정렬된 데이터를 불러오는데 실패했습니다.");
     }
+
+    setIsLoadingData(false);
   };
 
   /**
    * 페이지 변경 처리 함수
    * @param {number} pageNumber - 이동할 페이지 번호
    */
-  const handlePageChange = (pageNumber) => {
-    // 페이지가 변경된 경우에만 실행
-    if (pageNumber !== pageInfo.currentPage) {
-      setLoading(true);
-      const query = new URLSearchParams(router.query);
+  const handlePageChange = async (pageNumber) => {
+    if (pageNumber === pageInfo.currentPage) return;
 
-      // 페이지 번호 설정 및 페이지 새로고침
+    setIsLoadingData(true);
+
+    try {
+      // 페이지 파라미터 URL에 저장
+      const query = new URLSearchParams(router.query);
       query.set("page", pageNumber.toString());
-      window.location.href = `/article?${query.toString()}`;
+
+      // URL 업데이트 (페이지 새로고침 없이)
+      router.push(`/article?${query.toString()}`, undefined, { shallow: true });
+
+      // 데이터 가져오기
+      const result = await getArticles({
+        page: pageNumber,
+        limit: 5,
+        search: searchTerm,
+        sort: sortBy,
+      });
+
+      // 상태 업데이트
+      setArticles(result.articles || []);
+      setPageInfo(result.pageInfo || defaultPageInfo);
+
+      // 페이지 상단으로 스크롤
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    } catch (err) {
+      console.error("페이지 데이터 가져오기 실패:", err);
+      setError("페이지 데이터를 불러오는데 실패했습니다.");
     }
+
+    setIsLoadingData(false);
   };
+
+  // 로딩 상태 체크
+  const isDataLoading = initialLoading || isLoadingData;
 
   // 로딩 상태 처리
   if (loading) return <Loading />;
@@ -279,11 +317,11 @@ const ArticleList = ({
    */
   const getVisibleBestArticles = () => {
     if (windowWidth >= 1200) {
-      return bestArticles.slice(0, 3); // 데스크탑: 3개
+      return bestArticlesList.slice(0, 3); // 데스크탑: 3개
     } else if (windowWidth >= 744) {
-      return bestArticles.slice(0, 2); // 태블릿: 2개
+      return bestArticlesList.slice(0, 2); // 태블릿: 2개
     } else {
-      return bestArticles.slice(0, 1); // 모바일: 1개
+      return bestArticlesList.slice(0, 1); // 모바일: 1개
     }
   };
 
@@ -297,13 +335,23 @@ const ArticleList = ({
         {/* 베스트 게시글 섹션 */}
         <BestArticlesSection>
           <BestArticlesGrid>
-            {getVisibleBestArticles().map((article) => (
-              <ArticleListCard
-                key={article.id}
-                article={article}
-                isBest={true}
-              />
-            ))}
+            {isDataLoading
+              ? // 스켈레톤 UI 적용
+                Array(3)
+                  .fill(0)
+                  .map((_, index) => (
+                    <ArticleSkeletonCard
+                      key={`skeleton-best-${index}`}
+                      isBest={true}
+                    />
+                  ))
+              : getVisibleBestArticles().map((article) => (
+                  <ArticleListCard
+                    key={article.id}
+                    article={article}
+                    isBest={true}
+                  />
+                ))}
           </BestArticlesGrid>
         </BestArticlesSection>
 
@@ -333,7 +381,16 @@ const ArticleList = ({
 
         {/* 게시글 목록 */}
         <ArticleListContainer>
-          {articles.length > 0 ? (
+          {loading ? (
+            <Loading />
+          ) : isDataLoading ? (
+            // 스켈레톤 UI 적용
+            Array(5)
+              .fill(0)
+              .map((_, index) => (
+                <ArticleSkeletonCard key={`skeleton-${index}`} />
+              ))
+          ) : articles.length > 0 ? (
             articles.map((article) => (
               <ArticleListCard key={article.id} article={article} />
             ))
