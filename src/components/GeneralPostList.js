@@ -58,7 +58,7 @@ const GeneralPostList = ({ data }) => {
           )}
           disabled={page === 1}
         >
-          {"<"}
+          &lt;
         </button>
         {pages.map((item) => (
           <button
@@ -84,7 +84,7 @@ const GeneralPostList = ({ data }) => {
           className="w-8 h-8 bg-[#F3F4F6] flex items-center justify-center rounded-sm"
           disabled={page === totalPage}
         >
-          {">"}
+          &gt;
         </button>
       </div>
     );
