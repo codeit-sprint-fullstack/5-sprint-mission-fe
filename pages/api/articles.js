@@ -3,17 +3,19 @@ import axios from "axios";
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 
 export const fetchArticles = async () => {
-  const response = await axios.get(`${API_URL}/articles`);
+  const response = await axios.get(`${API_URL}/api/articles`);
   return response.data;
 };
 
 export const fetchArticleComments = async (articleId) => {
-  const response = await axios.get(`${API_URL}/articles/${articleId}/comments`);
+  const response = await axios.get(
+    `${API_URL}/api/articles/${articleId}/comments`
+  );
   return response.data;
 };
 
 export const createArticle = async ({ title, content, username, image }) => {
-  const response = await axios.post(`${API_URL}/articles`, {
+  const response = await axios.post(`${API_URL}/api/articles`, {
     title,
     content,
     username,
@@ -24,7 +26,7 @@ export const createArticle = async ({ title, content, username, image }) => {
 
 export const createComment = async ({ articleId, content, username }) => {
   const response = await axios.post(
-    `${API_URL}/articles/${articleId}/comments`,
+    `${API_URL}/api/articles/${articleId}/comments`,
     {
       content,
       username,
@@ -39,7 +41,7 @@ export const updateArticle = async ({
   content,
   username,
 }) => {
-  const response = await axios.patch(`${API_URL}/articles/${articleId}`, {
+  const response = await axios.patch(`${API_URL}/api/articles/${articleId}`, {
     title,
     content,
     username,
@@ -49,7 +51,7 @@ export const updateArticle = async ({
 
 export const updateComment = async ({ articleId, commentId, content }) => {
   const response = await axios.patch(
-    `${API_URL}/articles/${articleId}/comments/${commentId}`,
+    `${API_URL}/api/articles/${articleId}/comments/${commentId}`,
     {
       content,
     }
@@ -58,13 +60,13 @@ export const updateComment = async ({ articleId, commentId, content }) => {
 };
 
 export const deleteArticle = async ({ articleId }) => {
-  const response = await axios.delete(`${API_URL}/articles/${articleId}`);
+  const response = await axios.delete(`${API_URL}/api/articles/${articleId}`);
   return response.data;
 };
 
 export const deleteComment = async ({ articleId, commentId }) => {
   const response = await axios.delete(
-    `${API_URL}/articles/${articleId}/comments/${commentId}`
+    `${API_URL}/api/articles/${articleId}/comments/${commentId}`
   );
   return response.data;
 };

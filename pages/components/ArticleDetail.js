@@ -6,9 +6,9 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { deleteArticle } from "../api/articles";
 
-export default function ArticleDetail({ article }) {
+export default function ArticleDetail({ article = {} }) {
   const [commentContent, setCommentContent] = useState("");
-  const [comments, setComments] = useState(article.comments || []);
+  const [comments, setComments] = useState(article?.comments ?? []);
   const router = useRouter();
 
   const refreshComments = async () => {
