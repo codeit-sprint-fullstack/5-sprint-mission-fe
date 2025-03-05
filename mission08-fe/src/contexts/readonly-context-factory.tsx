@@ -22,5 +22,6 @@ export function createReadonlyContext<T>() {
   return { Provider, useContextValue };
 }
 
-export const { Provider: ArticleProvider, useContextValue: useArticle } =
-  createReadonlyContext<Article>();
+const ArticleContext = createReadonlyContext<Article>();
+export const ArticleProvider = ArticleContext.Provider;
+export const useArticle = ArticleContext.useContextValue;
