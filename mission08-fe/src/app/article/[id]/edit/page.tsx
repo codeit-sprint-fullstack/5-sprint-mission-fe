@@ -1,7 +1,7 @@
 "use client";
 
 import ArticleForm from "@/components/form/ArticleForm";
-import { useArticle } from "../layout";
+import { useArticle } from "@/contexts/readonly-context-factory";
 
 export default function Page() {
   const { value: article } = useArticle();

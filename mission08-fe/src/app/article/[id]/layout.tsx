@@ -3,12 +3,7 @@ import { fetchData } from "@/lib/apis/service.ts";
 import { Article } from "@/types";
 import { ReactNode } from "react";
 import { notFound } from "next/navigation";
-import {
-  ArticleProvider,
-  useArticle,
-} from "@/contexts/readonly-context-factory";
-
-export { ArticleProvider, useArticle };
+import { ArticleProvider } from "@/contexts/readonly-context-factory";
 
 interface LayoutProps {
   children: ReactNode;

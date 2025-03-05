@@ -1,3 +1,4 @@
+// ArticleDetail.tsx
 "use client";
 
 import Image from "next/image";
@@ -6,7 +7,7 @@ import dateFormatter from "@/utils/dateFormatter";
 import Like from "@/components/shared/Like";
 import Control from "@/components/shared/Control";
 import { useRouter } from "next/navigation";
-import { useArticle } from "@/app/article/[id]/layout";
+import { useArticle } from "@/contexts/readonly-context-factory";
 import { useActionState, useEffect, useRef } from "react";
 import deleteArticleAction from "@/lib/actions/delete-article.action";
 import { useQueryClient } from "@tanstack/react-query";

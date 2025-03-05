@@ -2,7 +2,7 @@
 
 import EmptyComment from "@/components/empty/EmptyComment";
 import CommentItem from "@/components/article/comment/CommentItem";
-import { useArticle } from "@/app/article/[id]/layout";
+import { useArticle } from "@/contexts/readonly-context-factory";
 
 export default function CommentList() {
   const { value: article } = useArticle();
