@@ -4,7 +4,11 @@ import DropdownMenu from "./DropDown";
 import { updateComment, deleteComment } from "../api/articles";
 import Link from "next/link";
 
-export default function CommentsList({ articleId, comments, refreshComments }) {
+export default function CommentsList({
+  articleId,
+  comments = [],
+  refreshComments,
+}) {
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editContent, setEditContent] = useState("");
 
@@ -34,10 +38,12 @@ export default function CommentsList({ articleId, comments, refreshComments }) {
       alert("댓글 수정에 실패했습니다.");
     }
   };
+
   const handleCancelEdit = () => {
     setEditingCommentId(null);
     setEditContent("");
   };
+
   const handleDelete = async (commentId) => {
     if (confirm("정말로 삭제하시겠습니까?")) {
       try {
@@ -54,7 +60,7 @@ export default function CommentsList({ articleId, comments, refreshComments }) {
   return (
     <>
       <div className="w-full max-w-[1200px] py-8 ">
-        {comments.length > 0 ? (
+        {comments && comments.length > 0 ? (
           comments.map((comment) => (
             <div key={comment._id} className="bg-[#fcfcfc] mb-[24px] border-b">
               <div className="flex justify-between mb-6">
