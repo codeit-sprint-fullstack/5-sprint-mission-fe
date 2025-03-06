@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "public/globals.css";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
+import { AuthInitializer } from "@/shared/hooks/useInitializeAuth";
+import { SnackbarAlert } from "@/shared/components/Snackbar/SnackbarAlert";
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
   display: "swap",
@@ -29,7 +31,11 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <body className={pretendard.className}>
-        <QueryProvider>{children}</QueryProvider>
+        <QueryProvider>
+          <AuthInitializer />
+          {children}
+          <SnackbarAlert />
+        </QueryProvider>
       </body>
     </html>
   );

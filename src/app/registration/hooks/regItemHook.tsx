@@ -1,5 +1,5 @@
 import { useState, useCallback } from "react";
-import { createItemAPI } from "../../../shared/utils/APIs/createItemAPI";
+import { createItemAPI } from "../services/createItemAPI";
 import { useRouter } from "next/navigation";
 import { RegItemInputFields, ValidKey } from "../type";
 import { Product } from "@/shared/type";

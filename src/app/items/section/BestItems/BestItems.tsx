@@ -1,7 +1,7 @@
 import "./BestItems.css";
 import { ItemCard } from "../common/ui/ItemCard";
 import { SkeletonCard } from "../common/ui/SkeletonCard";
-import { ORDER_BY } from "../../../../shared/utils/APIs/getItemsListAPI";
+import { ORDER_BY } from "../common/services/getItemsListAPI";
 import { Typo } from "@/shared/Typo/Typo";
 import { useMediaQuery } from "@/shared/hooks/mediaQueryHook";
 import { useItemsFetch } from "../common/hooks/itemsFetchHook";
