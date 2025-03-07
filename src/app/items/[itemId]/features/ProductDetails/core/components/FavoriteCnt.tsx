@@ -6,11 +6,13 @@ import Image from "next/image";
 interface FavoriteCntProps {
   isFavorite: boolean;
   favoriteCount: number;
+  onToggleFavorite: () => void;
 }
 
 export const FavoriteCnt = ({
   isFavorite,
   favoriteCount,
+  onToggleFavorite,
 }: FavoriteCntProps) => {
   return (
     <Stack
@@ -21,7 +23,7 @@ export const FavoriteCnt = ({
         borderLeft: `1px solid ${colorChips.gray200}`,
       }}
     >
-      <Stack sx={favoriteCountSx}>
+      <Stack sx={favoriteCountSx} onClick={onToggleFavorite}>
         <Image
           src={
             isFavorite

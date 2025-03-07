@@ -11,6 +11,7 @@ interface ProductBottomProps {
   formattedDate: string;
   favoriteCount: number;
   isFavorite: boolean;
+  onToggleFavorite: () => void;
 }
 
 export const ProductWriterInfo = ({
@@ -19,6 +20,7 @@ export const ProductWriterInfo = ({
   formattedDate,
   favoriteCount,
   isFavorite,
+  onToggleFavorite,
 }: ProductBottomProps) => {
   return (
     <Stack sx={productBottomSx}>
@@ -45,7 +47,11 @@ export const ProductWriterInfo = ({
           />
         </Stack>
       </Stack>
-      <FavoriteCnt isFavorite={isFavorite} favoriteCount={favoriteCount} />
+      <FavoriteCnt
+        isFavorite={isFavorite}
+        favoriteCount={favoriteCount}
+        onToggleFavorite={onToggleFavorite}
+      />
     </Stack>
   );
 };

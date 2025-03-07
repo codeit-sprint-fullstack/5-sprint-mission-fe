@@ -10,11 +10,16 @@ import { ProductImage } from "./core/components/ProductImage";
 import { ProductHeader } from "./core/components/ProductHeader";
 import { ProductDesc } from "./core/components/ProductDesc";
 import { ProductWriterInfo } from "./core/components/ProductWriterInfo";
+import { useProductFavoriteHook } from "@/app/items/core/hooks/useProductFavoriteHook";
 
 export const ProductDetails = ({ itemId }: { itemId: string }) => {
   const router = useRouter();
   const { data, isLoading } = useGetCodeitProductDetail(itemId);
   const { mutate: deleteProduct } = useDeleteCodeitProduct();
+  const { isFavorite, handleToggleFavorite } = useProductFavoriteHook({
+    productId: itemId,
+    initialFavorite: data?.isFavorite ?? false,
+  });
 
   if (isLoading || !data) {
     return (
@@ -33,7 +38,6 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
   }
 
   const {
-    isFavorite,
     name,
     description,
     price,
@@ -78,6 +82,7 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
           formattedDate={formattedDate}
           favoriteCount={favoriteCount}
           isFavorite={isFavorite}
+          onToggleFavorite={handleToggleFavorite}
         />
       </Stack>
     </Stack>

@@ -1,11 +1,15 @@
+import { useDefaultImg } from "@/shared/hooks/useDefaultImg";
 import { Stack } from "@mui/material";
 
 export const ProductImage = ({ images }: { images: string[] }) => {
+  const defaultItemImg = "/assets/default_item.png";
+  const { imgSrc, handleImgErr } = useDefaultImg(images[0], defaultItemImg);
+
   return (
     <Stack sx={productImageContainerSx}>
       <Stack sx={productImageWrapperSx}>
         <img
-          src={images[0]}
+          src={imgSrc}
           alt="product"
           style={{
             position: "absolute",
@@ -15,6 +19,7 @@ export const ProductImage = ({ images }: { images: string[] }) => {
             height: "100%",
             borderRadius: "16px",
           }}
+          onError={handleImgErr}
         />
       </Stack>
     </Stack>
