@@ -7,6 +7,7 @@ import Image from "next/image";
 import { CodeitProductComment } from "@/shared/types/codeitApiType";
 import { useState } from "react";
 import { useCodeitProductCommentActions } from "@/app/items/[itemId]/core/hooks/useProductCommentQuery";
+import { useDefaultImg } from "@/shared/hooks/useDefaultImg";
 
 interface CommentCardProps {
   data: CodeitProductComment;
@@ -38,17 +39,20 @@ export const CommentCard = ({ data }: CommentCardProps) => {
     setEditContent(content);
   };
 
-  //TODO: 여기 모달 바꿀수있음 바꾸기
+  //TODO: 여기 모달 바꾸기
   const handleDelete = () => {
     if (window.confirm("정말 삭제하시겠습니까?")) {
       deleteComment(id);
     }
   };
 
-  //FIXME: 디폴트 이미지 처리 추가하기
   const nickname = writer.nickname;
   const userProfileImg = writer.image;
   const defaultProfileImg = "/assets/default_profile.png";
+  const { imgSrc, handleImgErr } = useDefaultImg(
+    userProfileImg,
+    defaultProfileImg
+  );
   const formattedDate = getRelativeTimeString(createdAt);
 
   return (
@@ -110,7 +114,13 @@ export const CommentCard = ({ data }: CommentCardProps) => {
         )}
       </Stack>
       <Stack sx={userInfoSx}>
-        <Image src={defaultProfileImg} alt="profile" width={32} height={32} />
+        <Image
+          src={imgSrc}
+          alt="profile"
+          width={32}
+          height={32}
+          onError={handleImgErr}
+        />
         <Stack
           sx={{
             width: "100%",

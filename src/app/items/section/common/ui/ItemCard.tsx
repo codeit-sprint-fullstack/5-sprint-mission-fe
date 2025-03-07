@@ -71,7 +71,6 @@ export function ItemCard({
             content={formattedPrice}
           />
           <Stack direction="row" alignItems="center" gap="4px">
-            {/* TODO: 좋아요 아이콘 클릭하면 post 요청되도록(인가된 유저만 가능) */}
             <Image
               src={"/assets/favorite_heart.png"}
               alt="좋아요 아이콘"
