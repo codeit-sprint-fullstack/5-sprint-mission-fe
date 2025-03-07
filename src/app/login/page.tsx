@@ -16,16 +16,13 @@ export default function Page() {
   const {
     inputValue,
     emailError,
+    passwordError,
     handleInputValue,
     handleIsShowPassword,
-    handlePasswordValueDelete,
-    handleClickLogin,
+    handleSubmit,
+    isFormValid,
     isShowPasswordText,
   } = useLoginPost();
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
 
   const showPwOff = "/assets/ic_pw_show_off.svg";
   const showPwOn = "/assets/ic_pw_show_on.svg";
@@ -69,7 +66,7 @@ export default function Page() {
                 height="56px"
                 value={inputValue.password}
                 onChange={handleInputValue}
-                // isError={isPasswordSame === "notSame"}
+                isError={passwordError.isError}
                 type={isShowPasswordText ? "text" : "password"}
                 endAdornment={
                   <IconButton
@@ -85,21 +82,21 @@ export default function Page() {
                   </IconButton>
                 }
               />
-              {/* {isPasswordSame === "notSame" && (
-                //TODO: 여기 비번 에러메시지 추가하고 거기에 맞는걸로 바꾸기
-                <InputErrorMsg message={"비밀번호가 일치하지 않습니다."} />
-              )} */}
+              {passwordError.isError && (
+                <InputErrorMsg message={passwordError.message} />
+              )}
             </Stack>
 
             <CommonButton
               type="submit"
               colorType="primary"
-              disabled={true}
+              disabled={!isFormValid()}
               title="로그인"
               width="100%"
               padding="16px"
               borderRadius="40px"
               textSize="text20Semibold"
+              onClick={handleSubmit}
             />
           </Stack>
         </form>

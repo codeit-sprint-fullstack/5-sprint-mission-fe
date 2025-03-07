@@ -3,7 +3,7 @@
 import React from "react";
 import { Typo } from "@/shared/Typo/Typo";
 import { colorChips } from "@/shared/styles/colorChips";
-import { IconButton, Stack, SxProps } from "@mui/material";
+import { IconButton, Link, Stack, SxProps } from "@mui/material";
 import { CommonInput } from "@/shared/components/Input/CommonInput";
 import { CommonButton } from "@/shared/components/Buttons/CommonButton";
 import { useSignupInput } from "./core/hooks/useSignupInput";
@@ -173,6 +173,26 @@ export default function Page() {
           </Stack>
         </form>
         <SocialAuth />
+        <Stack
+          width="100%"
+          direction="row"
+          justifyContent="center"
+          alignItems="center"
+          gap={"4px"}
+        >
+          <Typo
+            className="text14Medium"
+            color={colorChips.gray800}
+            content="이미 회원이신가요?"
+          />
+          <Link href="/login">
+            <Typo
+              className="text14Medium"
+              color={colorChips.primary100}
+              content="로그인"
+            />
+          </Link>
+        </Stack>
       </Stack>
     </Stack>
   );

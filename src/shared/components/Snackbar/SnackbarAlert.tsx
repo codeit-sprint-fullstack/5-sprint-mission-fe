@@ -1,7 +1,7 @@
 "use client";
 
 import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Snackbar, SxProps } from "@mui/material";
 import { colorChips } from "../../styles/colorChips";
 
 /**
@@ -10,7 +10,7 @@ import { colorChips } from "../../styles/colorChips";
  * @returns 스낵바 컴포넌트
  */
 export const SnackbarAlert = () => {
-  const { isSnackbarOpened, SnackbarMessage, closeSnackbar } =
+  const { isSnackbarOpened, snackbarType, SnackbarMessage, closeSnackbar } =
     useSnackbarStore();
 
   return (
@@ -20,33 +20,52 @@ export const SnackbarAlert = () => {
       onClose={() => closeSnackbar()}
       anchorOrigin={{ vertical: "top", horizontal: "center" }}
       sx={{ zIndex: 10000, mt: "100px" }}
+      TransitionProps={{
+        onExited: closeSnackbar,
+      }}
     >
-      <Alert icon={false} severity="success" sx={snackbarStyle}>
+      <Alert
+        severity={snackbarType}
+        sx={snackbarType === "success" ? successSnackbarSx : errorSnackbarSx}
+      >
         {SnackbarMessage}
       </Alert>
     </Snackbar>
   );
 };
 
-const snackbarStyle = {
+const snackbarBaseSx: SxProps = {
   width: "fit-content",
   minWidth: "300px",
-  maxWidth: "335px",
   height: "fit-content",
   minHeight: "54px",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: colorChips.primary100,
-  color: colorChips.white,
-  "& .MuiAlert-icon": {
-    color: colorChips.white,
-  },
   fontFamily: "Pretendard",
-  fontSize: "14px",
+  fontSize: "18px",
   fontWeight: 500,
   lineHeight: "150%",
   padding: "15px 10px",
   borderRadius: "12px",
   textAlign: "center",
-} as const;
+  boxShadow: "0px 4px 10px 0px rgba(0, 0, 0, 0.1)",
+};
+
+const errorSnackbarSx: SxProps = {
+  ...snackbarBaseSx,
+  backgroundColor: colorChips.gray50,
+  color: colorChips.gray900,
+  "& .MuiAlert-icon": {
+    color: colorChips.error,
+  },
+};
+
+const successSnackbarSx: SxProps = {
+  ...snackbarBaseSx,
+  backgroundColor: colorChips.gray50,
+  color: colorChips.gray900,
+  "& .MuiAlert-icon": {
+    color: colorChips.primary100,
+  },
+};

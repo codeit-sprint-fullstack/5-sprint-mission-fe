@@ -1,5 +1,5 @@
 import { authInstance } from "@/shared/service/auth/authInstance";
-import { handleApiError } from "@/shared/service/auth/handleApiError";
+// import { handleApiError } from "@/shared/service/auth/handleApiError";
 import { AuthResponse, SignInInputDto } from "@/shared/service/auth/type";
 
 /**
@@ -16,6 +16,7 @@ export const postSignInApi = async (
     );
     return response.data;
   } catch (err) {
-    throw handleApiError(err);
+    // throw handleApiError(err);
+    throw err;
   }
 };

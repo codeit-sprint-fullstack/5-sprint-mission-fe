@@ -15,10 +15,23 @@ export const useLoginPost = () => {
     isError: false,
     message: "",
   });
+  const [passwordError, setPasswordError] = useState({
+    isError: false,
+    message: "",
+  });
 
   const router = useRouter();
   const changeCurrentUser = useUserStore((state) => state.setUserInfo);
   const { openSnackbar } = useSnackbarStore.getState();
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  };
+
+  const validatePassword = (password: string): boolean => {
+    return password.length >= 8;
+  };
 
   const handleInputValue = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -27,28 +40,49 @@ export const useLoginPost = () => {
       [name]: value,
     });
 
-    const validateEmail = (email: string): boolean => {
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      return emailRegex.test(email);
-    };
+    if (name === "email") {
+      if (value.length > 0) {
+        setEmailError({
+          isError: !validateEmail(value),
+          message: !validateEmail(value) ? "잘못된 이메일 형식입니다." : "",
+        });
+      } else {
+        setEmailError({ isError: false, message: "" });
+      }
+    }
 
-    //TODO: 비번 입력중일 때 8자 이상 체크 추가
-    // 이메일 입력 중일 때만 유효성 검사
-    if (name === "email" && value.length > 0) {
-      setEmailError({
-        isError: !validateEmail(value),
-        message: !validateEmail(value) ? "잘못된 이메일 형식입니다." : "",
-      });
-    } else if (name === "email" && value.length === 0) {
-      setEmailError({ isError: false, message: "" });
+    if (name === "password") {
+      if (value.length > 0) {
+        setPasswordError({
+          isError: !validatePassword(value),
+          message: !validatePassword(value)
+            ? "비밀번호를 8자 이상 입력해주세요."
+            : "",
+        });
+      } else {
+        setPasswordError({ isError: false, message: "" });
+      }
     }
   };
 
-  const handleIsShowPassword = () => setIsShowPasswordText(!isShowPasswordText);
-  const handlePasswordValueDelete = () =>
-    setInputValue({ ...inputValue, password: "" });
+  const isFormValid = () => {
+    return (
+      validateEmail(inputValue.email) &&
+      validatePassword(inputValue.password) &&
+      !emailError.isError &&
+      !passwordError.isError
+    );
+  };
 
-  const handleClickLogin = async () => {
+  const handleIsShowPassword = () => setIsShowPasswordText(!isShowPasswordText);
+
+  const handleSubmit = async (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
+
+    if (!isFormValid()) return;
+
     try {
       const data = await postSignInApi({
         email: inputValue.email,
@@ -70,13 +104,22 @@ export const useLoginPost = () => {
         createdAt: data.user.createdAt,
       });
 
-      openSnackbar("로그인되었습니다.");
+      openSnackbar("로그인되었습니다.", "success");
       router.push("/items"); //중고마켓 페이지로 이동
     } catch (error) {
-      const errorMessage = (error as any).response?.data?.message;
-      //TODO: 여기 에러메시지 확인해보고 분기 처리 추가할지 봐야될듯
-      if (errorMessage) {
-        openSnackbar("비밀번호가 일치하지 않습니다.");
+      const err = error as any;
+      const statusCode = err.response?.status;
+      const errorMessage = err.response?.data?.message;
+
+      console.log(statusCode, errorMessage);
+
+      // 500대 서버 에러일 경우
+      if (statusCode >= 500) {
+        openSnackbar("다시 시도해주세요.", "error");
+      }
+      // 400대 클라이언트 에러일 경우 에러메시지 그대로 출력
+      else if (statusCode >= 400) {
+        openSnackbar(errorMessage || "로그인에 실패했습니다.", "error");
       }
     }
   };
@@ -85,9 +128,10 @@ export const useLoginPost = () => {
     isShowPasswordText,
     inputValue,
     emailError,
+    passwordError,
     handleInputValue,
     handleIsShowPassword,
-    handlePasswordValueDelete,
-    handleClickLogin,
+    handleSubmit,
+    isFormValid,
   };
 };

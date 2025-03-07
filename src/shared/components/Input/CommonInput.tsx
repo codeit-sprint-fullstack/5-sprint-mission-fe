@@ -97,7 +97,9 @@ const inputSlotSx = (isError: boolean): SxProps<Theme> => {
       opacity: 1,
     },
     "& .MuiOutlinedInput-root": {
-      border: "1px solid transparent",
+      border: isError
+        ? `1px solid ${colorChips.error}`
+        : "1px solid transparent",
       "&:hover": {
         border: `1px solid ${
           isError ? colorChips.error : colorChips.primary100

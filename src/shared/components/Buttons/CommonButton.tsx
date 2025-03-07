@@ -45,8 +45,8 @@ export const CommonButton = ({
   ...props
 }: CommonButtonProps) => {
   const handleTextColor = () => {
-    if (disabled || isLoading) return colorChips.gray100;
     if (textColor) return textColor;
+    if (disabled || isLoading) return colorChips.gray100;
 
     switch (colorType) {
       case "primary":
@@ -90,9 +90,12 @@ export const CommonButton = ({
         borderRadius: borderRadius || "8px",
         border: border || "none",
         cursor: disabled || isLoading ? "not-allowed" : "pointer",
+        "&.Mui-disabled": {
+          color: handleTextColor(),
+        },
         ":hover": {
-          bgcolor: isMobile ? handleBgColor() : undefined, // hover 시 배경색 변경을 막음
-          color: isMobile ? handleTextColor() : undefined, // hover 시 글자색 변경을 막음
+          bgcolor: isMobile ? handleBgColor() : undefined,
+          color: isMobile ? handleTextColor() : undefined,
         },
       }}
       {...props}
