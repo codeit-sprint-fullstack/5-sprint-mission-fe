@@ -1,14 +1,15 @@
 import { colorChips } from "@/shared/styles/colorChips";
-import { Typo } from "@/shared/Typo/Typo";
 import { CircularProgress, Stack } from "@mui/material";
 import {
   useDeleteCodeitProduct,
   useGetCodeitProductDetail,
 } from "../../core/hooks/useProductDetailQuery";
-import { EditEllipsis } from "@/shared/components/EditEllipsis";
 import { formatDate } from "@/shared/utils/getFormattedDate";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
+import { ProductImage } from "./core/components/ProductImage";
+import { ProductHeader } from "./core/components/ProductHeader";
+import { ProductDesc } from "./core/components/ProductDesc";
+import { ProductWriterInfo } from "./core/components/ProductWriterInfo";
 
 export const ProductDetails = ({ itemId }: { itemId: string }) => {
   const router = useRouter();
@@ -43,8 +44,10 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
     createdAt,
   } = data;
 
+  // api에서 상품 작성자 프로필이미지를 안보내고 있어서 디폴트 이미지 사용
   const defaultProfileImg = "/assets/default_profile.png";
   const formattedDate = formatDate(createdAt);
+  const formattedPrice = `${new Intl.NumberFormat("ko-KR").format(price)}원`;
 
   const handleUpdate = () => {
     router.push(`/items/${itemId}/edit`);
@@ -60,70 +63,23 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
 
   return (
     <Stack sx={productDetailsSx}>
-      <Stack sx={productHeaderSx}>
-        <Stack sx={productTitleSx}>
-          <Typo
-            className="text20Bold"
-            content={name}
-            color={colorChips.gray800}
-          />
-          <EditEllipsis onUpdate={handleUpdate} onDelete={handleDelete} />
-        </Stack>
-        <Stack sx={userInfoSx}>
-          <Stack
-            sx={{ flexDirection: "row", alignItems: "center", gap: "16px" }}
-          >
-            <Image
-              src={defaultProfileImg}
-              alt="profile"
-              width={40}
-              height={40}
-            />
-            <Stack
-              sx={{ flexDirection: "row", alignItems: "center", gap: "8px" }}
-            >
-              <Typo
-                className="text14Medium"
-                content={ownerNickname}
-                color={colorChips.gray600}
-                customStyle={{ whiteSpace: "nowrap" }}
-              />
-              <Typo
-                className="text14Regular"
-                content={formattedDate}
-                color={colorChips.gray400}
-              />
-            </Stack>
-          </Stack>
-          <Stack
-            sx={{
-              width: { xs: "16px", md: "32px" },
-              height: "40px",
-              marginRight: { xs: "16px", md: "32px" },
-              borderRight: `1px solid ${colorChips.gray200}`,
-            }}
-          />
-          <Stack sx={favoriteCountSx}>
-            <Image
-              src="/assets/ic_heart_gray5.svg"
-              alt="favorite"
-              width={32}
-              height={32}
-              style={{ cursor: "pointer" }}
-            />
-            <Typo
-              className="text16Medium"
-              content={favoriteCount.toString()}
-              color={colorChips.gray500}
-            />
-          </Stack>
-        </Stack>
+      <ProductImage images={images} />
+      <Stack sx={productContentSx}>
+        <ProductHeader
+          name={name}
+          formattedPrice={formattedPrice}
+          handleUpdate={handleUpdate}
+          handleDelete={handleDelete}
+        />
+        <ProductDesc description={description} tags={tags} />
+        <ProductWriterInfo
+          defaultProfileImg={defaultProfileImg}
+          ownerNickname={ownerNickname}
+          formattedDate={formattedDate}
+          favoriteCount={favoriteCount}
+          isFavorite={isFavorite}
+        />
       </Stack>
-      <Typo
-        className="text18Regular"
-        content={description}
-        color={colorChips.gray900}
-      />
     </Stack>
   );
 };
@@ -131,47 +87,18 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
 const productDetailsSx = {
   width: "100%",
   height: "fit-content",
-  flexDirection: "column",
+  flexDirection: { xs: "column", sm: "row" },
   justifyContent: "flex-start",
   alignItems: "flex-start",
-  gap: "24px",
-};
-
-const productHeaderSx = {
-  width: "100%",
-  height: "fit-content",
-  flexDirection: "column",
-  justifyContent: "flex-start",
-  alignItems: "flex-start",
-  gap: "16px",
-  paddingBottom: "16px",
+  gap: { xs: "16px", md: "24px" },
+  paddingBottom: { xs: "24px", sm: "32px", md: "40px" },
   borderBottom: `1px solid ${colorChips.gray200}`,
 };
 
-const productTitleSx = {
+const productContentSx = {
   width: "100%",
   height: "fit-content",
-  flexDirection: "row",
-  justifyContent: "space-between",
-  alignItems: "center",
-  gap: "8px",
-};
-
-const userInfoSx = {
-  width: "100%",
-  height: "40px",
-  flexDirection: "row",
-  alignItems: "center",
-};
-
-const favoriteCountSx = {
-  width: "fit-content",
-  height: "40px",
-  borderRadius: "35px",
-  border: `1px solid ${colorChips.gray200}`,
-  padding: "4px 12px",
-  flexDirection: "row",
-  alignItems: "center",
-  justifyContent: "center",
-  gap: "8px",
+  flexDirection: "column",
+  justifyContent: "flex-start",
+  alignItems: "flex-start",
 };
