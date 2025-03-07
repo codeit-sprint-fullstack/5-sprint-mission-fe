@@ -13,8 +13,16 @@ export const articleKeys = {
     [...articleKeys.all, "detail", articleId] as const,
 };
 
-export const productKeys = {
+export const codeitItemKeys = {
   all: ["products"] as const,
-  list: (params: { keyword: string; page: number; sort: string }) =>
-    [...productKeys.all, "list", params] as const,
+  best: (pageSize: number) =>
+    [...codeitItemKeys.all, "best", pageSize] as const,
+  list: (params: {
+    keyword: string;
+    page: number;
+    orderBy: string;
+    pageSize: number;
+  }) => [...codeitItemKeys.all, "list", params] as const,
+  detail: (productId: string) =>
+    [...codeitItemKeys.all, "detail", productId] as const,
 };

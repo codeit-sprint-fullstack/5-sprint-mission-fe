@@ -2,8 +2,8 @@
 
 import { useEffect } from "react";
 import { useUserStore } from "../store/useUserStore";
-import { getUserInfo } from "../service/auth/getUserInfo";
-import { localStorageKeys } from "../service/auth/authInstance";
+import { getUserInfo } from "../service/codeit/getUserInfo";
+import { localStorageKeys } from "../service/codeit/codeitInstance";
 
 export const useInitializeAuth = () => {
   const { setUserInfo, setIsAuthenticated, setIsInitialized } = useUserStore();

@@ -34,9 +34,11 @@ export const SortItems: React.FC<SortItemsProps> = ({ onSortChange }) => {
       className={"text-lg reguar"}
       onClick={toggleDropdown}
     >
-      <p className={`sort-items-label ${sortItemsLabelClassName}`}>
-        {selectedName}
-      </p>
+      {screenSize !== "MOBILE" && (
+        <p className={`sort-items-label ${sortItemsLabelClassName}`}>
+          {selectedName}
+        </p>
+      )}
       <img id="dropdown-icon" src={sortItemsIcon} alt="정렬 아이콘" />
 
       <div className={`dropdown-menu ${dropdownMenuClassName}`}>

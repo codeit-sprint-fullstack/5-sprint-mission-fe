@@ -1,6 +1,6 @@
-import { authInstance } from "@/shared/service/auth/authInstance";
+import { codeitInstance } from "@/shared/service/codeit/codeitInstance";
 // import { handleApiError } from "@/shared/service/auth/handleApiError";
-import { AuthResponse, SignInInputDto } from "@/shared/service/auth/type";
+import { AuthResponse, SignInInputDto } from "@/shared/service/codeit/type";
 
 /**
  * 로그인 API
@@ -10,7 +10,7 @@ export const postSignInApi = async (
   body: SignInInputDto
 ): Promise<AuthResponse> => {
   try {
-    const response = await authInstance.post<AuthResponse>(
+    const response = await codeitInstance.post<AuthResponse>(
       "/auth/signIn",
       body
     );

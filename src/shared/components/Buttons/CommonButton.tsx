@@ -103,7 +103,13 @@ export const CommonButton = ({
       {isLoading ? (
         <CircularProgress size={15} sx={{ color: handleTextColor() }} />
       ) : (
-        <Typo className={textSize ?? "text16Semibold"} content={title} />
+        <Typo
+          className={textSize ?? "text16Semibold"}
+          content={title}
+          customStyle={{
+            whiteSpace: "nowrap",
+          }}
+        />
       )}
     </Button>
   );

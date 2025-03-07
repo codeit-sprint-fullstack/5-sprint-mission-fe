@@ -1,6 +1,6 @@
 "use client";
 
-import { localStorageKeys } from "../service/auth/authInstance";
+import { localStorageKeys } from "../service/codeit/codeitInstance";
 
 /*
 로그인/회원가입하고 로컬스토리지 저장

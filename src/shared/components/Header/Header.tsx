@@ -13,7 +13,7 @@ export function Header() {
           direction="row"
           justifyContent="flex-start"
           alignItems="center"
-          sx={{ gap: { xs: "16px", sm: "25px" } }}
+          sx={{ gap: { xs: "8px", sm: "20px", md: "25px" } }}
         >
           <HeaderLogo />
           <HeaderLink />
@@ -38,7 +38,6 @@ const headerStyles = {
   position: "sticky",
   top: 0,
   zIndex: 5,
-  flexShrink: 0,
 };
 
 const navStyles = {

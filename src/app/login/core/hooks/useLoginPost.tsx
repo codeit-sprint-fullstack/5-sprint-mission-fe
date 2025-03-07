@@ -4,8 +4,11 @@ import { useUserStore } from "@/shared/store/useUserStore";
 import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
 import { postSignInApi } from "../service/postSignInApi";
 import { setLocalStorage } from "@/shared/utils/setLocalStorage";
-import { commentKeys, productKeys } from "@/shared/utils/queryKeys";
-import { articleKeys } from "@/shared/utils/queryKeys";
+import {
+  codeitItemKeys,
+  articleKeys,
+  commentKeys,
+} from "@/shared/utils/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
 
 export const useLoginPost = () => {
@@ -103,7 +106,7 @@ export const useLoginPost = () => {
       // 관련 쿼리 모두 무효화
       queryClient.invalidateQueries({ queryKey: commentKeys.all });
       queryClient.invalidateQueries({ queryKey: articleKeys.all });
-      queryClient.invalidateQueries({ queryKey: productKeys.all });
+      queryClient.invalidateQueries({ queryKey: codeitItemKeys.all });
 
       // 전역 user 데이터 업데이트
       changeCurrentUser({

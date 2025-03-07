@@ -1,5 +1,5 @@
 import { createStore } from "./zustand/createStore";
-import { UserInfoResponse } from "../service/auth/type";
+import { UserInfoResponse } from "../service/codeit/type";
 
 interface State {
   userInfo: UserInfoResponse | null;

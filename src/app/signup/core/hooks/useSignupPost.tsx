@@ -3,8 +3,11 @@ import { useRouter } from "next/navigation";
 import { postSignUpApi } from "../service/postSignUpApi";
 import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
 import { useQueryClient } from "@tanstack/react-query";
-import { commentKeys, productKeys } from "@/shared/utils/queryKeys";
-import { articleKeys } from "@/shared/utils/queryKeys";
+import {
+  codeitItemKeys,
+  articleKeys,
+  commentKeys,
+} from "@/shared/utils/queryKeys";
 import { setLocalStorage } from "@/shared/utils/setLocalStorage";
 
 interface SignupProps {
@@ -47,7 +50,7 @@ export const useSignupPost = ({
       // 관련 쿼리 모두 무효화
       queryClient.invalidateQueries({ queryKey: commentKeys.all });
       queryClient.invalidateQueries({ queryKey: articleKeys.all });
-      queryClient.invalidateQueries({ queryKey: productKeys.all });
+      queryClient.invalidateQueries({ queryKey: codeitItemKeys.all });
 
       // 전역 user 데이터 업데이트
       changeCurrentUser({

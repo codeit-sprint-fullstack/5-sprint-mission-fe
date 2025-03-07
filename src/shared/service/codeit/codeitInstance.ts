@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 
-//유저 기능 요청을 위한 axios 인스턴스 생성
+// codeit 서버로 요청하는 instance
 const instances: Record<string, AxiosInstance> = {};
 
 const baseURL = "https://panda-market-api.vercel.app";
@@ -45,10 +45,11 @@ const requestInterceptor = (axiosInstance: AxiosInstance) => {
   );
 };
 
+//TODO: 토큰만료시 토큰 갱신 로직 추가해야됨
 const responseInterceptor = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.response.use(function (response) {
     return response;
   });
 };
 
-export const authInstance = AxiosDefault(baseURL);
+export const codeitInstance = AxiosDefault(baseURL);

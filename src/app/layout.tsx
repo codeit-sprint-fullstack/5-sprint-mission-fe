@@ -4,6 +4,9 @@ import "public/globals.css";
 import { QueryProvider } from "@/shared/providers/QueryProvider";
 import { AuthInitializer } from "@/shared/hooks/useInitializeAuth";
 import { SnackbarAlert } from "@/shared/components/Snackbar/SnackbarAlert";
+import { ThemeProvider } from "@mui/material/styles";
+import { theme } from "@/shared/theme";
+
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
   display: "swap",
@@ -31,11 +34,13 @@ export default function RootLayout({
   return (
     <html lang="kr">
       <body className={pretendard.className}>
-        <QueryProvider>
-          <AuthInitializer />
-          {children}
-          <SnackbarAlert />
-        </QueryProvider>
+        <ThemeProvider theme={theme}>
+          <QueryProvider>
+            <AuthInitializer />
+            {children}
+            <SnackbarAlert />
+          </QueryProvider>
+        </ThemeProvider>
       </body>
     </html>
   );

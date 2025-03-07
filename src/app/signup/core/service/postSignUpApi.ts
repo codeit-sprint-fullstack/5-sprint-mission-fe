@@ -1,6 +1,6 @@
 // import { handleApiError } from "@/shared/service/auth/handleApiError";
-import { authInstance } from "@/shared/service/auth/authInstance";
-import { AuthResponse, SignUpInputDto } from "@/shared/service/auth/type";
+import { codeitInstance } from "@/shared/service/codeit/codeitInstance";
+import { AuthResponse, SignUpInputDto } from "@/shared/service/codeit/type";
 
 /**
  * 회원가입 API
@@ -10,7 +10,7 @@ export const postSignUpApi = async (
   body: SignUpInputDto
 ): Promise<AuthResponse> => {
   try {
-    const response = await authInstance.post<AuthResponse>(
+    const response = await codeitInstance.post<AuthResponse>(
       "/auth/signUp",
       body
     );
