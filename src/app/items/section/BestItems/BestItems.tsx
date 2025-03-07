@@ -43,8 +43,8 @@ const cardsBoxSx = {
   height: "fit-content",
   display: "flex",
   flexDirection: "row",
-  justifyContent: "space-between",
+  justifyContent: "center",
   alignItems: "center",
-  flexWrap: "wrap",
+  // flexWrap: "wrap",
   gap: "24px",
 };

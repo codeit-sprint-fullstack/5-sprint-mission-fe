@@ -3,7 +3,7 @@ import { codeitInstance } from "@/shared/service/codeit/codeitInstance";
 import {
   GetCodeitProdApiQueryParams,
   GetCodeitProdApiResponse,
-} from "@/app/items/section/common/types/codeitApiType";
+} from "@/shared/types/codeitApiType";
 
 /** 상품 목록 조회
  * @param {Object} params - 쿼리 정보

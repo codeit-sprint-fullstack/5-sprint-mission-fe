@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import { GetCodeitProdApiQueryParams } from "@/app/items/section/common/types/codeitApiType";
+import { GetCodeitProdApiQueryParams } from "@/shared/types/codeitApiType";
 
 interface SearchStore {
   params: GetCodeitProdApiQueryParams;

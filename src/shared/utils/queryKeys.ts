@@ -26,3 +26,9 @@ export const codeitItemKeys = {
   detail: (productId: string) =>
     [...codeitItemKeys.all, "detail", productId] as const,
 };
+
+export const codeitProductCommentKeys = {
+  all: ["codeitProductComments"] as const,
+  list: (productId: string) =>
+    [...codeitProductCommentKeys.all, productId] as const,
+};

@@ -2,7 +2,7 @@ import "./ItemCard.css";
 import Link from "next/link";
 import { Typo } from "@/shared/Typo/Typo";
 import { colorChips } from "@/shared/styles/colorChips";
-import { CodeitProduct } from "@/app/items/section/common/types/codeitApiType";
+import { CodeitProduct } from "@/shared/types/codeitApiType";
 import React from "react";
 import Image from "next/image";
 import { Stack } from "@mui/material";
@@ -71,6 +71,7 @@ export function ItemCard({
             content={formattedPrice}
           />
           <Stack direction="row" alignItems="center" gap="4px">
+            {/* TODO: 좋아요 아이콘 클릭하면 post 요청되도록(인가된 유저만 가능) */}
             <Image
               src={"/assets/favorite_heart.png"}
               alt="좋아요 아이콘"

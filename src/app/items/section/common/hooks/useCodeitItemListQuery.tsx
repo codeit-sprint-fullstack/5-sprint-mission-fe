@@ -1,7 +1,7 @@
-import { GetCodeitProdApiResponse } from "@/app/items/section/common/types/codeitApiType";
+import { GetCodeitProdApiResponse } from "@/shared/types/codeitApiType";
 import { useQuery } from "@tanstack/react-query";
-import { getCodeitItemListAPI } from "../services/getCodeitItemListApi";
-import { useSearchStore } from "./useSearchStore";
+import { getCodeitItemListAPI } from "@/app/items/section/common/services/getCodeitItemListApi";
+import { useSearchStore } from "@/app/items/section/common/hooks/useSearchStore";
 import { codeitItemKeys } from "@/shared/utils/queryKeys";
 
 // 코드잇 서버에서 상품 목록 조회
