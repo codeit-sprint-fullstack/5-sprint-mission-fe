@@ -45,7 +45,6 @@ const requestInterceptor = (axiosInstance: AxiosInstance) => {
   );
 };
 
-//TODO: 로그인상태 여부 확인해서 setInitialized 할수있나
 const responseInterceptor = (axiosInstance: AxiosInstance) => {
   axiosInstance.interceptors.response.use(function (response) {
     return response;

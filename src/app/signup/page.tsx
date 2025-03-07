@@ -21,7 +21,9 @@ export default function Page() {
     isEmailValid,
     nickname,
     handleNicknameChange,
+    isNicknameValid,
     inputPassword,
+    passwordError,
     isShowPasswordText,
     isShowConfirmPasswordText,
     isPasswordSame,
@@ -32,9 +34,9 @@ export default function Page() {
 
   const { handleClickSignup } = useSignupPost({
     email,
-    nickname: "",
+    nickname,
     password: inputPassword.password,
-    passwordConfirmation: inputPassword.confirmPassword,
+    passwordConfirmation: inputPassword.passwordConfirmation,
   });
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -42,7 +44,8 @@ export default function Page() {
     handleClickSignup();
   };
 
-  const isSubmitEnabled = isEmailValid(email) && isPasswordValid;
+  const isSubmitEnabled =
+    isEmailValid(email) && isPasswordValid && isNicknameValid(nickname);
 
   const showPwOff = "/assets/ic_pw_show_off.svg";
   const showPwOn = "/assets/ic_pw_show_on.svg";
@@ -102,7 +105,7 @@ export default function Page() {
                 height="56px"
                 value={inputPassword.password}
                 onChange={handleInputPw}
-                isError={isPasswordSame === "notSame"}
+                isError={passwordError.isError}
                 type={isShowPasswordText ? "text" : "password"}
                 endAdornment={
                   <IconButton
@@ -118,9 +121,8 @@ export default function Page() {
                   </IconButton>
                 }
               />
-              {isPasswordSame === "notSame" && (
-                //TODO: 여기 비번 에러메시지 추가하고 거기에 맞는걸로 바꾸기
-                <InputErrorMsg message={"비밀번호가 일치하지 않습니다."} />
+              {passwordError.isError && (
+                <InputErrorMsg message={passwordError.message} />
               )}
             </Stack>
 
@@ -135,17 +137,17 @@ export default function Page() {
                 name="passwordConfirmation"
                 placeholder="비밀번호를 다시 한 번 입력해주세요"
                 height="56px"
-                value={inputPassword.confirmPassword}
+                value={inputPassword.passwordConfirmation}
                 onChange={handleInputPw}
                 isError={isPasswordSame === "notSame"}
                 type={isShowConfirmPasswordText ? "text" : "password"}
                 endAdornment={
                   <IconButton
-                    onClick={() => handleIsShowPassword("password")}
+                    onClick={() => handleIsShowPassword("passwordConfirmation")}
                     sx={{ cursor: "pointer" }}
                   >
                     <Image
-                      src={isShowPasswordText ? showPwOn : showPwOff}
+                      src={isShowConfirmPasswordText ? showPwOn : showPwOff}
                       alt="show password"
                       width={24}
                       height={24}
@@ -154,7 +156,6 @@ export default function Page() {
                 }
               />
               {isPasswordSame === "notSame" && (
-                //TODO: 여기 비번 에러메시지 추가하고 거기에 맞는걸로 바꾸기
                 <InputErrorMsg message={"비밀번호가 일치하지 않습니다."} />
               )}
             </Stack>

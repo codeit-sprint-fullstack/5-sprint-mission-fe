@@ -4,6 +4,9 @@ import { useUserStore } from "@/shared/store/useUserStore";
 import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
 import { postSignInApi } from "../service/postSignInApi";
 import { setLocalStorage } from "@/shared/utils/setLocalStorage";
+import { commentKeys, productKeys } from "@/shared/utils/queryKeys";
+import { articleKeys } from "@/shared/utils/queryKeys";
+import { useQueryClient } from "@tanstack/react-query";
 
 export const useLoginPost = () => {
   const [isShowPasswordText, setIsShowPasswordText] = useState(false);
@@ -21,11 +24,13 @@ export const useLoginPost = () => {
   });
 
   const router = useRouter();
+  const queryClient = useQueryClient();
   const changeCurrentUser = useUserStore((state) => state.setUserInfo);
+  const setIsAuthenticated = useUserStore((state) => state.setIsAuthenticated);
   const { openSnackbar } = useSnackbarStore.getState();
 
   const validateEmail = (email: string): boolean => {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailRegex.test(email);
   };
 
@@ -95,6 +100,11 @@ export const useLoginPost = () => {
         refreshToken: data.refreshToken,
       });
 
+      // 관련 쿼리 모두 무효화
+      queryClient.invalidateQueries({ queryKey: commentKeys.all });
+      queryClient.invalidateQueries({ queryKey: articleKeys.all });
+      queryClient.invalidateQueries({ queryKey: productKeys.all });
+
       // 전역 user 데이터 업데이트
       changeCurrentUser({
         id: data.user.id,
@@ -104,14 +114,15 @@ export const useLoginPost = () => {
         createdAt: data.user.createdAt,
       });
 
+      // 전역 인증 상태 업데이트 -> 로그인 완료 시 헤더 프로필 변경
+      setIsAuthenticated(true);
+
       openSnackbar("로그인되었습니다.", "success");
       router.push("/items"); //중고마켓 페이지로 이동
     } catch (error) {
       const err = error as any;
       const statusCode = err.response?.status;
       const errorMessage = err.response?.data?.message;
-
-      console.log(statusCode, errorMessage);
 
       // 500대 서버 에러일 경우
       if (statusCode >= 500) {

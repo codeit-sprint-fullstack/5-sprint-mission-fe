@@ -1,12 +1,14 @@
 import React from "react";
 import { colorChips } from "@/shared/styles/colorChips";
-import { Stack } from "@mui/material";
+import { Stack, useMediaQuery } from "@mui/material";
 import { useRouter } from "next/navigation";
 import { useUserStore } from "@/shared/store/useUserStore";
 import { CommonButton } from "../../Buttons/CommonButton";
 import { useDefaultImg } from "@/shared/hooks/useDefaultImg";
+import { Typo } from "@/shared/Typo/Typo";
 
 export const HeaderUser = () => {
+  const isDesktop = useMediaQuery("(min-width: 744px)");
   const { userInfo, isAuthenticated } = useUserStore();
   const router = useRouter();
 
@@ -36,15 +38,25 @@ export const HeaderUser = () => {
   }
 
   return (
-    <Stack sx={profileImgSx}>
-      <img
-        src={imgSrc}
-        alt="프로필 사진"
-        width={40}
-        height={40}
-        onError={handleImgErr}
-        style={{ objectFit: "cover" }}
-      />
+    <Stack direction="row" alignItems="center" gap={"6px"}>
+      <Stack sx={profileImgSx}>
+        <img
+          src={imgSrc}
+          alt="프로필 사진"
+          width={40}
+          height={40}
+          onError={handleImgErr}
+          style={{ objectFit: "cover" }}
+        />
+      </Stack>
+      {/* PC 화면에서만 닉네임 추가 */}
+      {isDesktop && (
+        <Typo
+          className="text18Regular"
+          color={colorChips.gray600}
+          content={userInfo?.nickname}
+        />
+      )}
     </Stack>
   );
 };
