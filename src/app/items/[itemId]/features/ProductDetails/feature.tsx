@@ -11,11 +11,16 @@ import { ProductHeader } from "./core/components/ProductHeader";
 import { ProductDesc } from "./core/components/ProductDesc";
 import { ProductWriterInfo } from "./core/components/ProductWriterInfo";
 import { useProductFavoriteHook } from "@/app/items/core/hooks/useProductFavoriteHook";
+import { useState } from "react";
+import { DeleteItemModal } from "@/shared/components/Modal/DeleteItemModal";
+import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
 
 export const ProductDetails = ({ itemId }: { itemId: string }) => {
   const router = useRouter();
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { data, isLoading } = useGetCodeitProductDetail(itemId);
-  const { mutate: deleteProduct } = useDeleteCodeitProduct();
+  const { mutateAsync: deleteProduct } = useDeleteCodeitProduct();
+  const { openSnackbar } = useSnackbarStore();
   const { isFavorite, handleToggleFavorite } = useProductFavoriteHook({
     productId: itemId,
     initialFavorite: data?.isFavorite ?? false,
@@ -55,37 +60,57 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
 
   const handleUpdate = () => {
     router.push(`/items/${itemId}/edit`);
-    //TODO: 수정하기 페이지 추가하기
   };
 
   const handleDelete = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteProduct({ productId: itemId });
+    setOpenDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteProduct({ productId: itemId });
+      openSnackbar("상품이 삭제되었습니다.", "success");
       router.push("/items");
+    } catch (error: any) {
+      openSnackbar(error.message, "error");
+    } finally {
+      setOpenDeleteModal(false);
     }
   };
 
   return (
-    <Stack sx={productDetailsSx}>
-      <ProductImage images={images} />
-      <Stack sx={productContentSx}>
-        <ProductHeader
-          name={name}
-          formattedPrice={formattedPrice}
-          handleUpdate={handleUpdate}
-          handleDelete={handleDelete}
-        />
-        <ProductDesc description={description} tags={tags} />
-        <ProductWriterInfo
-          defaultProfileImg={defaultProfileImg}
-          ownerNickname={ownerNickname}
-          formattedDate={formattedDate}
-          favoriteCount={favoriteCount}
-          isFavorite={isFavorite}
-          onToggleFavorite={handleToggleFavorite}
-        />
+    <>
+      <Stack sx={productDetailsSx}>
+        <ProductImage images={images} />
+        <Stack sx={productContentSx}>
+          <ProductHeader
+            name={name}
+            formattedPrice={formattedPrice}
+            handleUpdate={handleUpdate}
+            handleDelete={handleDelete}
+          />
+          <ProductDesc description={description} tags={tags} />
+          <ProductWriterInfo
+            defaultProfileImg={defaultProfileImg}
+            ownerNickname={ownerNickname}
+            formattedDate={formattedDate}
+            favoriteCount={favoriteCount}
+            isFavorite={isFavorite}
+            onToggleFavorite={handleToggleFavorite}
+          />
+        </Stack>
       </Stack>
-    </Stack>
+      <DeleteItemModal
+        modalTitle="정말로 상품을 삭제하시겠어요?"
+        openModal={openDeleteModal}
+        handleCloseModal={handleCloseDeleteModal}
+        handleClickDelete={handleConfirmDelete}
+      />
+    </>
   );
 };
 

@@ -76,5 +76,8 @@ export const useDeleteCodeitProduct = () => {
         queryKey: codeitItemKeys.all,
       });
     },
+    onError: (error: any) => {
+      throw error;
+    },
   });
 };

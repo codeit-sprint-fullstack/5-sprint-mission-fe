@@ -49,7 +49,7 @@ export const patchCodeitProductAPI = async ({
         tags,
       });
     return response.data;
-  } catch (err) {
+  } catch (err: any) {
     throw err;
   }
 };
@@ -64,7 +64,10 @@ export const deleteCodeitProductAPI = async ({
 }: DeleteProductApiProps): Promise<void> => {
   try {
     await codeitInstance.delete(`/products/${productId}`);
-  } catch (err) {
+  } catch (err: any) {
+    if (err.response?.data?.message) {
+      throw new Error(err.response.data.message);
+    }
     throw err;
   }
 };

@@ -84,7 +84,10 @@ export const deleteCodeitProductCommentAPI = async ({
 }: DeleteProductCommentApiProps): Promise<void> => {
   try {
     await codeitInstance.delete(`/comments/${commentId}`);
-  } catch (err) {
+  } catch (err: any) {
+    if (err.response?.data?.message) {
+      throw new Error(err.response.data.message);
+    }
     throw err;
   }
 };

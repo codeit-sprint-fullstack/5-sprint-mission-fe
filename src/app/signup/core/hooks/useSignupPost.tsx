@@ -39,8 +39,6 @@ export const useSignupPost = ({
         passwordConfirmation: passwordConfirmation,
       });
 
-      console.log(data);
-
       // 로컬스토리지에 토큰 저장
       setLocalStorage({
         accessToken: data.accessToken,
