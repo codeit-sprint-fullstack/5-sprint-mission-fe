@@ -1,19 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import DropdownMenu from "./DropDown";
 import { updateComment, deleteComment } from "../api/articles";
 import Link from "next/link";
+import { fetchArticleComments } from "../api/articles";
+import RelativeTime from "./relativeTime";
 
-export default function CommentsList({
-  articleId,
-  comments = [],
-  refreshComments,
-}) {
+export default function ArticleCommentsList({ articleId, refreshComments }) {
+  const [comments, setComments] = useState([]);
   const [editingCommentId, setEditingCommentId] = useState(null);
   const [editContent, setEditContent] = useState("");
 
   const handleEdit = (comment) => {
-    setEditingCommentId(comment._id);
+    setEditingCommentId(comment.id);
     setEditContent(comment.content);
   };
 
@@ -57,14 +56,29 @@ export default function CommentsList({
     }
   };
 
+  useEffect(() => {
+    if (!articleId) {
+      return;
+    }
+
+    const loadComments = async () => {
+      try {
+        const fetchedComments = await fetchArticleComments(articleId);
+        setComments(fetchedComments.list || []);
+      } catch (error) {}
+    };
+
+    loadComments();
+  }, [articleId]);
+
   return (
     <>
       <div className="w-full max-w-[1200px] py-8 ">
         {comments && comments.length > 0 ? (
           comments.map((comment) => (
-            <div key={comment._id} className="bg-[#fcfcfc] mb-[24px] border-b">
+            <div key={comment.id} className="bg-[#fcfcfc] mb-[24px] border-b">
               <div className="flex justify-between mb-6">
-                {editingCommentId === comment._id ? (
+                {editingCommentId === comment.id ? (
                   <textarea
                     className="w-full resize-none outline-none border-none px-6 py-4 bg-[#f3f4f6] rounded-xl"
                     value={editContent}
@@ -75,14 +89,14 @@ export default function CommentsList({
                     {comment.content}
                   </div>
                 )}
-                {editingCommentId !== comment._id && (
+                {editingCommentId !== comment.id && (
                   <DropdownMenu
                     onEdit={() => handleEdit(comment)}
-                    onDelete={() => handleDelete(comment._id)}
+                    onDelete={() => handleDelete(comment.id)}
                   />
                 )}
               </div>
-              {editingCommentId === comment._id && (
+              {editingCommentId === comment.id && (
                 <div className="flex justify-end mb-4 gap-1">
                   <button
                     onClick={handleCancelEdit}
@@ -91,7 +105,7 @@ export default function CommentsList({
                     취소
                   </button>
                   <button
-                    onClick={() => handleEditSubmit(comment._id)}
+                    onClick={() => handleEditSubmit(comment.id)}
                     className="border rounded-lg py-1 px-4 text-white bg-[#3692ff]"
                   >
                     수정 완료
@@ -107,10 +121,10 @@ export default function CommentsList({
                 />
                 <div className="flex flex-col">
                   <div className="text-xs text-[#4B5563] font-normal">
-                    {comment.username}
+                    {comment.writer?.nickname || "익명"}
                   </div>
                   <div className="text-xs text-[#9CA3AF] font-normal">
-                    {new Date(comment.createdAt).toLocaleString()}
+                    <RelativeTime timestamp={comment.createdAt} />
                   </div>
                 </div>
               </div>

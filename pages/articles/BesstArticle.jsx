@@ -30,9 +30,9 @@ export default function BestArticleList() {
       try {
         const data = await fetchArticles();
 
-        if (!Array.isArray(data)) return;
+        if (!data || !data.list || !Array.isArray(data.list)) return;
 
-        const sortedArticles = [...data]
+        const sortedArticles = [...data.list]
           .filter((article) => article.likeCount !== undefined)
           .sort((a, b) => b.likeCount - a.likeCount);
 
@@ -52,8 +52,8 @@ export default function BestArticleList() {
         {articles.length > 0 ? (
           articles.slice(0, displayCount).map((article) => (
             <Link
-              key={article._id}
-              href={`/articles/${article._id}`}
+              key={article.id}
+              href={`/articles/${article.id}`}
               className="block"
             >
               <div
@@ -61,7 +61,7 @@ export default function BestArticleList() {
                 onClick={() => setSelectedArticle(article)}
               >
                 <Image
-                  src="/img_badge (1).png"
+                  src={"/img_badge (1).png"}
                   alt="best"
                   width={102}
                   height={30}
@@ -70,20 +70,21 @@ export default function BestArticleList() {
                   <div className="text-xl font-semibold">{article.title}</div>
                   <div className="flex justify-center items-center w-[72px] h-[72px] border rounded-[8px] object-cover bg-white">
                     <img
-                      src={article.image}
+                      src={article.image ? article.image : "/img_default.png"}
                       className="w-[48px] h-[48px] object-cover"
+                      onError={(e) => (e.target.src = "/img_default.png")}
                     />
                   </div>
                 </div>
                 <div className="flex justify-between items-center">
                   <div className="flex gap-2">
                     <div className="text-sm text-[#4b5563] font-normal">
-                      {article.username}
+                      {article.writer.nickname}
                     </div>
                     <div className="flex items-center gap-1">
                       <Image
                         src="/small_heart.png"
-                        alt="123"
+                        alt="like"
                         width={16}
                         height={16}
                       />

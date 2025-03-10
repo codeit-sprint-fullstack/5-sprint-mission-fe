@@ -1,8 +1,8 @@
 import Image from "next/image";
-import BestArticleList from "../components/BesstArticle";
-import ArticleList from "../components/articleList";
+import BestArticleList from "./BesstArticle";
+import ArticleList from "./articleList";
 
-export default function ProductList() {
+export default function MainArticleList() {
   return (
     <>
       <div className="flex flex-col items-center w-full">
