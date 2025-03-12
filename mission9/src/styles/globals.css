@@ -17,6 +17,15 @@ body {
   font-size: 16px;
   background-color: #f9fafb;
   color: #111827;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+#__next {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 a {

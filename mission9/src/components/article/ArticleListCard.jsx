@@ -8,8 +8,44 @@ import Link from "next/link";
  * @param {boolean} isBest - 베스트 게시글 여부
  */
 const ArticleListCard = ({ article, isBest = false }) => {
+  // 누락된 속성에 대한 기본값 설정
+  const safeArticle = {
+    id: article?.id || 0,
+    title: article?.title || "제목 없음",
+    imageUrl: article?.imageUrl || article?.image || "/img_default.svg",
+    createdAt:
+      article?.createdAt || article?.created_at || new Date().toISOString(),
+    author: {
+      nickname:
+        article?.author?.nickname || article?.writer?.nickname || "작성자 없음",
+      id: article?.author?.id || article?.writer?.id || 0,
+    },
+    likeCount: article?.likeCount || 0,
+  };
+
+  // 날짜 포맷팅
+  const formatDate = (dateString) => {
+    try {
+      return dateString.slice(0, 10).replace(/-/g, ". ");
+    } catch (error) {
+      return new Date().toISOString().slice(0, 10).replace(/-/g, ". ");
+    }
+  };
+
+  // 이미지 로드 오류 처리
+  const handleImageError = (e) => {
+    console.log("이미지 로딩 실패, 기본 이미지로 대체");
+    // 이미 기본 이미지인 경우 더 이상 대체하지 않음
+    if (e.target.src.includes("img_default.svg")) {
+      e.target.onerror = null; // 무한 루프 방지
+      return;
+    }
+    e.target.onerror = null; // 무한 루프 방지
+    e.target.src = "/img_default.svg"; // 기본 이미지 경로
+  };
+
   return (
-    <Link href={`/article/${article.id}`} passHref legacyBehavior>
+    <Link href={`/article/${safeArticle.id}`} passHref legacyBehavior>
       {isBest ? (
         <BestArticleCard>
           <ContentWrapper isBest={isBest}>
@@ -20,62 +56,50 @@ const ArticleListCard = ({ article, isBest = false }) => {
 
             <MainContent isBest={isBest}>
               <TitleWrapper>
-                <ArticleTitle isBest={isBest}>{article.title}</ArticleTitle>
+                <ArticleTitle isBest={isBest}>{safeArticle.title}</ArticleTitle>
               </TitleWrapper>
               <ArticleImage
-                src={article.imageUrl}
-                alt={article.title}
+                src={safeArticle.imageUrl}
+                alt={safeArticle.title}
                 isBest={isBest}
-                onError={(e) => {
-                  e.target.onerror = null; // 무한 루프 방지
-                  e.target.src = "/img_default.svg"; // 기본 이미지 경로
-                }}
+                onError={handleImageError}
               />
             </MainContent>
             <MetaContainer>
               <AuthorInfo>
                 <ProfileImage src="/ic_profile.svg" alt="Profile" />
-                <AuthorName>{article.author.nickname}</AuthorName>
-                <CreatedAt>
-                  {article.createdAt.slice(0, 10).replace(/-/g, ". ")}
-                </CreatedAt>
+                <AuthorName>{safeArticle.author.nickname}</AuthorName>
+                <CreatedAt>{formatDate(safeArticle.createdAt)}</CreatedAt>
               </AuthorInfo>
               <LikeCount>
                 <LikeIcon src="/like.svg" alt="Like" />
-                {article.likes}
+                {safeArticle.likeCount}
               </LikeCount>
             </MetaContainer>
           </ContentWrapper>
         </BestArticleCard>
       ) : (
         <ArticleCard>
-          <ContentWrapper isBest={isBest}>
+          <ContentWrapper>
             <MainContent>
-              <div>
-                <ArticleTitle isBest={isBest}>{article.title}</ArticleTitle>
-                <ArticleContent>{article.content}</ArticleContent>
-              </div>
+              <TitleWrapper>
+                <ArticleTitle>{safeArticle.title}</ArticleTitle>
+              </TitleWrapper>
               <ArticleImage
-                src={article.imageUrl}
-                alt={article.title}
-                isBest={isBest}
-                onError={(e) => {
-                  e.target.onerror = null; // 무한 루프 방지
-                  e.target.src = "/img_default.svg"; // 기본 이미지 경로
-                }}
+                src={safeArticle.imageUrl}
+                alt={safeArticle.title}
+                onError={handleImageError}
               />
             </MainContent>
             <MetaContainer>
               <AuthorInfo>
                 <ProfileImage src="/ic_profile.svg" alt="Profile" />
-                <AuthorName>{article.author.nickname}</AuthorName>
-                <CreatedAt>
-                  {article.createdAt.slice(0, 10).replace(/-/g, ". ")}
-                </CreatedAt>
+                <AuthorName>{safeArticle.author.nickname}</AuthorName>
+                <CreatedAt>{formatDate(safeArticle.createdAt)}</CreatedAt>
               </AuthorInfo>
               <LikeCount>
                 <LikeIcon src="/like.svg" alt="Like" />
-                {article.likes}
+                {safeArticle.likeCount}
               </LikeCount>
             </MetaContainer>
           </ContentWrapper>
@@ -89,7 +113,7 @@ const ArticleListCard = ({ article, isBest = false }) => {
 const ArticleCard = styled.a`
   display: flex;
   padding: 1.5rem;
-  border: 1px solid #e5e7eb;
+  border: none;
   border-radius: 8px;
   background: #f9fafb;
   cursor: pointer;
@@ -105,7 +129,7 @@ const ArticleCard = styled.a`
 const BestArticleCard = styled.a`
   display: flex;
   background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  border: none;
   padding: 0 1.25rem 1.25rem 1.25rem;
   border-radius: 8px;
   cursor: pointer;

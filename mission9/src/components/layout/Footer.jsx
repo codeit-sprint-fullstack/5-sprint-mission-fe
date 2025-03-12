@@ -6,15 +6,29 @@ const FooterContainer = styled.footer`
   background-color: #1f2937;
   color: #9ca3af;
   padding: 2rem 0;
+  height: 100px;
 `;
 
 const FooterContent = styled.div`
-  max-width: 1200px;
+  max-width: 1920px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0 1rem;
+  padding: 0 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  height: 100%;
+
+  @media (max-width: 1600px) {
+    max-width: 1600px;
+  }
+
+  @media (max-width: 744px) {
+    padding: 0 16px;
+    flex-direction: column;
+    gap: 0.5rem;
+    justify-content: center;
+  }
 `;
 
 const Copyright = styled.p`
@@ -25,7 +39,11 @@ const Copyright = styled.p`
 const LeftSection = styled.div`
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  font-size: 0.875rem;
+
+  @media (max-width: 744px) {
+    order: 3;
+  }
 `;
 
 const LinksContainer = styled.div`
@@ -33,6 +51,10 @@ const LinksContainer = styled.div`
   justify-content: center;
   gap: 1rem;
   flex: 1;
+
+  @media (max-width: 744px) {
+    order: 2;
+  }
 `;
 
 const LinkItem = styled.div`
@@ -49,6 +71,10 @@ const LinkItem = styled.div`
 const SocialIcons = styled.div`
   display: flex;
   gap: 1rem;
+
+  @media (max-width: 744px) {
+    order: 1;
+  }
 `;
 
 const IconLink = styled.div`

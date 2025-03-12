@@ -3,6 +3,15 @@ const nextConfig = {
   reactStrictMode: true,
   pageExtensions: ["js", "jsx", "ts", "tsx"],
   output: "standalone", // Netlify 배포를 위한 최적화 설정
+  images: {
+    domains: ["blogs.nvidia.co.kr"],
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "**",
+      },
+    ],
+  },
   webpack: (config) => {
     config.resolve.alias = {
       ...config.resolve.alias,

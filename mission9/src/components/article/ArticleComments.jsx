@@ -54,11 +54,15 @@ const ArticleComments = ({
             <CommentItem key={comment.id}>
               <CommentAuthorInfo>
                 <ProfileImage src="/ic_profile.svg" alt="Profile" />
-                <CommentAuthorName>{comment.author.nickname}</CommentAuthorName>
+                <CommentAuthorName>
+                  {comment.author?.nickname || "알 수 없는 사용자"}
+                </CommentAuthorName>
                 <CommentDate>
-                  {new Date(comment.createdAt)
-                    .toLocaleDateString()
-                    .replace(/\./g, ". ")}
+                  {comment.createdAt
+                    ? new Date(comment.createdAt)
+                        .toLocaleDateString()
+                        .replace(/\./g, ". ")
+                    : "날짜 없음"}
                 </CommentDate>
               </CommentAuthorInfo>
 

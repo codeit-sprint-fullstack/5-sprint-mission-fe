@@ -25,6 +25,42 @@ const defaultPageInfo = {
   hasPrev: false,
 };
 
+// 빈 게시글 데이터 (API 오류 시 사용)
+const emptyArticle = {
+  id: 0,
+  title: "게시글 제목",
+  content: "게시글 내용이 표시됩니다.",
+  imageUrl: "/img_default.svg",
+  createdAt: new Date().toISOString(),
+  author: {
+    id: 0,
+    nickname: "사용자",
+    image: "/ic_profile.svg",
+  },
+  likes: 0,
+  comments: 0,
+};
+
+// 테스트 게시글 데이터 (API 오류 시 사용)
+const testArticles = Array(5)
+  .fill(null)
+  .map((_, index) => ({
+    ...emptyArticle,
+    id: index + 1,
+    title: `테스트 게시글 ${index + 1}`,
+    likes: Math.floor(Math.random() * 50),
+  }));
+
+// 테스트 베스트 게시글 (API 오류 시 사용)
+const testBestArticles = Array(3)
+  .fill(null)
+  .map((_, index) => ({
+    ...emptyArticle,
+    id: index + 100,
+    title: `베스트 게시글 ${index + 1}`,
+    likes: 100 - index * 10,
+  }));
+
 /**
  * ISR을 이용한 정적 페이지 생성 함수
  * 검색, 정렬, 페이지 정보에 따른 게시글 및 베스트 게시글 데이터를 가져옴
@@ -45,29 +81,48 @@ export async function getStaticProps() {
       sort: "likes",
     });
 
+    // API 응답 데이터 확인 및 가공
+    const articlesData =
+      initialData.articles && Array.isArray(initialData.articles)
+        ? initialData.articles
+        : testArticles;
+
+    const bestArticlesData =
+      bestArticles.articles && Array.isArray(bestArticles.articles)
+        ? bestArticles.articles
+        : testBestArticles;
+
+    const pageInfo = {
+      currentPage: initialData.currentPage || 1,
+      totalPages: initialData.totalPages || 1,
+      hasNext: initialData.currentPage < initialData.totalPages,
+      hasPrev: initialData.currentPage > 1,
+    };
+
     return {
       props: {
-        initialArticles: initialData.articles || [],
-        initialPageInfo: initialData.pageInfo || defaultPageInfo,
-        bestArticles: bestArticles.articles || [],
+        initialArticles: articlesData,
+        initialPageInfo: pageInfo,
+        bestArticles: bestArticlesData,
         currentSearch: "",
         currentSort: "latest",
       },
-      // 페이지를 10초마다 재생성 (필요에 따라 시간 조정)
-      revalidate: 10,
+      // 60초마다 페이지 재생성
+      revalidate: 60,
     };
   } catch (error) {
-    console.error("게시글 데이터 가져오기 실패:", error);
-    // 에러 발생 시 기본값 반환
+    console.error("정적 페이지 생성 중 오류:", error);
+    // 오류 발생시 테스트 데이터로 페이지 생성
     return {
       props: {
-        initialArticles: [],
+        initialArticles: testArticles,
         initialPageInfo: defaultPageInfo,
-        bestArticles: [],
+        bestArticles: testBestArticles,
         currentSearch: "",
         currentSort: "latest",
+        error: "데이터를 불러오는데 실패했습니다.",
       },
-      revalidate: 10,
+      revalidate: 60,
     };
   }
 }
@@ -120,6 +175,8 @@ const ArticleList = ({
 
       if (page !== 1 || search !== "" || sort !== "latest") {
         try {
+          console.log("게시글 데이터 요청:", { page, search, sort });
+
           // 쿼리 파라미터가 있을 경우 클라이언트 사이드에서 데이터 패칭
           const result = await getArticles({
             page,
@@ -128,18 +185,69 @@ const ArticleList = ({
             sort,
           });
 
-          setArticles(result.articles || []);
-          setPageInfo(result.pageInfo || defaultPageInfo);
+          console.log("게시글 데이터 응답:", result);
+
+          // 게시글이 없는 경우 빈 배열 대신 더 친절한 메시지 표시를 위해 결과 확인
+          if (
+            !result.articles ||
+            !Array.isArray(result.articles) ||
+            result.articles.length === 0
+          ) {
+            console.log("게시글 데이터가 없거나 형식이 올바르지 않음");
+            setArticles([]);
+            if (result.error) {
+              setError(result.error);
+            } else if (search) {
+              setError(`'${search}' 검색 결과가 없습니다.`);
+            } else {
+              setError("게시글이 없습니다.");
+            }
+          } else {
+            console.log("게시글 데이터 설정:", result.articles.length);
+            setArticles(result.articles);
+            setError(null);
+          }
+
+          // 페이지 정보 설정
+          const pageInfo = {
+            currentPage: result.currentPage || page,
+            totalPages: result.totalPages || 1,
+            hasNext: result.currentPage < result.totalPages,
+            hasPrev: result.currentPage > 1,
+          };
+
+          setPageInfo(pageInfo);
 
           // 검색어나 정렬이 변경된 경우 베스트 게시글도 다시 가져옴
           if (search !== currentSearch || sort !== currentSort) {
-            const bestResult = await getArticles({
-              page: 1,
-              limit: 3,
-              sort: "likes",
-              search,
-            });
-            setBestArticlesList(bestResult.articles || []);
+            console.log("베스트 게시글 데이터 요청");
+
+            try {
+              const bestResult = await getArticles({
+                page: 1,
+                limit: 3,
+                sort: "likes",
+                search,
+              });
+
+              console.log("베스트 게시글 응답:", bestResult);
+
+              // 베스트 게시글이 없는 경우 처리
+              if (
+                !bestResult.articles ||
+                !Array.isArray(bestResult.articles) ||
+                bestResult.articles.length === 0
+              ) {
+                console.log("베스트 게시글 데이터가 없음");
+                setBestArticlesList([]);
+              } else {
+                console.log("베스트 게시글 설정:", bestResult.articles.length);
+                setBestArticlesList(bestResult.articles);
+              }
+            } catch (bestErr) {
+              console.error("베스트 게시글 가져오기 실패:", bestErr);
+              setBestArticlesList([]);
+            }
           }
 
           setSearchTerm(search);
@@ -147,18 +255,34 @@ const ArticleList = ({
         } catch (err) {
           console.error("데이터 가져오기 실패:", err);
           setError("데이터를 불러오는데 실패했습니다.");
+          // 에러 발생 시 빈 배열 설정
+          setArticles([]);
+          setBestArticlesList([]);
+        } finally {
+          setIsLoadingData(false);
         }
       } else {
-        // 기본 페이지일 경우 초기 데이터 사용
-        setSearchTerm(currentSearch);
-        setSortBy(currentSort);
+        // 기본 페이지인 경우 초기 데이터 사용
+        console.log("초기 데이터 사용");
+        setArticles(initialArticles);
+        setPageInfo(initialPageInfo);
+        setBestArticlesList(bestArticles);
+        setSearchTerm("");
+        setSortBy("latest");
+        setIsLoadingData(false);
       }
-
-      setIsLoadingData(false);
     };
 
     fetchData();
-  }, [router.isReady, router.query]);
+  }, [
+    router.isReady,
+    router.query,
+    currentSearch,
+    currentSort,
+    initialArticles,
+    initialPageInfo,
+    bestArticles,
+  ]);
 
   // 윈도우 리사이즈 이벤트 처리 (반응형 UI를 위한 화면 너비 추적)
   useEffect(() => {
