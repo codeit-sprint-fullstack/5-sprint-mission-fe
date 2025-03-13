@@ -1,7 +1,5 @@
+import ServLayout from "@/components/Layout";
+
 export default function Home() {
-  return (
-    <div>
-      메인 페이지
-    </div>
-  );
+  return <ServLayout>메인 페이지</ServLayout>;
 }

@@ -14,6 +14,8 @@ import { useRouter } from "next/router";
 import emptyComment from "@/public/imgs/Img_reply_empty.png";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { CommentCard } from "@/types/commentCard";
+import MoreMenu from "@/components/common/MoreMenu";
+import Layout from "@/components/Layout";
 
 export const getServerSideProps = (async (context) => {
   const id = context.params?.id;
@@ -47,7 +49,7 @@ export default function EditPost({ article }: PostProps) {
   const [isMenuBar, setIsMenuBar] = useState(false);
 
   const { data, isLoading, isError } = useQuery({
-    queryKey: ["comments"],
+    queryKey: ["comments", article.id],
     queryFn: getComments,
   });
 
@@ -56,10 +58,6 @@ export default function EditPost({ article }: PostProps) {
   async function getComments() {
     const res = await api.get<CommentData>(`/comment/${article.id}`);
     return res;
-  }
-
-  function handleMenu() {
-    setIsMenuBar((prev) => !prev);
   }
 
   function handleContent(e: React.ChangeEvent<HTMLTextAreaElement>) {
@@ -81,8 +79,8 @@ export default function EditPost({ article }: PostProps) {
   const queryClient = useQueryClient();
   const mutation = useMutation({
     mutationFn: postCommit,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["comments"]}),
-  })
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["comments", article.id] }),
+  });
 
   async function deletePost() {
     try {
@@ -98,93 +96,76 @@ export default function EditPost({ article }: PostProps) {
   }
 
   return (
-    <div className="flex flex-col gap-[64px] w-[100%] min-h-[100vh]">
-      <div className="flex flex-col gap-[16px]">
-        <div className="flex justify-between">
-          <div className="text-[20px] font-bold">{article.title}</div>
-          <div className="relative">
-            <div
-              className="relative w-[24px] h-[24px] cursor-pointer"
-              onClick={handleMenu}
-            >
-              <Image src={kebabImg} fill alt="글 관리 메뉴" />
+    <Layout>
+      <div className="flex flex-col gap-[64px] w-[100%] min-h-[100vh]">
+        <div className="flex flex-col gap-[16px]">
+          <div className="flex justify-between">
+            <div className="text-[20px] font-bold">{article.title}</div>
+            <MoreMenu onUpdate={updatePost} onDelete={deletePost} isMenuBar={isMenuBar} setIsMenuBar={setIsMenuBar}/>
+          </div>
+          <div className="flex border-b pb-2 items-center gap-4">
+            <div className="relative w-[40px] h-[40px]">
+              <Image src={profileImg} fill alt="프로필 이미지" unoptimized />
             </div>
-            {isMenuBar && (
-              <div className="absolute right-2">
-                <div
-                  className="bg-white border border-[#D1D5DB] pt-[16px] pb-[12px] w-[102px] rounded-tl-lg rounded-tr-lg flex justify-center text-[#6B7280] z-50 cursor-pointer hover:bg-slate-50"
-                  onClick={updatePost}
-                >
-                  수정하기
-                </div>
-                <div
-                  className="bg-white border-x border-b border-[#D1D5DB] pt-[16px] pb-[12px] w-[102px] rounded-bl-lg rounded-br-lg flex justify-center text-[#6B7280] z-50 cursor-pointer hover:bg-slate-50"
-                  onClick={deletePost}
-                >
-                  삭제하기
-                </div>
+            <div className="text-[#4B5563]">익명</div>
+            <div className="border-r pr-4 text-[#9CA3AF]">
+              {new Date(article.updatedAt).toLocaleDateString()}
+            </div>
+            <div className="flex items-center justify-center border rounded-[35px] gap-[10px] w-[87px] h-[40px]">
+              <div className="relative w-[32px] h-[32px]">
+                <Image src={heart} fill alt="좋아요" unoptimized />
               </div>
-            )}
-          </div>
-        </div>
-        <div className="flex border-b pb-2 items-center gap-4">
-          <div className="relative w-[40px] h-[40px]">
-            <Image src={profileImg} fill alt="프로필 이미지" unoptimized />
-          </div>
-          <div className="text-[#4B5563]">익명</div>
-          <div className="border-r pr-4 text-[#9CA3AF]">
-            {new Date(article.updatedAt).toLocaleDateString()}
-          </div>
-          <div className="flex items-center justify-center border rounded-[35px] gap-[10px] w-[87px] h-[40px]">
-            <div className="relative w-[32px] h-[32px]">
-              <Image src={heart} fill alt="좋아요" unoptimized />
+              <div>123</div>
             </div>
-            <div>123</div>
           </div>
+          <div>{article.content}</div>
         </div>
-        <div>{article.content}</div>
-      </div>
-      <div className="flex flex-col gap-[40px]">
-        <div className="flex flex-col mt-2 gap-4">
-          <div className="font-semibold ">댓글달기</div>
+        <div className="flex flex-col gap-[40px]">
+          <div className="flex flex-col mt-2 gap-4">
+            <div className="font-semibold ">댓글달기</div>
 
-          <textarea
-            placeholder="댓글을 입력해주세요."
-            className="focus:outline-[#3692FF] bg-[#F3F4F6] min-h-[104px] px-[24px] py-[16px] rounded-xl resize-none"
-            onChange={handleContent}
-            value={content}
-          />
-          <div className="flex justify-end">
-            <Button name="등록" disabled={!isVerified} click={() => mutation.mutate()} />
-          </div>
-        </div>
-
-        {comments && comments.length > 0 ? (
-          <div className="flex flex-col gap-10">
-            {comments.map((comment, index) => {
-              return <Comment comment={comment} key={index} />;
-            })}
-          </div>
-        ) : (
-          <div className="flex flex-col items-center">
-            <div className="relative w-[140px] h-[140px]">
-              <Image src={emptyComment} alt="댓글 없음" fill />
+            <textarea
+              placeholder="댓글을 입력해주세요."
+              className="focus:outline-[#3692FF] bg-[#F3F4F6] min-h-[104px] px-[24px] py-[16px] rounded-xl resize-none"
+              onChange={handleContent}
+              value={content}
+            />
+            <div className="flex justify-end">
+              <Button
+                name="등록"
+                disabled={!isVerified}
+                click={() => mutation.mutate()}
+              />
             </div>
-            <div className="text-[#9CA3AF]">아직 댓글이 없어요,</div>
-            <div className="text-[#9CA3AF]">댓글을 달아보세요!</div>
           </div>
-        )}
-      </div>
 
-      <Link
-        href={"/board"}
-        className="flex gap-2 mx-auto bg-[#3692FF] text-[#F3F4F6] px-[64px] py-[12px] rounded-[40px] w-[280px] hover:bg-[#366cff]"
-      >
-        목록으로 돌아가기{" "}
-        <div className="relative w-[24px] h-[24px]">
-          <Image src={backImg} fill alt="뒤로가기" />
+          {comments && comments.length > 0 ? (
+            <div className="flex flex-col gap-10">
+              {comments.map((comment, index) => {
+                return <Comment comment={comment} key={index} />;
+              })}
+            </div>
+          ) : (
+            <div className="flex flex-col items-center">
+              <div className="relative w-[140px] h-[140px]">
+                <Image src={emptyComment} alt="댓글 없음" fill />
+              </div>
+              <div className="text-[#9CA3AF]">아직 댓글이 없어요,</div>
+              <div className="text-[#9CA3AF]">댓글을 달아보세요!</div>
+            </div>
+          )}
         </div>
-      </Link>
-    </div>
+
+        <Link
+          href={"/board"}
+          className="flex gap-2 mx-auto bg-[#3692FF] text-[#F3F4F6] px-[64px] py-[12px] rounded-[40px] w-[280px] hover:bg-[#366cff]"
+        >
+          목록으로 돌아가기{" "}
+          <div className="relative w-[24px] h-[24px]">
+            <Image src={backImg} fill alt="뒤로가기" />
+          </div>
+        </Link>
+      </div>
+    </Layout>
   );
 }
