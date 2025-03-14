@@ -4,6 +4,10 @@ import Header from "@components/Header";
 import "@styles/globals.css";
 import Head from "next/head";
 import { useRouter } from "next/router";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { AuthProvider } from "@contexts/AuthProvider";
+
+const queryClient = new QueryClient();
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -17,17 +21,23 @@ export default function App({ Component, pageProps }) {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/logo.png" />
       </Head>
-      <Header
-        variant={
-          pagesWithSimpleHeader.includes(router.pathname) ? "simple" : "full"
-        }
-      />
-      <div className="flex flex-col min-h-screen">
-        <Container page>
-          <Component {...pageProps} />
-        </Container>
-        <Footer />
-      </div>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <Header
+            variant={
+              pagesWithSimpleHeader.includes(router.pathname)
+                ? "simple"
+                : "full"
+            }
+          />
+          <div className="flex flex-col min-h-screen">
+            <Container page>
+              <Component {...pageProps} />
+            </Container>
+            <Footer />
+          </div>
+        </AuthProvider>
+      </QueryClientProvider>
     </>
   );
 }

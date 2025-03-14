@@ -5,14 +5,22 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import axios from "@/lib/axios";
 import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
+import useLocalStorage from "@hooks/useLocalStorage";
+import { useAuth } from "@contexts/AuthProvider";
 
 const Signup = () => {
   const router = useRouter();
+  const [accessToken, setAccessToken] = useLocalStorage("access_token", "");
+  const [refreshToken, setRefreshToken] = useLocalStorage("refresh_token", "");
+  const { user, setUser } = useAuth();
+  if (accessToken.length > 0) router.push("/items");
+
   const [formData, setFormData] = useState({
     email: "",
     nickname: "",
     password: "",
-    passwordConfirm: "",
+    passwordConfirmation: "",
   });
   const [errors, setErrors] = useState({});
   const [isActive, setIsActive] = useState(false);
@@ -25,7 +33,7 @@ const Signup = () => {
   const validateField = (e) => {
     const { name, value } = e.target;
     let error = "";
- 
+
     if (name === "email") {
       if (!value.trim()) error = "이메일을 입력해주세요";
       else if (
@@ -42,7 +50,7 @@ const Signup = () => {
     } else if (name === "password" && value.trim().length < 8) {
       error = "비밀번호를 8자 이상 입력해주세요";
     } else if (
-      name === "passwordConfirm" &&
+      name === "passwordConfirmation" &&
       value.trim() !== formData.password
     ) {
       error = "비밀번호가 일치하지 않습니다";
@@ -64,28 +72,36 @@ const Signup = () => {
     setIsVisiblePasswordConfirm((prev) => !prev);
   };
 
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post("/auth/signUp", data);
+    },
+    onError: (error, variables, context) => {
+      if (error.response?.status === 400) {
+        setModalMessage("사용 중인 이메일입니다.");
+        setActiveModal("-1");
+      }
+    },
+    onSuccess: (res) => {
+      setAccessToken(res.data.accessToken);
+      setRefreshToken(res.data.refreshToken);
+      setUser(res.data.user);
+      setModalMessage("가입 완료되었습니다.");
+      setActiveModal("1");
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post("/users/signup", formData)
-      .then((res) => {
-        setModalMessage("가입 완료되었습니다.");
-        setActiveModal("1");
-      })
-      .catch((e) => {
-        if (e.response.status === 400) {
-          setModalMessage("사용 중인 이메일입니다.");
-          setActiveModal("-1");
-        }
-      });
+    mutation.mutate(formData);
   };
 
   useEffect(() => {
     setIsActive(
       Object.values(formData).every((value) => value !== "") &&
         Object.values(errors).every((value) => value === "") &&
-        formData.password === formData.passwordConfirm
+        formData.password === formData.passwordConfirmation
     );
   }, [errors]);
 
@@ -175,15 +191,16 @@ const Signup = () => {
           <div className="relative">
             <input
               type={isVisiblePasswordConfirm ? "password" : "text"}
-              value={formData.passwordConfirm}
+              value={formData.passwordConfirmation}
               onChange={handleChange}
               onBlur={validateField}
-              name="passwordConfirm"
+              name="passwordConfirmation"
               placeholder="비밀번호를 다시 한 번 입력해주세요"
               className={clsx("w-full h-[56px] px-6 bg-[#F3F4F6] rounded-xl", {
-                ["outline outline-2 outline-red-400"]: errors.passwordConfirm,
+                ["outline outline-2 outline-red-400"]:
+                  errors.passwordConfirmation,
                 ["focus:outline outline-2 outline-blue-400"]:
-                  !errors.passwordConfirm,
+                  !errors.passwordConfirmation,
               })}
             ></input>
             <button
@@ -201,9 +218,9 @@ const Signup = () => {
               ></Image>
             </button>
           </div>
-          {errors.passwordConfirm && (
+          {errors.passwordConfirmation && (
             <p className="text-red-500 text-sm mt-2">
-              {errors.passwordConfirm}
+              {errors.passwordConfirmation}
             </p>
           )}
         </div>
@@ -249,8 +266,8 @@ const Signup = () => {
       <Modal
         isOpen={activeModal !== "0"}
         onClose={() => {
-          setActiveModal(false);
-          if (activeModal === "1") router.push("/login");
+          setActiveModal("0");
+          if (activeModal === "1") router.push("/community");
         }}
       >
         {modalMessage}

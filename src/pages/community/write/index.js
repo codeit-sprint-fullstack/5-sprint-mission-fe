@@ -17,12 +17,20 @@ const Write = () => {
   };
 
   const handleFormSubmit = async () => {
-    await axios.post("/articles", {
-      userId: "user",
-      title: titleValue,
-      content: contentValue,
-      imageUrl: "",
-    });
+    await axios.post(
+      "/articles",
+      {
+        title: titleValue,
+        content: contentValue,
+        image: "",
+      }
+      //   {
+      //   userId: "user",
+      //   title: titleValue,
+      //   content: contentValue,
+      //   imageUrl: "",
+      // }
+    );
     router.push("/community");
   };
 

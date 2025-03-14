@@ -5,9 +5,17 @@ import { useEffect, useState } from "react";
 import axios from "@/lib/axios";
 import Modal from "@components/Modal";
 import { useRouter } from "next/router";
+import { useMutation } from "@tanstack/react-query";
+import useLocalStorage from "@hooks/useLocalStorage";
+import { useAuth } from "@contexts/AuthProvider";
 
 const Login = () => {
   const router = useRouter();
+  const [accessToken, setAccessToken] = useLocalStorage("access_token", "");
+  const [refreshToken, setRefreshToken] = useLocalStorage("refresh_token", "");
+  const { user, setUser } = useAuth();
+  if (accessToken.length > 0) router.push("/items");
+
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [errors, setErrors] = useState({});
   const [isActive, setIsActive] = useState(false);
@@ -43,20 +51,32 @@ const Login = () => {
     setIsVisiblePassword((prev) => !prev);
   };
 
+  const mutation = useMutation({
+    mutationFn: (data) => {
+      return axios.post("/auth/signIn", data);
+    },
+    onError: (error, variables, context) => {
+      if (error.response?.status === 400) {
+        setActiveModal(true);
+        setErrors({
+          email: "이메일을 확인해 주세요.",
+          password: "비밀번호를 확인해 주세요.",
+        });
+      }
+    },
+    onSuccess: (res) => {
+      // 로그인 성공 시 /community 페이지로 이동
+      setAccessToken(res.data.accessToken);
+      setRefreshToken(res.data.refreshToken);
+      setUser(res.data.user);
+      router.push("/community");
+    },
+  });
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    await axios
-      .post("/users/login", formData)
-      .then((res) => {
-        const login = res.data;
-        router.push("/community");
-      })
-      .catch((e) => {
-        if (e.response.status === 400) {
-          setActiveModal(true);
-        }
-      });
+    mutation.mutate(formData);
   };
 
   useEffect(() => {
@@ -148,6 +168,7 @@ const Login = () => {
             href="https://www.google.com"
             className="relative w-[42px] h-[42px]"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <Image src="/ic_google.png" fill></Image>
           </a>
@@ -155,6 +176,7 @@ const Login = () => {
             href="https://www.kakao.com"
             className="relative w-[42px] h-[42px]"
             target="_blank"
+            rel="noopener noreferrer"
           >
             <Image src="/ic_kakao.png" fill></Image>
           </a>

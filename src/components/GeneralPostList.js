@@ -13,7 +13,6 @@ const GeneralPostList = ({ data }) => {
   const [page, setPage] = useState(1);
 
   const getArticles = () => {
-    console.log(page);
     router.push(
       `/community?page=${page}&pageSize=5&keyword=${value}&orderBy=${selected}`
     );

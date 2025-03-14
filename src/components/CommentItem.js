@@ -15,14 +15,17 @@ const CommentItem = ({ comment, handleDeleteComment, handleUpdateComment }) => {
   const handleChangeContent = (e) => {
     setContent(e.target.value);
   };
+  const handleReset = () => {
+    setContent(comment.content);
+    setUpdateActive(false);
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.patch(
-        `/articles/${comment.resourceId}/comments`,
-        { id: comment.id, content: content }
-      );
+      const res = await axios.patch(`/comments/${comment.id}`, {
+        content: content,
+      });
       handleUpdateComment(res.data);
       setUpdateActive(false);
     } catch (err) {}
@@ -44,6 +47,7 @@ const CommentItem = ({ comment, handleDeleteComment, handleUpdateComment }) => {
             <div className="mt-4 flex gap-3">
               <button
                 type="reset"
+                onClick={handleReset}
                 className="w-[66px] h-[42px] bg-[#9CA3AF] text-base text-white font-semibold rounded-lg"
               >
                 취소
@@ -88,7 +92,7 @@ const CommentItem = ({ comment, handleDeleteComment, handleUpdateComment }) => {
               <button
                 onClick={() => {
                   setIsActive(false);
-                  handleDeleteComment(comment.resourceId, comment.id);
+                  handleDeleteComment(comment.id);
                 }}
                 className="px-6 md:px-10 py-4"
               >
@@ -99,13 +103,13 @@ const CommentItem = ({ comment, handleDeleteComment, handleUpdateComment }) => {
         )}
       </div>
 
-      <div className="flex gap-2 mt-6 mb-3">
-        <div className="relative w-8 h-8">
-          <Image src="/ic_profile.png" fill />
+      <div className="flex gap-2 mt-6 mb-3 items-center">
+        <div className="relative w-8 h-8 rounded-full overflow-hidden">
+          <Image src={comment.writer.image || "/ic_profile.png"} fill />
         </div>
-        <div className="flex flex-col gap-3">
+        <div className="flex flex-col justify-center">
           <div className="text-sm text-[#4B5563] font-normal">
-            {comment.nickname}
+            {comment.writer.nickname}
           </div>
           <div className="text-xs text-[#9CA3AF] font-normal">
             {dayjs().diff(dayjs(comment.createdAt), "hour")}시간 전
