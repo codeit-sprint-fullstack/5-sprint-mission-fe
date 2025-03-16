@@ -2,24 +2,26 @@ import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@images/user-icon/ic_profile.png";
 import likeIcon from "@images/button-image/Like_Icon.png";
-import baseImage from "@images/base-image/baseArticleImg.png";
+import baseImg from "@images/base-image/baseImg.png";
 import { formatDay } from "@/lib/day";
 
-export default function ArticleList({ article = [] }) {
+export default function ProductList({ products = [] }) {
   return (
     <>
-      {article.map((article) => (
+      {products.map((product) => (
         <Link
-          key={article.id}
-          href={`/article/${article.id}`}
+          key={product.id}
+          href={`/items/${product.id}`}
           className="flex flex-col w-full gap-[24px] bg-custom-color-list-gray border-b border-custom-color-border-gray pb-[24px]"
         >
           <section className="flex justify-between">
-            <p className="text-xl font-semibold">{article.title}</p>
+            <p className="text-xl font-semibold">{product.name}</p>
             <Image
-              src={baseImage}
+              src={product.images[0] || baseImg}
               alt="상품 기본 이미지"
-              className="w-[72px]"
+              width={64}
+              height={50}
+              className="object-cover"
             />
           </section>
           <section className="flex justify-between">
@@ -33,7 +35,7 @@ export default function ArticleList({ article = [] }) {
                 총명한 판다
               </p>
               <p className="text-sm text-custom-text-gray-50 font-normal">
-                {formatDay(article.createdAt)}
+                {formatDay(product.createdAt)}
               </p>
             </div>
             <div className="flex gap-[8px]">
@@ -43,7 +45,7 @@ export default function ArticleList({ article = [] }) {
                 className="w-[20px] object-contain"
               />
               <p className="text-base font-normal text-custom-text-gray-200">
-                {article.likes?.length || 0}+
+                {product.favoriteCount || 0}+
               </p>
             </div>
           </section>

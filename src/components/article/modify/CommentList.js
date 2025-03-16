@@ -1,10 +1,10 @@
 import Image from "next/image";
-import userIcon from "../../../public/Img/user-icon/ic_profile.png";
-import replyImg from "../../../public/Img/base-image/Img_reply_empty.png";
-import backIcon from "../../../public/Img/button-image/ic_back.png";
-import { CommentDropdownBar } from "./CommentModifySelect";
-import SetComment from "./SetComment";
-import { fromNow } from "@/hooks/day";
+import userIcon from "@images/user-icon/ic_profile.png";
+import replyImg from "@images/base-image/Img_reply_empty.png";
+import backIcon from "@images/button-image/ic_back.png";
+import CommentModifySelect from "./CommentModifySelect";
+import CommentForm from "./CommentForm";
+import { fromNow } from "@/lib/day";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 
@@ -17,7 +17,7 @@ export default function CommentList({ articles }) {
     const id = articles.id;
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_ARL_URL}/comments/articles/${id}`
+        `${process.env.NEXT_PUBLIC_ARL_LOCAL_URL}/comments/articles/${id}`
       );
       if (!res.ok) throw new Error("댓글 불러오기 실패");
 
@@ -43,7 +43,7 @@ export default function CommentList({ articles }) {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_ARL_URL}/comments/${commentId}`,
+        `${process.env.NEXT_PUBLIC_ARL_LOCAL_URL}/comments/${commentId}`,
         {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -62,7 +62,7 @@ export default function CommentList({ articles }) {
   return (
     <>
       <div className="flex flex-col gap-10">
-        <SetComment articles={articles} CommentAdd={fetchComments} />
+        <CommentForm articles={articles} CommentAdd={fetchComments} />
         {comments.length > 0 ? (
           comments.map((comment) => (
             <div
@@ -87,7 +87,7 @@ export default function CommentList({ articles }) {
                     {comment.content}
                   </p>
                 )}
-                <CommentDropdownBar
+                <CommentModifySelect
                   commentId={comment.id}
                   onUpdate={fetchComments}
                   onEdit={() => handleEdit(comment)}

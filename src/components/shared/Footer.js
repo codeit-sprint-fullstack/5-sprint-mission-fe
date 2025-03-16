@@ -1,10 +1,10 @@
-import InstaIcon from "../../../public/Img/site-icon/Insta.png";
-import FaceBIcon from "../../../public/Img/site-icon/facebook.png";
-import TwitterIcon from "../../../public/Img/site-icon/Twitter.png";
-import YoutubeIcon from "../../../public/Img/site-icon/Youtube.png";
+import InstaIcon from "@images/site-icon/Insta.png";
+import FaceBIcon from "@images/site-icon/facebook.png";
+import TwitterIcon from "@images/site-icon/Twitter.png";
+import YoutubeIcon from "@images/site-icon/Youtube.png";
 import Image from "next/image";
 
-export function Footer() {
+export default function Footer() {
   return (
     <footer className="bg-gray-900 text-gray-400 flex justify-center px-20 pt-8 pb-28">
       <div className="flex justify-between items-center w-[1520px] h-[20px]">

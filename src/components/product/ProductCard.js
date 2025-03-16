@@ -1,15 +1,14 @@
 import Image from "next/image";
 import Link from "next/link";
-import baseImg from "@images/base-image/baseArticleImg.png";
 import likeImg from "@images/button-image/Like_Icon.png";
 import medal from "@images/ic_medal.png";
 import { formatDay } from "@/lib/day";
 
-export default function ArticleCard({ article }) {
+export default function ProductCard({ product }) {
   return (
     <>
       <Link
-        href={`/article/${article.id}`}
+        href={`/items/${product.id}`}
         className=" flex flex-col w-full bg-custom-color-card-gray px-[24px] pb-[16px] gap-[16px]"
       >
         <section className="flex justify-center w-[102px] py-[2px] bg-custom-color-blue rounded-b-2xl gap-[5px]">
@@ -24,9 +23,15 @@ export default function ArticleCard({ article }) {
         <div className=" flex flex-col gap-[40px] xl:gap-[18px]">
           <section className="flex justify-between">
             <p className="text-lg text-custom-text-gray-800 font-semibold">
-              {article.title}
+              {product.name}
             </p>
-            <Image src={baseImg} alt="base Image" className="w-[72px]" />
+            <Image
+              src={product.images[0]}
+              alt="상품 Image"
+              width={64}
+              height={50}
+              className="object-cover"
+            />
           </section>
 
           <section className="flex justify-between items-center">
@@ -41,12 +46,12 @@ export default function ArticleCard({ article }) {
                   className="w-[13px] object-contain"
                 />
                 <p className="text-sm text-custom-text-gray-200 font-normal">
-                  {article.likes?.length || 0}+
+                  {product.favoriteCount || 0}+
                 </p>
               </div>
             </div>
             <p className="text-sm text-custom-text-gray-50 font-normal">
-              {formatDay(article.createdAt)}
+              {formatDay(product.createdAt)}
             </p>
           </section>
         </div>
