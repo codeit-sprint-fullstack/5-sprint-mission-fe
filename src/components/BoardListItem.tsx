@@ -1,7 +1,7 @@
 import Image from "next/image";
-import macbook from "../../assets/images/macbook.png";
-import sampleProfile from "../../assets/icons/ic_profile.svg";
-import HeartIcon from "../../assets/icons/ic_heart.svg";
+import macbook from "@/assets/images/macbook.png";
+import sampleProfile from "@/assets/icons/ic_profile.svg";
+import HeartIcon from "@/assets/icons/ic_heart.svg";
 import { Post } from "@/services/postServices";
 import { useState } from "react";
 import { likePost } from "@/services/postServices";

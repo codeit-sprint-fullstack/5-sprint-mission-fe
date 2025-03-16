@@ -1,4 +1,4 @@
-import Logo from "@/components/Logo";
+import Logo from "@/app/(main)/_components/Logo";
 import "@/app/globals.css";
 import { Button } from "@/components/Button";
 import BestBoardSection from "@/components/BestBoardSection";

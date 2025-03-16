@@ -1,6 +1,6 @@
 import Image from "next/image";
-import logo from "../../assets/icons/panda-logo.svg";
-import logoName from "../../assets/icons/panda-name.svg";
+import logo from "@/assets/icons/panda-logo.svg";
+import logoName from "@/assets/icons/panda-name.svg";
 import Link from "next/link";
 export default function Logo() {
   return (

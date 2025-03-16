@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import Modal from "@/components/Modal";
 
-import Navigation from "@/app/(main)/_components/Navigaion";
-
-const meta: Meta<typeof Navigation> = {
-  title: "Navigation",
-  component: Navigation,
+const meta: Meta<typeof Modal> = {
+  title: "Modal",
+  component: Modal,
   tags: ["autodocs"],
+  parameters: {
+    layout: "centered",
+  },
 };
 
 export default meta;

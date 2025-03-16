@@ -1,7 +1,7 @@
 import Image from "next/image";
-import medal from "../../assets/icons/ic_medal.svg";
-import macbook from "../../assets/images/macbook.png";
-import heartIcon from "../../assets/icons/ic_heart.svg";
+import medal from "@/assets/icons/ic_medal.svg";
+import macbook from "@/assets/images/macbook.png";
+import heartIcon from "@/assets/icons/ic_heart.svg";
 
 export default function BestBoardCard() {
   return (
@@ -25,7 +25,7 @@ export default function BestBoardCard() {
             <p>9999+</p>
           </div>
           <div className="flex-grow" />
-          <p className="text-gray-400">2025. 02.   23</p>
+          <p className="text-gray-400">2025. 02. 23</p>
         </div>
       </div>
     </div>

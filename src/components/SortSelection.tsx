@@ -1,6 +1,6 @@
 import Image from "next/image";
-import sortIcon from "../../assets/icons/ic_sort.svg";
-import ArrowDownIcon from "../../assets/icons/ic_arrow_down.svg";
+import sortIcon from "@/assets/icons/ic_sort.svg";
+import ArrowDownIcon from "@/assets/icons/ic_arrow_down.svg";
 
 export default function SortSelection() {
   return (
