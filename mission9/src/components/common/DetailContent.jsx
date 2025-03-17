@@ -2,44 +2,37 @@ import React, { useState } from "react";
 import styled from "@emotion/styled";
 import LikeButton from "./LikeButton";
 
-/**
- * 상세 페이지 콘텐츠 컴포넌트
+/* 기능: 상세 페이지 콘텐츠 컴포넌트
  * @param {object} props - 컴포넌트 속성
- * @param {Array} props.images - 이미지 URL 배열 (여러 이미지)
- * @param {string} props.content - 내용 텍스트
- * @param {Array} props.tags - 태그 배열
+ * @param {string[]} props.images - 이미지 URL 배열
+ * @param {string} props.content - 상품 설명 텍스트
+ * @param {string[]} props.tags - 상품 태그 배열
  */
 const DetailContent = ({
   images = [],
   content = "내용이 없습니다.",
   tags = [],
 }) => {
-  // 현재 표시되는 이미지 인덱스 (이미지 갤러리용)
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  // 모든 이미지 소스 배열 생성
   const allImages = images.length > 0 ? images : ["/img_default.svg"];
 
-  // 이미지 오류 처리
+  /* 로직: 이미지 오류 처리 */
   const handleImageError = (e) => {
-    console.log("이미지 로딩 실패, 기본 이미지로 대체");
-    // 이미 기본 이미지인 경우 더 이상 대체하지 않음
     if (e.target.src.includes("img_default.svg")) {
-      e.target.onerror = null; // 무한 루프 방지
+      e.target.onerror = null;
       return;
     }
-    e.target.onerror = null; // 무한 루프 방지
+    e.target.onerror = null;
     e.target.src = "/img_default.svg";
   };
 
-  // 이전 이미지로 이동
+  /* 로직: 이미지 갤러리 네비게이션 */
   const handlePrevImage = () => {
     setCurrentImageIndex((prev) =>
       prev === 0 ? allImages.length - 1 : prev - 1
     );
   };
 
-  // 다음 이미지로 이동
   const handleNextImage = () => {
     setCurrentImageIndex((prev) =>
       prev === allImages.length - 1 ? 0 : prev + 1
@@ -104,7 +97,7 @@ const DetailContent = ({
   );
 };
 
-// 스타일 컴포넌트
+/* 스타일: 레이아웃 컴포넌트 */
 const ContentContainer = styled.div`
   padding: 0 2rem 2rem;
 `;
@@ -128,6 +121,7 @@ const ContentSection = styled.div`
   min-width: 0;
 `;
 
+/* 스타일: 이미지 갤러리 컴포넌트 */
 const ImageContainer = styled.div`
   position: relative;
   width: 100%;
@@ -143,11 +137,10 @@ const ProductImage = styled.img`
   display: block;
 `;
 
-const NavButtonLeft = styled.button`
+const NavButton = styled.button`
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  left: 10px;
   background-color: rgba(0, 0, 0, 0.5);
   color: white;
   border: none;
@@ -166,27 +159,12 @@ const NavButtonLeft = styled.button`
   }
 `;
 
-const NavButtonRight = styled.button`
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  right: 10px;
-  background-color: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 2;
+const NavButtonLeft = styled(NavButton)`
+  left: 10px;
+`;
 
-  &:hover {
-    background-color: rgba(0, 0, 0, 0.7);
-  }
+const NavButtonRight = styled(NavButton)`
+  right: 10px;
 `;
 
 const ImageCounter = styled.div`
@@ -200,6 +178,7 @@ const ImageCounter = styled.div`
   font-size: 14px;
 `;
 
+/* 스타일: 썸네일 컴포넌트 */
 const ThumbnailContainer = styled.div`
   display: flex;
   gap: 8px;
@@ -233,6 +212,7 @@ const Thumbnail = styled.img`
   }
 `;
 
+/* 스타일: 콘텐츠 컴포넌트 */
 const SectionTitle = styled.h3`
   font-size: 1.25rem;
   font-weight: 600;
@@ -249,21 +229,19 @@ const ContentText = styled.p`
   line-height: 1.6;
   color: #4b5563;
   white-space: pre-wrap;
-  word-break: break-word;
 `;
 
 const TagContainer = styled.div`
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 0.5rem;
+  gap: 0.5rem;
 `;
 
 const Tag = styled.span`
   background-color: #f3f4f6;
   color: #4b5563;
-  padding: 4px 12px;
-  border-radius: 16px;
+  padding: 0.25rem 0.75rem;
+  border-radius: 9999px;
   font-size: 0.875rem;
 `;
 

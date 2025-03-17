@@ -159,8 +159,8 @@ const ProductDetailPage = () => {
         isCommentMine,
       });
 
-      return {
-        ...comment,
+          return {
+            ...comment,
         isMine: isCommentMine,
       };
     });
@@ -379,8 +379,8 @@ const ProductDetailPage = () => {
 
     commentMutation.mutate({
       productId,
-      content: commentText,
-    });
+        content: commentText,
+      });
   };
 
   // 댓글 수정 시작 핸들러
@@ -405,8 +405,8 @@ const ProductDetailPage = () => {
 
     updateCommentMutation.mutate({
       commentId,
-      content: editText,
-    });
+        content: editText,
+      });
   };
 
   // 댓글 삭제 핸들러
@@ -498,22 +498,22 @@ const ProductDetailPage = () => {
   return (
     <>
       <DetailContainer>
-        <DetailHeader
+      <DetailHeader
           title={product.title}
           price={product.price}
-          createdAt={product.createdAt}
+        createdAt={product.createdAt}
           updatedAt={product.updatedAt}
           viewCount={product.viewCount}
           author={product.author}
           onEdit={() => router.push(`/items/edit?id=${productId}`)}
-          onDelete={handleDelete}
+        onDelete={handleDelete}
           hasPermission={isAuthor}
-        />
+      />
 
-        <DetailContent
+      <DetailContent
           content={product.content}
-          images={product.images || []}
-          tags={product.tags || []}
+        images={product.images || []}
+        tags={product.tags || []}
         />
 
         {/* 사용자 정보 및 좋아요 섹션 */}
@@ -543,16 +543,16 @@ const ProductDetailPage = () => {
           commentsPerPage={commentsPerPage}
           currentPage={commentPage}
           onPageChange={handleCommentPageChange}
-          commentText={commentText}
+        commentText={commentText}
           setCommentText={setCommentText}
           onCommentSubmit={handleCommentSubmit}
-          editingCommentId={editingCommentId}
-          editText={editText}
-          setEditText={setEditText}
-          onEditStart={handleEditStart}
-          onEditCancel={handleEditCancel}
-          onEditSubmit={handleEditSubmit}
-          onCommentDelete={handleCommentDelete}
+        editingCommentId={editingCommentId}
+        editText={editText}
+        setEditText={setEditText}
+        onEditStart={handleEditStart}
+        onEditCancel={handleEditCancel}
+        onEditSubmit={handleEditSubmit}
+        onCommentDelete={handleCommentDelete}
           isLoading={
             commentsLoading ||
             commentMutation.isPending ||

@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "@emotion/styled";
 
-/**
- * 좋아요 버튼 컴포넌트
+/* 기능: 좋아요 버튼 컴포넌트
  * @param {object} props - 컴포넌트 속성
  * @param {number} props.likeCount - 좋아요 수
  * @param {boolean} props.isLiked - 현재 사용자의 좋아요 상태
@@ -14,31 +13,28 @@ const LikeButton = ({
   isLiked = false,
   onClick,
   isLoading = false,
-}) => {
-  console.log("LikeButton render:", { likeCount, isLiked, isLoading });
+}) => (
+  <LikeSection>
+    <StyledLikeButton
+      onClick={onClick}
+      isLiked={isLiked}
+      disabled={isLoading}
+      title={isLiked ? "좋아요 취소하기" : "좋아요 추가하기"}
+    >
+      <LikeIcon src={isLiked ? "/like_pink.svg" : "/like.svg"} alt="좋아요" />
+      <LikeCount>{likeCount}</LikeCount>
+    </StyledLikeButton>
+  </LikeSection>
+);
 
-  return (
-    <LikeSection>
-      <StyledLikeButton
-        onClick={onClick}
-        isLiked={isLiked}
-        disabled={isLoading}
-        title={isLiked ? "좋아요 취소하기" : "좋아요 추가하기"}
-      >
-        <LikeIcon src={isLiked ? "/like_pink.svg" : "/like.svg"} alt="좋아요" />
-        <LikeCount>{likeCount}</LikeCount>
-      </StyledLikeButton>
-    </LikeSection>
-  );
-};
-
-// 스타일 컴포넌트
+/* 스타일: 좋아요 버튼 레이아웃 */
 const LikeSection = styled.div`
   display: flex;
   justify-content: center;
   padding: 1rem;
 `;
 
+/* 스타일: 좋아요 버튼 */
 const StyledLikeButton = styled.button`
   display: flex;
   align-items: center;
@@ -60,7 +56,6 @@ const StyledLikeButton = styled.button`
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
-
     &:hover {
       background-color: ${({ isLiked }) =>
         isLiked ? "#FFF5F9" : "transparent"};
@@ -68,11 +63,13 @@ const StyledLikeButton = styled.button`
   }
 `;
 
+/* 스타일: 좋아요 아이콘 */
 const LikeIcon = styled.img`
   width: 24px;
   height: 24px;
 `;
 
+/* 스타일: 좋아요 카운트 */
 const LikeCount = styled.span`
   font-size: 1rem;
   min-width: 1rem;
