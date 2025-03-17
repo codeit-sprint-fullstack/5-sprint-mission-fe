@@ -1,4 +1,4 @@
-import apiClient from "@/lib/apiClient";
+import { apiClient } from "@/lib/apiClient";
 
 export interface Post {
   id: number;
@@ -16,8 +16,8 @@ export interface Post {
 // 게시글 목록 조회
 export const getPosts = async (): Promise<Post[]> => {
   try {
-    const response = await apiClient.get("/api/posts");
-    return response.data;
+    const posts = await apiClient.get<Post[]>("/api/posts");
+    return posts;
   } catch (error) {
     console.error("Error fetching posts:", error);
     throw error;
@@ -26,12 +26,11 @@ export const getPosts = async (): Promise<Post[]> => {
 
 // 게시글 좋아요
 export const likePost = async (postId: number): Promise<Post> => {
-    try {
-        const response = await apiClient.post(`/api/posts/${postId}/like`);
-        return response.data;
-    } catch (error) {
-        console.error("Error liking post:", error);
-        throw error;
-    }
+  try {
+    const post = await apiClient.post<Post>(`/api/posts/${postId}/like`);
+    return post;
+  } catch (error) {
+    console.error("Error liking post:", error);
+    throw error;
+  }
 };
-

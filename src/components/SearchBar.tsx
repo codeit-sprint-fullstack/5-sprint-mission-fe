@@ -1,4 +1,4 @@
-import searchIcon from "../../assets/icons/ic_search.svg";
+import searchIcon from "@/assets/icons/ic_search.svg";
 import Image from "next/image";
 
 export default function SearchBar() {

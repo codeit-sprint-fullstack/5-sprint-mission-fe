@@ -1,8 +1,8 @@
 import Image from "next/image";
-import facebookIcon from "../../assets/icons/ic_facebook.svg";
-import instagramIcon from "../../assets/icons/ic_instagram.svg";
-import twitterIcon from "../../assets/icons/ic_twitter.svg";
-import youtubeIcon from "../../assets/icons/ic_youtube.svg";
+import facebookIcon from "@/assets/icons/ic_facebook.svg";
+import instagramIcon from "@/assets/icons/ic_instagram.svg";
+import twitterIcon from "@/assets/icons/ic_twitter.svg";
+import youtubeIcon from "@/assets/icons/ic_youtube.svg";
 
 export default function Footer() {
   return (

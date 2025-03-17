@@ -1,4 +1,4 @@
-import Navigation from "@/components/Navigaion";
+import Navigation from "@/app/(main)/_components/Navigaion";
 import type { Metadata } from "next";
 import Footer from "@/components/Footer";
 import "@/app/globals.css";
@@ -15,11 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko">
-      <body className="pt-[69px] flex flex-col min-h-screen">
-        <Navigation />
-        <main className="flex-grow">{children}</main>
-        <Footer />
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
