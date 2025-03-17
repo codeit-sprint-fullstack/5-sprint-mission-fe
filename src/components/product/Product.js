@@ -1,38 +1,23 @@
 import Image from "next/image";
 import searchIcon from "@public/Img/input-icon/ic_search.png";
-import ArticleList from "./ArticleList";
 import Link from "next/link";
-import { useState, useEffect } from "react";
-import ArticleCustomSelect from "./ArticleCustomSelect";
+import { useState, useMemo } from "react";
+import ProductList from "./ProductList";
+import ProductCustomSelect from "./ProductCustomSelect";
 
-export default function Article({ articles }) {
-  const [articleList, setArticleList] = useState(articles);
+export default function Product({ products = [] }) {
   const [search, setSearch] = useState("");
   const [sortOrder, setSortOrder] = useState("recent");
 
-  const handleSearch = (e) => {
-    setSearch(e.target.value);
-  };
-
-  const handleSortChange = (newSortOrder) => {
-    setSortOrder(newSortOrder);
-  };
-
-  useEffect(() => {
-    let filteredArticles = articles.filter((article) =>
-      article.title.toLowerCase().includes(search.toLowerCase())
+  const filteredProducts = useMemo(() => {
+    let result = products.filter((product) =>
+      product.name.toLowerCase().includes(search.toLowerCase())
     );
 
-    if (sortOrder === "recent") {
-      filteredArticles = filteredArticles.sort(
-        (a, b) => b.createdAt - a.createdAt
-      );
-    } else if (sortOrder === "likes") {
-      filteredArticles = filteredArticles.sort((a, b) => b.likes - a.likes);
-    }
-
-    setArticleList(filteredArticles);
-  }, [articles, search, sortOrder]);
+    return sortOrder === "recent"
+      ? result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+      : result.sort((a, b) => (b.favoriteCount || 0) - (a.favoriteCount || 0));
+  }, [products, search, sortOrder]);
 
   return (
     <>
@@ -48,27 +33,27 @@ export default function Article({ articles }) {
         </section>
 
         <section className="relative flex gap-[13px] md:gap-[6px] xl:gap-[16px]">
-          {/*input*/}
           <input
             type="text"
             placeholder="검색할 상품을 입력해주세요"
             value={search}
-            onChange={handleSearch}
+            onChange={(e) => setSearch(e.target.value)}
             className="w-full pl-[40px] py-[9px] bg-custom-input-gray-100 rounded-xl focus:outline-none"
           />
           <Image
             src={searchIcon}
             alt="검색 아이콘"
+            width={24}
             className="absolute w-[24px] left-[16px] top-1/2 transform -translate-y-1/2"
           />
-          <ArticleCustomSelect
+          <ProductCustomSelect
             sortOrder={sortOrder}
-            setSortOrder={handleSortChange}
+            setSortOrder={setSortOrder}
           />
         </section>
 
         <section className="flex flex-col md:gap-[16px] xl:gap-[24px]">
-          <ArticleList article={articleList} />
+          <ProductList products={filteredProducts} />
         </section>
       </div>
     </>

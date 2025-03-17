@@ -1,12 +1,13 @@
-import CommentList from "@/components/modify/CommentList";
-import DetailArticle from "@/components/modify/DetailArticle";
+import CommentList from "@/components/article/modify/CommentList";
+import DetailArticle from "@/components/article/modify/DetailArticle";
+import DetailLayout from "@/components/shared/DetailLayout";
 
 export async function getServerSideProps({ params }) {
   const id = params.id;
 
   try {
     const articlesRes = await fetch(
-      `${process.env.NEXT_PUBLIC_ARL_URL}/articles/${id}`
+      `${process.env.NEXT_PUBLIC_ARL_LOCAL_URL}/articles/${id}`
     );
 
     if (!articlesRes.ok) {
@@ -39,3 +40,7 @@ export default function ArticleDetail({ articles }) {
     </div>
   );
 }
+
+ArticleDetail.getLayout = (page) => {
+  return <DetailLayout>{page}</DetailLayout>;
+};

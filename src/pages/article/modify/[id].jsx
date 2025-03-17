@@ -1,9 +1,10 @@
-import { useRouter, useParams } from "next/navigation";
+import DetailLayout from "@/components/shared/DetailLayout";
+import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
 export default function ModifyDetail() {
   const router = useRouter();
-  const { id } = useParams();
+  const { id } = router.query;
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
 
@@ -103,3 +104,7 @@ export default function ModifyDetail() {
     </form>
   );
 }
+
+ModifyDetail.getLayout = (page) => {
+  return <DetailLayout>{page}</DetailLayout>;
+};

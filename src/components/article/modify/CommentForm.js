@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-export default function SetComment({ articles, CommentAdd }) {
+export default function CommentForm({ articles, CommentAdd }) {
   const [comment, setComment] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
@@ -11,7 +11,7 @@ export default function SetComment({ articles, CommentAdd }) {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_ARL_URL}/comments/articles/${articleId}`,
+        `${process.env.NEXT_PUBLIC_ARL_LOCAL_URL}/comments/articles/${articleId}`,
         {
           method: "POST",
           headers: {

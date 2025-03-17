@@ -2,6 +2,10 @@
 
 @theme {
   --color-custom-color-blue: #3692ff;
+  --color-custom-color-red: #f74747;
+
+  --color-custom-color-bg-blue: #cfe5ff;
+  --color-custom-color-bg-cool-blue: #e6f2ff;
   --color-custom-color-card-gray: #f9fafb;
   --color-custom-color-list-gray: #fcfcfc;
 

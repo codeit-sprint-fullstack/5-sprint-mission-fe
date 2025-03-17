@@ -1,7 +1,9 @@
+import { AuthProvider } from "@/core/contexts/AuthContext";
 import "@/styles/globals.css";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import localFont from "next/font/local";
-import Header from "@/components/shared/Header";
-import { Footer } from "@/components/shared/Footer";
+
+const queryClient = new QueryClient();
 
 const pretendard = localFont({
   src: "../../public/fonts/PretendardVariable.woff2",
@@ -11,11 +13,13 @@ const pretendard = localFont({
 });
 
 export default function App({ Component, pageProps }) {
+  const getLayout = Component.getLayout ?? ((page) => page);
+
   return (
     <div className={pretendard.variable}>
-      <Header />
-      <Component {...pageProps} />
-      <Footer />
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>{getLayout(<Component {...pageProps} />)}</AuthProvider>
+      </QueryClientProvider>
     </div>
   );
 }

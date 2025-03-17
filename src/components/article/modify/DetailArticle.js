@@ -1,8 +1,8 @@
 import Image from "next/image";
-import userIcon from "../../../public/Img/user-icon/ic_profile.png";
-import likeIcon from "../../../public/Img/button-image/Like_Icon.png";
+import userIcon from "@images/user-icon/ic_profile.png";
+import likeIcon from "@images/button-image/Like_Icon.png";
 
-import { formatDay } from "@/hooks/day";
+import { formatDay } from "@/lib/day";
 import ArticleDropdownBar from "./ArticleModifySelect";
 
 export default function DetailArticle({ articles }) {
