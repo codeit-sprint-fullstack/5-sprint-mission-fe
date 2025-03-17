@@ -1,5 +1,6 @@
 import Button from "@/components/common/Button";
-import { ArticleCard } from "@/types/ArticleCard";
+import ServLayout from "@/components/Layout";
+import { ArticleCard } from "@/types/articleCard";
 import api from "@/utils/axiosInstance";
 import { GetServerSideProps } from "next";
 import { notFound } from "next/navigation";
@@ -47,42 +48,44 @@ export default function Edit({ article }: EditProps) {
     else setIsVerified(false);
   }, [title, content]);
 
-  async function submit() {
+  async function onSubmit() {
     setIsVerified(false);
     try {
       await api.patch(`/article/${article.id}`, {
         title: title,
         content: content,
       });
-      router.push(`/board/post/${article.idx}`);
+      router.push(`/board/${article.idx}`);
     } catch (err) {
       console.log(err);
     }
   }
   return (
-    <div className="flex flex-col gap-[32px] w-[100%] mb-[500px]">
-      <div className=" flex justify-between">
-        <div className="font-bold text-[20px]">게시글 수정</div>
-        <Button name="수정" disabled={!isVerified} click={submit} />
-      </div>
-      <div className="flex flex-col gap-3">
-        <div className="font-bold text-[18px]">*제목</div>
-        <input
-          placeholder="제목을 입력해주세요"
-          className="focus:outline-[#3692FF] bg-[#F3F4F6] w-[100%] px-[24px] py-[16px] rounded-xl"
-          onChange={handleTitle}
-          value={title}
-        />
-      </div>
-      <div className="flex flex-col gap-3">
-        <div className="font-bold text-[18px]">*내용</div>
-        <textarea
-          placeholder="내용을 입력해주세요"
-          className="focus:outline-[#3692FF] bg-[#F3F4F6] w-[100%] px-[24px] py-[16px] rounded-xl min-h-[282px]"
-          onChange={handleContent}
-          value={content}
-        />
-      </div>
-    </div>
+    <ServLayout>
+      <form className="flex flex-col gap-[32px] w-[100%] mb-[500px]">
+        <div className=" flex justify-between">
+          <div className="font-bold text-[20px]">게시글 수정</div>
+          <Button name="수정" disabled={!isVerified} click={onSubmit} />
+        </div>
+        <div className="flex flex-col gap-3">
+          <div className="font-bold text-[18px]">*제목</div>
+          <input
+            placeholder="제목을 입력해주세요"
+            className="focus:outline-[#3692FF] bg-[#F3F4F6] w-[100%] px-[24px] py-[16px] rounded-xl"
+            onChange={handleTitle}
+            value={title}
+          />
+        </div>
+        <div className="flex flex-col gap-3">
+          <div className="font-bold text-[18px]">*내용</div>
+          <textarea
+            placeholder="내용을 입력해주세요"
+            className="focus:outline-[#3692FF] bg-[#F3F4F6] w-[100%] px-[24px] py-[16px] rounded-xl min-h-[282px]"
+            onChange={handleContent}
+            value={content}
+          />
+        </div>
+      </form>
+    </ServLayout>
   );
 }

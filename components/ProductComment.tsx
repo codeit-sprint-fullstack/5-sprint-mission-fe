@@ -12,10 +12,14 @@ import MoreMenu from "./common/MoreMenu";
 import ProductComment from "@/types/productComment";
 
 interface CommentProps {
-  comment: CommentCard;
+  comment: ProductComment;
+  productId: number;
 }
 
-export default function Comment({ comment }: CommentProps) {
+export default function ProductCommentElement({
+  comment,
+  productId,
+}: CommentProps) {
   const [isMenuBar, setIsMenuBar] = useState(false);
   const [isEditMod, setIsEditMod] = useState(false);
   const [commentVal, setCommentVal] = useState(comment.content);
@@ -30,7 +34,7 @@ export default function Comment({ comment }: CommentProps) {
 
   const mutation = useMutation({
     mutationFn: patchComment,
-    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["comments"] }),
+    onSuccess: () => queryClient.invalidateQueries({ queryKey: ["comments", productId] }),
   });
 
   const router = useRouter();
@@ -51,17 +55,22 @@ export default function Comment({ comment }: CommentProps) {
 
   async function patchComment() {
     setIsEditMod(false);
-    await api.patch(`/comment/${comment.id}`, {
-      content: commentVal,
-    });
+    await api.patch(
+      `https://panda-market-api.vercel.app/comments/${comment.id}`,
+      {
+        content: commentVal,
+      }
+    );
   }
 
   const deleteComment = useMutation<void, Error, string>({
     mutationFn: async (commentId: string) => {
-      await api.delete(`/comment/${commentId}`);
+      await api.delete(
+        `https://panda-market-api.vercel.app/comments/${commentId}`
+      );
     },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["comments"] }); // 삭제 후 최신 데이터 갱신
+      queryClient.invalidateQueries({ queryKey: ["comments", productId] }); // 삭제 후 최신 데이터 갱신
       setIsMenuBar(false);
     },
   });
@@ -72,7 +81,14 @@ export default function Comment({ comment }: CommentProps) {
         {!isEditMod ? (
           <>
             <div>{comment.content}</div>
-            <MoreMenu onUpdate={handleEditMod} onDelete={() => deleteComment.mutate(String(comment.id))} isMenuBar={isMenuBar} setIsMenuBar={setIsMenuBar}/>
+            <MoreMenu
+              onUpdate={handleEditMod}
+              onDelete={() => {
+                deleteComment.mutate(String(comment.id));
+              }}
+              isMenuBar={isMenuBar}
+              setIsMenuBar={setIsMenuBar}
+            />
           </>
         ) : (
           <div className="w-[100%]">
@@ -97,7 +113,7 @@ export default function Comment({ comment }: CommentProps) {
               />
             </div>
             <div>
-              <div className="text-[#4B5563]">익명</div>
+              <div className="text-[#4B5563]">{comment.writer.nickname}</div>
               <div className="text-[#9CA3AF]">{timeAgo(comment.createdAt)}</div>
             </div>
           </div>
@@ -124,7 +140,7 @@ export default function Comment({ comment }: CommentProps) {
             />
           </div>
           <div>
-            <div className="text-[#4B5563]">익명</div>
+            <div className="text-[#4B5563]">{comment.writer.nickname}</div>
             <div className="text-[#9CA3AF]">{timeAgo(comment.createdAt)}</div>
           </div>
         </div>

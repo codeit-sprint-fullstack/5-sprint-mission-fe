@@ -5,12 +5,4 @@ export interface ArticleCard {
   content:string;
   createdAt:string;
   updatedAt:string;
-  comments?:CommentCard[];
-}
-
-export interface CommentCard {
-  id:string;
-  content:string;
-  updatedAt:string;
-  createdAt:string;
 }

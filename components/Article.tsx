@@ -2,7 +2,7 @@ import profileImg from "@/public/imgs/ic_profile.png";
 import notebook from "@/public/imgs/notebook.png";
 import Image from "next/image";
 import heart from "@/public/imgs/ic_heart.png";
-import { ArticleCard } from "@/types/ArticleCard";
+import { ArticleCard } from "@/types/articleCard";
 
 interface ArticleProps {
   article: ArticleCard;
