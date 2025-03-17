@@ -1,0 +1,39 @@
+.articlePage {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.button {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 26px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.buttonActive {
+  background-color: #2f80ed;
+  border: none;
+  color: #f9fafb;
+}
+
+.buttonExtra {
+  background-color: #fff;
+  border: 1px solid #e5e7eb;
+  color: #6b7280;
+}
+
+.button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.button:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

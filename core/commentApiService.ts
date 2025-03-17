@@ -1,8 +1,5 @@
-import axios, { AxiosInstance, AxiosResponse } from "axios";
-
-const apiUrl: AxiosInstance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
-});
+import { AxiosResponse } from "axios";
+import { apiClientList } from "./apiClient";
 
 export interface User {
   id: string;
@@ -57,9 +54,8 @@ export const getBulletinBoards = async (options?: {
   }
   const query = params.toString() ? `?${params.toString()}` : "";
   try {
-    const response: AxiosResponse<BulletinBoardsResponse> = await apiUrl.get(
-      `/api/-board${query}`
-    );
+    const response: AxiosResponse<BulletinBoardsResponse> =
+      await apiClientList.apiClient.get(`/api/-board${query}`);
     return response.data;
   } catch (error) {
     throw new Error("게시글 목록을 가져오는데 실패했습니다.");
@@ -76,10 +72,11 @@ export const uploadBulletinBoard = async (
   boardData: { title: string; contents: string; [key: string]: any }
 ): Promise<BulletinBoard> => {
   try {
-    const response: AxiosResponse<BulletinBoard> = await apiUrl.post(
-      `/api/bulletin-board?id=${userId}`,
-      boardData
-    );
+    const response: AxiosResponse<BulletinBoard> =
+      await apiClientList.apiClient.post(
+        `/api/bulletin-board?id=${userId}`,
+        boardData
+      );
     return response.data;
   } catch (error) {
     throw new Error("게시글 등록에 실패했습니다.");
@@ -97,10 +94,11 @@ export const updateBulletinBoard = async (
 ): Promise<BulletinBoard> => {
   try {
     // PATCH 메서드를 사용하여 일부 필드만 업데이트합니다.
-    const response: AxiosResponse<BulletinBoard> = await apiUrl.patch(
-      `/api/bulletin-board/${boardId}`,
-      boardData
-    );
+    const response: AxiosResponse<BulletinBoard> =
+      await apiClientList.apiClient.patch(
+        `/api/bulletin-board/${boardId}`,
+        boardData
+      );
     return response.data;
   } catch (error) {
     throw new Error("게시글 수정에 실패했습니다.");
@@ -113,7 +111,7 @@ export const updateBulletinBoard = async (
  */
 export const deleteBulletinBoard = async (boardId: string): Promise<void> => {
   try {
-    await apiUrl.delete(`/api/bulletin-board/${boardId}`);
+    await apiClientList.apiClient.delete(`/api/bulletin-board/${boardId}`);
   } catch (error) {
     throw new Error("게시글 삭제에 실패했습니다.");
   }

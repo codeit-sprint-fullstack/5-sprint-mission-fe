@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { BulletinBoardList, BulletinBoard } from "@/pages/api/bulletinBoardApi";
+import {
+  BulletinBoardList,
+  BulletinBoard,
+} from "@/core/bulletinBoardApiService";
 import styles from "@/styles/bulletinBoardAll.module.css";
 
 export const BulletinBoardAll = () => {
@@ -12,7 +15,7 @@ export const BulletinBoardAll = () => {
   // 데이터 로드 함수
   const loadMore = async (cursor?: string) => {
     try {
-      const response = await BulletinBoardList.getAll({ cursor, limit: 5 });
+      const response = await BulletinBoardList.GetAll({ cursor, limit: 5 });
       setBoards((prev) => [...prev, ...response.data]);
       setNextCursor(response.nextCursor);
       setHasMore(response.nextCursor !== null);

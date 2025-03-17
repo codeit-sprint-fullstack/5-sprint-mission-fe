@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { BulletinBoardList, BulletinBoard } from "@/pages/api/bulletinBoardApi";
+import {
+  BulletinBoardList,
+  BulletinBoard,
+} from "@/core/bulletinBoardApiService";
 import styles from "@/styles/bulletinBoardBest.module.css";
 
 export const BulletinBoardBest = () => {
@@ -10,7 +13,7 @@ export const BulletinBoardBest = () => {
 
   useEffect(() => {
     console.log("useEffect 시작");
-    BulletinBoardList.topLike()
+    BulletinBoardList.TopLike()
       .then((data) => {
         setBoards(data);
       })

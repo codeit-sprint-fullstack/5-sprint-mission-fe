@@ -44,6 +44,10 @@
     width: 744px;
     height: 340px;
   }
+  #main_nav_img {
+    width: 744px;
+    height: 340;
+  }
 }
 
 @media (max-width: 743px) {

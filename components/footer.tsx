@@ -30,25 +30,42 @@ export default function Footer() {
               </a>
             </div>
             <div id="footer_ad">
-              <a target="_blank" href="https://www.facebook.com/">
-                <Link href={"/bulletin-board"}></Link>
+              <Link href={"https://www.facebook.com/"}>
                 <Image
                   src={"/assets/ic_facebook.svg"}
                   alt={"headerPandaImg"}
                   width={153}
                   height={51}
-                ></Image>
-                <address id="facebook"></address>
-              </a>
-              <a target="_blank" href="https://x.com/">
-                <address id="twitter"></address>
-              </a>
-              <a target="_blank" href="https://www.youtube.com/">
-                <address id="yotube"></address>
-              </a>
-              <a target="_blank" href="https://www.instagram.com/">
-                <address id="instagram"></address>
-              </a>
+                />
+              </Link>
+              <address id="facebook"></address>{" "}
+              <Link href={"https://www.facebook.com/"}>
+                <Image
+                  src={"/assets/ic_facebook.svg"}
+                  alt={"headerPandaImg"}
+                  width={153}
+                  height={51}
+                />
+              </Link>
+              <address id="twitter"></address>{" "}
+              <Link href={"https://www.facebook.com/"}>
+                <Image
+                  src={"/assets/ic_facebook.svg"}
+                  alt={"headerPandaImg"}
+                  width={153}
+                  height={51}
+                />
+              </Link>
+              <address id="yotube"></address>{" "}
+              <Link href={"https://www.facebook.com/"}>
+                <Image
+                  src={"/assets/ic_facebook.svg"}
+                  alt={"headerPandaImg"}
+                  width={153}
+                  height={51}
+                />
+              </Link>
+              <address id="instagram"></address>
             </div>
           </div>
         </div>

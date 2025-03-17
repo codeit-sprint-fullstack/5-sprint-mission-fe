@@ -1,9 +1,10 @@
 import styles from "@/styles/main.module.css";
 import Image from "next/image";
 import Link from "next/link";
-import Header from "@/components/head";
+import Header from "@/components/Header";
+// import Footer from "@/components/Footer";
 
-export default function Home() {
+export default function Main() {
   return (
     <>
       <Header />
@@ -16,7 +17,7 @@ export default function Home() {
                 <p>일상의 모든 물건을</p>
                 <p>거래해 보세요</p>
               </div>
-              <Link href={"/item"}>
+              <Link href={"/items"}>
                 <div id={styles.main_nav_link}>구경하러 가기</div>
               </Link>
             </div>
@@ -26,6 +27,8 @@ export default function Home() {
                 alt={"mainPandaImg"}
                 width={746}
                 height={340}
+                layout="responsive"
+                sizes="(max-width: 743px) 100vw, (max-width: 1199px) 744px, 746px"
               ></Image>
             </div>
           </div>
@@ -108,7 +111,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        {/* <!-- 푸터 --> */}
+        {/* <Footer /> */}
       </div>
     </>
   );
