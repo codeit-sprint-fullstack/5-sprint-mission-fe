@@ -85,7 +85,7 @@ export default function ArticleDetail({ article = {} }) {
               height={32}
             />
             <div className="ml-4 mr-2">
-              {data?.user?.nickname || "Anonymous"}
+              {article?.user?.nickname || "Anonymous"}
             </div>
             <div>{new Date(article.createdAt).toLocaleDateString()}</div>
           </div>

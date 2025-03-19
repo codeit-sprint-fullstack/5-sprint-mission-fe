@@ -5,11 +5,15 @@ import ProductCommentList from "../components/ProductCommentList";
 
 export default function ProductDetail({ product, handleLike }) {
   const { user } = useAuth();
-  const [isLiked, setIsLiked] = useState(product.isFavorite); // ✅ 좋아요 상태
-  const [likeCount, setLikeCount] = useState(product.favoriteCount); // ✅ 좋아요 수
+  const [isLiked, setIsLiked] = useState(product?.isFavorite ?? false);
+  const [likeCount, setLikeCount] = useState(product?.favoriteCount ?? 0);
 
   if (!product) {
-    return <p>상품 정보가 없습니다.</p>;
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <p className="text-xl text-gray-600">상품 정보를 불러오는 중...</p>
+      </div>
+    );
   }
 
   const defaultImage = "/img_default.png";
@@ -37,7 +41,7 @@ export default function ProductDetail({ product, handleLike }) {
             src={imageUrl}
             alt="상품 이미지"
             className="w-[486px] h-[486px] object-cover rounded-2xl"
-            onError={(e) => (e.target.src = defaultImage)} // 이미지 로딩 실패 시 기본 이미지로 변경
+            onError={(e) => (e.target.src = defaultImage)}
           />
 
           <div className=" flex flex-col gap-6 max-w-[690px] w-full">
