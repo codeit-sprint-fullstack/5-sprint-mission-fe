@@ -1,6 +1,6 @@
 import "@/styles/globals.css";
 import Nav from "./components/Nav";
-import Footer from "./components/footer";
+import Footer from "./components/Footer";
 import ArticleProvider from "@/context/ArticleContext";
 import ProductProvider from "@/context/ProductContext";
 import { useRouter } from "next/router";

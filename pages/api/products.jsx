@@ -24,7 +24,7 @@ export const fetchProductById = async (productId) => {
   return response.data;
 };
 
-// 상품품 댓글 조회
+// 상품 댓글 조회
 export const fetchProductComments = async (productId, limit = 5) => {
   try {
     const response = await axios.get(

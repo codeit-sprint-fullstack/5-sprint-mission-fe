@@ -156,7 +156,7 @@ export default function ArticleList() {
             onChange={handleSearchChange}
             placeholder="검색할 게시글을 입력해주세요"
             className="w-full rounded-lg border-gray-50 bg-[#f3f4f6] px-10 py-2 shadow-sm"
-            onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()} // ✅ 엔터키 입력 시 검색
+            onKeyDown={(e) => e.key === "Enter" && handleSearchSubmit()}
           />
         </div>
 
