@@ -84,7 +84,9 @@ export default function ArticleDetail({ article = {} }) {
               width={32}
               height={32}
             />
-            <div className="ml-4 mr-2">{article.writer.nickname}</div>
+            <div className="ml-4 mr-2">
+              {data?.user?.nickname || "Anonymous"}
+            </div>
             <div>{new Date(article.createdAt).toLocaleDateString()}</div>
           </div>
           <div className="flex items-center border rounded-[35px] px-3 py-1 gap-1">

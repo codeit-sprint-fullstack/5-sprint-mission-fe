@@ -1,6 +1,6 @@
 import Image from "next/image";
 import BestArticleList from "./BesstArticle";
-import ArticleList from "./articleList";
+import ArticleList from "./ArticleList";
 
 export default function MainArticleList() {
   return (
