@@ -3,15 +3,17 @@ import Image from "next/image";
 import Link from "next/link";
 import useCustomMediaQuery from "@hooks/useCustomMediaQuery";
 import { usePathname } from "next/navigation";
+import { useAuth } from "@contexts/AuthProvider";
 
 const Header = ({ variant = "full" }) => {
   const pathname = usePathname();
 
   const navItems = [
     { name: "자유게시판", path: "/community" },
-    { name: "중고마켓", path: "/market" },
+    { name: "중고마켓", path: "/items" },
   ];
 
+  const { user, setUser } = useAuth();
   const isMobile = useCustomMediaQuery("(max-width: 743px)"); //
   const homeImgSource = isMobile ? "/home_logo_text.png" : "/home_logo.png";
 
@@ -49,13 +51,23 @@ const Header = ({ variant = "full" }) => {
             ))}
           </nav>
         )}
-
-        <Link
-          href="/login"
-          className="w-[88px] h-[42px] bg-[#3692FF] rounded-lg text-base font-semibold text-[#ffffff] flex items-center justify-center"
-        >
-          로그인
-        </Link>
+        {user ? (
+          <div className="flex items-center gap-2">
+            <div className="relative w-10 h-10">
+              <Image src={user.image || "/ic_profile.png"} fill />
+            </div>
+            <div className="hidden lg:block text-lg text-[#4B5563] font-normal">
+              {user.nickname}
+            </div>
+          </div>
+        ) : (
+          <Link
+            href="/login"
+            className="w-[88px] h-[42px] bg-[#3692FF] rounded-lg text-base font-semibold text-[#ffffff] flex items-center justify-center"
+          >
+            로그인
+          </Link>
+        )}
       </div>
     </header>
   );
