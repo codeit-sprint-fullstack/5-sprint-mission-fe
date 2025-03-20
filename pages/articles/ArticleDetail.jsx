@@ -1,50 +1,57 @@
-import CommentsList from "./commentsList";
+import ArticleCommentsList from "../components/ArticleCommentsList";
 import Image from "next/image";
-import DropdownMenu from "./DropDown";
+import DropdownMenu from "../components/DropDown";
 import { createComment, fetchArticleComments } from "../api/articles";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { useAuth } from "@/context/AuthContext";
 import { deleteArticle } from "../api/articles";
 
 export default function ArticleDetail({ article = {} }) {
   const [commentContent, setCommentContent] = useState("");
   const [comments, setComments] = useState(article?.comments ?? []);
   const router = useRouter();
+  const { user } = useAuth();
 
   const refreshComments = async () => {
-    const updateComments = await fetchArticleComments(article._id);
+    const updateComments = await fetchArticleComments(article.id);
     setComments(updateComments);
   };
 
   const handleSubmit = async () => {
-    if (commentContent.trim().length === 0) {
-      alert("댓글을 1글자 이상 입력해주세요.");
-      return;
-    }
+    if (!user) {
+      alert("로그인이 필요합니다.");
+      router.push("/login");
+    } else {
+      if (commentContent.trim().length === 0) {
+        alert("댓글을 입력해주세요.");
+        return;
+      }
 
-    try {
-      await createComment({
-        articleId: article._id,
-        content: commentContent,
-        username: "유저", // 다음 미션 추가 예정
-      });
-      setCommentContent("");
-      alert("댓글이 등록되었습니다.");
-      await refreshComments();
-    } catch (error) {
-      console.error(error);
-      alert("댓글 등록에 실패했습니다.");
+      try {
+        await createComment({
+          articleId: article.id,
+          content: commentContent,
+        });
+        setCommentContent("");
+        alert("댓글이 등록되었습니다.");
+        await refreshComments();
+        router.reload();
+      } catch (error) {
+        console.error(error);
+        alert("댓글 등록에 실패했습니다.");
+      }
     }
   };
 
   const handleEdit = () => {
-    router.push(`/articles/${article._id}/edits`); // 수정 페이지 이동예정
+    router.push(`/articles/${article.id}/edits`); // 수정 페이지 이동예정
   };
 
   const handleDelete = async () => {
     if (confirm("정말로 삭제하시겠습니까?")) {
       try {
-        await deleteArticle({ articleId: article._id });
+        await deleteArticle({ articleId: article.id });
         alert("게시글이 삭제되었습니다.");
         router.push("/articles");
         const updatedComments = await fetchArticleComments(articleId);
@@ -53,6 +60,13 @@ export default function ArticleDetail({ article = {} }) {
         console.error(error);
         alert("게시글 삭제에 실패했습니다.");
       }
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit();
     }
   };
   return (
@@ -70,7 +84,9 @@ export default function ArticleDetail({ article = {} }) {
               width={32}
               height={32}
             />
-            <div className="ml-4 mr-2">{article.username}</div>
+            <div className="ml-4 mr-2">
+              {article?.user?.nickname || "Anonymous"}
+            </div>
             <div>{new Date(article.createdAt).toLocaleDateString()}</div>
           </div>
           <div className="flex items-center border rounded-[35px] px-3 py-1 gap-1">
@@ -95,6 +111,7 @@ export default function ArticleDetail({ article = {} }) {
           className="w-full h-[104px] bg-[#f3f4f6] p-4 rounded-lg outline-none resize-none"
           value={commentContent}
           onChange={(e) => setCommentContent(e.target.value)}
+          onKeyDown={handleKeyDown}
         />
       </div>
       <div className="w-full max-w-[1200px] flex justify-end">
@@ -106,8 +123,8 @@ export default function ArticleDetail({ article = {} }) {
         </button>
       </div>
 
-      <CommentsList
-        articleId={article._id}
+      <ArticleCommentsList
+        articleId={article.id}
         comments={comments}
         refreshComments={refreshComments}
       />
