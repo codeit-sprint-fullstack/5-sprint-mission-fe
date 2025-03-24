@@ -5,7 +5,7 @@ import {
   deleteCodeitProductFavoriteAPI,
 } from "../services/productFavoriteService";
 import { codeitItemKeys } from "@/shared/utils/queryKeys";
-import { handleApiError } from "@/shared/service/codeit/handleApiError";
+import { handleApiError } from "@/shared/service/handleApiError";
 
 interface UseProductFavoriteProps {
   productId: string;

@@ -2,9 +2,10 @@
 
 import { useEffect } from "react";
 import { useUserStore } from "../store/useUserStore";
-import { getUserInfo } from "../service/codeit/getUserInfo";
+import { getUserInfo } from "../service/getUserInfo";
 import { localStorageKeys } from "../service/codeit/codeitInstance";
 
+// XXX: 미션 10 백엔드 쿠키로 만들어서 로컬스토리지 활용x
 export const useInitializeAuth = () => {
   const { setUserInfo, setIsAuthenticated, setIsInitialized } = useUserStore();
 
