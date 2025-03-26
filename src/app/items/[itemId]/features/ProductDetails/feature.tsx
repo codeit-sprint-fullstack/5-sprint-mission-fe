@@ -2,7 +2,8 @@ import { colorChips } from "@/shared/styles/colorChips";
 import { CircularProgress, Stack } from "@mui/material";
 import {
   useDeleteCodeitProduct,
-  useGetCodeitProductDetail,
+  // useGetCodeitProductDetail,
+  useGetProductDetail,
 } from "../../core/hooks/useProductDetailQuery";
 import { formatDate } from "@/shared/utils/getFormattedDate";
 import { useRouter } from "next/navigation";
@@ -18,12 +19,12 @@ import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
 export const ProductDetails = ({ itemId }: { itemId: string }) => {
   const router = useRouter();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const { data, isLoading } = useGetCodeitProductDetail(itemId);
+  const { data, isLoading } = useGetProductDetail(itemId);
   const { mutateAsync: deleteProduct } = useDeleteCodeitProduct();
   const { openSnackbar } = useSnackbarStore();
   const { isFavorite, handleToggleFavorite } = useProductFavoriteHook({
     productId: itemId,
-    initialFavorite: data?.isFavorite ?? false,
+    initialFavorite: data?.isLiked ?? false,
   });
 
   if (isLoading || !data) {
@@ -48,7 +49,7 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
     price,
     images,
     tags,
-    favoriteCount,
+    likeCount,
     ownerNickname,
     createdAt,
   } = data;
@@ -98,7 +99,7 @@ export const ProductDetails = ({ itemId }: { itemId: string }) => {
             defaultProfileImg={defaultProfileImg}
             ownerNickname={ownerNickname}
             formattedDate={formattedDate}
-            favoriteCount={favoriteCount}
+            favoriteCount={likeCount}
             isFavorite={isFavorite}
             onToggleFavorite={handleToggleFavorite}
           />

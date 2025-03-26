@@ -3,6 +3,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
   postCodeitProductFavoriteAPI,
   deleteCodeitProductFavoriteAPI,
+  postProductLikeAPI,
+  deleteProductLikeAPI,
 } from "../services/productFavoriteService";
 import { codeitItemKeys } from "@/shared/utils/queryKeys";
 import { handleApiError } from "@/shared/service/handleApiError";
@@ -38,7 +40,8 @@ export const useProductFavoriteHook = ({
 
   const saveFavoriteMutation = useMutation({
     mutationFn: (productId: string) =>
-      postCodeitProductFavoriteAPI({ productId }),
+      // postCodeitProductFavoriteAPI({ productId }),
+      postProductLikeAPI({ productId }),
     onSuccess: () => {
       updateFavoriteCache(true);
       setIsFavorite(true);
@@ -50,7 +53,8 @@ export const useProductFavoriteHook = ({
 
   const deleteFavoriteMutation = useMutation({
     mutationFn: (productId: string) =>
-      deleteCodeitProductFavoriteAPI({ productId }),
+      // deleteCodeitProductFavoriteAPI({ productId }),
+      deleteProductLikeAPI({ productId }),
     onSuccess: () => {
       updateFavoriteCache(false);
       setIsFavorite(false);

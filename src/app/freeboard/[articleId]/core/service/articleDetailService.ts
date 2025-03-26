@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { instance } from "@/shared/utils/APIs/axiosInstance";
+import { myInstance } from "@/shared/service/myApi/myInstance";
 import { Article } from "@/shared/type";
 
 export interface GetArticleDetailApiProps {
@@ -12,7 +12,7 @@ export const getArticleDetailAPI = async ({
   articleId,
 }: GetArticleDetailApiProps): Promise<Article> => {
   try {
-    const response: AxiosResponse<Article> = await instance.get(
+    const response: AxiosResponse<Article> = await myInstance.get(
       `/articles/${articleId}`
     );
     // console.log("getArticleDetail", response.data);
@@ -37,7 +37,7 @@ export const patchArticleAPI = async ({
   image,
 }: PatchArticleApiProps): Promise<Article> => {
   try {
-    const response: AxiosResponse<Article> = await instance.patch(
+    const response: AxiosResponse<Article> = await myInstance.patch(
       `/articles/${articleId}`,
       { title, content, image }
     );
@@ -56,7 +56,7 @@ export const deleteArticleAPI = async ({
   articleId,
 }: DeleteArticleApiProps): Promise<void> => {
   try {
-    await instance.delete(`/articles/${articleId}`);
+    await myInstance.delete(`/articles/${articleId}`);
   } catch (err) {
     throw err;
   }

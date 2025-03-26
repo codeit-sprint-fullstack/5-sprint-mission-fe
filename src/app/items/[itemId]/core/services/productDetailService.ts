@@ -1,19 +1,35 @@
 import { AxiosResponse } from "axios";
 import { codeitInstance } from "@/shared/service/codeit/codeitInstance";
 import { CodeitProductDetail } from "@/shared/types/codeitApiType";
+import { myInstance } from "@/shared/service/myApi/myInstance";
+import { Product } from "@/shared/type";
 
 export interface GetProductDetailApiProps {
   productId: string;
 }
 
-/** 상품 상세 조회
- */
+/** 상품 상세 조회 코드잇 api */
 export const getCodeitProductDetailAPI = async ({
   productId,
 }: GetProductDetailApiProps): Promise<CodeitProductDetail> => {
   try {
     const response: AxiosResponse<CodeitProductDetail> =
       await codeitInstance.get(`/products/${productId}`);
+
+    return response.data;
+  } catch (err) {
+    throw err;
+  }
+};
+
+/** 상품 상세 조회 미션 api */
+export const getProductDetailAPI = async ({
+  productId,
+}: GetProductDetailApiProps): Promise<Product> => {
+  try {
+    const response: AxiosResponse<Product> = await myInstance.get(
+      `/products/${productId}`
+    );
 
     return response.data;
   } catch (err) {

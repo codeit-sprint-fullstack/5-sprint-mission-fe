@@ -4,6 +4,7 @@ import {
   patchCodeitProductAPI,
   deleteCodeitProductAPI,
   PatchCodeitProductApiProps,
+  getProductDetailAPI,
 } from "../services/productDetailService";
 import { articleKeys, codeitItemKeys } from "@/shared/utils/queryKeys";
 import { DeleteProductApiProps } from "../services/productDetailService";
@@ -11,12 +12,14 @@ import {
   CodeitProduct,
   CodeitProductDetail,
 } from "@/shared/types/codeitApiType";
+import { Product } from "@/shared/type";
 
-export const useGetCodeitProductDetail = (productId: string) => {
+export const useGetProductDetail = (productId: string) => {
   if (typeof productId === "string") {
-    const { data, isLoading } = useQuery<CodeitProductDetail>({
+    const { data, isLoading } = useQuery<Product>({
       queryKey: codeitItemKeys.detail(productId),
-      queryFn: () => getCodeitProductDetailAPI({ productId: productId }),
+      // queryFn: () => getCodeitProductDetailAPI({ productId: productId }),
+      queryFn: () => getProductDetailAPI({ productId: productId }),
       staleTime: 5 * 60 * 1000,
       gcTime: 10 * 60 * 1000,
     });
@@ -24,15 +27,15 @@ export const useGetCodeitProductDetail = (productId: string) => {
     return {
       data: {
         id: data?.id ?? "",
-        isFavorite: data?.isFavorite ?? false,
         name: data?.name ?? "",
         description: data?.description ?? "",
         price: data?.price ?? 0,
         images: data?.images ?? [],
-        tags: data?.tags ?? [],
+        tags: data?.ProductTag ?? [],
         ownerId: data?.ownerId ?? 0,
         ownerNickname: data?.ownerNickname ?? "",
-        favoriteCount: data?.favoriteCount ?? 0,
+        isLiked: data?.isLiked ?? false,
+        likeCount: data?.likeCount ?? 0,
         createdAt: data?.createdAt ?? "",
       },
       isLoading,

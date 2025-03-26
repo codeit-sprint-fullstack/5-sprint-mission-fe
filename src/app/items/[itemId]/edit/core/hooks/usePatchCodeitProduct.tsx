@@ -9,6 +9,7 @@ import { validRules } from "@/app/registration/hooks/regItemHook";
 
 type ValidFieldType = "name" | "description" | "price" | "tagInput";
 
+// TODO: 여기 등록 잘되는지 확인하고 등록과 같은 형식으로 폼데이터로 변경하기
 export const usePatchCodeitProduct = ({ id }: { id: string }) => {
   const router = useRouter();
   const { openSnackbar } = useSnackbarStore();

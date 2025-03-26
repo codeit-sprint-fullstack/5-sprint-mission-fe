@@ -1,5 +1,5 @@
 import { AxiosResponse } from "axios";
-import { instance } from "@/shared/utils/APIs/axiosInstance";
+import { myInstance } from "@/shared/service/myApi/myInstance";
 import {
   OrderByType,
   GetArticleApiQueryParams,
@@ -22,7 +22,7 @@ export const getArticleListAPI = async (
   const { page = 1, limit = 10, sort = "recent", keyword = "" } = params;
 
   try {
-    const response: AxiosResponse<ArticleList> = await instance.get(
+    const response: AxiosResponse<ArticleList> = await myInstance.get(
       "/articles",
       {
         params: { page, limit, sort, keyword },
@@ -50,7 +50,7 @@ export const createArticleAPI = async (
   params: PostArticleApiQueryParams
 ): Promise<Article> => {
   try {
-    const response: AxiosResponse<Article> = await instance.post(
+    const response: AxiosResponse<Article> = await myInstance.post(
       "/articles",
       params
     );
