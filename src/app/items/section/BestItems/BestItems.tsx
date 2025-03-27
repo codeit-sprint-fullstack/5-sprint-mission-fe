@@ -5,7 +5,7 @@ import { Typo } from "@/shared/Typo/Typo";
 import React from "react";
 import { colorChips } from "@/shared/styles/colorChips";
 import { Stack, useMediaQuery } from "@mui/material";
-import { useCodeitBestItems } from "../common/hooks/useCodeitItemListQuery";
+// import { useCodeitBestItems } from "../common/hooks/useCodeitItemListQuery";
 import { useBestItems } from "../common/hooks/useItemListQuery";
 
 export function BestItems(): React.ReactElement {

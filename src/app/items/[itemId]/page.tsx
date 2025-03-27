@@ -14,7 +14,6 @@ export default function Page() {
     ? params.itemId[0]
     : params.itemId;
 
-  //FIXME: 게시글 ID가 없는 경우 404나 알림 띄우는거 추가하면 좋을 듯
   if (!itemId) {
     return null;
   }

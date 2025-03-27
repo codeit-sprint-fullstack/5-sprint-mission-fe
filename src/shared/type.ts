@@ -17,13 +17,23 @@ export interface PostProdApiQueryParams {
   images?: File[];
 }
 
+// 상품 patch 쿼리 파라미터
+export interface PatchProdApiQueryParams {
+  productId: string;
+  name: string;
+  description: string;
+  price: string;
+  tags?: string[];
+  images?: (File | string)[];
+}
+
 // 태그 타입
 export interface ProductTag {
   id: number;
   tag: string;
 }
 
-//getAPI 응답 객체
+//상세 조회 응답 객체
 export interface Product {
   id: number;
   name: string;
@@ -39,10 +49,16 @@ export interface Product {
   updatedAt: string;
 }
 
+//상품 목록 조회 응답 객체
 export interface ProductList {
   ProductList: Product[];
   totalPages: number;
   totalProducts: number;
+}
+
+export interface DeleteProductResponse {
+  isSuccess: boolean;
+  message: string;
 }
 
 export type ProductState = Pick<ProductList, "ProductList" | "totalPages">;

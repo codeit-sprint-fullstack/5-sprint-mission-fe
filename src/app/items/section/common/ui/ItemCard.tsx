@@ -2,7 +2,7 @@ import "./ItemCard.css";
 import Link from "next/link";
 import { Typo } from "@/shared/Typo/Typo";
 import { colorChips } from "@/shared/styles/colorChips";
-import { CodeitProduct } from "@/shared/types/codeitApiType";
+// import { CodeitProduct } from "@/shared/types/codeitApiType";
 import React from "react";
 import Image from "next/image";
 import { Stack } from "@mui/material";
@@ -26,8 +26,14 @@ export function ItemCard({
     isLiked,
   } = product;
 
+  const formattedImage = productImg
+    ? `https://panda-prisma.onrender.com${productImg}`
+    : "";
   const defaultItemImg = "/assets/default_item.png";
-  const { imgSrc, handleImgErr } = useDefaultImg(productImg, defaultItemImg);
+  const { imgSrc, handleImgErr } = useDefaultImg(
+    formattedImage,
+    defaultItemImg
+  );
 
   const formattedPrice = `${new Intl.NumberFormat("ko-KR").format(price)}원`;
 

@@ -77,9 +77,6 @@ SignupProps) => {
       else if (statusCode >= 400) {
         if (errorMessage === "이미 가입된 이메일입니다.") {
           openSnackbar("이미 가입된 이메일입니다.", "error");
-          // TODO: 백엔드에 닉네임 유니크 넣을지 정하기
-          // } else if (errorMessage === "이미 사용중인 닉네임입니다.") {
-          //   openSnackbar("이미 사용중인 닉네임입니다.", "error");
         } else {
           openSnackbar("다시 시도해주세요.", "error");
         }

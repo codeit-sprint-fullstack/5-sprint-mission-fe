@@ -9,7 +9,7 @@ import { SkeletonCard } from "../common/ui/SkeletonCard";
 import { colorChips } from "@/shared/styles/colorChips";
 import { Stack, useMediaQuery, useTheme } from "@mui/material";
 import { useSearchStore } from "../common/hooks/useSearchStore";
-import { useCodeitItemList } from "../common/hooks/useCodeitItemListQuery";
+// import { useCodeitItemList } from "../common/hooks/useCodeitItemListQuery";
 import { useEffect } from "react";
 import { useItemList } from "../common/hooks/useItemListQuery";
 

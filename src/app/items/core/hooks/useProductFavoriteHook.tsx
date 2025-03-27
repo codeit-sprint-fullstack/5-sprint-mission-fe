@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback } from "react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import {
-  postCodeitProductFavoriteAPI,
-  deleteCodeitProductFavoriteAPI,
+  // postCodeitProductFavoriteAPI,
+  // deleteCodeitProductFavoriteAPI,
   postProductLikeAPI,
   deleteProductLikeAPI,
 } from "../services/productFavoriteService";

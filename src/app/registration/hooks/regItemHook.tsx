@@ -4,18 +4,11 @@ import { RegItemInputFields, ValidKey } from "../type";
 // import { CodeitProduct } from "@/shared/types/codeitApiType";
 // import { postCodeitProductAPI } from "../services/createCodeitItemApi";
 import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
-import { codeitItemKeys, productKeys } from "@/shared/utils/queryKeys";
+// import { codeitItemKeys, productKeys } from "@/shared/utils/queryKeys";
+import { productKeys } from "@/shared/utils/queryKeys";
 import { useQueryClient } from "@tanstack/react-query";
 import { Product } from "@/shared/type";
 import { createItemAPI } from "../services/createItemAPI";
-
-// TODO: 이미지 등록 테스트 , 수정하기
-
-//XXX:
-//1. input에서 받은 value를 body에 일단 담는다.
-//2. body 업데이트되면 useCallback이 돌면서 리렌더링.
-//3. 그때 유효성 검사 함수를 타면서 에러 ui보여주기
-//4. 모든 필수 필드에 유효한 값이 있을 떄 등록 버튼 활성화
 
 //input 유효성 검사 규칙
 //validate true일때 error

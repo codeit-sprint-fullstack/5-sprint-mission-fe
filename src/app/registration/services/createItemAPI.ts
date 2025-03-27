@@ -2,7 +2,6 @@ import { AxiosResponse } from "axios";
 import { myInstance } from "@/shared/service/myApi/myInstance";
 import { PostProdApiQueryParams, Product } from "@/shared/type";
 
-// XXX: formData 타입으로 수정됨. 제대로 되는지 확인 필요
 /** 상품 등록
  * @param {Object} params - 상품 정보
  * @param {string} params.name - 상품 이름 (10자 이내)

@@ -16,6 +16,16 @@ export const RegImgInput: React.FC<RegImgInputProps> = ({
   onClickDeleteImg,
   showMaxImageError,
 }) => {
+  // 이미지 URL 포맷팅 함수
+  const formatImageUrl = (url: string) => {
+    // 이미 http로 시작하거나 blob으로 시작하는 URL은 그대로 사용
+    if (url.startsWith("http") || url.startsWith("blob")) {
+      return url;
+    }
+    // 그 외의 경우 서버 URL 추가
+    return `https://panda-prisma.onrender.com${url}`;
+  };
+
   return (
     <Stack direction="column" gap={"16px"}>
       <Typo
@@ -45,30 +55,40 @@ export const RegImgInput: React.FC<RegImgInputProps> = ({
             gap={"24px"}
             sx={{ overflowX: "auto", scrollbarWidth: "none" }}
           >
-            {images.map((image, idx) => (
-              <Stack key={idx} sx={regImgSx}>
-                <Image
-                  src={image}
-                  alt="상품 이미지"
-                  fill
-                  sizes="100%"
-                  style={{ objectFit: "cover", borderRadius: "12px" }}
-                />
-                <Image
-                  src={"/assets/ic_delete_circle.svg"}
-                  alt="상품 이미지 삭제"
-                  width={24}
-                  height={24}
-                  style={{
-                    position: "absolute",
-                    top: "12px",
-                    right: "12px",
-                    cursor: "pointer",
-                  }}
-                  onClick={() => onClickDeleteImg(idx)}
-                />
-              </Stack>
-            ))}
+            {images.map((image, idx) => {
+              const formattedUrl = formatImageUrl(image);
+
+              return (
+                <Stack key={idx} sx={regImgSx}>
+                  <img
+                    src={formattedUrl}
+                    alt="상품 이미지"
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      borderRadius: "12px",
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.src = "/assets/default_item.png";
+                    }}
+                  />
+                  <Image
+                    src={"/assets/ic_delete_circle.svg"}
+                    alt="상품 이미지 삭제"
+                    width={24}
+                    height={24}
+                    style={{
+                      position: "absolute",
+                      top: "12px",
+                      right: "12px",
+                      cursor: "pointer",
+                    }}
+                    onClick={() => onClickDeleteImg(idx)}
+                  />
+                </Stack>
+              );
+            })}
           </Stack>
         )}
       </Stack>
