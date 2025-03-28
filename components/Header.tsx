@@ -16,10 +16,9 @@ export default function Header() {
   const router = useRouter();
   const pathname = usePathname() || ""; // 현재 경로를 보기 위해서
   const queryClient = useQueryClient();
-  const { userData, isLoading = true } = useContext(AuthContext);
+  const { userData, isLoading = true, signout } = useContext(AuthContext);
   
   const user = userData;
-  console.log(user);
 
   useEffect(() => {
     if (width <= 768) setIsMobile(true);
@@ -84,7 +83,9 @@ export default function Header() {
               width={40}
               height={40}
             />
-            <div className="hidden xl:block">{user.nickname}</div>
+            <div className="hidden xl:block mr-4">{user.nickname}</div>
+            <Button name="로그아웃" width="90px" click={() => signout()}/>
+              
           </div>
         ) : (
           <div className="flex items-center">

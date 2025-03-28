@@ -56,7 +56,7 @@ export default function ProductCommentElement({
   async function patchComment() {
     setIsEditMod(false);
     await api.patch(
-      `https://panda-market-api.vercel.app/comments/${comment.id}`,
+      `/comments/${comment.id}`,
       {
         content: commentVal,
       }
@@ -66,7 +66,7 @@ export default function ProductCommentElement({
   const deleteComment = useMutation<void, Error, string>({
     mutationFn: async (commentId: string) => {
       await api.delete(
-        `https://panda-market-api.vercel.app/comments/${commentId}`
+        `/comments/${commentId}`
       );
     },
     onSuccess: () => {
@@ -113,7 +113,7 @@ export default function ProductCommentElement({
               />
             </div>
             <div>
-              <div className="text-[#4B5563]">{comment.writer.nickname}</div>
+              <div className="text-[#4B5563]">{comment.nickname}</div>
               <div className="text-[#9CA3AF]">{timeAgo(comment.createdAt)}</div>
             </div>
           </div>
@@ -140,7 +140,7 @@ export default function ProductCommentElement({
             />
           </div>
           <div>
-            <div className="text-[#4B5563]">{comment.writer.nickname}</div>
+            <div className="text-[#4B5563]">{comment.nickname}</div>
             <div className="text-[#9CA3AF]">{timeAgo(comment.createdAt)}</div>
           </div>
         </div>

@@ -15,6 +15,7 @@ import { useQuery } from "@tanstack/react-query";
 import getProduct from "@/api/getProduct";
 import ProductCard from "@/types/productCard";
 import Modal from "@/components/common/Modal";
+import ImgUpload from "@/components/common/ImgUpload";
 
 interface Props {
   userEnv: string;
@@ -50,6 +51,7 @@ export default function UploadItemPage() {
     useTagCheck(product?.tags || []);
 
   const [verified, setVerified] = useState(true);
+  const [images, setImages] = useState<string[]>(product?.images || []);
 
   useEffect(() => {
     if (
@@ -67,12 +69,12 @@ export default function UploadItemPage() {
     if (verified) {
       setVerified(false);
       try {
-        await api.patch(`https://panda-market-api.vercel.app/products/${id}`, {
+        await api.patch(`/products/${id}`, {
           name: name,
           description: description,
           price: Number(price),
           tags: tag,
-          images: [],
+          images: images,
         });
         router.push(`/items/${id}`);
       } catch (err) {
@@ -101,6 +103,10 @@ export default function UploadItemPage() {
             disabled={!verified}
             click={handleRegisterClick}
           />
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-[18px] font-bold">상품 이미지</h4>
+          <ImgUpload images={images} setImages={setImages} />
         </div>
         <div className="flex flex-col gap-4">
           <h4 className="text-[18px] font-bold">상품명</h4>
@@ -156,7 +162,14 @@ export default function UploadItemPage() {
       <Modal isShow={isModal} width="480px">
         <div className="flex flex-col gap-12 justify-center items-center">
           <div>{modalMessage}</div>
-          <Button name="돌아가기" disabled={false} click={() => {router.push(`/items/${product?.id}`)}}  width="100px"/>
+          <Button
+            name="돌아가기"
+            disabled={false}
+            click={() => {
+              router.push(`/items/${product?.id}`);
+            }}
+            width="100px"
+          />
         </div>
       </Modal>
     </Layout>

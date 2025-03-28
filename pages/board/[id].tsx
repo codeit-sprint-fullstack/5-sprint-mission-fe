@@ -20,7 +20,7 @@ import Layout from "@/components/Layout";
 export const getServerSideProps = (async (context) => {
   const id = context.params?.id;
   try {
-    const res = await api.get<ArticleCard>(`/article/${id}`);
+    const res = await api.get<ArticleCard>(`/articles/${id}`);
     const article = res.data;
     if (!article) {
       return { notFound: true };
@@ -56,7 +56,7 @@ export default function EditPost({ article }: PostProps) {
   const comments = data?.data.comments;
 
   async function getComments() {
-    const res = await api.get<CommentData>(`/comment/${article.id}`);
+    const res = await api.get<CommentData>(`/comments/${article.id}`);
     return res;
   }
 
@@ -72,7 +72,7 @@ export default function EditPost({ article }: PostProps) {
 
   async function postCommit() {
     setIsVerified(false);
-    await api.post(`/comment/article/${article.id}`, { content: content });
+    await api.post(`/comments/article/${article.id}`, { content: content });
     setContent("");
   }
 
@@ -84,7 +84,7 @@ export default function EditPost({ article }: PostProps) {
 
   async function deletePost() {
     try {
-      await api.delete(`/article/${article.id}`);
+      await api.delete(`/articles/${article.id}`);
     } catch (err) {
       console.log(err);
     }

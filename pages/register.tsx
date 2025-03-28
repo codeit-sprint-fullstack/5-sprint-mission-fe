@@ -18,7 +18,7 @@ import { useQueryClient } from "@tanstack/react-query";
 
 export default function RegisterPage() {
   const router = useRouter();
-  const { userData, setAccessToken, setRefreshToken } = useContext(AuthContext);
+  const { userData, setAccessToken } = useContext(AuthContext);
   const queryClient = useQueryClient();
 
   const [inputData, setInputData] = useState({
@@ -66,7 +66,7 @@ export default function RegisterPage() {
     e.preventDefault();
     try {
       const res = await api.post(
-        "https://panda-market-api.vercel.app/auth/signup",
+        "/auth/signup",
         {
           email: inputData.email,
           nickname: inputData.nickname,
@@ -75,11 +75,7 @@ export default function RegisterPage() {
         }
       );
       const signinData = res.data as SigninResponse;
-      //로컬 스토리지에 accessToken과 refreshToken을 저장해줌.
-      localStorage.setItem("accessToken", signinData.accessToken);
-      localStorage.setItem("refreshToken", signinData.refreshToken);
       setAccessToken(signinData.accessToken);
-      setRefreshToken(signinData.refreshToken);
       setModalMessage("가입 완료되었습니다.");
       setIsSuccess(true);
       setIsModal(true);

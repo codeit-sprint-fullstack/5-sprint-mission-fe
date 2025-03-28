@@ -17,7 +17,7 @@ import { AuthContext } from "@/contexts/AuthProvider";
 
 export default function LoginPage() {
   const router = useRouter();
-  const { userData, setRefreshToken, setAccessToken } = useContext(AuthContext);
+  const { userData, setAccessToken } = useContext(AuthContext);
 
   useEffect(()=> {
     if (userData) router.push("/items");
@@ -62,23 +62,20 @@ export default function LoginPage() {
     e.preventDefault();
     try {
       const res = await api.post(
-        "https://panda-market-api.vercel.app/auth/signin",
+        "/auth/signin",
         {
           email: inputData.email,
           password: inputData.password,
-        }
+        },
+        { withCredentials: true }
       );
       const signinData = res.data as SigninResponse;
-      //로컬 스토리지에 accessToken과 refreshToken을 저장해줌.
       localStorage.setItem("accessToken", signinData.accessToken);
-      localStorage.setItem("refreshToken", signinData.refreshToken);
       setAccessToken(signinData.accessToken);
-      setRefreshToken(signinData.refreshToken);
-
       router.push("/items");
     } catch (err) {
       const error = err as AxiosError;
-      if (error.response?.status === 400) {
+      if (error.response?.status === 401) {
         setModalMessage("비밀번호가 일치하지 않습니다.");
         setIsModal(true);
       }

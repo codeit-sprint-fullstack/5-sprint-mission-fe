@@ -11,6 +11,9 @@ import InputArea from "@/components/common/InputArea";
 import api from "@/utils/axiosInstance";
 import { useRouter } from "next/router";
 import { AuthContext } from "@/contexts/AuthProvider";
+import Image from "next/image";
+import ImgUpload from "@/components/common/ImgUpload";
+
 
 interface Props {
   userEnv: string;
@@ -18,16 +21,18 @@ interface Props {
 }
 
 export default function UploadItemPage() {
-    const { userData } = useContext(AuthContext);
+  const { userData } = useContext(AuthContext);
   const { name, nameCheck, handleNameInputChange } = useNameCheck();
   const { description, descriptionCheck, handleDescriptionInputChange } =
     useDescriptionCheck();
   const { price, priceCheck, handlePriceInputChange } = usePriceCheck();
   const { tag, setTag, tagCheck, handleTagInputKeyDown, handleTagChange } =
     useTagCheck();
-
   const [verified, setVerified] = useState(false);
+  const [images, setImages] = useState<string[]>([]);
   const router = useRouter();
+
+  console.log(images)
 
   useEffect(() => {
     if (
@@ -42,26 +47,23 @@ export default function UploadItemPage() {
   async function handleRegisterClick(): Promise<void> {
     if (verified) {
       setVerified(false);
-      await api.post(
-        "https://panda-market-api.vercel.app/products",
-        {
-          name: name,
-          description: description,
-          price: Number(price),
-          tags: tag,
-          images: [],
-        }
-      );
+      const result = await api.post("/products", {
+        name: name,
+        description: description,
+        price: Number(price),
+        tags: tag,
+        images: images,
+      });
     }
-    router.push("/items")
+    router.push("/items");
   }
 
-    if (!userData)
-      return (
-        <Layout>
-          <div>로그인부터 진행해주세요.</div>
-        </Layout>
-      );
+  if (!userData)
+    return (
+      <Layout>
+        <div>로그인부터 진행해주세요.</div>
+      </Layout>
+    );
 
   return (
     <Layout>
@@ -73,6 +75,10 @@ export default function UploadItemPage() {
             disabled={!verified}
             click={handleRegisterClick}
           />
+        </div>
+        <div className="flex flex-col gap-4">
+          <h4 className="text-[18px] font-bold">상품 이미지</h4>
+          <ImgUpload images={images} setImages = {setImages} />
         </div>
         <div className="flex flex-col gap-4">
           <h4 className="text-[18px] font-bold">상품명</h4>

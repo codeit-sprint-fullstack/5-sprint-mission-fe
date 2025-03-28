@@ -27,7 +27,7 @@ export default function WritePage() {
   async function onSubmit() {
     setIsVerified(false);
     try {
-      await api.post("/article", {
+      await api.post("/articles", {
         title: title,
         content: content,
       });
