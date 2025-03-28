@@ -1,6 +1,6 @@
 import { AxiosResponse } from "axios";
 import { myInstance } from "@/shared/service/myApi/myInstance";
-import { Article } from "@/shared/type";
+import { Article, DeleteCommentResponse } from "@/shared/type";
 
 export interface GetArticleDetailApiProps {
   articleId: string;
@@ -27,7 +27,7 @@ export interface PatchArticleApiProps {
   articleId: string;
   title: string;
   content: string;
-  image?: string;
+  image?: File;
 }
 
 export const patchArticleAPI = async ({
@@ -54,9 +54,11 @@ export interface DeleteArticleApiProps {
 
 export const deleteArticleAPI = async ({
   articleId,
-}: DeleteArticleApiProps): Promise<void> => {
+}: DeleteArticleApiProps): Promise<DeleteCommentResponse> => {
   try {
-    await myInstance.delete(`/articles/${articleId}`);
+    const response: AxiosResponse<DeleteCommentResponse> =
+      await myInstance.delete(`/articles/${articleId}`);
+    return response.data;
   } catch (err) {
     throw err;
   }

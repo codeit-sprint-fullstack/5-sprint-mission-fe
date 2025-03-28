@@ -45,17 +45,31 @@ export const ORDER_BY: OrderByType = {
  * @param {Object} params - 쿼리 정보
  * @param {int} params.title - 게시글 제목
  * @param {int} params.content - 게시글 내용
+ * @param {string} params.image - 게시글 이미지
  */
 export const createArticleAPI = async (
   params: PostArticleApiQueryParams
 ): Promise<Article> => {
   try {
+    const formData = new FormData();
+
+    formData.append("title", params.title);
+    formData.append("content", params.content);
+    if (params.image) {
+      formData.append("images", params.image);
+    }
+
     const response: AxiosResponse<Article> = await myInstance.post(
       "/articles",
-      params
+      formData,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+        withCredentials: true,
+      }
     );
 
-    // console.log("post 성공:", response.data);
     return response.data;
   } catch (err) {
     throw err;

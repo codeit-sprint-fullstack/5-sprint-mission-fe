@@ -86,7 +86,7 @@ export interface GetArticleApiQueryParams {
 export interface PostArticleApiQueryParams {
   title: string;
   content: string;
-  image?: string;
+  image?: File;
 }
 
 //게시글 getAPI 응답 객체
@@ -95,10 +95,12 @@ export interface Article {
   title: string;
   content: string;
   image: string;
-  favoritesCount: number;
+  likeCount: number;
+  isLiked: boolean;
+  ownerId: string;
+  ownerNickname: string;
   createdAt: string;
   updatedAt: string;
-  deletedAt: string;
 }
 
 export interface ArticleList {
@@ -138,4 +140,9 @@ export interface DeleteCommentResponse {
 export interface ProductLikeResponse {
   isSuccess: boolean;
   data: Product;
+}
+
+export interface ArticleLikeResponse {
+  isSuccess: boolean;
+  data: Article;
 }
