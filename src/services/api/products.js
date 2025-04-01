@@ -1,6 +1,28 @@
 import instance from "@/services/api/axios";
 
-const BASE_URL = "https://panda-market-api.vercel.app/products";
+//const BASE_URL = "https://panda-market-api.vercel.app/products";
+const BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL + "/products";
+
+export const addFavorite = async (productId) => {
+  try {
+    const response = await instance.post(`/products/${productId}/favorite`);
+    return response.data;
+  } catch (error) {
+    console.error("좋아요 추가 실패:", error);
+    throw error;
+  }
+};
+
+// 좋아요 취소 함수
+export const removeFavorite = async (productId) => {
+  try {
+    const response = await instance.delete(`/products/${productId}/favorite`);
+    return response.data;
+  } catch (error) {
+    console.error("좋아요 취소 실패:", error);
+    throw error;
+  }
+};
 
 export const fetchProducts = async ({
   orderBy = "recent",
@@ -55,23 +77,63 @@ export const fetchProductById = async (id) => {
 //   }
 // };
 
-export const createProduct = async ({
-  name,
-  description,
-  price,
-  images: [imageUrl],
-  tags,
-}) => {
+export const createProduct = async (data) => {
   try {
-    const response = await instance.post(`${BASE_URL}`, {
-      name,
-      description,
-      price,
-      images: [imageUrl], // 이미지 URL 배열로
-      tags: tags,
+    let formData;
+
+    // 이미 FormData 객체인 경우 그대로 사용
+    if (data instanceof FormData) {
+      formData = data;
+    }
+    // JSON 객체인 경우 FormData로 변환
+    else {
+      formData = new FormData();
+      const { name, description, price, images, tags } = data;
+
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("price", price);
+
+      // 이미지가 URL 배열인 경우
+      if (images && Array.isArray(images)) {
+        // 이미지가 URL 문자열인 경우
+        if (typeof images[0] === "string") {
+          formData.append("images", JSON.stringify(images));
+        }
+        // 이미지가 File 객체인 경우
+        else {
+          images.forEach((image) => {
+            formData.append("images", image);
+          });
+        }
+      }
+
+      // 태그 처리 - 배열이면 쉼표로 구분된 문자열로 변환
+      if (tags) {
+        if (Array.isArray(tags)) {
+          formData.append("tags", tags.join(","));
+        } else {
+          formData.append("tags", tags);
+        }
+      }
+    }
+
+    // 요청 로깅
+    console.log(
+      "createProduct 요청 데이터:",
+      Array.from(formData.entries()).reduce((obj, [key, value]) => {
+        obj[key] = value;
+        return obj;
+      }, {})
+    );
+
+    const response = await instance.post(`${BASE_URL}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
     });
 
-    console.log(response.data);
+    console.log("상품 등록 성공:", response.data);
     return response.data;
   } catch (error) {
     console.error("상품 등록 에러:", error);
@@ -87,21 +149,70 @@ export const createProduct = async ({
   }
 };
 
+// 상품 수정 함수
 export const updateProduct = async (data) => {
   if (!data.name || !data.description || !data.price) {
     throw new Error("Missing required fields");
   }
 
-  const { id, imageUrl, ...dataToSend } = data;
-
-  // `imageUrl`을 `images` 배열로 감싸기
-  const updatedData = {
-    ...dataToSend,
-    images: [imageUrl],
-  };
-
   try {
-    const response = await instance.patch(`${BASE_URL}/${id}`, updatedData);
+    let formData;
+
+    // 이미 FormData 객체인 경우 그대로 사용
+    if (data instanceof FormData) {
+      formData = data;
+      // ID가 FormData에 없는 경우 추가
+      if (!formData.has("id") && data.id) {
+        formData.append("id", data.id);
+      }
+    }
+    // JSON 객체인 경우 FormData로 변환
+    else {
+      const { id, imageUrl, imageFile, ...restData } = data;
+
+      formData = new FormData();
+
+      // 기본 필드 추가
+      Object.entries(restData).forEach(([key, value]) => {
+        if (key !== "images" && key !== "tags" && value !== undefined) {
+          formData.append(key, value);
+        }
+      });
+
+      // 태그 처리
+      if (restData.tags) {
+        if (Array.isArray(restData.tags)) {
+          formData.append("tags", restData.tags.join(","));
+        } else {
+          formData.append("tags", restData.tags);
+        }
+      }
+
+      // 이미지 처리
+      if (imageFile) {
+        // 파일 객체가 있으면 파일 업로드
+        formData.append("images", imageFile);
+      } else if (imageUrl) {
+        // URL만 있는 경우 기존 이미지 URL 유지
+        formData.append("existingImages", JSON.stringify([imageUrl]));
+      }
+    }
+
+    // 로깅
+    console.log(
+      "updateProduct 요청 데이터:",
+      Array.from(formData.entries()).reduce((obj, [key, value]) => {
+        obj[key] = typeof value === "object" ? "(File 객체)" : value;
+        return obj;
+      }, {})
+    );
+
+    const response = await instance.patch(`${BASE_URL}/${data.id}`, formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+
     console.log("Updated product:", response.data);
     return response.data;
   } catch (error) {

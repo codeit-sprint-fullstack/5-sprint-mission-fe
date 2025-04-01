@@ -13,10 +13,10 @@ const ProductList = () => {
   const [searchTerm, setSearchTerm] = useState("");
 
   const totalPages = Math.ceil(data.totalCount / itemsPerPage);
-  // 검색어 핸들러
+
   const handleSearchChange = (newSearchTerm) => {
     setSearchTerm(newSearchTerm);
-    setPage(1); // 검색 시 첫 페이지로 초기화
+    setPage(1);
   };
 
   // 화면 크기에 따라 업데이트
@@ -33,7 +33,6 @@ const ProductList = () => {
     return () => window.removeEventListener("resize", updateItemsPerPage);
   }, [updateItemsPerPage]);
 
-  // 데이터 가져오기
   const fetchPageData = useCallback(async () => {
     try {
       const response = await fetchProducts({
@@ -49,7 +48,6 @@ const ProductList = () => {
     }
   }, [orderBy, page, searchTerm, itemsPerPage]);
 
-  // `orderBy`가 변경될 때 호출되는 함수
   const handleOrderByChange = (value) => {
     setOrderBy(value);
   };

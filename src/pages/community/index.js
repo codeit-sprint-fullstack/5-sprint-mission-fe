@@ -38,7 +38,7 @@ export default function Community({
         const data = await response.json();
         if (Array.isArray(data.list)) {
           const sortedData = data.list.sort(
-            (a, b) => b.favoriteCnt - a.favoriteCnt
+            (a, b) => b.likeCount - a.likeCount
           );
           setBestArticles(sortedData.slice(0, bestCount)); // 변경된 bestCount 적용
         } else {
@@ -70,7 +70,7 @@ export default function Community({
 
   // const bestArticles = useMemo(() => {
   //   return [...allArticles] // 전체 게시글 데이터 기준으로 정렬
-  //     .sort((a, b) => b.favoriteCnt - a.favoriteCnt)
+  //     .sort((a, b) => b.likeCount - a.likeCount)
   //     .slice(0, bestCount);
   // }, [allArticles, bestCount]);
 

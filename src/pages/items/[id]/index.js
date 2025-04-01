@@ -14,7 +14,7 @@ export default function ProductDetailPage({ product, comments }) {
   const { id } = router.query;
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false);
-  // 로그인 상태를 useEffect로 확인
+
   useEffect(() => {
     const token = localStorage.getItem("accessToken");
     if (!token) {
@@ -40,7 +40,6 @@ export default function ProductDetailPage({ product, comments }) {
     }
   };
 
-  // 로그인 모달을 닫고 로그인 페이지로 이동
   const handleLoginRedirect = () => {
     setIsLoginModalOpen(false);
     router.push("/login"); // 로그인 페이지로 리다이렉트

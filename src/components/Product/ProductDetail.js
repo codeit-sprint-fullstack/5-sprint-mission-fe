@@ -14,7 +14,6 @@ export default function ProductDetail({ product, onDelete }) {
   const username = product.ownerNickname || "귀여운 판다";
   console.log("작성자", product.ownerId);
 
-  // ✅ 모달 상태 추가
   const [isDoubleCheckModalOpen, setIsDoubleCheckModalOpen] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false); // 수정용 모달 상태
   const [message, setMessage] = useState("");
@@ -58,7 +57,6 @@ export default function ProductDetail({ product, onDelete }) {
   //   }
   // };
 
-  // Edit page
   const handleEdit = () => {
     if (user.id === product.ownerId) {
       router.push(`/items/${product.id}/edit`);
@@ -69,8 +67,7 @@ export default function ProductDetail({ product, onDelete }) {
   };
 
   const userId = user ? user.id : null;
-  console.log(userId);
-  if (!product) return <div>❌ 상품 데이터를 불러오지 못했습니다.</div>;
+  // console.log(userId);
 
   return (
     <section className="max-w-[1200px] mx-auto px-4 w-full md:flex md:justify-between md:gap-4">

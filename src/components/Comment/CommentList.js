@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Comment from "@/components/Comment/Comment";
+import Comment from "./Comment.js";
 import Image from "next/image";
 import { useType } from "../../contexts/TypeContext";
 import { fetchProductComments } from "@/services/api/products";
