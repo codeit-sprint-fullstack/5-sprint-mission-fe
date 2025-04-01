@@ -12,6 +12,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import useDebounce from "@/hooks/useDebounce";
 import SelectPage from "@/components/common/Paginiation";
+import BestProduct from "@/components/BestProduct";
 
 interface ProductList {
   list: ProductCard[];
@@ -48,7 +49,7 @@ export default function ItemsPage() {
     orderBy: string
   ) {
     const res = await api.get<ProductList>(
-      `https://panda-market-api.vercel.app/products/?keyword=${searchVal}&pageSize=${pageSize}&page=${page}&orderBy=${orderBy}`
+      `/products/?keyword=${searchVal}&pageSize=${pageSize}&page=${page}&order=${orderBy}`
     );
     return res.data;
   }
@@ -59,6 +60,7 @@ export default function ItemsPage() {
   return (
     <Layout>
       <div className="flex flex-col gap-[40px] min-h-[100vh] w-[100%]">
+        <BestProduct />
         {width > 768 ? (
           <div className="flex justify-between items-center">
             <h3 className="text-[20px] font-bold">판매 중인 상품</h3>

@@ -26,13 +26,13 @@ import { useContext, useEffect, useState } from "react";
 
 interface ProductCommentData {
   list: ProductComment[];
-  nextCursor: number | null | undefined;
+  nextCursor: string | null | undefined;
 }
 
 export default function ItemDetailPage() {
   const router = useRouter();
   const id = (router.query.id as string) || "";
-  const { data, isLoading, isError } = useQuery({
+  const { data, isPending, isError } = useQuery({
     queryKey: ["product", id],
     queryFn: ({ queryKey }) => {
       const productId = queryKey[1];
@@ -60,19 +60,24 @@ export default function ItemDetailPage() {
   }, [content]);
 
   async function getComments({
-    pageParam,
+    pageParam = 0,
     queryKey,
   }: {
     pageParam: number;
     queryKey: QueryKey;
   }) {
-    const [, productId] = queryKey;
+    const productId = queryKey?.[1];
+
     if (!productId) return { list: [], nextCursor: null }; // productId가 없으면 빈 배열 반환
+    console.log("Fetching comments for productId:", productId);
+    
     const res = await api.get<ProductCommentData>(
-      `https://panda-market-api.vercel.app/products/${productId}/comments/?limit=5&cursor=${pageParam}`
+      `/comments/${productId}?targetType=product&cursor=${pageParam || ""}`
     );
+
+    console.log("API Response:", res.data);
     return {
-      list: res.data.list,
+      list: Array.isArray(res.data.list) ? res.data.list : [],
       nextCursor: res.data.nextCursor ?? undefined,
     };
   }
@@ -81,7 +86,7 @@ export default function ItemDetailPage() {
     data: commentData,
     fetchNextPage,
     hasNextPage,
-    isFetchingNextPage,
+    // Removed unused variable
   } = useInfiniteQuery<ProductCommentData>({
     queryKey: ["comments", product?.id],
     queryFn: ({ pageParam, queryKey }) => {
@@ -93,18 +98,22 @@ export default function ItemDetailPage() {
     enabled: !!product?.id,
     staleTime: 1000 * 60 * 5, // 5분 동안 캐싱된 데이터 사용
     gcTime: 1000 * 60 * 10,
-    getNextPageParam: (lastPage) => lastPage.nextCursor ?? undefined,
-    initialPageParam: 0,
+    getNextPageParam: (lastPage) => {
+      if (!lastPage || !lastPage.nextCursor) {
+        return undefined; // 더 이상 페이지가 없음을 명확히 반환
+      }
+      return lastPage.nextCursor;
+    },
+    initialPageParam: null, // cursor 값 초기화
   });
-
+  
+  console.log(hasNextPage)
+  console.log("📢 commentData: ", commentData);
   const comments = commentData?.pages.flatMap((page) => page.list) ?? [];
-
+  console.log(comments);
   async function postCommit() {
     setIsVerified(false);
-    await api.post(
-      `https://panda-market-api.vercel.app/products/${product.id}/comments`,
-      { content: content }
-    );
+    await api.post(`/comments/product/${product.id}`, { content: content });
     setContent("");
   }
 
@@ -117,9 +126,7 @@ export default function ItemDetailPage() {
 
   async function deletePost() {
     try {
-      await api.delete(
-        `https://panda-market-api.vercel.app/products/${product.id}`
-      );
+      await api.delete(`/products/${product.id}`);
       router.push("/items");
     } catch (err) {
       console.log(err);
@@ -129,9 +136,7 @@ export default function ItemDetailPage() {
 
   async function favoritePost() {
     try {
-      await api.post(
-        `https://panda-market-api.vercel.app/products/${product.id}/favorite`
-      );
+      await api.post(`/products/${product.id}/favorite`);
       queryClient.invalidateQueries({ queryKey: ["product", id] });
     } catch (err) {
       console.log(err);
@@ -140,16 +145,15 @@ export default function ItemDetailPage() {
 
   async function favoriteDelete() {
     try {
-      await api.delete(
-        `https://panda-market-api.vercel.app/products/${product.id}/favorite`
-      );
+      await api.delete(`/products/${product.id}/favorite`);
       queryClient.invalidateQueries({ queryKey: ["product", id] });
     } catch (err) {
       console.log(err);
     }
   }
 
-  if (isLoading)
+
+  if (isPending)
     return (
       <Layout>
         <div>로딩중 ...</div>
@@ -172,7 +176,7 @@ export default function ItemDetailPage() {
               src={
                 imgError || !product.images[0]
                   ? "/imgs/img_default.png"
-                  : product.images[0]
+                  : `${process.env.NEXT_PUBLIC_API_URL}${product.images[0]}`
               }
               alt="상품 이미지"
               fill
@@ -299,7 +303,7 @@ export default function ItemDetailPage() {
           </div>
         </div>
         <div className="flex flex-col gap-[40px]">
-          {comments.map((comment, index) => {
+          {comments?.map((comment, index) => {
             return (
               <ProductCommentElement
                 comment={comment}
@@ -308,12 +312,17 @@ export default function ItemDetailPage() {
               />
             );
           })}
-          { hasNextPage &&
-            <div className="flex justify-center" onClick={() => fetchNextPage()}>
-            <div className="text-slate-500 bg-slate-50 p-2 rounded-xl cursor-pointer">댓글 더보기</div>
-          </div>
-          }
-          {comments.length === 0 && (
+          {hasNextPage && (
+            <div
+              className="flex justify-center"
+              onClick={() => fetchNextPage()}
+            >
+              <div className="text-slate-500 bg-slate-50 p-2 rounded-xl cursor-pointer">
+                댓글 더보기
+              </div>
+            </div>
+          )}
+          {comments?.length === 0 && (
             <div className="flex flex-col gap-5 items-center">
               <div className="relative w-[140px] h-[140px]">
                 <Image

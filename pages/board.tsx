@@ -25,7 +25,7 @@ export default function BoardPage() {
   const [searchVal, setSearchVal] = useState("");
   const { width, height } = useWindowSize();
   const [maxCount, setMaxCount] = useState(3);
-  const [order, setOrder] = useState("newest");
+  const [order, setOrder] = useState("recent");
   const router = useRouter();
   const debounceSearchVal = useDebounce<string>(searchVal, 1000);
 
@@ -51,7 +51,7 @@ export default function BoardPage() {
 
   async function getArticlesByKeyword(keyword: string, order: string) {
     const res = await api.get<ArticleData>(
-      `/article/?keyword=${keyword}&order=${order}`
+      `/articles/?keyword=${keyword}&order=${order}`
     );
     return res;
   }

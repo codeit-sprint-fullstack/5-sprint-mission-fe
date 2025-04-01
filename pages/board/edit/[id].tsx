@@ -51,7 +51,7 @@ export default function Edit({ article }: EditProps) {
   async function onSubmit() {
     setIsVerified(false);
     try {
-      await api.patch(`/article/${article.id}`, {
+      await api.patch(`/articles/${article.id}`, {
         title: title,
         content: content,
       });

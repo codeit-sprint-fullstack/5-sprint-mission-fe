@@ -19,7 +19,7 @@ export default function Product({ product }: ProductProps) {
           src={
             !product.images[0] || isError
               ? "/imgs/img_default.png"
-              : product.images[0]
+              : `${process.env.NEXT_PUBLIC_API_URL}${product.images[0]}`
           }
           alt={product.name}
           fill
