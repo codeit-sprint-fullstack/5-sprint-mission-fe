@@ -58,8 +58,9 @@ export default function ArticleDetailPage() {
         const commentsData = await getCommentsByArticleId(
           articleData.id.toString()
         );
-        console.log("댓글 데이터:", commentsData);
-        if (commentsData && commentsData.comments) {
+        console.log("댓글 데이터 전체 구조:", commentsData);
+        console.log("댓글 목록 구조:", commentsData.comments);
+        if (commentsData && Array.isArray(commentsData.comments)) {
           setComments(commentsData.comments);
           console.log("설정된 댓글 데이터:", commentsData.comments);
         } else {
@@ -89,10 +90,16 @@ export default function ArticleDetailPage() {
     try {
       setIsLoadingComments(true);
       const commentsData = await getCommentsByArticleId(articleId.current);
-      console.log(commentsData);
-      setComments(commentsData.comments);
+      console.log("댓글 새로고침 데이터:", commentsData);
+      if (commentsData && Array.isArray(commentsData.comments)) {
+        setComments(commentsData.comments);
+      } else {
+        console.error("댓글 데이터 형식이 올바르지 않습니다:", commentsData);
+        setComments([]);
+      }
     } catch (err) {
       console.error("댓글을 불러오는데 실패했습니다.", err);
+      setComments([]);
     } finally {
       setIsLoadingComments(false);
     }
@@ -115,9 +122,12 @@ export default function ArticleDetailPage() {
       try {
         setIsLoadingComments(true);
         const commentsData = await getCommentsByArticleId(articleId.current);
-        console.log("댓글 작성 후 새로 불러온 데이터:", commentsData);
-        if (commentsData && commentsData.comments) {
+        console.log("댓글 작성 후 데이터 전체 구조:", commentsData);
+        if (commentsData && Array.isArray(commentsData.comments)) {
           setComments(commentsData.comments);
+        } else {
+          console.error("댓글 형식이 올바르지 않습니다:", commentsData);
+          setComments([]);
         }
       } catch (err) {
         console.error("댓글 작성 후 목록 불러오기 실패:", err);
@@ -246,19 +256,24 @@ export default function ArticleDetailPage() {
             <div className="flex justify-center py-4">
               <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-primary-blue"></div>
             </div>
-          ) : comments && comments.length > 0 ? (
+          ) : comments && Array.isArray(comments) && comments.length > 0 ? (
             <>
               <p className="text-sm text-gray-600 mb-4">
                 총 {comments.length}개의 댓글
               </p>
-              {comments.map((comment, index) => (
-                <CommentItem
-                  key={`${comment.id || index}-${index}`}
-                  comment={comment}
-                  articleId={article.id.toString()}
-                  onCommentUpdated={fetchComments}
-                />
-              ))}
+              {comments.map((comment, index) => {
+                if (process.env.NODE_ENV !== "production") {
+                  console.log(`댓글 ${index} 렌더링:`, comment);
+                }
+                return (
+                  <CommentItem
+                    key={`comment-${index}`}
+                    comment={comment}
+                    articleId={article.id.toString()}
+                    onCommentUpdated={fetchComments}
+                  />
+                );
+              })}
             </>
           ) : (
             <div className="flex flex-col items-center justify-center py-8">

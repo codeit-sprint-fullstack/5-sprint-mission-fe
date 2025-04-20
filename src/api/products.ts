@@ -21,16 +21,18 @@ export interface ProductsResponse {
 
 export interface CommentsResponse {
   list: Comment[];
+  comments?: Comment[];
   nextCursor: number | null;
 }
 
 export interface Comment {
   id: string;
-  writer: {
-    id: string;
-    image?: string;
+  user?: {
     nickname: string;
+    image?: string;
+    [key: string]: any;
   };
+  userId?: string;
   content: string;
   createdAt: string;
   updatedAt: string;
@@ -107,10 +109,34 @@ export const getProductComments = async (
     params.append("cursor", cursor.toString());
   }
 
-  const response = await api.get<CommentsResponse>(
-    `/api/products/${productId}/comments?${params.toString()}`
-  );
-  return response.data;
+  try {
+    const response = await api.get<CommentsResponse>(
+      `/api/products/${productId}/comments?${params.toString()}`
+    );
+    console.log("상품 댓글 API 원본 응답:", response.data);
+
+    // comments 속성이 없는 경우 list 속성을 활용하여 추가
+    if (!response.data.comments && response.data.list) {
+      response.data.comments = response.data.list;
+    }
+
+    // 댓글 목록 확보
+    const commentsList = response.data.comments || response.data.list || [];
+
+    // 댓글 목록은 있는 그대로 사용 (이미 user 속성이 있음)
+    const result = {
+      list: commentsList,
+      comments: commentsList,
+      nextCursor: response.data.nextCursor,
+    };
+
+    console.log("처리된 상품 댓글 데이터:", result);
+    return result;
+  } catch (error) {
+    console.error("상품 댓글 조회 오류:", error);
+    // 오류 발생 시 빈 데이터 반환
+    return { list: [], comments: [], nextCursor: null };
+  }
 };
 
 // 댓글 작성
