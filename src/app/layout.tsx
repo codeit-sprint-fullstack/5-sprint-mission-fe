@@ -1,6 +1,5 @@
 import type { Metadata } from "next";
 import "@/shared/globals.css";
-import Layout from "@/shared/components/Layout";
 
 export const metadata: Metadata = {
   title: "판다마켓",
@@ -16,10 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body>
-        <Layout>{children}</Layout>
-      </body>
+    <html lang="ko">
+      <body>{children}</body>
     </html>
   );
 }

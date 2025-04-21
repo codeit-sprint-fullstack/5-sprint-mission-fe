@@ -1,0 +1,78 @@
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  createProduct,
+  fetchProductById,
+  fetchProducts,
+  likeProduct,
+  unlikeProduct,
+  updateProduct,
+} from "./productApi";
+
+interface UseProductsParams {
+  page: number;
+  sort: "recent" | "favorite";
+  search: string;
+}
+
+export const useProducts = ({ page, sort, search }: UseProductsParams) => {
+  return useQuery({
+    queryKey: ["products", page, sort, search],
+    queryFn: () => fetchProducts({ page, sort, search }),
+    placeholderData: (prev) => prev,
+  });
+};
+export const useProductById = (id?: string) => {
+  return useQuery({
+    queryKey: ["product", id],
+    queryFn: () => fetchProductById(id as string),
+    enabled: !!id,
+  });
+};
+
+export const useCreateProduct = (options?: { onSuccess?: () => void }) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: createProduct,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      options?.onSuccess?.();
+    },
+  });
+};
+
+export const useEditProduct = (
+  id: string,
+  options?: { onSuccess?: () => void }
+) => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (formData: FormData) => updateProduct(id, formData),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
+      queryClient.invalidateQueries({ queryKey: ["product", id] });
+      options?.onSuccess?.();
+    },
+  });
+};
+
+export const useLikeProduct = (id: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => likeProduct(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["product", id] });
+    },
+  });
+};
+
+export const useUnlikeProduct = (id: string) => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: () => unlikeProduct(id),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["product", id] });
+    },
+  });
+};
