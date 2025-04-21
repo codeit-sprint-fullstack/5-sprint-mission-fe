@@ -1,6 +1,6 @@
 // 백엔드에서 전달된 이미지 경로를 완전한 URL로 변환
 export const getImageUrl = (
-  url: string,
+  url: string | undefined,
   fallbackImage: string = ""
 ): string => {
   if (!url) return fallbackImage;
