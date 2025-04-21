@@ -81,7 +81,6 @@ export const getProductComments = async (
     const response = await api.get<CommentsResponse>(
       `/api/products/${productId}/comments?${params.toString()}`
     );
-    console.log("상품 댓글 API 원본 응답:", response.data);
 
     // comments 속성이 없는 경우 list 속성을 활용하여 추가
     if (!response.data.comments && response.data.list) {
@@ -98,7 +97,6 @@ export const getProductComments = async (
       nextCursor: response.data.nextCursor,
     };
 
-    console.log("처리된 상품 댓글 데이터:", result);
     return result;
   } catch (error) {
     console.error("상품 댓글 조회 오류:", error);

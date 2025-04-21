@@ -58,11 +58,8 @@ export default function ArticleDetailPage() {
         const commentsData = await getCommentsByArticleId(
           articleData.id.toString()
         );
-        console.log("댓글 데이터 전체 구조:", commentsData);
-        console.log("댓글 목록 구조:", commentsData.comments);
         if (commentsData && Array.isArray(commentsData.comments)) {
           setComments(commentsData.comments);
-          console.log("설정된 댓글 데이터:", commentsData.comments);
         } else {
           console.error("댓글 데이터 형식이 올바르지 않습니다:", commentsData);
           setComments([]);
@@ -73,8 +70,6 @@ export default function ArticleDetailPage() {
       } finally {
         setIsLoadingComments(false);
       }
-
-      console.log(articleData);
     } catch (error) {
       console.error("게시글을 불러오는데 실패했습니다:", error);
       router.push("/404");
@@ -90,7 +85,6 @@ export default function ArticleDetailPage() {
     try {
       setIsLoadingComments(true);
       const commentsData = await getCommentsByArticleId(articleId.current);
-      console.log("댓글 새로고침 데이터:", commentsData);
       if (commentsData && Array.isArray(commentsData.comments)) {
         setComments(commentsData.comments);
       } else {
@@ -122,7 +116,6 @@ export default function ArticleDetailPage() {
       try {
         setIsLoadingComments(true);
         const commentsData = await getCommentsByArticleId(articleId.current);
-        console.log("댓글 작성 후 데이터 전체 구조:", commentsData);
         if (commentsData && Array.isArray(commentsData.comments)) {
           setComments(commentsData.comments);
         } else {
@@ -262,9 +255,6 @@ export default function ArticleDetailPage() {
                 총 {comments.length}개의 댓글
               </p>
               {comments.map((comment, index) => {
-                if (process.env.NODE_ENV !== "production") {
-                  console.log(`댓글 ${index} 렌더링:`, comment);
-                }
                 return (
                   <CommentItem
                     key={`comment-${index}`}

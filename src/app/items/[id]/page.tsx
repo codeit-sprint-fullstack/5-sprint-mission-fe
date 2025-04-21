@@ -76,7 +76,6 @@ export default function ItemDetailPage() {
         productId,
         typeof pageParam === "string" ? Number(pageParam) : pageParam
       ).then((data) => {
-        console.log("상품 댓글 데이터:", data);
         return data;
       });
     },
@@ -143,7 +142,6 @@ export default function ItemDetailPage() {
   // 댓글 목록 가져오기
   const comments =
     commentsData?.pages.flatMap((page) => {
-      console.log("댓글 페이지 구조:", page);
       // API 응답 구조에 따라 page.list 또는 page.comments 필드에서 댓글 목록을 가져옴
       if (page.comments && Array.isArray(page.comments)) {
         return page.comments;
@@ -152,7 +150,6 @@ export default function ItemDetailPage() {
       }
       return [];
     }) || [];
-  console.log("처리된 댓글 목록:", comments);
 
   // 인증 확인 중이거나 로딩 중 표시
   if (isAuthenticated === null || isItemLoading) {
@@ -175,14 +172,13 @@ export default function ItemDetailPage() {
       </div>
     );
   }
-  console.log(item);
 
   return (
     <div className="max-w-[1200px] mx-auto mb-[234px] md:mb-[561px] lg:mb-[463px] px-4 py-8">
       <div className="flex flex-col md:flex-row md:gap-6 mb-6 border-b border-gray-300 pb-6">
         <div>
           <Image
-            src={getImageUrl(item?.images?.[0], defaultImage.src)}
+            src={getImageUrl(item?.images?.[0] || "", defaultImage.src)}
             alt={item?.name || "상품 이미지"}
             width={480}
             height={480}

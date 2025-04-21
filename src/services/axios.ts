@@ -45,10 +45,7 @@ api.interceptors.response.use(
         // 백엔드 컨트롤러와 일치하는 엔드포인트 사용
         // refreshToken 함수가 백엔드에서 사용되므로 refresh-token 엔드포인트 사용
         // 쿠키에서 자동으로 리프레시 토큰을 읽어오므로 요청 본문은 비움
-        console.log("토큰 갱신 시도");
         const response = await api.post("/api/auth/refresh-token");
-
-        console.log("토큰 갱신 응답:", response.data);
 
         // 새 토큰 저장
         if (response.data.accessToken) {

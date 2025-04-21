@@ -16,10 +16,6 @@ const CommentItem = ({
   articleId,
   onCommentUpdated,
 }: CommentItemProps) => {
-  // 콘솔로 실제 댓글 데이터 구조 확인
-  console.log("댓글 컴포넌트 데이터:", comment);
-  console.log("댓글 user 속성:", comment.user);
-
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(comment.content || "");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -36,7 +32,6 @@ const CommentItem = ({
         const userInfo = JSON.parse(userInfoStr);
         setCurrentUserId(userInfo.id || null);
         setCurrentUserNickname(userInfo.nickname || "");
-        console.log("현재 로그인한 사용자:", userInfo);
       }
     } catch (error) {
       console.error("사용자 정보를 가져오는데 실패했습니다:", error);
@@ -70,9 +65,6 @@ const CommentItem = ({
     } else if (value === "delete") {
       if (window.confirm("정말로 이 댓글을 삭제하시겠습니까?")) {
         try {
-          console.log(
-            `댓글 삭제: 게시글 ID ${articleId}, 댓글 ID ${comment.id}`
-          );
           await deleteComment(comment.id);
           alert("댓글이 삭제되었습니다.");
           onCommentUpdated();

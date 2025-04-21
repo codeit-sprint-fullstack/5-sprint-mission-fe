@@ -9,7 +9,6 @@ export const getCommentsByArticleId = async (
     const response = await api.get<CommentsResponse>(
       `/api/articles/${articleId}/comments`
     );
-    console.log("게시글 댓글 API 원본 응답:", response.data);
 
     // API 응답에 comments 필드가 없거나 배열이 아니면 처리
     if (!response.data.comments || !Array.isArray(response.data.comments)) {
@@ -27,7 +26,6 @@ export const getCommentsByArticleId = async (
       comments: response.data.comments,
     };
 
-    console.log("처리된 게시글 댓글 데이터:", result);
     return result;
   } catch (error) {
     console.error("게시글 댓글 조회 오류:", error);

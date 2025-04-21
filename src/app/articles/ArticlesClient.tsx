@@ -72,7 +72,6 @@ export default function ArticlesClient({
           keyword,
         },
       });
-      console.log(response.data);
       setArticles(response.data.articles);
     } catch (error) {
       console.error("Failed to fetch articles:", error);
