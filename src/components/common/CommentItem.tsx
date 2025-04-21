@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react";
 import Image from "next/image";
-import { Comment, updateComment, deleteComment } from "@/api/comments";
+import { updateComment, deleteComment } from "@/services/comments";
 import { formatRelativeTime } from "@/utils/date";
 import ContextMenu from "./ContextMenu";
+import { Comment } from "@/types/comments.types";
 
 interface CommentItemProps {
   comment: Comment;

@@ -11,7 +11,7 @@ import { useRouter } from "next/navigation";
 import Button from "@/components/common/Button";
 import Image from "next/image";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getProductsByPage, getProductById } from "@/api/products";
+import { getProductsByPage, getProductById } from "@/services/products";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { getImageUrl } from "@/utils/images/url";
 

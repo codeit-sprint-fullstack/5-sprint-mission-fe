@@ -1,50 +1,15 @@
 "use client";
 
-import {
-  createContext,
-  useContext,
-  useState,
-  useEffect,
-  ReactNode,
-} from "react";
+import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { api } from "@/api/axios"; // 기존 API 인스턴스 사용
-
-// 인증 컨텍스트의 타입 정의
-type AuthContextType = {
-  isAuthenticated: boolean;
-  user: User | null;
-  login: (requestData: {
-    email: string;
-    password: string;
-  }) => Promise<{ success: boolean; message: string }>;
-  signup: (
-    userData: SignupData
-  ) => Promise<{ success: boolean; message: string }>;
-  logout: () => void;
-  loading: boolean;
-};
-
-// User 타입 정의
-type User = {
-  email: string;
-  nickname: string;
-  image: string | null;
-};
-
-// 회원가입 데이터 타입 정의
-type SignupData = {
-  email: string;
-  nickname: string;
-  password: string;
-  passwordConfirmation: string;
-};
-
-// AuthProvider props 타입 정의
-type AuthProviderProps = {
-  children: ReactNode;
-};
+import { api } from "@/services/axios";
+import {
+  AuthContextType,
+  User,
+  SignupData,
+  AuthProviderProps,
+} from "@/types/auth.types";
 
 // 기본값으로 사용할 컨텍스트 생성
 const AuthContext = createContext<AuthContextType | undefined>(undefined);

@@ -1,17 +1,5 @@
 import { api } from "./axios";
-
-export interface Article {
-  id: string;
-  title: string;
-  content: string;
-  favoriteCount: number;
-  createdAt: string;
-  writer: {
-    id: string;
-    nickname: string;
-  };
-  isFavorite?: boolean;
-}
+import { Article } from "@/types/articles.types";
 
 // 게시글 상세 조회
 export const getArticleById = async (id: string): Promise<Article> => {

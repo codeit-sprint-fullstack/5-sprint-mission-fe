@@ -1,27 +1,5 @@
 import { api } from "./axios";
-
-export interface Comment {
-  id: string;
-  user?: {
-    nickname: string;
-    image?: string;
-    [key: string]: any;
-  };
-  userId?: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-}
-
-export interface CommentsResponse {
-  comments: Comment[];
-  writer: {
-    id: string;
-    image?: string;
-    nickname: string;
-  };
-  nextCursor: string | null;
-}
+import { Comment, CommentsResponse } from "@/types/comments.types";
 
 // 댓글 목록 조회
 export const getCommentsByArticleId = async (

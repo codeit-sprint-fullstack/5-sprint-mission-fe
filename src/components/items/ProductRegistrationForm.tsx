@@ -1,27 +1,17 @@
 "use client";
 
-import { useState, useCallback, KeyboardEvent, useEffect } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/common/Button";
 import Image from "next/image";
-import { createProduct, updateProduct, ProductFormData } from "@/api/products";
+import { createProduct, updateProduct } from "@/services/products";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import xIcon from "@public/icons/ic_X.png";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import defaultImage from "@public/icons/img_default.png";
 import { getImageUrl } from "@/utils/images/url";
-
-interface Product {
-  id: string;
-  name: string;
-  price: number;
-  images?: string[];
-  description: string;
-  tags?: string[];
-  ownerNickname: string;
-  createdAt: string;
-  favoriteCount: number;
-}
+import { Product } from "@/types/products.types";
+import { ProductFormData } from "@/types/products.types";
 
 interface ProductRegistrationFormProps {
   product?: Product;

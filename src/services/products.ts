@@ -1,42 +1,10 @@
 import { api } from "./axios";
-
-export interface Product {
-  id: string;
-  name: string;
-  price: number;
-  images?: string[];
-  description: string;
-  tags?: string[];
-  ownerNickname: string;
-  createdAt: string;
-  favoriteCount: number;
-  isFavorite: boolean;
-}
-
-export interface ProductsResponse {
-  list: Product[];
-  nextCursor: number | null;
-  totalCount?: number;
-}
-
-export interface CommentsResponse {
-  list: Comment[];
-  comments?: Comment[];
-  nextCursor: number | null;
-}
-
-export interface Comment {
-  id: string;
-  user?: {
-    nickname: string;
-    image?: string;
-    [key: string]: any;
-  };
-  userId?: string;
-  content: string;
-  createdAt: string;
-  updatedAt: string;
-}
+import {
+  Product,
+  ProductsResponse,
+  ProductFormData,
+} from "@/types/products.types";
+import { Comment, CommentsResponse } from "@/types/comments.types";
 
 // 상품 목록 조회 - 커서 방식
 // export const getProductsByCursor = async (
@@ -178,15 +146,6 @@ export const deleteProduct = async (productId: string): Promise<void> => {
 };
 
 // 상품 등록
-export interface ProductFormData {
-  name: string;
-  price: number;
-  description: string;
-  images?: File[] | string[]; // File 객체 또는 기존 이미지 URL 배열
-  tags?: string[];
-  existingImages?: string[]; // 기존 이미지 URL을 별도로 저장하기 위한 속성
-}
-
 export const createProduct = async (
   productData: ProductFormData
 ): Promise<Product> => {

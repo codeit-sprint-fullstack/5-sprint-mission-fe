@@ -4,7 +4,8 @@ import { useEffect, useState } from "react";
 import { useParams, useRouter } from "next/navigation";
 import NotFound from "@/app/not-found";
 import ProductRegistrationForm from "@/components/items/ProductRegistrationForm";
-import { getProductById, Product } from "@/api/products";
+import { getProductById } from "@/services/products";
+import { Product } from "@/types/products.types";
 import { useQueryClient } from "@tanstack/react-query";
 
 export default function EditProductPage() {

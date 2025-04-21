@@ -1,4 +1,4 @@
-import { api } from "@/api/axios";
+import { api } from "@/services/axios";
 import ArticlesClient from "./ArticlesClient";
 import NotFound from "../not-found";
 

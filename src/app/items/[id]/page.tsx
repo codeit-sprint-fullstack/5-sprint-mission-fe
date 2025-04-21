@@ -24,9 +24,9 @@ import {
   deleteProduct,
   addFavorite,
   removeFavorite,
-  CommentsResponse,
-} from "@/api/products";
+} from "@/services/products";
 import { getImageUrl } from "@/utils/images/url";
+import { Comment, CommentsResponse } from "@/types/comments.types";
 
 export default function ItemDetailPage() {
   const params = useParams();
@@ -72,7 +72,10 @@ export default function ItemDetailPage() {
   } = useInfiniteQuery({
     queryKey: ["productComments", productId],
     queryFn: ({ pageParam }) => {
-      return getProductComments(productId, pageParam).then((data) => {
+      return getProductComments(
+        productId,
+        typeof pageParam === "string" ? Number(pageParam) : pageParam
+      ).then((data) => {
         console.log("상품 댓글 데이터:", data);
         return data;
       });

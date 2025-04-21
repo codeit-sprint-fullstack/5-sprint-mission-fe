@@ -1,6 +1,6 @@
 import BestItems from "@/components/items/BestItems";
 import OnSaleItems from "@/components/items/OnSaleItems";
-import { getBestProducts, getProductsByPage } from "@/api/products";
+import { getBestProducts, getProductsByPage } from "@/services/products";
 import {
   HydrationBoundary,
   QueryClient,

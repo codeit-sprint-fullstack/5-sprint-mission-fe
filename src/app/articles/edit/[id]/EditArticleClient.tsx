@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/common/Button";
-import { updateArticle } from "@/api/articles";
+import { updateArticle } from "@/services/articles";
 
 interface EditArticleClientProps {
   article: {

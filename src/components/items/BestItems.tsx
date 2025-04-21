@@ -6,14 +6,10 @@ import Image from "next/image";
 import useResponsivePageSize from "@/hooks/useResponsivePageSize";
 import { useRouter } from "next/navigation";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import {
-  getBestProducts,
-  getProductById,
-  Product,
-  ProductsResponse,
-} from "@/api/products";
+import { getBestProducts, getProductById } from "@/services/products";
 import LoadingSpinner from "@/components/common/LoadingSpinner";
 import { getImageUrl } from "@/utils/images/url";
+import { Product, ProductsResponse } from "@/types/products.types";
 
 const BestItems: React.FC = () => {
   const pageSize = useResponsivePageSize({ mobile: 1, tablet: 2, desktop: 4 });

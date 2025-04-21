@@ -3,13 +3,12 @@
 import { useEffect, useState, useCallback, useRef } from "react";
 import Image from "next/image";
 import {
-  Article,
   getArticleById,
   deleteArticle,
   addArticleFavorite,
   removeArticleFavorite,
-} from "@/api/articles";
-import { Comment, getCommentsByArticleId, createComment } from "@/api/comments";
+} from "@/services/articles";
+import { getCommentsByArticleId, createComment } from "@/services/comments";
 import CommentItem from "@/components/common/CommentItem";
 import CommentForm from "@/components/common/CommentForm";
 import { formatDate } from "@/utils/date";
@@ -17,7 +16,8 @@ import ContextMenu from "@/components/common/ContextMenu";
 import { useRouter, useParams } from "next/navigation";
 import { notFound } from "next/navigation";
 import LikeCountBtn from "@/components/common/LikeCountBtn";
-
+import { Article } from "@/types/articles.types";
+import { Comment } from "@/types/comments.types";
 export default function ArticleDetailPage() {
   const router = useRouter();
   const params = useParams();

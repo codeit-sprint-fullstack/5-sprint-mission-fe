@@ -6,7 +6,7 @@ import Button from "@/components/common/Button";
 import SearchInput from "@/components/common/SearchInput";
 import { useState, useEffect, useCallback } from "react";
 import Dropdown from "@/components/common/Dropdown";
-import { api } from "@/api/axios";
+import { api } from "@/services/axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useResponsive from "@/hooks/useResponsive";

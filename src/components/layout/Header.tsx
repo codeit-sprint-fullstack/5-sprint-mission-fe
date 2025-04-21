@@ -8,7 +8,7 @@ import logo from "@public/images/logo/logo.svg";
 import mobileLogo from "@public/images/logo/headerlogo_mobile.png";
 import NavMenu from "@/components/navigation/NavMenu";
 import Button from "@/components/common/Button";
-import { api } from "@/api/axios"; // 중앙 집중식 axios 인스턴스 가져오기
+import { api } from "@/services/axios"; // 중앙 집중식 axios 인스턴스 가져오기
 import { useAuth } from "@/contexts/AuthContext";
 
 const Header = () => {

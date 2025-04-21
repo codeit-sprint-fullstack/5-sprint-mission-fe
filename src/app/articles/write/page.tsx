@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { api } from "@/api/axios";
+import { api } from "@/services/axios";
 import Button from "@/components/common/Button";
 
 export default function WriteArticlePage() {

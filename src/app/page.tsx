@@ -7,7 +7,7 @@ import Feature2Image from "@public/images/home/feature2-image.png";
 import Feature3Image from "@public/images/home/feature3-image.png";
 import TextContent from "@/components/home/TextContent";
 import Link from "next/link";
-import { getBestProducts, getProductsByPage } from "@/api/products";
+import { getBestProducts, getProductsByPage } from "@/services/products";
 import {
   HydrationBoundary,
   QueryClient,
