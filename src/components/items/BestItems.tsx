@@ -65,7 +65,7 @@ const BestItems: React.FC = () => {
               className="cursor-pointer"
             >
               <Image
-                src={getImageUrl(item.images?.[0], defaultImage.src)}
+                src={getImageUrl(item.images?.[0] || "", defaultImage.src)}
                 alt={item.name || "상품 이미지"}
                 width={500}
                 height={500}
