@@ -5,19 +5,26 @@ interface FetchProductsParams {
   page: number;
   sort: "recent" | "favorite";
   search: string;
+  limit: number;
 }
 
 export const fetchProducts = async ({
   page,
   sort,
   search,
+  limit,
 }: FetchProductsParams): Promise<{
   products: Product[];
   totalCount: number;
 }> => {
-  const res = await customFetch(
-    `/products?page=${page}&sortBy=${sort}&search=${search}`
-  );
+  const res = await customFetch(`/products`, {
+    params: {
+      page,
+      limit,
+      sortBy: sort,
+      search,
+    },
+  });
 
   if (!res.ok) {
     throw new Error("상품 목록을 불러오지 못했습니다.");
@@ -73,14 +80,14 @@ export const deleteProduct = async (productId: string): Promise<void> => {
 };
 
 export const likeProduct = async (id: string): Promise<void> => {
-  const res = await customFetch(`/products/${id}/favorites`, {
-    method: "POST",
+  const res = await customFetch(`/products/${id}/favorite`, {
+    method: "PUT",
   });
   if (!res.ok) throw new Error("상품 좋아요 실패");
 };
 
 export const unlikeProduct = async (id: string): Promise<void> => {
-  const res = await customFetch(`/products/${id}/favorites`, {
+  const res = await customFetch(`/products/${id}/favorite`, {
     method: "DELETE",
   });
   if (!res.ok) throw new Error("상품 좋아요 취소 실패");

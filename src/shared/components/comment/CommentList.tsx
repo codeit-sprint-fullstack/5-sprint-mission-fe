@@ -49,7 +49,7 @@ export default function CommentList({ type, targetId }: CommentListProps) {
   };
 
   const handleDelete = async (commentId: string) => {
-    if (deletingId === commentId) return;
+    if (deletingId) return;
     setDeletingId(commentId);
     try {
       await deleteComment(commentId);

@@ -25,7 +25,7 @@ export default function ProductForm({
   const [description, setDescription] = useState(
     initialData?.description || ""
   );
-  const [price, setPrice] = useState(initialData?.price || 0);
+  const [price, setPrice] = useState(initialData?.price?.toString() ?? "");
   const [tags, setTags] = useState<string[]>(initialData?.tags || []);
   const [tagInput, setTagInput] = useState("");
   const [images, setImages] = useState<File[]>([]);
@@ -62,18 +62,28 @@ export default function ProductForm({
       return;
     }
 
-    const formData = new FormData();
-    formData.append("name", name);
-    formData.append("description", description);
-    formData.append("price", String(price));
-    tags.forEach((tag) => formData.append("tags", tag));
-    images.forEach((img) => formData.append("images", img));
+    try {
+      const formData = new FormData();
+      formData.append("name", name);
+      formData.append("description", description);
+      formData.append("price", price.trim() ? price : "0");
+      formData.append("tags", JSON.stringify(tags));
+      images.forEach((img) => formData.append("images", img));
 
-    console.log("formData", formData);
-    if (category === "create") {
-      createMutation.mutate(formData);
-    } else if (category === "edit" && initialData?.id) {
-      updateMutation.mutate(formData);
+      for (const [key, value] of formData.entries()) {
+        console.log(`${key}:`, value);
+      }
+      if (category === "create") {
+        createMutation.mutate(formData, {
+          onError: (error) => {
+            console.error("Mutation 에러:", error);
+          },
+        });
+      } else if (category === "edit" && initialData?.id) {
+        updateMutation.mutate(formData);
+      }
+    } catch (error) {
+      console.error("🔥 mutate 실패", error);
     }
   };
 
@@ -194,7 +204,7 @@ export default function ProductForm({
               type="number"
               placeholder="숫자만 입력해주세요"
               value={price}
-              onChange={(e) => setPrice(Number(e.target.value))}
+              onChange={(e) => setPrice(e.target.value)}
               className="w-full px-6 py-4 bg-custom-input-gray-100 rounded-xl focus:outline-none"
             />
           </section>

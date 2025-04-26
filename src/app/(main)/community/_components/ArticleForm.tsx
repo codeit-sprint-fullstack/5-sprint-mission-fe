@@ -67,6 +67,10 @@ export default function ArticleForm({
       });
     }
 
+    formData.forEach((value, key) => {
+      console.log(key, value);
+    });
+
     if (category === "create") {
       createMutation.mutate(formData);
     } else if (category === "edit" && initialData?.id) {

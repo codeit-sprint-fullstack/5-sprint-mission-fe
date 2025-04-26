@@ -30,7 +30,7 @@ const Pagination = ({
   const isNextDisabled = currentPage === totalPages;
 
   return (
-    <div className="flex w-72 md:w-80   items-center justify-center mt-4">
+    <div className="flex w-full   items-center justify-center mt-4">
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={isPrevDisabled}
@@ -64,14 +64,14 @@ const Pagination = ({
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={isNextDisabled}
-        className="   p-3"
+        className="p-3"
       >
         <Image
           src={right}
           alt="다음 페이지"
           width={40}
           height={40}
-          className="w-10"
+          className="w-[40px]"
         />
       </button>
     </div>

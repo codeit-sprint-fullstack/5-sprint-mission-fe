@@ -14,9 +14,7 @@ import DefaultImg from "@/shared/assets/Img/base-image/baseImg.png";
 interface DetailProductBoardProps {
   product: Product & {
     isLiked?: boolean;
-    _count?: {
-      favorites?: number;
-    };
+    favoriteCount?: number;
   };
 }
 
@@ -48,6 +46,8 @@ export default function DetailProductBoard({
   const handleDelete = () => {
     window.location.href = "/items";
   };
+
+  console.log("product._count", product.favoriteCount);
 
   return (
     <div className="flex flex-col md:flex-row items-center  gap-6 border-b border-custom-color-border-gray pb-6">
@@ -128,7 +128,7 @@ export default function DetailProductBoard({
           >
             <Image src={likeIcon} alt="좋아요" width={20} height={20} />
             <p className="text-sm text-custom-text-gray-200">
-              {product._count?.favorites ?? 0}
+              {product.favoriteCount ?? 0}
             </p>
           </button>
         </div>

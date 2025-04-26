@@ -13,8 +13,8 @@ export const getComments = async (
   const res = await customFetch(url, { method: "GET", cache: "no-store" });
 
   if (!res.ok) throw new Error("댓글 불러오기 실패");
-
-  return res.json();
+  const json = await res.json();
+  return json.data;
 };
 
 export const postComment = async (
@@ -22,11 +22,6 @@ export const postComment = async (
   id: string,
   content: string
 ) => {
-  const body =
-    type === "article"
-      ? { articleId: id, content }
-      : { productId: id, content };
-
   const url =
     type === "article"
       ? `/articles/${id}/comments`
@@ -34,8 +29,7 @@ export const postComment = async (
 
   const res = await customFetch(url, {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(body),
+    body: { content },
   });
 
   if (!res.ok) throw new Error("댓글 등록 실패");

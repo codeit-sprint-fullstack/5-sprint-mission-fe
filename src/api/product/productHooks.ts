@@ -12,12 +12,18 @@ interface UseProductsParams {
   page: number;
   sort: "recent" | "favorite";
   search: string;
+  limit: number;
 }
 
-export const useProducts = ({ page, sort, search }: UseProductsParams) => {
+export const useProducts = ({
+  page,
+  sort,
+  search,
+  limit,
+}: UseProductsParams) => {
   return useQuery({
-    queryKey: ["products", page, sort, search],
-    queryFn: () => fetchProducts({ page, sort, search }),
+    queryKey: ["products", page, sort, search, limit],
+    queryFn: () => fetchProducts({ page, sort, search, limit }),
     placeholderData: (prev) => prev,
   });
 };

@@ -12,8 +12,6 @@ export default function DetailProduct() {
 
   const { data: product, isPending, error } = useProductById(id);
 
-  console.log("product", product);
-
   if (isPending) {
     return <p className="pt-10 text-center">상품을 불러오는 중입니다...</p>;
   }

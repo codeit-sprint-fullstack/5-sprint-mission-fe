@@ -1,8 +1,10 @@
 import Image from "next/image";
 import replyImg from "@/shared/assets/Img/base-image/Img_reply_empty.png";
 import inquireImg from "@/shared/assets/Img/base-image/none_inquire.png";
+import backIcon from "@/shared/assets/Img/button-image/ic_back.png";
 import CommentItem from "./CommentItem";
 import { Comment } from "@/types";
+import Link from "next/link";
 
 interface CommentBoardProps {
   comments: Comment[];
@@ -28,21 +30,40 @@ export default function CommentBoard({
   type,
 }: CommentBoardProps) {
   const isProduct = type === "product";
+  const noCommentsImage = isProduct ? inquireImg : replyImg;
+  const noCommentsText = isProduct
+    ? ""
+    : "아직 댓글이 없어요. \n지금 댓글을 남겨보세요!";
 
-  if (comments.length === 0) {
+  if (!Array.isArray(comments) || comments.length === 0) {
     return (
-      <div className="flex flex-col items-center">
-        <Image
-          src={isProduct ? inquireImg : replyImg}
-          alt="댓글 없음"
-          className="w-[140px]"
-        />
-        <p className="text-base text-center text-custom-text-gray-50">
-          {isProduct
-            ? "아직 문의가 없어요. 지금 문의를 남겨보세요!"
-            : "아직 댓글이 없어요. 지금 댓글을 남겨보세요!"}
-        </p>
-      </div>
+      <>
+        <div className="flex flex-col items-center">
+          <Image src={noCommentsImage} alt="댓글 없음" width={140} />
+          <p className="text-base text-center text-custom-text-gray-50">
+            {noCommentsText.split("\n").map((line, index) => (
+              <span key={index}>
+                {line}
+                <br />
+              </span>
+            ))}
+          </p>
+        </div>
+        <section className="flex justify-center mt-6">
+          <Link
+            href={isProduct ? "/items" : "/community"}
+            className="flex items-center px-6 py-2 gap-2 text-nowrap bg-custom-color-blue text-lg text-white font-semibold rounded-4xl"
+          >
+            <p>목록으로 돌아가기</p>
+            <Image
+              src={backIcon}
+              alt="back Icon"
+              width={24}
+              className="pt-1 object-contain"
+            />
+          </Link>
+        </section>
+      </>
     );
   }
 

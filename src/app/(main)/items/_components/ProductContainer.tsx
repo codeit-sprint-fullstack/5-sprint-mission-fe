@@ -16,23 +16,25 @@ export default function ProductContainer() {
   const [sortOrder, setSortOrder] = useState<"recent" | "favorite">("recent");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
-
   useEffect(() => {
-    const updatePerPage = () => {
+    const updateProductsPerPage = () => {
       const width = window.innerWidth;
       if (width >= 1280) setProductsPerPage(10);
       else if (width >= 768) setProductsPerPage(8);
       else setProductsPerPage(4);
     };
-    updatePerPage();
-    window.addEventListener("resize", updatePerPage);
-    return () => window.removeEventListener("resize", updatePerPage);
+
+    updateProductsPerPage();
+
+    window.addEventListener("resize", updateProductsPerPage);
+    return () => window.removeEventListener("resize", updateProductsPerPage);
   }, []);
 
   const { data, isPending, error } = useProducts({
     page: currentPage,
     sort: sortOrder,
     search,
+    limit: productsPerPage,
   });
 
   const products = data?.products || [];

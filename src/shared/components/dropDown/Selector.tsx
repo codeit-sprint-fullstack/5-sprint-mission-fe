@@ -32,13 +32,12 @@ export default function Selector({
     setIsDeleting(true);
     try {
       if (type === "article") {
-        await deleteArticle(id);
+        await deleteArticle({ id });
         router.push("/article");
       } else if (type === "product") {
         await deleteProduct(id);
         router.push("/items");
       } else {
-        await deleteComment(id);
         onDelete?.();
       }
     } catch (error) {
@@ -46,6 +45,8 @@ export default function Selector({
       alert("삭제에 실패했습니다.");
     } finally {
       setShowModal(false);
+      setIsOpen(false);
+      setIsDeleting(false);
     }
   };
 
@@ -55,7 +56,7 @@ export default function Selector({
     } else if (type === "product") {
       router.push(`/items/${id}/modify`);
     } else {
-      onEdit?.(); // 댓글 수정은 컴포넌트 전환 콜백
+      onEdit?.();
     }
   };
 
@@ -68,13 +69,13 @@ export default function Selector({
       {isOpen && (
         <ul className="absolute right-0 mt-2 w-[102px] md:w-[139px] border border-custom-color-border-gray rounded-xl bg-white z-10">
           <li
-            className="px-5 py-3 text-nowrap border-b border-custom-color-border-gray cursor-pointer"
+            className="px-5 py-3 text-nowrap text-center border-b border-custom-color-border-gray cursor-pointer"
             onClick={handleModify}
           >
             수정하기
           </li>
           <li
-            className="px-5 py-3 text-nowrap cursor-pointer"
+            className="px-5 py-3 text-nowrap text-center cursor-pointer"
             onClick={() => setShowModal(true)}
           >
             삭제하기
