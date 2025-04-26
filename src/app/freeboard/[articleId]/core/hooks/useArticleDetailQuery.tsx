@@ -6,36 +6,18 @@ import {
   PatchArticleApiProps,
   DeleteArticleApiProps,
 } from "../service/articleDetailService";
-import { Article } from "@/shared/type";
+import { Article, DeleteCommentResponse } from "@/shared/type";
 import { articleKeys } from "@/shared/utils/queryKeys";
 
 export const useGetArticleDetail = (articleId: string) => {
-  if (typeof articleId === "string") {
-    const { data, isLoading } = useQuery<Article>({
-      queryKey: articleKeys.detail(articleId),
-      queryFn: () => getArticleDetailAPI({ articleId: articleId }),
-      staleTime: 5 * 60 * 1000,
-      gcTime: 10 * 60 * 1000,
-    });
+  const { data, isLoading } = useQuery<Article>({
+    queryKey: articleKeys.detail(articleId),
+    queryFn: () => getArticleDetailAPI({ articleId }),
+    staleTime: 5 * 60 * 1000,
+    gcTime: 10 * 60 * 1000,
+  });
 
-    return {
-      data: {
-        id: data?.id ?? "",
-        title: data?.title ?? "",
-        content: data?.content ?? "",
-        image: data?.image ?? "",
-        favoritesCount: data?.favoritesCount ?? 0,
-        createdAt: data?.createdAt ?? "",
-        updatedAt: data?.updatedAt ?? "",
-      },
-      isLoading,
-    };
-  }
-
-  return {
-    data: null,
-    isLoading: false,
-  };
+  return { data, isLoading };
 };
 
 export const useUpdateArticle = () => {
@@ -45,27 +27,11 @@ export const useUpdateArticle = () => {
     mutationFn: (params: PatchArticleApiProps) => patchArticleAPI(params),
     onSuccess: (_, variables) => {
       queryClient.invalidateQueries({
-        queryKey: articleKeys.detail(variables.articleId),
-      });
-      queryClient.invalidateQueries({
         queryKey: articleKeys.all,
       });
     },
-  });
-};
-
-export const useDeleteArticle = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation<void, Error, DeleteArticleApiProps>({
-    mutationFn: (params: DeleteArticleApiProps) => deleteArticleAPI(params),
-    onSuccess: (_, variables) => {
-      queryClient.invalidateQueries({
-        queryKey: articleKeys.detail(variables.articleId),
-      });
-      queryClient.invalidateQueries({
-        queryKey: articleKeys.all,
-      });
+    onError: (error: any) => {
+      throw error;
     },
   });
 };

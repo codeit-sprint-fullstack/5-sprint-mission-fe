@@ -2,12 +2,13 @@ import { CircularProgress, Stack } from "@mui/material";
 import { CommentCard } from "./core/components/CommentCard";
 import { useEffect, useRef, useCallback } from "react";
 import { ProductInquiryEmpty } from "./core/components/ProductInquiryEmpty";
-import { useCodeitProductCommentList } from "../../core/hooks/useProductCommentQuery";
+import { useCodeitProductCommentList } from "../../core/hooks/useCodeitProductCommentQuery";
 
 interface CommentListProps {
   itemId: string;
 }
 
+// XXX: 코드잇 api에서 미션 api로 마이그레이션 하면서 사용안하게됨
 export const CommentList = ({ itemId }: CommentListProps) => {
   const { comments, fetchNextPage, hasNextPage, isFetchingNextPage } =
     useCodeitProductCommentList(itemId);

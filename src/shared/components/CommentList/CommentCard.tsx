@@ -7,6 +7,8 @@ import Image from "next/image";
 import { Comment } from "@/shared/type";
 import { CommentType, useCommentActions } from "@/shared/hooks/useCommentHook";
 import { useState } from "react";
+import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
+import { DeleteItemModal } from "../Modal/DeleteItemModal";
 
 interface CommentCardProps {
   data: Comment;
@@ -16,8 +18,10 @@ interface CommentCardProps {
 export const CommentCard = ({ data, type }: CommentCardProps) => {
   const [isEditing, setIsEditing] = useState(false);
   const [editContent, setEditContent] = useState(data.content);
-  const { content, createdAt, id } = data;
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const { writer, content, createdAt, id } = data;
   const { updateComment, deleteComment } = useCommentActions(type);
+  const { openSnackbar } = useSnackbarStore();
 
   const handleUpdate = () => {
     setIsEditing(true);
@@ -29,8 +33,7 @@ export const CommentCard = ({ data, type }: CommentCardProps) => {
       await updateComment(id, editContent);
       setIsEditing(false);
     } catch (error) {
-      console.error("댓글 수정 실패:", error);
-      window.alert("댓글 수정에 실패했습니다.");
+      openSnackbar("다시 시도해주세요.", "error");
     }
   };
 
@@ -40,98 +43,119 @@ export const CommentCard = ({ data, type }: CommentCardProps) => {
   };
 
   const handleDelete = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteComment(id);
+    setOpenDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteComment(id);
+      openSnackbar("댓글이 삭제되었습니다.", "success");
+    } catch (error: any) {
+      openSnackbar(error?.response?.data?.message, "error");
+    } finally {
+      setOpenDeleteModal(false);
     }
   };
 
-  //FIXME: 아직 user 정보가 없어서 임시 닉네임, 프로필 이미지 디폴트로 설정
-  const nickname = "똑똑한판다";
+  // 프로필 이미지 수정 기능 없어서 다 디폴트 이미지로 처리
+  const nickname = writer.nickname;
   const profileImg = "/assets/default_profile.png";
   const formattedDate = getRelativeTimeString(createdAt);
 
   return (
-    <Stack sx={commentCardSx}>
-      <Stack sx={commentCardContentSx}>
-        {isEditing ? (
-          <Stack sx={editModeSx}>
-            <FormControl variant="filled" sx={editInputBoxStyle}>
-              <Input
-                disableUnderline
-                placeholder="수정할 내용을 입력해주세요."
-                value={editContent}
-                onChange={(e) => setEditContent(e.target.value)}
-                sx={placeholderStyle}
-              />
-            </FormControl>
-            <Stack direction="row" spacing={1}>
-              <Button
-                variant="outlined"
-                color="primary"
-                onClick={handleCancel}
-                sx={{
-                  backgroundColor: colorChips.white,
-                  border: `1px solid ${colorChips.primary100}`,
-                }}
-              >
-                <Typo
-                  className="text14Semibold"
-                  content="취소"
-                  customStyle={{ color: colorChips.primary100 }}
+    <>
+      <Stack sx={commentCardSx}>
+        <Stack sx={commentCardContentSx}>
+          {isEditing ? (
+            <Stack sx={editModeSx}>
+              <FormControl variant="filled" sx={editInputBoxStyle}>
+                <Input
+                  disableUnderline
+                  placeholder="수정할 내용을 입력해주세요."
+                  value={editContent}
+                  onChange={(e) => setEditContent(e.target.value)}
+                  sx={placeholderStyle}
                 />
-              </Button>
-              <Button
-                variant="contained"
-                color="primary"
-                onClick={handleUpdateSubmit}
-                disabled={!editContent.trim()}
-                sx={{
-                  backgroundColor: colorChips.primary100,
-                }}
-              >
-                <Typo
-                  className="text14Semibold"
-                  content="수정하기"
-                  customStyle={{ color: colorChips.white }}
-                />
-              </Button>
+              </FormControl>
+              <Stack direction="row" spacing={1}>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  onClick={handleCancel}
+                  sx={{
+                    backgroundColor: colorChips.white,
+                    border: `1px solid ${colorChips.primary100}`,
+                  }}
+                >
+                  <Typo
+                    className="text14Semibold"
+                    content="취소"
+                    customStyle={{ color: colorChips.primary100 }}
+                  />
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleUpdateSubmit}
+                  disabled={!editContent.trim()}
+                  sx={{
+                    backgroundColor: colorChips.primary100,
+                  }}
+                >
+                  <Typo
+                    className="text14Semibold"
+                    content="수정하기"
+                    customStyle={{ color: colorChips.white }}
+                  />
+                </Button>
+              </Stack>
             </Stack>
-          </Stack>
-        ) : (
-          <>
+          ) : (
+            <>
+              <Typo
+                className="text14Regular"
+                content={content}
+                color={colorChips.gray800}
+              />
+              <EditEllipsis onUpdate={handleUpdate} onDelete={handleDelete} />
+            </>
+          )}
+        </Stack>
+        <Stack sx={userInfoSx}>
+          <Image src={profileImg} alt="profile" width={32} height={32} />
+          <Stack
+            sx={{
+              width: "100%",
+              flexDirection: "column",
+              alignItems: "flex-start",
+              gap: "4px",
+            }}
+          >
             <Typo
-              className="text14Regular"
-              content={content}
-              color={colorChips.gray800}
+              className="text12Medium"
+              content={nickname}
+              color={colorChips.gray600}
+              customStyle={{ whiteSpace: "nowrap" }}
             />
-            <EditEllipsis onUpdate={handleUpdate} onDelete={handleDelete} />
-          </>
-        )}
-      </Stack>
-      <Stack sx={userInfoSx}>
-        <Image src={profileImg} alt="profile" width={32} height={32} />
-        <Stack
-          sx={{
-            width: "100%",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            gap: "4px",
-          }}
-        >
-          <Typo
-            className="text12Medium"
-            content={nickname}
-            color={colorChips.gray600}
-            customStyle={{ whiteSpace: "nowrap" }}
-          />
-          <Typo
-            className="text12Regular"
-            content={formattedDate}
-            color={colorChips.gray400}
-          />
+            <Typo
+              className="text12Regular"
+              content={formattedDate}
+              color={colorChips.gray400}
+            />
+          </Stack>
         </Stack>
       </Stack>
-    </Stack>
+      <DeleteItemModal
+        modalTitle="정말로 댓글을 삭제하시겠어요?"
+        openModal={openDeleteModal}
+        handleCloseModal={handleCloseDeleteModal}
+        handleClickDelete={handleConfirmDelete}
+      />
+    </>
   );
 };
 

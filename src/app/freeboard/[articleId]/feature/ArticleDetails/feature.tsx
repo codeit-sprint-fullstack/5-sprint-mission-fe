@@ -1,19 +1,58 @@
 import { colorChips } from "@/shared/styles/colorChips";
 import { Typo } from "@/shared/Typo/Typo";
 import { CircularProgress, Stack } from "@mui/material";
-import {
-  useDeleteArticle,
-  useGetArticleDetail,
-} from "../../core/hooks/useArticleDetailQuery";
+import { useGetArticleDetail } from "../../core/hooks/useArticleDetailQuery";
 import { EditEllipsis } from "@/shared/components/EditEllipsis";
 import { formatDate } from "@/shared/utils/getFormattedDate";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
+import { useArticleFavoriteHook } from "@/app/freeboard/core/hooks/useArticleFavoriteHook";
+import { useState } from "react";
+import { useSnackbarStore } from "@/shared/store/useSnackbarStore";
+import { DeleteItemModal } from "@/shared/components/Modal/DeleteItemModal";
+import { deleteArticleAPI } from "../../core/service/articleDetailService";
+import { articleKeys } from "@/shared/utils/queryKeys";
+import { useQueryClient } from "@tanstack/react-query";
 export const ArticleDetails = ({ articleId }: { articleId: string }) => {
   const router = useRouter();
+  const queryClient = useQueryClient();
+  const { openSnackbar } = useSnackbarStore();
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const { data, isLoading } = useGetArticleDetail(articleId);
-  const { mutate: deleteArticle } = useDeleteArticle();
+  const { isFavorite, handleToggleFavorite } = useArticleFavoriteHook({
+    articleId,
+    initialFavorite: data?.isLiked ?? false,
+  });
+
+  const handleUpdate = () => {
+    router.push(`/freeboard/${articleId}/edit`);
+  };
+
+  const handleDelete = () => {
+    setOpenDeleteModal(true);
+  };
+
+  const handleCloseDeleteModal = () => {
+    setOpenDeleteModal(false);
+  };
+
+  const handleConfirmDelete = async () => {
+    try {
+      await deleteArticleAPI({ articleId });
+      queryClient.invalidateQueries({
+        queryKey: articleKeys.all,
+      });
+      openSnackbar("게시글이 삭제되었습니다.", "success");
+      router.push("/freeboard");
+    } catch (error: any) {
+      openSnackbar(
+        error?.response?.data?.message || "게시글 삭제에 실패했습니다.",
+        "error"
+      );
+    } finally {
+      setOpenDeleteModal(false);
+    }
+  };
 
   if (isLoading || !data) {
     return (
@@ -31,85 +70,85 @@ export const ArticleDetails = ({ articleId }: { articleId: string }) => {
     );
   }
 
-  const { title, content, favoritesCount, createdAt } = data;
-  //FIXME: 아직 user 정보가 없어서 임시 닉네임, 프로필 이미지 디폴트로 설정
-  const nickname = "총명한판다";
+  const { title, content, likeCount, createdAt, ownerNickname } = data;
+  const nickname = ownerNickname;
   const profileImg = "/assets/default_profile.png";
   const formattedDate = formatDate(createdAt);
 
-  const handleUpdate = () => {
-    router.push(`/freeboard/${articleId}/edit`);
-  };
-
-  const handleDelete = () => {
-    if (window.confirm("정말 삭제하시겠습니까?")) {
-      deleteArticle({ articleId });
-      router.push("/freeboard");
-    }
-  };
-
   return (
-    <Stack sx={articleDetailsSx}>
-      <Stack sx={articleHeaderSx}>
-        <Stack sx={articleTitleSx}>
-          <Typo
-            className="text20Bold"
-            content={title}
-            color={colorChips.gray800}
-          />
-          <EditEllipsis onUpdate={handleUpdate} onDelete={handleDelete} />
-        </Stack>
-        <Stack sx={userInfoSx}>
-          <Stack
-            sx={{ flexDirection: "row", alignItems: "center", gap: "16px" }}
-          >
-            <Image src={profileImg} alt="profile" width={40} height={40} />
+    <>
+      <Stack sx={articleDetailsSx}>
+        <Stack sx={articleHeaderSx}>
+          <Stack sx={articleTitleSx}>
+            <Typo
+              className="text20Bold"
+              content={title}
+              color={colorChips.gray800}
+            />
+            <EditEllipsis onUpdate={handleUpdate} onDelete={handleDelete} />
+          </Stack>
+          <Stack sx={userInfoSx}>
             <Stack
-              sx={{ flexDirection: "row", alignItems: "center", gap: "8px" }}
+              sx={{ flexDirection: "row", alignItems: "center", gap: "16px" }}
             >
-              <Typo
-                className="text14Medium"
-                content={nickname}
-                color={colorChips.gray600}
-                customStyle={{ whiteSpace: "nowrap" }}
+              <Image src={profileImg} alt="profile" width={40} height={40} />
+              <Stack
+                sx={{ flexDirection: "row", alignItems: "center", gap: "8px" }}
+              >
+                <Typo
+                  className="text14Medium"
+                  content={nickname}
+                  color={colorChips.gray600}
+                  customStyle={{ whiteSpace: "nowrap" }}
+                />
+                <Typo
+                  className="text14Regular"
+                  content={formattedDate}
+                  color={colorChips.gray400}
+                />
+              </Stack>
+            </Stack>
+            <Stack
+              sx={{
+                width: { xs: "16px", md: "32px" },
+                height: "40px",
+                marginRight: { xs: "16px", md: "32px" },
+                borderRight: `1px solid ${colorChips.gray200}`,
+              }}
+            />
+            <Stack sx={favoriteCountSx} onClick={handleToggleFavorite}>
+              <Image
+                src={
+                  isFavorite
+                    ? "/assets/ic_heart_pink.svg"
+                    : "/assets/ic_heart_gray5.svg"
+                }
+                alt="favorite"
+                width={32}
+                height={32}
+                style={{ cursor: "pointer" }}
               />
               <Typo
-                className="text14Regular"
-                content={formattedDate}
-                color={colorChips.gray400}
+                className="text16Medium"
+                content={likeCount.toString()}
+                color={colorChips.gray500}
               />
             </Stack>
           </Stack>
-          <Stack
-            sx={{
-              width: { xs: "16px", md: "32px" },
-              height: "40px",
-              marginRight: { xs: "16px", md: "32px" },
-              borderRight: `1px solid ${colorChips.gray200}`,
-            }}
-          />
-          <Stack sx={favoriteCountSx}>
-            <Image
-              src="/assets/ic_heart_gray5.svg"
-              alt="favorite"
-              width={32}
-              height={32}
-              style={{ cursor: "pointer" }}
-            />
-            <Typo
-              className="text16Medium"
-              content={favoritesCount.toString()}
-              color={colorChips.gray500}
-            />
-          </Stack>
         </Stack>
+        <Typo
+          className="text18Regular"
+          content={content}
+          color={colorChips.gray900}
+        />
       </Stack>
-      <Typo
-        className="text18Regular"
-        content={content}
-        color={colorChips.gray900}
+      <DeleteItemModal
+        modalTitle="정말로 게시글을 삭제하시겠어요?"
+        openModal={openDeleteModal}
+        handleCloseModal={handleCloseDeleteModal}
+        handleClickDelete={handleConfirmDelete}
       />
-    </Stack>
+    </>
   );
 };
 

@@ -8,6 +8,8 @@ import {
 } from "@/shared/service/commentsService";
 import { Comment, CommentList } from "@/shared/type";
 import { commentKeys } from "../utils/queryKeys";
+import { useSnackbarStore } from "../store/useSnackbarStore";
+import { useRouter } from "next/navigation";
 export type CommentType = "articles" | "products";
 
 // 댓글 입력 및 등록
@@ -112,7 +114,7 @@ export const useCommentList = (itemId: string, type: CommentType) => {
 
   return {
     comments,
-    data,
+    // data,
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
@@ -125,6 +127,8 @@ export const useCommentList = (itemId: string, type: CommentType) => {
 // 댓글 수정/삭제 훅
 export const useCommentActions = (type: CommentType) => {
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const { openSnackbar } = useSnackbarStore();
   const [isLoading, setIsLoading] = useState(false);
 
   const updateComment = async (id: string, content: string) => {
@@ -137,11 +141,12 @@ export const useCommentActions = (type: CommentType) => {
       });
       // 댓글 수정 후 목록 갱신
       await queryClient.invalidateQueries({
-        queryKey: ["comments"],
+        queryKey: commentKeys.all,
       });
-    } catch (error) {
-      console.error("댓글 수정 실패:", error);
-      throw error;
+    } catch (error: any) {
+      const errorMessage =
+        error?.response?.data?.message || "댓글 수정에 실패했습니다.";
+      openSnackbar(errorMessage, "error");
     } finally {
       setIsLoading(false);
     }
@@ -156,10 +161,9 @@ export const useCommentActions = (type: CommentType) => {
       });
       // 댓글 삭제 후 목록 갱신
       await queryClient.invalidateQueries({
-        queryKey: ["comments"],
+        queryKey: commentKeys.all,
       });
-    } catch (error) {
-      console.error("댓글 삭제 실패:", error);
+    } catch (error: any) {
       throw error;
     } finally {
       setIsLoading(false);
