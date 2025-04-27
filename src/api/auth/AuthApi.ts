@@ -24,3 +24,9 @@ export const googleLoginAPI = async (code: string): Promise<AuthResponse> => {
   });
   return await res.json();
 };
+
+export const logoutAPI = async (): Promise<void> => {
+  await customFetch("/auth/logout", {
+    method: "POST",
+  });
+};

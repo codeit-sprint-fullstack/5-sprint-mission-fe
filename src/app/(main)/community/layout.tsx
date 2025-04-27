@@ -1,3 +1,4 @@
+"use client";
 import "@/shared/globals.css";
 
 export default function CommunityLayout({

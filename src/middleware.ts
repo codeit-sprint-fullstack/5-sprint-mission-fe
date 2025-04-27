@@ -11,15 +11,16 @@ interface JwtPayload {
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
   const accessToken = request.cookies.get("accessToken")?.value;
-
+  console.log("accessToken", accessToken);
   let user: JwtPayload | null = null;
-
+  console.log("user1", user);
   if (accessToken) {
     try {
       const decoded = decodeJwt(accessToken);
 
       if (typeof decoded === "object" && decoded !== null && "id" in decoded) {
         user = decoded as JwtPayload;
+        console.log("user2", user);
       }
     } catch (error) {
       console.error("토큰 디코딩 실패:", error);
@@ -32,7 +33,7 @@ export async function middleware(request: NextRequest) {
   ) {
     return NextResponse.redirect(new URL("/", request.url));
   }
-
+  console.log("user3", user);
   const protectedRoutes = [
     "/items/create",
     "/items/(.*)/edit",

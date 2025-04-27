@@ -1,3 +1,5 @@
+"use client";
+
 import ClientLayout from "@/shared/components/Layout/ClientLayout";
 import DetailProduct from "./_components/DetailProduct";
 

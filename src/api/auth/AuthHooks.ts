@@ -1,5 +1,5 @@
 import { useMutation } from "@tanstack/react-query";
-import { loginAPI, signupAPI, googleLoginAPI } from "./AuthApi";
+import { loginAPI, signupAPI, googleLoginAPI, logoutAPI } from "./AuthApi";
 import { useAuthStore } from "@/api/auth/AuthStore";
 import { useRouter } from "next/navigation";
 import { AuthResponse, LoginParams, SignupParams } from "@/types";
@@ -44,5 +44,20 @@ export const useGoogleToLogin = (onSuccess: (user: AuthResponse) => void) => {
   return useMutation<AuthResponse, Error, string>({
     mutationFn: googleLoginAPI,
     onSuccess,
+  });
+};
+
+export const useLogout = (onSuccess?: () => void) => {
+  const router = useRouter();
+
+  return useMutation({
+    mutationFn: logoutAPI,
+    onSuccess: () => {
+      onSuccess?.();
+      router.replace("/login");
+    },
+    onError: (error) => {
+      console.error("로그아웃 실패:", error);
+    },
   });
 };

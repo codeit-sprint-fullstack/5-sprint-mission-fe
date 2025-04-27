@@ -8,15 +8,25 @@ import UserBaseIcon from "@/shared/assets/Img/user-icon/ic_profile.png";
 import { useAuthStore } from "../../../api/auth/AuthStore";
 import Button, { ButtonCategory } from "../button/Button";
 import { PATH } from "@/constants";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import TabNav from "../tabNav/TabNav";
 
 export default function Header() {
   const { user, clearAuth } = useAuthStore();
+  const router = useRouter();
   const pathname = usePathname();
 
   const showTabs =
     pathname.startsWith(PATH.items) || pathname.startsWith(PATH.community);
+
+  const handleLogout = async () => {
+    try {
+      clearAuth();
+      router.push(PATH.login);
+    } catch (error) {
+      console.error("로그아웃 실패:", error);
+    }
+  };
 
   return (
     <>
@@ -53,7 +63,7 @@ export default function Header() {
             </div>
             <div>
               <Button
-                onClick={clearAuth}
+                onClick={handleLogout}
                 size="py-3 px-4"
                 category={ButtonCategory.RECTANGLE_ON}
               >
