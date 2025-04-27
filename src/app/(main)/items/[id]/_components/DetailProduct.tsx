@@ -7,10 +7,11 @@ import CommentList from "@/shared/components/comment/CommentList";
 
 export default function DetailProduct() {
   const { id } = useParams();
+  const safeId = typeof id === "string" ? id : undefined;
 
-  if (!id || typeof id !== "string") return notFound();
+  const { data: product, isPending, error } = useProductById(safeId);
 
-  const { data: product, isPending, error } = useProductById(id);
+  if (!safeId) return notFound();
 
   if (isPending) {
     return <p className="pt-10 text-center">상품을 불러오는 중입니다...</p>;

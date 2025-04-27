@@ -1,6 +1,6 @@
 interface CustomFetchOptions extends Omit<RequestInit, "body"> {
-  body?: any; // body는 우리가 자유롭게 쓸 수 있게
-  params?: Record<string, any>;
+  body?: BodyInit | Record<string, unknown>;
+  params?: Record<string, string | number | boolean>;
 }
 
 export const customFetch = async (
@@ -35,7 +35,12 @@ export const customFetch = async (
 
   let url = `${process.env.NEXT_PUBLIC_ARL_LOCAL_URL}${input}`;
   if (options.params) {
-    const queryString = new URLSearchParams(options.params).toString();
+    const queryString = new URLSearchParams(
+      Object.entries(options.params).reduce((acc, [key, value]) => {
+        acc[key] = String(value);
+        return acc;
+      }, {} as Record<string, string>)
+    ).toString();
     url += `?${queryString}`;
   }
 
@@ -65,11 +70,15 @@ export const customFetch = async (
     const { accessToken: newToken } = await refreshRes.json();
     localStorage.setItem("accessToken", newToken);
 
-    headers.set("Authorization", `Bearer ${newToken}`);
+    const newHeaders = new Headers();
+    newHeaders.set("Authorization", `Bearer ${newToken}`);
+    if (!isFormData) {
+      newHeaders.set("Content-Type", "application/json");
+    }
 
     return fetch(url, {
       method: options.method || "GET",
-      headers,
+      headers: newHeaders,
       body,
       credentials: "include",
     });

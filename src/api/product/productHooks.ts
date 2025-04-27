@@ -10,7 +10,7 @@ import {
 
 interface UseProductsParams {
   page: number;
-  sort: "recent" | "favorite";
+  sort: "recent" | "favorites";
   search: string;
   limit: number;
 }
@@ -48,15 +48,15 @@ export const useCreateProduct = (options?: { onSuccess?: () => void }) => {
 
 export const useEditProduct = (
   id: string,
-  options?: { onSuccess?: () => void }
+  options?: { onSuccess?: (id: string) => void }
 ) => {
   const queryClient = useQueryClient();
-  return useMutation({
+  return useMutation<string, Error, FormData>({
     mutationFn: (formData: FormData) => updateProduct(id, formData),
-    onSuccess: () => {
+    onSuccess: (id) => {
       queryClient.invalidateQueries({ queryKey: ["products"] });
       queryClient.invalidateQueries({ queryKey: ["product", id] });
-      options?.onSuccess?.();
+      options?.onSuccess?.(id);
     },
   });
 };
@@ -67,6 +67,7 @@ export const useLikeProduct = (id: string) => {
   return useMutation({
     mutationFn: () => likeProduct(id),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
       queryClient.invalidateQueries({ queryKey: ["product", id] });
     },
   });
@@ -78,6 +79,7 @@ export const useUnlikeProduct = (id: string) => {
   return useMutation({
     mutationFn: () => unlikeProduct(id),
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["products"] });
       queryClient.invalidateQueries({ queryKey: ["product", id] });
     },
   });

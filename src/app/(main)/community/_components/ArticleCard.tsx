@@ -1,17 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
 import likeImg from "@/shared/assets/Img/button-image/Like_Icon.png";
-import baseImg from "@/shared/assets/Img/base-image/baseImg.png";
+
 import medal from "@/shared/assets/Img/ic_medal.png";
-import { formatDay } from "@/lib/utill";
+import { formatDay, getImageUrl } from "@/lib/utill";
 import { Article } from "@/types";
+import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 
 interface ArticleCardProps {
   article: Article;
 }
 
 export default function ArticleCard({ article }: ArticleCardProps) {
-  console.log("article", article);
   return (
     <Link
       href={`/community/${article.id}`}
@@ -27,20 +27,20 @@ export default function ArticleCard({ article }: ArticleCardProps) {
       </section>
 
       <div className="flex flex-col gap-[40px] xl:gap-[18px]">
-        <section className="flex justify-between">
+        <section className="flex justify-between ">
           <p className="text-lg text-custom-text-gray-800 font-semibold">
             {article.title}
           </p>
-          <Image
-            src={article.imageUrls?.[0] || baseImg}
+          <ImageWrapper
+            src={getImageUrl(article.imageUrls?.[0])}
             alt="상품 Image"
             width={64}
-            height={50}
-            className="object-cover"
+            height={75}
+            className="object-contain"
           />
         </section>
 
-        <section className="flex justify-between items-center">
+        <section className="flex justify-between ">
           <div className="flex gap-[8px]">
             <p className="text-sm text-custom-text-gray-400 font-normal">
               {article.user?.nickname ?? "알 수 없음"}
@@ -52,7 +52,7 @@ export default function ArticleCard({ article }: ArticleCardProps) {
                 className="w-[13px] object-contain"
               />
               <p className="text-sm text-custom-text-gray-200 font-normal">
-                {(article._count?.favorites ?? 0) + "+"}
+                {(article.favoriteCount ?? 0) + "+"}
               </p>
             </div>
           </div>

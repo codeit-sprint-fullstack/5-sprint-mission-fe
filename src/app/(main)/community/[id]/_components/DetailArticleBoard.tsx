@@ -1,13 +1,15 @@
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-
 import userIcon from "@/shared/assets/Img/user-icon/ic_profile.png";
 import likeIcon from "@/shared/assets/Img/button-image/Like_Icon.png";
-import baseImg from "@/shared/assets/Img/base-image/baseImg.png";
-
 import { formatDay } from "@/lib/utill";
 import Selector from "@/shared/components/dropDown/Selector";
 import { Article } from "@/types";
+import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
+import {
+  useFavoriteArticle,
+  useUnfavoriteArticle,
+} from "@/api/article/articleHook";
 
 interface DetailArticleBoardProps {
   article: Article;
@@ -17,6 +19,18 @@ export default function DetailArticleBoard({
   article,
 }: DetailArticleBoardProps) {
   const router = useRouter();
+  const likeMutation = useFavoriteArticle(article.id);
+  const unlikeMutation = useUnfavoriteArticle(article.id);
+
+  const isLiked = article.isLiked;
+
+  const handleLikeToggle = () => {
+    if (isLiked) {
+      unlikeMutation.mutate();
+    } else {
+      likeMutation.mutate();
+    }
+  };
 
   const handleDelete = () => {
     router.push("/article");
@@ -52,9 +66,12 @@ export default function DetailArticleBoard({
             </p>
           </div>
 
-          <button className="flex items-center gap-1 border border-custom-color-border-gray ml-4 md:ml-8 px-3 py-1 rounded-4xl">
+          <button
+            onClick={handleLikeToggle}
+            className="flex items-center gap-1 border border-custom-color-border-gray ml-4 md:ml-8 px-3 py-1 rounded-4xl"
+          >
             <Image src={likeIcon} alt="like" className="w-[26px]" />
-            <p>{article._count?.favorites ?? 0}</p>
+            <p>{article.favoriteCount ?? 0}</p>
           </button>
         </section>
       </div>
@@ -63,9 +80,9 @@ export default function DetailArticleBoard({
         {article.imageUrls?.length > 0 && (
           <div className="flex flex-wrap gap-4 mt-6">
             {article.imageUrls.map((url, i) => (
-              <Image
+              <ImageWrapper
                 key={i}
-                src={url || baseImg}
+                src={url}
                 alt={`게시글 이미지 ${i + 1}`}
                 width={200}
                 height={150}

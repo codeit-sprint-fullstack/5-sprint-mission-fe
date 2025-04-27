@@ -8,7 +8,8 @@ import BestSkeleton from "./BestSkeleton";
 export default function BestProducts() {
   const { data, isPending } = useProducts({
     page: 1,
-    sort: "favorite",
+    limit: 100,
+    sort: "favorites",
     search: "",
   });
   const [visibleCount, setVisibleCount] = useState(1);

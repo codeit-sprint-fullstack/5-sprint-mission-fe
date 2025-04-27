@@ -22,3 +22,21 @@ export function formatDay(
 ): string {
   return dayjs(time).format(format);
 }
+
+export function getImageUrl(url?: string | null): string {
+  const SERVER_URL = process.env.NEXT_PUBLIC_ARL_LOCAL_URL!;
+
+  if (!url || url.trim() === "") {
+    return "/baseImg.png";
+  }
+
+  if (url.startsWith("http:") || url.startsWith("https:")) {
+    return url;
+  }
+
+  if (url.startsWith("/uploads/")) {
+    return `${SERVER_URL}${url}`;
+  }
+
+  return url;
+}

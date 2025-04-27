@@ -72,9 +72,8 @@ export interface Article {
     nickname: string;
     image?: string;
   };
-  _count?: {
-    favorites: number;
-  };
+  isLiked: boolean;
+  favoriteCount: number;
 }
 
 export interface Comment {
@@ -93,4 +92,20 @@ export interface Favorite {
   userId: string;
   articleId: string;
   createdAt: string;
+}
+
+export interface LoginParams {
+  email: string;
+  password: string;
+}
+
+export interface SignupParams {
+  email: string;
+  password: string;
+  nickname: string;
+}
+
+export interface AuthResponse {
+  accessToken: string;
+  user: User;
 }

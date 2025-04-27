@@ -6,7 +6,6 @@ import Image from "next/image";
 import kebabIcon from "@/shared/assets/Img/dropdown-icon/ic_kebab.png";
 import CheckIcon from "@/shared/assets/Img/modal-icon/ic_check.png";
 import { deleteArticle } from "@/api/article/articleApi";
-import { deleteComment } from "@/api/comment/commentApi";
 import { deleteProduct } from "@/api/product/productApi";
 
 interface SelectorProps {

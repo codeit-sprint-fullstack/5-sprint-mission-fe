@@ -3,11 +3,11 @@
 import { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
-import baseImg from "@/shared/assets/Img/base-image/baseImg.png";
 import PlusIcon from "@/shared/assets/Img/input-icon/ic_plus.png";
 import CloseIcon from "@/shared/assets/Img/button-image/X-round-Icon.png.png";
 import { useCreateProduct, useEditProduct } from "@/api/product/productHooks";
 import { Product } from "@/types";
+import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 
 interface ProductFormProps {
   category: "create" | "edit";
@@ -37,7 +37,7 @@ export default function ProductForm({
     onSuccess: () => router.push("/items"),
   });
   const updateMutation = useEditProduct(initialData?.id ?? "", {
-    onSuccess: () => router.push("/items"),
+    onSuccess: (id) => router.push(`/items/${id}`),
   });
 
   useEffect(() => {
@@ -49,9 +49,10 @@ export default function ProductForm({
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
     if (files.length > 0) {
-      setImages(files);
       const previews = files.map((file) => URL.createObjectURL(file));
-      setPreviewUrls(previews);
+
+      setImages((prev) => [...prev, ...files]);
+      setPreviewUrls((prev) => [...prev, ...previews]);
     }
   };
 
@@ -69,10 +70,10 @@ export default function ProductForm({
       formData.append("price", price.trim() ? price : "0");
       formData.append("tags", JSON.stringify(tags));
       images.forEach((img) => formData.append("images", img));
-
-      for (const [key, value] of formData.entries()) {
-        console.log(`${key}:`, value);
-      }
+      const existingUrls = previewUrls.filter(
+        (url) => !url.startsWith("blob:")
+      );
+      formData.append("existingImageUrls", JSON.stringify(existingUrls));
       if (category === "create") {
         createMutation.mutate(formData, {
           onError: (error) => {
@@ -150,8 +151,8 @@ export default function ProductForm({
             <div className="flex flex-wrap gap-4">
               {previewUrls.map((url, i) => (
                 <div key={i} className="relative w-24 h-24">
-                  <Image
-                    src={url || baseImg.src}
+                  <ImageWrapper
+                    src={url}
                     alt={`preview-${i}`}
                     fill
                     className="object-cover rounded-md border"
@@ -169,7 +170,6 @@ export default function ProductForm({
           </div>
         </div>
 
-        {/* 오른쪽: 상품 입력 정보 */}
         <div className="flex-1 flex flex-col gap-6">
           <section>
             <label className="text-lg font-bold text-custom-text-black-800">

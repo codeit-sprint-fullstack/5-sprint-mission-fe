@@ -7,6 +7,8 @@ import GoogleIcon from "@/shared/assets/Img/login-icon/googleIcon.png";
 import Image from "next/image";
 import Link from "next/link";
 import { PATH } from "@/constants";
+import { useRouter } from "next/navigation";
+import { googleLoginAPI } from "@/api/auth/AuthApi";
 
 interface EasyAuthProps {
   type: "login" | "signup";
@@ -14,20 +16,26 @@ interface EasyAuthProps {
 
 export default function EasyAuth({ type }: EasyAuthProps) {
   const { setAuth } = useAuthStore();
+  const router = useRouter();
 
   const login = useGoogleLogin({
-    flow: "implicit",
+    flow: "auth-code",
+
     onSuccess: async (res) => {
-      const idToken = res.access_token;
-      if (!idToken) {
-        console.error("accessToken이 없습니다");
+      const code = res.code;
+      if (!code) {
+        console.error("code가 없습니다");
         return;
       }
 
-      console.log("Google idToken", idToken);
-
-      // const user = await fetchUserByOAuth(idToken);
-      // setAuth(user);
+      try {
+        const data = await googleLoginAPI(code);
+        setAuth(data.user);
+        localStorage.setItem("accessToken", data.accessToken);
+        router.back();
+      } catch (error) {
+        console.error("Google 로그인 실패", error);
+      }
     },
     onError: () => {
       console.error("Google 로그인 실패");

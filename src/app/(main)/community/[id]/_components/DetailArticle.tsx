@@ -7,10 +7,13 @@ import CommentList from "@/shared/components/comment/CommentList";
 
 export default function DetailArticle() {
   const { id } = useParams();
+  const safeId = typeof id === "string" ? id : undefined;
 
-  if (!id || typeof id !== "string") return notFound();
+  const { data: article, isPending, error } = useArticleById(safeId);
 
-  const { data: article, isPending, error } = useArticleById(id);
+  if (!safeId) {
+    notFound();
+  }
 
   if (isPending) {
     return <p className="text-center pt-10">게시글을 불러오는 중입니다...</p>;

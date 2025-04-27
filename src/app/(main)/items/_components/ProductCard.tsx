@@ -2,9 +2,9 @@
 
 import Image from "next/image";
 import LikeIcon from "@/shared/assets/Img/button-image/Like_Icon.png";
-import DefaultImg from "@/shared/assets/Img/base-image/baseImg.png";
 import { Product } from "@/types";
 import Link from "next/link";
+import { getImageUrl } from "@/lib/utill";
 
 interface ProductCardProps {
   product: Product;
@@ -18,9 +18,10 @@ export default function ProductCard({ product }: ProductCardProps) {
     >
       <div className="relative w-full aspect-[1/1] bg-gray-100">
         <Image
-          src={product.imageUrls?.[0] || DefaultImg}
+          src={getImageUrl(product.imageUrls?.[0])}
           alt={product.name}
-          fill
+          width={200}
+          height={150}
           unoptimized
           className="object-cover"
         />

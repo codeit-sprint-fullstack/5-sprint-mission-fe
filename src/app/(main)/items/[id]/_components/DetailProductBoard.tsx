@@ -2,14 +2,13 @@
 
 import Image from "next/image";
 import { Product } from "@/types";
-import { formatDay } from "@/lib/utill";
+import { formatDay, getImageUrl } from "@/lib/utill";
 
 import Selector from "@/shared/components/dropDown/Selector";
 import userIcon from "@/shared/assets/Img/user-icon/ic_profile.png";
 import likeIcon from "@/shared/assets/Img/button-image/Like_Icon.png";
 import { useAuthStore } from "@/api/auth/AuthStore";
 import { useLikeProduct, useUnlikeProduct } from "@/api/product/productHooks";
-import DefaultImg from "@/shared/assets/Img/base-image/baseImg.png";
 
 interface DetailProductBoardProps {
   product: Product & {
@@ -47,13 +46,11 @@ export default function DetailProductBoard({
     window.location.href = "/items";
   };
 
-  console.log("product._count", product.favoriteCount);
-
   return (
     <div className="flex flex-col md:flex-row items-center  gap-6 border-b border-custom-color-border-gray pb-6">
       <div className="flex justify-center items-center w-[343px] xl:w-[486px]  bg-gray-100 rounded-xl overflow-hidden">
         <Image
-          src={product.imageUrls?.[0] || DefaultImg}
+          src={getImageUrl(product.imageUrls?.[0])}
           alt={product.name}
           width={300}
           height={300}
@@ -121,7 +118,6 @@ export default function DetailProductBoard({
             </div>
           </div>
 
-          {/* 좋아요 */}
           <button
             onClick={handleLike}
             className="flex items-center gap-1 border border-custom-color-border-gray px-4 py-1 rounded-full"

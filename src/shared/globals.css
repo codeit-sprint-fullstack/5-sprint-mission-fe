@@ -1,5 +1,11 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: "pretendard";
+  font-style: normal;
+  src: url("/fonts/Pretendard.woff2") format("woff2");
+}
+
 @theme {
   --color-custom-color-blue: #3692ff;
   --color-custom-color-red: #f74747;

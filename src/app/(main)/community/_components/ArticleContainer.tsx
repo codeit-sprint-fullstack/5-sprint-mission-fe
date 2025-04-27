@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import searchIcon from "@/shared/assets/Img/input-icon/ic_search.png";
-import { Article } from "@/types";
+import { useArticles } from "@/api/article/articleHook";
 import Pagination from "@/shared/components/pageNation/PageNation";
 import SortDropDown from "@/shared/components/dropDown/SortDropDown";
 import ProductSkeleton from "./ArticleSkeleton";
@@ -11,44 +11,27 @@ import Link from "next/link";
 import { PATH } from "@/constants";
 import ArticleList from "./ArticleList";
 
-interface ArticleContainerProps {
-  articles: Article[];
-  isPending: boolean;
-}
-
 const ARTICLES_PER_PAGE = 5;
 
-export default function ArticleContainer({
-  articles,
-  isPending,
-}: ArticleContainerProps) {
-  const [search, setSearch] = useState("");
-  const [sortOrder, setSortOrder] = useState<"recent" | "favorite">("recent");
+export default function ArticleContainer() {
   const [currentPage, setCurrentPage] = useState(1);
+  const [search, setSearch] = useState("");
+  const [sortOrder, setSortOrder] = useState<"recent" | "favorites">("recent");
 
-  const safeArticles = Array.isArray(articles) ? articles : [];
-
-  const filtered = safeArticles.filter((a) =>
-    a.title.toLowerCase().includes(search.toLowerCase())
+  const { data, isPending } = useArticles(
+    currentPage,
+    ARTICLES_PER_PAGE,
+    sortOrder,
+    search
   );
+  const articles = data?.articles ?? [];
+  const totalCount = data?.totalCount ?? 0;
 
-  const sorted = [...filtered].sort((a, b) => {
-    if (sortOrder === "recent") {
-      return new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime();
-    } else {
-      return (b._count?.favorites || 0) - (a._count?.favorites || 0);
-    }
-  });
-
-  const totalPages = Math.ceil(sorted.length / ARTICLES_PER_PAGE);
-  const paginated = sorted.slice(
-    (currentPage - 1) * ARTICLES_PER_PAGE,
-    currentPage * ARTICLES_PER_PAGE
-  );
+  const totalPages = Math.ceil(totalCount / ARTICLES_PER_PAGE);
 
   return (
     <div className="flex flex-col gap-2">
-      <section className="flex  justify-between items-center">
+      <section className="flex justify-between items-center">
         <p className="text-xl text-custom-text-black-800 font-bold text-nowrap">
           게시글
         </p>
@@ -63,7 +46,7 @@ export default function ArticleContainer({
       <section className="relative flex gap-[13px] md:gap-[6px] xl:gap-[16px]">
         <input
           type="text"
-          placeholder="검색할 상품을 입력해주세요"
+          placeholder="검색할 게시글을 입력해주세요"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           className="w-full pl-[40px] py-[9px] bg-custom-input-gray-100 rounded-xl focus:outline-none"
@@ -78,7 +61,7 @@ export default function ArticleContainer({
       </section>
 
       <section>
-        {isPending ? <ProductSkeleton /> : <ArticleList articles={paginated} />}
+        {isPending ? <ProductSkeleton /> : <ArticleList articles={articles} />}
       </section>
 
       <section className="flex justify-center mt-4">

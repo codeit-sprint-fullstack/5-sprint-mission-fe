@@ -4,9 +4,9 @@ import Image from "next/image";
 import Link from "next/link";
 import userIcon from "@/shared/assets/Img/user-icon/ic_profile.png";
 import likeIcon from "@/shared/assets/Img/button-image/Like_Icon.png";
-import baseImg from "@/shared/assets/Img/base-image/baseImg.png";
-import { formatDay } from "@/lib/utill";
+import { formatDay, getImageUrl } from "@/lib/utill";
 import { Article } from "@/types";
+import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 
 interface ArticleListProps {
   articles: Article[];
@@ -25,9 +25,9 @@ export default function ArticleList({ articles = [] }: ArticleListProps) {
             <p className="text-xl font-semibold text-custom-text-gray-800">
               {article.title}
             </p>
-            <Image
-              src={article.imageUrls?.[0] || baseImg}
-              alt="상품 이미지"
+            <ImageWrapper
+              src={getImageUrl(article.imageUrls?.[0])}
+              alt="게시글 이미지"
               width={64}
               height={50}
               className="object-cover rounded-md"
@@ -48,7 +48,7 @@ export default function ArticleList({ articles = [] }: ArticleListProps) {
             <div className="flex items-center gap-1">
               <Image src={likeIcon} alt="좋아요 아이콘" className="w-5 h-5" />
               <p className="text-base font-normal text-custom-text-gray-200">
-                {article._count?.favorites ?? 0}+
+                {article.favoriteCount ?? 0}+
               </p>
             </div>
           </section>

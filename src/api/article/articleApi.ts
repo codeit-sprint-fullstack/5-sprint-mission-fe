@@ -1,12 +1,29 @@
 import { Article } from "@/types";
 import { customFetch } from "../url";
 
-export const fetchArticles = async (): Promise<{ articles: Article[] }> => {
-  const res = await customFetch("/articles", {
+export const fetchArticles = async ({
+  page = 1,
+  take = 10,
+  sortBy = "recent",
+  search = "",
+}: {
+  page?: number;
+  take?: number;
+  sortBy: "recent" | "favorites";
+  search: string;
+}): Promise<{ articles: Article[]; totalCount: number }> => {
+  const params = new URLSearchParams();
+  params.append("page", String(page));
+  params.append("take", String(take));
+  params.append("sortBy", sortBy);
+  params.append("search", search);
+
+  const res = await customFetch(`/articles?${params.toString()}`, {
     method: "GET",
   });
 
   if (!res.ok) throw new Error("게시글 조회 실패");
+
   return res.json();
 };
 
@@ -34,7 +51,9 @@ export const createArticle = async (
   });
 
   if (!res.ok) throw new Error("게시글 생성 실패");
-  return res.json();
+  const json = await res.json();
+
+  return { id: json.data.id };
 };
 
 export const updateArticle = async ({
@@ -50,7 +69,9 @@ export const updateArticle = async ({
   });
 
   if (!res.ok) throw new Error("게시글 수정 실패");
-  return res.json();
+  const json = await res.json();
+
+  return { id: json.data.id };
 };
 
 export const deleteArticle = async ({
@@ -62,6 +83,22 @@ export const deleteArticle = async ({
     method: "DELETE",
   });
 
-  if (!res.ok) throw new Error("게시글 수정 실패");
+  if (!res.ok) throw new Error("게시글 삭제 실패");
   return res.json();
+};
+
+export const favoriteArticle = async (id: string): Promise<void> => {
+  const res = await customFetch(`/articles/${id}/favorite`, {
+    method: "PUT",
+  });
+
+  if (!res.ok) throw new Error("게시글 좋아요 추가 실패");
+};
+
+export const unfavoriteArticle = async (id: string): Promise<void> => {
+  const res = await customFetch(`/articles/${id}/favorite`, {
+    method: "DELETE",
+  });
+
+  if (!res.ok) throw new Error("게시글 좋아요 취소 실패");
 };

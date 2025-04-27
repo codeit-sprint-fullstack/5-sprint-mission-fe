@@ -2,19 +2,13 @@
 
 import { useState, useEffect, useCallback } from "react";
 import BestSkeleton from "./BestSkeleton";
-import { Article } from "@/types";
 import ArticleCard from "./ArticleCard";
+import { useArticles } from "@/api/article/articleHook";
 
-interface BestArticlesProps {
-  articles: Article[];
-  isPending?: boolean;
-}
-
-export default function BestArticles({
-  articles = [],
-  isPending = false,
-}: BestArticlesProps) {
+export default function BestArticles() {
   const [maxArticles, setMaxArticles] = useState(1);
+  const { data, isPending } = useArticles(1, 100, "favorites", "");
+  const articles = data?.articles ?? [];
 
   const updateMaxArticles = useCallback(() => {
     const width = window.innerWidth;
@@ -31,11 +25,10 @@ export default function BestArticles({
 
   const bestArticles = Array.isArray(articles)
     ? [...articles]
-        .sort((a, b) => (b._count?.favorites ?? 0) - (a._count?.favorites ?? 0))
+        .sort((a, b) => (b.favoriteCount ?? 0) - (a.favoriteCount ?? 0))
         .slice(0, maxArticles)
     : [];
 
-  console.log("bestArticles", bestArticles);
   return (
     <div className="flex flex-col items-start gap-6">
       <h2 className="text-xl text-custom-text-black-800 font-bold">

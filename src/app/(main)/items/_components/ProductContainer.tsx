@@ -13,9 +13,10 @@ import { useProducts } from "@/api/product/productHooks";
 
 export default function ProductContainer() {
   const [search, setSearch] = useState("");
-  const [sortOrder, setSortOrder] = useState<"recent" | "favorite">("recent");
+  const [sortOrder, setSortOrder] = useState<"recent" | "favorites">("recent");
   const [currentPage, setCurrentPage] = useState(1);
   const [productsPerPage, setProductsPerPage] = useState(10);
+
   useEffect(() => {
     const updateProductsPerPage = () => {
       const width = window.innerWidth;

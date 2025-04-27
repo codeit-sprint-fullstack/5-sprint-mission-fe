@@ -1,9 +1,9 @@
-import { Product, ProductFormData } from "@/types";
+import { Product } from "@/types";
 import { customFetch } from "../url";
 
 interface FetchProductsParams {
   page: number;
-  sort: "recent" | "favorite";
+  sort: "recent" | "favorites";
   search: string;
   limit: number;
 }
@@ -60,13 +60,14 @@ export const createProduct = async (formData: FormData): Promise<void> => {
 export const updateProduct = async (
   id: string,
   formData: FormData
-): Promise<void> => {
+): Promise<string> => {
   const res = await customFetch(`/products/${id}`, {
     method: "PATCH",
     body: formData,
   });
 
   if (!res.ok) throw new Error("상품 수정 실패");
+  return id;
 };
 
 export const deleteProduct = async (productId: string): Promise<void> => {

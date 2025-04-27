@@ -6,13 +6,13 @@ import sortIcon from "@/shared/assets/Img/dropdown-icon/ic_sort.png";
 import dropArrow from "@/shared/assets/Img/dropdown-icon/ic_arrow_down.png";
 
 interface ProductSortDropdownProps {
-  value: "recent" | "favorite";
-  onChange: (value: "recent" | "favorite") => void;
+  value: "recent" | "favorites";
+  onChange: (value: "recent" | "favorites") => void;
 }
 
-const options: { value: "recent" | "favorite"; label: string }[] = [
+const options: { value: "recent" | "favorites"; label: string }[] = [
   { value: "recent", label: "최신순" },
-  { value: "favorite", label: "좋아요순" },
+  { value: "favorites", label: "좋아요순" },
 ];
 
 export default function SortDropDown({
