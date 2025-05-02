@@ -7,29 +7,13 @@ export const getImageUrl = (
 
   // 유효한 URL인지 확인
   try {
-    // 백엔드 서버에서 전달된 절대 경로 처리
+    // AWS S3 버킷 URL 또는 이미 올바른 URL 형식인 경우
     if (
-      url.includes("/Users/hayoon/Desktop/codeit/5-sprint-mission-be/uploads")
-    ) {
-      // 절대 경로에서 /uploads 부분만 추출
-      return url.replace(
-        /^.*\/Users\/hayoon\/Desktop\/codeit\/5-sprint-mission-be(\/uploads\/.*)$/,
-        "http://localhost:5005$1"
-      );
-    }
-
-    // 이미 올바른 URL 형식인 경우
-    if (
+      url.includes("s3.ap-northeast-2.amazonaws.com") ||
       url.startsWith("http://") ||
-      url.startsWith("https://") ||
-      url.startsWith("/uploads/")
+      url.startsWith("https://")
     ) {
       return url;
-    }
-
-    // 상대 경로일 경우 적절한 기본 URL 추가
-    if (url.startsWith("/")) {
-      return `http://localhost:5005${url}`;
     }
 
     return url;
