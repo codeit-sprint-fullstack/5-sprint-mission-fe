@@ -1,12 +1,5 @@
 import { api } from "./axios";
-
-export interface Article {
-  id: string;
-  title: string;
-  content: string;
-  likeCount: number;
-  createdAt: string;
-}
+import { Article } from "@/types/articles.types";
 
 // 게시글 상세 조회
 export const getArticleById = async (id: string): Promise<Article> => {
@@ -27,3 +20,15 @@ export async function updateArticle(
 export async function deleteArticle(id: string): Promise<void> {
   await api.delete(`/api/articles/${id}`);
 }
+
+// 좋아요 추가
+export const addArticleFavorite = async (articleId: string): Promise<void> => {
+  await api.post(`/api/articles/${articleId}/favorite`);
+};
+
+// 좋아요 삭제
+export const removeArticleFavorite = async (
+  articleId: string
+): Promise<void> => {
+  await api.delete(`/api/articles/${articleId}/favorite`);
+};

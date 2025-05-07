@@ -24,8 +24,9 @@ import {
   deleteProduct,
   addFavorite,
   removeFavorite,
-  CommentsResponse,
-} from "@/api/products";
+} from "@/services/products";
+import { getImageUrl } from "@/utils/images/url";
+import { Comment, CommentsResponse } from "@/types/comments.types";
 
 export default function ItemDetailPage() {
   const params = useParams();
@@ -70,7 +71,14 @@ export default function ItemDetailPage() {
     isError: isCommentsError,
   } = useInfiniteQuery({
     queryKey: ["productComments", productId],
-    queryFn: ({ pageParam }) => getProductComments(productId, pageParam),
+    queryFn: ({ pageParam }) => {
+      return getProductComments(
+        productId,
+        typeof pageParam === "string" ? Number(pageParam) : pageParam
+      ).then((data) => {
+        return data;
+      });
+    },
     initialPageParam: null as number | null,
     getNextPageParam: (lastPage: CommentsResponse) => lastPage.nextCursor,
     enabled: !!productId && isAuthenticated === true,
@@ -132,7 +140,16 @@ export default function ItemDetailPage() {
   });
 
   // 댓글 목록 가져오기
-  const comments = commentsData?.pages.flatMap((page) => page.list) || [];
+  const comments =
+    commentsData?.pages.flatMap((page) => {
+      // API 응답 구조에 따라 page.list 또는 page.comments 필드에서 댓글 목록을 가져옴
+      if (page.comments && Array.isArray(page.comments)) {
+        return page.comments;
+      } else if (page.list && Array.isArray(page.list)) {
+        return page.list;
+      }
+      return [];
+    }) || [];
 
   // 인증 확인 중이거나 로딩 중 표시
   if (isAuthenticated === null || isItemLoading) {
@@ -161,7 +178,7 @@ export default function ItemDetailPage() {
       <div className="flex flex-col md:flex-row md:gap-6 mb-6 border-b border-gray-300 pb-6">
         <div>
           <Image
-            src={item?.images?.[0] || defaultImage.src}
+            src={getImageUrl(item?.images?.[0] || "", defaultImage.src)}
             alt={item?.name || "상품 이미지"}
             width={480}
             height={480}
@@ -220,14 +237,16 @@ export default function ItemDetailPage() {
               상품 태그
             </h2>
             <div className="flex gap-2">
-              {item?.tags?.map((tag) => (
-                <span
-                  key={tag}
-                  className="text-[16px] text-text-primary-black bg-tag-background rounded-full px-4 py-[6px]"
-                >
-                  #{tag}
-                </span>
-              ))}
+              {item?.tags
+                ?.filter((tag) => tag !== undefined)
+                .map((tag) => (
+                  <span
+                    key={tag}
+                    className="text-[16px] text-text-primary-black bg-tag-background rounded-full px-4 py-[6px]"
+                  >
+                    #{tag}
+                  </span>
+                ))}
             </div>
           </div>
           <div className="flex justify-between gap-4">
@@ -270,20 +289,27 @@ export default function ItemDetailPage() {
           <div className="flex justify-center py-8 text-red-500">
             댓글을 불러오는데 실패했습니다.
           </div>
-        ) : comments.length > 0 ? (
+        ) : comments && Array.isArray(comments) && comments.length > 0 ? (
           <div>
-            {comments.map((comment) => (
-              <CommentItem
-                key={comment.id}
-                comment={comment}
-                articleId={productId}
-                onCommentUpdated={() =>
-                  queryClient.invalidateQueries({
-                    queryKey: ["productComments", productId],
-                  })
-                }
-              />
-            ))}
+            {comments
+              .filter(
+                (comment) =>
+                  comment !== undefined &&
+                  comment !== null &&
+                  typeof comment === "object"
+              )
+              .map((comment, index) => (
+                <CommentItem
+                  key={`${comment.id || index}-${index}`}
+                  comment={comment}
+                  articleId={productId}
+                  onCommentUpdated={() =>
+                    queryClient.invalidateQueries({
+                      queryKey: ["productComments", productId],
+                    })
+                  }
+                />
+              ))}
           </div>
         ) : (
           <div className="flex flex-col items-center justify-center py-8">

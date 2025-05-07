@@ -1,12 +1,5 @@
 import Link from "next/link";
-import { ReactNode } from "react";
-
-// Props 타입 정의
-interface NavMenuProps {
-  children: ReactNode;
-  isActive: boolean;
-  to: string;
-}
+import { NavMenuProps } from "@/types/components.types";
 
 const NavMenu = ({ children, isActive, to }: NavMenuProps) => {
   return (

@@ -1,4 +1,4 @@
-import { getArticleById } from "@/api/articles";
+import { getArticleById } from "@/services/articles";
 import EditArticleClient from "./EditArticleClient";
 import NotFound from "@/app/not-found";
 

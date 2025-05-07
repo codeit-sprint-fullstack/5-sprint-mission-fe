@@ -6,7 +6,7 @@ import Button from "@/components/common/Button";
 import SearchInput from "@/components/common/SearchInput";
 import { useState, useEffect, useCallback } from "react";
 import Dropdown from "@/components/common/Dropdown";
-import { api } from "@/api/axios";
+import { api } from "@/services/axios";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import useResponsive from "@/hooks/useResponsive";
@@ -15,8 +15,11 @@ interface Article {
   id: number;
   title: string;
   createdAt: string;
-  likeCount: number;
-  nickname: string;
+  favoriteCount: number;
+  writer: {
+    id: string;
+    nickname: string;
+  };
 }
 
 interface ArticleResponse {
@@ -106,7 +109,8 @@ export default function ArticlesClient({
               key={article.id}
               title={article.title}
               createdAt={article.createdAt}
-              likeCount={article.likeCount}
+              favoriteCount={article.favoriteCount}
+              nickname={article.writer.nickname}
               onClick={() => {
                 router.push(`/articles/${article.id}`);
               }}
@@ -145,7 +149,8 @@ export default function ArticlesClient({
                     key={article.id}
                     title={article.title}
                     createdAt={article.createdAt}
-                    likeCount={article.likeCount}
+                    favoriteCount={article.favoriteCount}
+                    nickname={article.writer.nickname}
                     onClick={() => {
                       router.push(`/articles/${article.id}`);
                     }}

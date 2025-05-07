@@ -1,10 +1,5 @@
 import { useState, useEffect } from "react";
-
-interface UseResponsiveReturn {
-  isMobile: boolean;
-  isTablet: boolean;
-  isDesktop: boolean;
-}
+import { UseResponsiveReturn } from "@/types/hooks.types";
 
 export default function useResponsive(): UseResponsiveReturn {
   const [isMobile, setIsMobile] = useState(false);
