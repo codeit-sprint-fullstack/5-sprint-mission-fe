@@ -2,7 +2,7 @@ import { useMutation } from "@tanstack/react-query";
 import { loginAPI, signupAPI, googleLoginAPI, logoutAPI } from "./AuthApi";
 import { useAuthStore } from "@/api/auth/AuthStore";
 import { useRouter } from "next/navigation";
-import { AuthResponse, LoginParams, SignupParams } from "@/types";
+import { AuthResponse, LoginParams, SignupParams } from "@/types/types";
 
 export const useLogin = (onError?: () => void) => {
   const router = useRouter();

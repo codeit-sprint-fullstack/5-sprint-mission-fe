@@ -1,4 +1,4 @@
-import { Article } from "@/types";
+import { Article } from "@/types/types";
 import { customFetch } from "../url";
 
 export const fetchArticles = async ({

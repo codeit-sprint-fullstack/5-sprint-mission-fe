@@ -7,7 +7,7 @@ import Image from "next/image";
 import PlusIcon from "@/shared/assets/Img/input-icon/ic_plus.png";
 import CloseIcon from "@/shared/assets/Img/button-image/X-round-Icon.png.png";
 import { useCreateArticle, useUpdateArticle } from "@/api/article/articleHook";
-import { Article } from "@/types";
+import { Article } from "@/types/types";
 import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 
 interface ArticleFormProps {

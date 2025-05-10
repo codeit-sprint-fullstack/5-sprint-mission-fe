@@ -1,4 +1,4 @@
-import { LoginParams, SignupParams, AuthResponse } from "@/types";
+import { LoginParams, SignupParams, AuthResponse } from "@/types/types";
 import { customFetch } from "../url";
 
 export const loginAPI = async (data: LoginParams): Promise<AuthResponse> => {

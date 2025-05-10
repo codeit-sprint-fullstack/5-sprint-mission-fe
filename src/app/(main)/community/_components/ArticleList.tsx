@@ -5,7 +5,7 @@ import Link from "next/link";
 import userIcon from "@/shared/assets/Img/user-icon/ic_profile.png";
 import likeIcon from "@/shared/assets/Img/button-image/Like_Icon.png";
 import { formatDay, getImageUrl } from "@/lib/utill";
-import { Article } from "@/types";
+import { Article } from "@/types/types";
 import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 
 interface ArticleListProps {

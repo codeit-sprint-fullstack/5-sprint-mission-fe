@@ -10,7 +10,7 @@ import {
   deleteComment,
 } from "@/api/comment/commentApi";
 import CommentForm from "./CommentForm";
-import { Comment } from "@/types";
+import { Comment } from "@/types/types";
 
 interface CommentListProps {
   type: "article" | "product";

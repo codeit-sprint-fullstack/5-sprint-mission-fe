@@ -4,7 +4,7 @@ import likeImg from "@/shared/assets/Img/button-image/Like_Icon.png";
 
 import medal from "@/shared/assets/Img/ic_medal.png";
 import { formatDay, getImageUrl } from "@/lib/utill";
-import { Article } from "@/types";
+import { Article } from "@/types/types";
 import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 
 interface ArticleCardProps {

@@ -1,4 +1,4 @@
-import { Comment } from "@/types";
+import { Comment } from "@/types/types";
 import { customFetch } from "../url";
 
 export const getComments = async (

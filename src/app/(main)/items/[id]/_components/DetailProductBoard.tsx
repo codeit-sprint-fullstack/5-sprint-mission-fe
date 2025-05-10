@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { Product } from "@/types";
+import { Product } from "@/types/types";
 import { formatDay, getImageUrl } from "@/lib/utill";
 
 import Selector from "@/shared/components/dropDown/Selector";
