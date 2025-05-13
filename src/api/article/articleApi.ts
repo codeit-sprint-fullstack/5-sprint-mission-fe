@@ -74,17 +74,14 @@ export const updateArticle = async ({
   return { id: json.data.id };
 };
 
-export const deleteArticle = async ({
-  id,
-}: {
-  id: string;
-}): Promise<{ id: string }> => {
+export const deleteArticle = async (id: string): Promise<void> => {
   const res = await customFetch(`/articles/${id}`, {
     method: "DELETE",
   });
 
   if (!res.ok) throw new Error("게시글 삭제 실패");
-  return res.json();
+
+  return;
 };
 
 export const favoriteArticle = async (id: string): Promise<void> => {
@@ -101,4 +98,40 @@ export const unfavoriteArticle = async (id: string): Promise<void> => {
   });
 
   if (!res.ok) throw new Error("게시글 좋아요 취소 실패");
+};
+
+export const uploadImageToS3 = async (file: File): Promise<string> => {
+  const fileType = file.type;
+  const fileName = file.name;
+
+  const res = await customFetch(
+    `/articles/presigned-url?fileType=${encodeURIComponent(
+      fileType
+    )}&fileName=${encodeURIComponent(fileName)}`,
+    {
+      method: "GET",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Presigned URL 요청 실패");
+  }
+
+  const { uploadUrl, fileUrl } = await res.json();
+
+  if (!uploadUrl || !fileUrl) {
+    throw new Error("Presigned 응답에 URL 또는 Key 없음");
+  }
+
+  const uploadRes = await fetch(uploadUrl, {
+    method: "PUT",
+    headers: { "Content-Type": fileType },
+    body: file,
+  });
+
+  if (!uploadRes.ok) {
+    throw new Error("S3 업로드 실패");
+  }
+
+  return fileUrl;
 };

@@ -6,6 +6,7 @@ import Image from "next/image";
 import PlusIcon from "@/shared/assets/Img/input-icon/ic_plus.png";
 import CloseIcon from "@/shared/assets/Img/button-image/X-round-Icon.png.png";
 import { useCreateProduct, useEditProduct } from "@/api/product/productHooks";
+import { uploadImageToS3 } from "@/api/product/productApi";
 import { Product } from "@/types/types";
 import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 
@@ -28,7 +29,6 @@ export default function ProductForm({
   const [price, setPrice] = useState(initialData?.price?.toString() ?? "");
   const [tags, setTags] = useState<string[]>(initialData?.tags || []);
   const [tagInput, setTagInput] = useState("");
-  const [images, setImages] = useState<File[]>([]);
   const [previewUrls, setPreviewUrls] = useState<string[]>(
     initialData?.imageUrls || []
   );
@@ -36,7 +36,8 @@ export default function ProductForm({
   const createMutation = useCreateProduct({
     onSuccess: () => router.push("/items"),
   });
-  const updateMutation = useEditProduct(initialData?.id ?? "", {
+
+  const updateMutation = useEditProduct(initialData?.id ?? "undefined-id", {
     onSuccess: (id) => router.push(`/items/${id}`),
   });
 
@@ -46,18 +47,39 @@ export default function ProductForm({
     }
   }, [initialData]);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const files = Array.from(e.target.files || []);
-    if (files.length > 0) {
-      const previews = files.map((file) => URL.createObjectURL(file));
+    const totalImages = previewUrls.length;
 
-      setImages((prev) => [...prev, ...files]);
-      setPreviewUrls((prev) => [...prev, ...previews]);
+    if (totalImages >= 3) {
+      alert("이미지는 최대 3장까지 등록할 수 있습니다.");
+      return;
+    }
+
+    const remainingSlots = 3 - totalImages;
+    const limitedFiles = files.slice(0, remainingSlots);
+
+    const uploadedUrls: string[] = [];
+
+    for (const file of limitedFiles) {
+      try {
+        const url = await uploadImageToS3(file);
+        if (url && typeof url === "string") {
+          uploadedUrls.push(url);
+        }
+      } catch (error) {
+        console.error("이미지 업로드 실패:", error);
+      }
+    }
+
+    if (uploadedUrls.length > 0) {
+      setPreviewUrls((prev) => [...prev, ...uploadedUrls]);
     }
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+
     if (!name.trim() || !description.trim()) {
       alert("상품명과 설명을 입력해주세요!");
       return;
@@ -67,20 +89,23 @@ export default function ProductForm({
       const formData = new FormData();
       formData.append("name", name);
       formData.append("description", description);
-      formData.append("price", price.trim() ? price : "0");
+      formData.append("price", price.trim() ? Number(price).toString() : "0");
       formData.append("tags", JSON.stringify(tags));
-      images.forEach((img) => formData.append("images", img));
-      const existingUrls = previewUrls.filter(
-        (url) => !url.startsWith("blob:")
-      );
-      formData.append("existingImageUrls", JSON.stringify(existingUrls));
+      formData.append("imageUrls", JSON.stringify(previewUrls));
+
       if (category === "create") {
         createMutation.mutate(formData, {
           onError: (error) => {
             console.error("Mutation 에러:", error);
           },
         });
-      } else if (category === "edit" && initialData?.id) {
+      }
+
+      if (category === "edit") {
+        if (!initialData?.id) {
+          console.warn("🛑 수정할 상품 ID가 존재하지 않음");
+          return;
+        }
         updateMutation.mutate(formData);
       }
     } catch (error) {
@@ -90,7 +115,6 @@ export default function ProductForm({
 
   const removeImage = (index: number) => {
     setPreviewUrls((prev) => prev.filter((_, i) => i !== index));
-    setImages((prev) => prev.filter((_, i) => i !== index));
     if (fileInputRef.current) fileInputRef.current.value = "";
   };
 
@@ -141,6 +165,7 @@ export default function ProductForm({
                 <input
                   type="file"
                   accept="image/*"
+                  multiple
                   onChange={handleImageChange}
                   ref={fileInputRef}
                   className="hidden"
@@ -149,23 +174,32 @@ export default function ProductForm({
             )}
 
             <div className="flex flex-wrap gap-4">
-              {previewUrls.map((url, i) => (
-                <div key={i} className="relative w-24 h-24">
-                  <ImageWrapper
-                    src={url}
-                    alt={`preview-${i}`}
-                    fill
-                    className="object-cover rounded-md border"
-                  />
-                  <button
-                    type="button"
-                    onClick={() => removeImage(i)}
-                    className="absolute -top-2 -right-2"
-                  >
-                    <Image src={CloseIcon} alt="닫기" width={20} height={20} />
-                  </button>
-                </div>
-              ))}
+              {previewUrls
+                .filter(
+                  (url) => typeof url === "string" && url.startsWith("http")
+                )
+                .map((url, i) => (
+                  <div key={i} className="relative w-24 h-24">
+                    <ImageWrapper
+                      src={url}
+                      alt={`preview-${i}`}
+                      fill
+                      className="object-cover rounded-md border"
+                    />
+                    <button
+                      type="button"
+                      onClick={() => removeImage(i)}
+                      className="absolute -top-2 -right-2"
+                    >
+                      <Image
+                        src={CloseIcon}
+                        alt="닫기"
+                        width={20}
+                        height={20}
+                      />
+                    </button>
+                  </div>
+                ))}
             </div>
           </div>
         </div>

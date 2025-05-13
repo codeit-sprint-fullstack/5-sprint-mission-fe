@@ -18,6 +18,26 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/articles/:path*",
+        destination: "https://api.to-do-domain.com/articles/:path*",
+      },
+      {
+        source: "/auth/:path*",
+        destination: "https://api.to-do-domain.com/auth/:path*",
+      },
+      {
+        source: "/comments/:path*",
+        destination: "https://api.to-do-domain.com/comments/:path*",
+      },
+      {
+        source: "/products/:path*",
+        destination: "https://api.to-do-domain.com/products/:path*",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

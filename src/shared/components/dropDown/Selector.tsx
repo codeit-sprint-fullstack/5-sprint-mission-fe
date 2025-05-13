@@ -7,6 +7,7 @@ import kebabIcon from "@/shared/assets/Img/dropdown-icon/ic_kebab.png";
 import CheckIcon from "@/shared/assets/Img/modal-icon/ic_check.png";
 import { deleteArticle } from "@/api/article/articleApi";
 import { deleteProduct } from "@/api/product/productApi";
+import { PATH } from "@/constants";
 
 interface SelectorProps {
   id: string;
@@ -31,11 +32,11 @@ export default function Selector({
     setIsDeleting(true);
     try {
       if (type === "article") {
-        await deleteArticle({ id });
-        router.push("/article");
+        await deleteArticle(id);
+        router.push(`${PATH.community}`);
       } else if (type === "product") {
         await deleteProduct(id);
-        router.push("/items");
+        router.push(`${PATH.items}`);
       } else {
         onDelete?.();
       }
@@ -51,9 +52,9 @@ export default function Selector({
 
   const handleModify = () => {
     if (type === "article") {
-      router.push(`/community/${id}/modify`);
+      router.push(`${PATH.community}/${id}/modify`);
     } else if (type === "product") {
-      router.push(`/items/${id}/modify`);
+      router.push(`${PATH.items}/${id}/modify`);
     } else {
       onEdit?.();
     }

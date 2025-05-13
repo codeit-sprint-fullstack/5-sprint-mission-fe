@@ -25,7 +25,9 @@ jest.mock("@/api/auth/AuthHooks", () => ({
 }));
 
 jest.mock("@/app/(auth)/_components/EasyAuth", () => () => {
-  return <div data-testid="mock-easyauth" />;
+  const MockEasyAuth = () => <div data-testid="mock-easyauth" />;
+  MockEasyAuth.displayName = "MockEasyAuth";
+  return MockEasyAuth;
 });
 
 describe("AuthForm (로그인)", () => {
