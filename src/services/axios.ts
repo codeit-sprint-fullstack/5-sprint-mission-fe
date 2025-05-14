@@ -1,8 +1,10 @@
 import axios from "axios";
 
 export const api = axios.create({
+  baseURL: "https://hay-oon.com",
   // baseURL: "https://five-sprint-mission-be.onrender.com",
-  baseURL: "http://localhost:5005",
+  // baseURL: "http://43.203.195.48:5005",
+  // baseURL: "http://localhost:5005",
   // baseURL: "https://panda-market-api.vercel.app",
   withCredentials: true, // 쿠키를 포함한 요청을 위해 필요
 });
