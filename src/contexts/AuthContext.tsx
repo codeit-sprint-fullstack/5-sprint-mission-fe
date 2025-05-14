@@ -3,7 +3,6 @@
 import { createContext, useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useRouter } from "next/navigation";
-import { api } from "@/services/axios";
 import {
   AuthContextType,
   User,
@@ -16,7 +15,8 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 // 쿠키를 포함한 요청을 위한 axios 인스턴스
 const authAxios = axios.create({
-  baseURL: "http://localhost:5005",
+  baseURL: "https://hay-oon.com",
+  // baseURL: "http://localhost:5005",
   // baseURL: "https://five-sprint-mission-be.onrender.com",
   withCredentials: true,
 });
