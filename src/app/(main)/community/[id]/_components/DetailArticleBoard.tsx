@@ -1,10 +1,9 @@
 import Image from "next/image";
-import { useRouter } from "next/navigation";
 import userIcon from "@/shared/assets/Img/user-icon/ic_profile.png";
 import likeIcon from "@/shared/assets/Img/button-image/Like_Icon.png";
 import { formatDay } from "@/lib/utill";
 import Selector from "@/shared/components/dropDown/Selector";
-import { Article } from "@/types";
+import { Article } from "@/types/types";
 import ImageWrapper from "@/shared/components/ImageWrapper/ImageWrapper";
 import {
   useFavoriteArticle,
@@ -18,7 +17,6 @@ interface DetailArticleBoardProps {
 export default function DetailArticleBoard({
   article,
 }: DetailArticleBoardProps) {
-  const router = useRouter();
   const likeMutation = useFavoriteArticle(article.id);
   const unlikeMutation = useUnfavoriteArticle(article.id);
 
@@ -32,12 +30,12 @@ export default function DetailArticleBoard({
     }
   };
 
-  const handleDelete = () => {
-    router.push("/article");
+  const handleEdit = () => {
+    window.location.href = `/community/${article.id}/modify`;
   };
 
-  const handleEdit = () => {
-    router.push(`/article/modify/${article.id}`);
+  const handleDelete = () => {
+    window.location.href = "/community";
   };
 
   return (

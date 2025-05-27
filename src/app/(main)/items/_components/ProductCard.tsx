@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import LikeIcon from "@/shared/assets/Img/button-image/Like_Icon.png";
-import { Product } from "@/types";
+import { Product } from "@/types/types";
 import Link from "next/link";
 import { getImageUrl } from "@/lib/utill";
 

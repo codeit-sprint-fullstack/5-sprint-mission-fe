@@ -8,7 +8,7 @@ import {
 } from "./articleApi";
 import { useQuery } from "@tanstack/react-query";
 import { fetchArticles } from "./articleApi";
-import { Article } from "@/types";
+import { Article } from "@/types/types";
 
 export const useArticles = (
   page: number,

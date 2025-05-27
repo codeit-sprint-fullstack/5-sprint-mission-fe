@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 import CommentBoard from "./CommentBoard";
 import {
@@ -10,7 +10,7 @@ import {
   deleteComment,
 } from "@/api/comment/commentApi";
 import CommentForm from "./CommentForm";
-import { Comment } from "@/types";
+import { Comment } from "@/types/types";
 
 interface CommentListProps {
   type: "article" | "product";
@@ -23,7 +23,7 @@ export default function CommentList({ type, targetId }: CommentListProps) {
   const [editContent, setEditContent] = useState("");
   const [deletingId, setDeletingId] = useState<string | null>(null);
 
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     try {
       const data = await getComments(type, targetId);
       setComments(data);
@@ -31,11 +31,11 @@ export default function CommentList({ type, targetId }: CommentListProps) {
       console.error("댓글 가져오기 실패:", error);
       setComments([]);
     }
-  };
+  }, [type, targetId]);
 
   useEffect(() => {
     fetchComments();
-  }, [type, targetId]);
+  }, [fetchComments]);
 
   const handleEdit = (commentId: string, content: string) => {
     setEditingId(commentId);

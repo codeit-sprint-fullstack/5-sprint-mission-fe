@@ -4,7 +4,7 @@ import userIcon from "@/shared/assets/Img/user-icon/ic_profile.png";
 import Selector from "@/shared/components/dropDown/Selector";
 import { fromNow } from "@/lib/utill";
 import Button, { ButtonCategory } from "../button/Button";
-import { Comment } from "@/types";
+import { Comment } from "@/types/types";
 
 interface CommentItemProps {
   comment: Comment;

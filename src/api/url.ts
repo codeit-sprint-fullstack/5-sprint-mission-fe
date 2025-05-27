@@ -17,9 +17,11 @@ export const customFetch = async (
     typeof window !== "undefined" && options.body instanceof FormData;
 
   const headers = new Headers();
+
   if (accessToken) {
     headers.set("Authorization", `Bearer ${accessToken}`);
   }
+
   if (!isFormData) {
     headers.set("Content-Type", "application/json");
   }
@@ -33,7 +35,7 @@ export const customFetch = async (
     body = options.body ?? undefined;
   }
 
-  let url = `${process.env.NEXT_PUBLIC_ARL_LOCAL_URL}${input}`;
+  let url = input.startsWith("/") ? input : `/${input}`;
   if (options.params) {
     const queryString = new URLSearchParams(
       Object.entries(options.params).reduce((acc, [key, value]) => {
@@ -49,18 +51,17 @@ export const customFetch = async (
     headers,
     body,
     credentials: "include",
+    mode: "cors",
   });
 
   if (res.status === 401 && isClient) {
     console.warn("[🔁 customFetch] 401 Unauthorized. Trying token refresh...");
 
-    const refreshRes = await fetch(
-      `${process.env.NEXT_PUBLIC_ARL_LOCAL_URL}/auth/refresh`,
-      {
-        method: "POST",
-        credentials: "include",
-      }
-    );
+    const refreshRes = await fetch("/auth/refresh", {
+      method: "POST",
+      credentials: "include",
+      mode: "cors",
+    });
 
     if (!refreshRes.ok) {
       console.error("[❌ customFetch] Token refresh failed.");

@@ -3,7 +3,7 @@ import replyImg from "@/shared/assets/Img/base-image/Img_reply_empty.png";
 import inquireImg from "@/shared/assets/Img/base-image/none_inquire.png";
 import backIcon from "@/shared/assets/Img/button-image/ic_back.png";
 import CommentItem from "./CommentItem";
-import { Comment } from "@/types";
+import { Comment } from "@/types/types";
 import Link from "next/link";
 
 interface CommentBoardProps {

@@ -7,7 +7,7 @@ import Link from "next/link";
 import LogoImg from "@/shared/assets/Img/logo-image/mainLogo.png";
 import LogoText from "@/shared/assets/Img/logo-image/mainText.png";
 import { useLogin, useSignup } from "@/api/auth/AuthHooks";
-import { LoginForm, SignupForm, SignupPayload } from "@/types";
+import { LoginForm, SignupForm, SignupPayload } from "@/types/types";
 import Text from "@/shared/components/input/Text";
 import Password from "@/shared/components/input/Password";
 import Button, { ButtonCategory } from "@/shared/components/button/Button";
